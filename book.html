@@ -1,1 +1,103 @@
-<!-- Firebase booking form -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book a Test – Healthify</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="firebase.js"></script>
+  <script type="module">
+    import { db } from './firebase.js';
+    import { collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const name = form.name.value.trim();
+        const age = form.age.value.trim();
+        const sex = form.sex.value;
+        const contact = form.contact.value.trim();
+        const address = form.address.value.trim();
+        const pincode = form.pincode.value.trim();
+        const bookingDate = form.date.value;
+        const bookingTime = form.time.value;
+        const selectedTests = Array.from(form.querySelectorAll('input[name="tests"]:checked')).map(i => i.value);
+        const selectedProfiles = Array.from(form.querySelectorAll('input[name="profiles"]:checked')).map(i => i.value);
+
+        if (!name || !age || !sex || !contact || !address || !pincode || !bookingDate || !bookingTime || (selectedTests.length === 0 && selectedProfiles.length === 0)) {
+          alert("Please fill all required fields and select at least one test or profile.");
+          return;
+        }
+
+        try {
+          await addDoc(collection(db, "bookings"), {
+            name, age, sex, contact, address, pincode,
+            date: bookingDate,
+            time: bookingTime,
+            tests: selectedTests,
+            profiles: selectedProfiles,
+            status: "Pending",
+            createdAt: Timestamp.now()
+          });
+          alert("Booking submitted successfully!");
+          form.reset();
+        } catch (err) {
+          console.error("Error saving booking:", err);
+          alert("Something went wrong. Please try again.");
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="nav-right">
+      <a href="book.html" class="nav-btn big-btn">Book Test Now</a>
+    </div>
+  </nav>
+
+  <section class="banner">
+    <h1>Book a Lab Test</h1>
+  </section>
+
+  <section style="max-width: 700px; margin: auto; padding: 2rem;">
+    <form>
+      <input name="name" type="text" placeholder="Full Name" required />
+      <input name="age" type="number" placeholder="Age" required />
+      <select name="sex" required>
+        <option value="">Sex</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+      <input name="contact" type="tel" placeholder="Mobile Number" required />
+      <textarea name="address" placeholder="Full Address" required></textarea>
+      <input name="pincode" type="text" placeholder="Pincode" required />
+      <input name="date" type="date" required />
+      <input name="time" type="time" required />
+
+      <h4>Select Test(s):</h4>
+      <label><input type="checkbox" name="tests" value="CBC" /> CBC</label>
+      <label><input type="checkbox" name="tests" value="LFT" /> LFT</label>
+      <label><input type="checkbox" name="tests" value="KFT" /> KFT</label>
+      <label><input type="checkbox" name="tests" value="ECG" /> ECG</label>
+
+      <h4>Select Profile(s):</h4>
+      <label><input type="checkbox" name="profiles" value="Full Body" /> Full Body</label>
+      <label><input type="checkbox" name="profiles" value="Thyroid Profile" /> Thyroid Profile</label>
+      <label><input type="checkbox" name="profiles" value="Diabetes Panel" /> Diabetes Panel</label>
+
+      <button type="submit">Submit Booking</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>📞 9503832889 | ✉ report@healthifylab.com</p>
+  </footer>
+</body>
+</html>
