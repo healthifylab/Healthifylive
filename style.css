@@ -1,45 +1,59 @@
 body {
   font-family: 'Segoe UI', sans-serif;
+  background: #f8faff;
   margin: 0;
   padding: 0;
-  background: #f8faff;
-  color: #222;
 }
+
 .navbar {
   display: flex;
   justify-content: space-between;
   background: #004aad;
-  color: white;
   padding: 1rem 2rem;
+  color: white;
   align-items: center;
 }
-.navbar img {
-  height: 40px;
-}
-.navbar a, .nav-btn {
+.navbar a {
   color: white;
+  margin-right: 1rem;
   text-decoration: none;
-  margin-left: 1rem;
   font-weight: bold;
-  font-size: 1rem;
+}
+.nav-btn.big-btn {
+  background: #28a745;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.search-btn {
   background: none;
   border: none;
+  color: white;
+  font-size: 1.2rem;
+  margin-right: 1rem;
   cursor: pointer;
 }
-.nav-btn:hover {
-  text-decoration: underline;
-}
+
 .banner {
   text-align: center;
-  padding: 3rem 1rem;
-  background: linear-gradient(to right, #e0f7fa, #fff4f4);
+  background: linear-gradient(to right, #e0f7fa, #ffffff);
+  padding: 2rem;
 }
+.banner h1 {
+  color: #004aad;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
 .popup {
   background: linear-gradient(135deg, #ff6ec4, #7873f5);
   color: white;
   padding: 1rem 1.5rem;
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  animation: fadeIn 0.4s ease-in-out;
 }
 .popup-content {
   position: relative;
@@ -55,6 +69,11 @@ body {
   border: none;
   cursor: pointer;
 }
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -63,14 +82,13 @@ body {
   padding: 2rem 1rem;
 }
 .card {
-  background: linear-gradient(to bottom right, #fff, #f4f9ff);
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
   padding: 1rem;
   width: 280px;
-  transition: transform 0.3s ease, box-shadow 0.3s;
-  cursor: pointer;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s;
 }
 .card:hover {
   transform: translateY(-5px);
@@ -80,12 +98,11 @@ body {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 10px;
   margin-bottom: 0.8rem;
 }
 .card h3 {
   color: #004aad;
-  margin: 0.5rem 0;
 }
 .card p {
   margin: 0.2rem 0;
@@ -94,19 +111,42 @@ body {
 .homevisit-label {
   background: #d4edda;
   color: #155724;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
   display: inline-block;
   margin-top: 5px;
 }
-footer {
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+form input, form textarea, form select {
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+form button {
   background: #004aad;
   color: white;
-  padding: 2rem;
+  font-size: 1rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+footer {
   text-align: center;
+  padding: 2rem;
+  background: #004aad;
+  color: white;
 }
 footer a {
   color: #ffeb3b;
+  margin: 0 6px;
   text-decoration: none;
-  margin: 0 8px;
 }
