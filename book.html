@@ -9,10 +9,41 @@
 </head>
 <body>
 
-  <h2>🧾 Book Home Sample Collection</h2>
+  <h2 style="text-align:center">🧾 Book Home Sample Collection</h2>
 
-  <form id="booking-form">
+  <form id="booking-form" style="max-width: 600px; margin: auto; display: flex; flex-direction: column; gap: 1rem;">
     <input type="text" name="name" placeholder="Full Name" required />
     <input type="number" name="age" placeholder="Age" required />
     <select name="sex" required>
-      <option value="">Select Sex
+      <option value="">Select Sex</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+    <input type="tel" name="mobile" placeholder="Mobile Number (+91)" required />
+    <input type="text" name="address" placeholder="Full Address with Pincode" required />
+    <input type="datetime-local" name="appointmentDateTime" required />
+
+    <h3>🧪 Select Blood Tests</h3>
+    <select name="tests" multiple>
+      <option value="CBC">CBC – <del style="color:red">₹400</del> ₹320 – Complete Blood Count – TAT: 6 hrs</option>
+      <option value="FBS">FBS – <del style="color:red">₹200</del> ₹160 – Fasting Blood Sugar – TAT: 4 hrs</option>
+      <option value="LFT">LFT – <del style="color:red">₹600</del> ₹480 – Liver Function Test – TAT: 6 hrs</option>
+      <option value="KFT">KFT – <del style="color:red">₹700</del> ₹560 – Kidney Function Test – TAT: 7 hrs</option>
+      <option value="Thyroid">Thyroid Profile – <del style="color:red">₹500</del> ₹400 – T3, T4, TSH – TAT: 6 hrs</option>
+    </select>
+
+    <h3>📋 Select Body Profiles</h3>
+    <select name="profiles" multiple>
+      <option value="Smart Body Checkup">Smart Body Checkup – <del style="color:red">₹1500</del> ₹1200 – Includes CBC, LFT, KFT, Lipid – TAT: 24 hrs</option>
+      <option value="Diabetes Panel">Diabetes Panel – <del style="color:red">₹800</del> ₹640 – FBS, PPBS, HbA1c – TAT: 6 hrs</option>
+      <option value="Vitamin Profile">Vitamin Profile – <del style="color:red">₹1100</del> ₹880 – Vitamin D & B12 – TAT: 12 hrs</option>
+      <option value="Heart Profile">Heart Profile – <del style="color:red">₹1600</del> ₹1280 – Lipid, ECG, CRP – TAT: 24 hrs</option>
+    </select>
+
+    <button type="submit" style="background:#28a745; color:white; padding:10px 16px; border:none; border-radius:6px;">
+      Submit Booking
+    </button>
+  </form>
+
+</body>
+</html>
