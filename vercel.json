@@ -1,7 +1,1 @@
-{
-  "rewrites": [
-    { "source": "/book", "destination": "/book.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/admin", "destination": "/admin.html" }
-  ]
-}
+{ "rewrites": [ { "source": "/book", "destination": "/book.html" }, { "source": "/about", "destination": "/about.html" }, { "source": "/admin", "destination": "/admin.html" } ] }

@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Test - Healthify</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module">
+    const urlParams = new URLSearchParams(window.location.search);
+    const profile = urlParams.get("profile");
+    window.addEventListener("DOMContentLoaded", () => {
+      if (profile) {
+        const input = document.querySelector(`input[value="${profile}"]`);
+        if (input) input.checked = true;
+      }
+    });
+  </script>
+</head>
+<body>
+  <h2>Book a Test</h2>
+  <form>
+    <input type="text" name="name" placeholder="Full Name" required />
+    <input type="number" name="age" placeholder="Age" required />
+    <input type="text" name="contact" placeholder="Contact" required />
+    <label><input type="checkbox" name="profiles" value="smart-body-checkup" /> Smart Body Checkup</label>
+    <label><input type="checkbox" name="profiles" value="diabetes-panel" /> Diabetes Panel</label>
+    <label><input type="checkbox" name="profiles" value="vitamin-checkup" /> Vitamin Profile</label>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

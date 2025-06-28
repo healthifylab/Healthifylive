@@ -1,0 +1,1 @@
+// Firebase Auth setup for login/signup

@@ -1,0 +1,1 @@
+// Admin dashboard JS with Firebase status controls
