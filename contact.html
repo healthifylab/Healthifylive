@@ -3,21 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact – Healthify</title>
+  <title>Contact – Healthify Lab</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="emailjs-enquiry.js"></script>
 </head>
 <body>
 
-  <h2>📩 Contact Healthify Lab</h2>
+  <h2 style="text-align:center">📩 Contact Healthify Lab</h2>
 
-  <form id="enquiry-form">
+  <form id="enquiry-form" style="max-width: 600px; margin: auto; display: flex; flex-direction: column; gap: 1rem;">
     <input type="text" name="name" placeholder="Your Name" required />
     <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" placeholder="Your Message or Enquiry..." required></textarea>
-    <button type="submit">Send Enquiry</button>
+    <textarea name="message" placeholder="Your Message or Enquiry..." rows="5" required></textarea>
+    <button type="submit" style="background:#28a745; color:white; padding:10px 16px; border:none; border-radius:6px;">
+      Send Enquiry
+    </button>
   </form>
 
 </body>
 </html>
-<!-- Contact form using EmailJS -->
