@@ -1,6 +1,0 @@
-
-.navbar img { height: 50px; margin-right: 12px; border-radius: 8px; background: white; padding: 4px; }
-.promo-slider { display: flex; overflow-x: scroll; gap: 1rem; padding: 1rem; }
-.card { min-width: 300px; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; text-align: center; }
-.card img { width: 100%; border-radius: 8px; }
-.nav-btn { background: green; color: white; padding: 8px 16px; text-decoration: none; border-radius: 6px; }
