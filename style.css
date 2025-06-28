@@ -19,7 +19,7 @@ header.navbar {
 }
 
 .navbar .logo {
-  height: 50px;
+  height: 70px; /* increased from 50px */
 }
 
 .navbar nav a {
@@ -43,6 +43,7 @@ header.navbar {
   width: 100%;
   max-height: 400px;
   object-fit: cover;
+  margin-top: 1rem; /* adds margin to push popup down */
 }
 
 .hero-text {
@@ -72,6 +73,7 @@ header.navbar {
   gap: 1rem;
   padding: 1rem;
   background: #e6f2f2;
+  margin-top: 2rem; /* spacing from header or popup */
 }
 
 .card {
