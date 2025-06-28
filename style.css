@@ -43,7 +43,7 @@ header.navbar {
 }
 
 .hero-img {
-  width: 150%;
+  width: 100%;
   max-height: 400px;
   object-fit: cover;
   margin-top: 2rem; /* adds margin to push popup down */
