@@ -1,1 +1,68 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+  height: 50px;
+  margin-right: auto;
+  border-radius: 8px;
+  background: white;
+  padding: 4px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.promo-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.promo-slider .card {
+  flex: 0 0 90%;
+  scroll-snap-align: start;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 16px;
+  background: #fff;
+  text-align: center;
+}
+
+.promo-slider .card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.book-btn {
+  display: inline-block;
+  background: #28a745;
+  color: #fff;
+  padding: 10px 16px;
+  margin-top: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+}
 /* Full style for layout, promo cards, nav, booking form */
