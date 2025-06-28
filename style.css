@@ -1,1 +1,158 @@
-/* Green, blue, and white theme (Healthians-inspired) */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f8f9fa;
+  color: #333;
+}
+
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  height: 50px;
+}
+
+.navbar nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #007b83;
+  font-weight: 500;
+}
+
+.navbar nav a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.hero-img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.hero-text {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  background: rgba(0, 123, 131, 0.6);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.hero-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 18px;
+  text-decoration: none;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.promo-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem;
+  background: #e6f2f2;
+}
+
+.card {
+  background: white;
+  border: 1px solid #cce0e0;
+  border-radius: 12px;
+  min-width: 250px;
+  max-width: 280px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.card h3 {
+  margin-top: 10px;
+  color: #007b83;
+}
+
+.book-btn {
+  background: #007b83;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.why-healthify {
+  padding: 2rem;
+  background: #ffffff;
+  border-top: 2px solid #e0e0e0;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.why-healthify h2 {
+  text-align: center;
+  color: #007b83;
+}
+
+.why-healthify ul {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+.why-healthify li {
+  background: #e6f2f2;
+  margin: 0.5rem 0;
+  padding: 0.8rem;
+  border-left: 5px solid #28a745;
+  border-radius: 4px;
+  font-size: 1.05rem;
+}
+
+footer {
+  background: #007b83;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+footer a {
+  color: white;
+  margin: 0 4px;
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.whatsapp-float img {
+  height: 60px;
+  width: 60px;
+}
