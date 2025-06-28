@@ -10,7 +10,7 @@ document.getElementById("enquiry-form").addEventListener("submit", function(e) {
   };
 
   // Replace with your own EmailJS service info
-  emailjs.send("service_id", "template_id", data, "public_key")
+  emailjs.send("service_z3ac4pk", "template_5v6t6ku", data, "dJE_JHAoNTxxzTxiT)
     .then(() => {
       alert("Message sent successfully!");
       form.reset();
