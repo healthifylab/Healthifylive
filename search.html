@@ -1,1 +1,35 @@
-<!-- Search page with keyword matching -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Search Tests – Healthify</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #results li { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h2>🔍 Search Tests or Profiles</h2>
+  <input type="text" id="searchInput" placeholder="Search..." />
+  <ul id="results"></ul>
+
+  <script>
+    const data = [
+      "CBC – Complete Blood Count",
+      "FBS – Fasting Blood Sugar",
+      "Vitamin D & B12 Panel",
+      "Smart Body Profile",
+      "Diabetes Panel",
+      "Thyroid Profile",
+      "LFT – Liver Function Test"
+    ];
+
+    document.getElementById("searchInput").addEventListener("input", function() {
+      const val = this.value.toLowerCase();
+      const result = data.filter(item => item.toLowerCase().includes(val));
+      const ul = document.getElementById("results");
+      ul.innerHTML = result.map(i => `<li>${i}</li>`).join("");
+    });
+  </script>
+</body>
+</html>
