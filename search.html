@@ -1,1 +1,30 @@
-<!-- Search functionality across site -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Search Tests – Healthify</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #results li {
+      margin-bottom: 15px;
+      background: #f1f9f9;
+      padding: 10px;
+      border-left: 4px solid #28a745;
+      border-radius: 6px;
+    }
+    .highlight {
+      color: #007b83;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center">🔍 Search Tests & Health Profiles</h2>
+  <input type="text" id="searchInput" placeholder="Type a test or profile name..." style="width:80%; display:block; margin:1rem auto; padding:10px;" />
+  <ul id="results" style="max-width: 700px; margin: auto;"></ul>
+
+  <script>
+    const data = [
+      { name: "CBC", mrp: "₹400", price: "₹320", description: "Complete Blood Count", tat: "6 hrs" },
+      { name: "LFT", mrp: "₹600", price: "₹480", description: "Liver Function Test", tat: "6 hrs"
