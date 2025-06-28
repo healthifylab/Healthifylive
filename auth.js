@@ -1,0 +1,1 @@
+// Auth submission placeholder for Firebase form
