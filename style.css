@@ -43,10 +43,10 @@ header.navbar {
 }
 
 .hero-img {
-  width: 100%;
+  width: 150%;
   max-height: 400px;
   object-fit: cover;
-  margin-top: 1rem; /* adds margin to push popup down */
+  margin-top: 2rem; /* adds margin to push popup down */
 }
 
 .hero-text {
