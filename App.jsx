@@ -1,12 +1,10 @@
 import React from "react";
-import SearchBar from "./components/SearchBar";
-import { allTests } from "./data/allTests";
+import BookingForm from "./components/BookingForm";
 
 function App() {
   return (
     <div className="pt-20">
-      {/* Only Search visible outside menu */}
-      <SearchBar allTests={allTests} />
+      <BookingForm />
     </div>
   );
 }
