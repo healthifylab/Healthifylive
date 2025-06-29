@@ -27,4 +27,26 @@
   <script>
     const data = [
       { name: "CBC", mrp: "₹400", price: "₹320", description: "Complete Blood Count", tat: "6 hrs" },
-      { name: "LFT", mrp: "₹600", price: "₹480", description: "Liver Function Test", tat: "6 hrs"
+      { name: "LFT", mrp: "₹600", price: "₹480", description: "Liver Function Test", tat: "6 hrs" },
+      { name: "FBS", mrp: "₹200", price: "₹160", description: "Fasting Blood Sugar", tat: "4 hrs" },
+      { name: "Full Body Checkup Basic", mrp: "₹1499", price: "₹1199", description: "CBC, LFT, KFT, Glucose, Lipid", tat: "24 hrs" }
+    ];
+
+    const resultsList = document.getElementById("results");
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const val = this.value.toLowerCase();
+      const matches = data.filter(entry => entry.name.toLowerCase().includes(val) || entry.description.toLowerCase().includes(val));
+      resultsList.innerHTML = matches.map(item => `
+        <li>
+          <span class="highlight">${item.name}</span><br/>
+          <del style="color:red">${item.mrp}</del> <strong>${item.price}</strong><br/>
+          📝 ${item.description}<br/>
+          ⏱️ TAT: ${item.tat}
+        </li>
+      `).join("");
+    });
+  </script>
+
+</body>
+</html>
