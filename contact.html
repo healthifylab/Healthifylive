@@ -3,22 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact – Healthify Lab</title>
+  <title>Contact Us – Healthify Lab</title>
   <link rel="stylesheet" href="style.css" />
-  <script defer src="emailjs-enquiry.js"></script>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("YOUR_EMAILJS_USER_ID"); // replace with your EmailJS user ID
+    })();
+  </script>
+  <script src="script.js" defer></script>
 </head>
 <body>
 
-  <h2 style="text-align:center">📩 Contact Healthify Lab</h2>
+  <!-- Header (reuse from index.html) -->
+  <header>
+    <img src="logo.png" alt="Healthify Logo" class="logo" />
+    <nav class="top-nav">
+      <a href="index.html">🏠 Home</a>
+      <a href="about.html">ℹ️ About</a>
+      <a href="contact.html">📬 Contact Us</a>
+      <a href="booking.html">🧾 Book a Test</a>
+    </nav>
+  </header>
 
-  <form id="enquiry-form" style="max-width: 600px; margin: auto; display: flex; flex-direction: column; gap: 1rem;">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" placeholder="Your Message or Enquiry..." rows="5" required></textarea>
-    <button type="submit" style="background:#28a745; color:white; padding:10px 16px; border:none; border-radius:6px;">
-      Send Enquiry
-    </button>
-  </form>
+  <!-- Contact Form -->
+  <section class="contact-section">
+    <h2>📬 Send Us an Enquiry</h2>
+    <form id="contactForm" class="contact-form">
+      <div class="form-group">
+        <label for="name">👤 Your Name</label>
+        <input type="text" id="name" name="user_name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">📧 Your Email</label>
+        <input type="email" id="email" name="user_email" required />
+      </div>
+      <div class="form-group">
+        <label for="message">💬 Your Message</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn">📨 Send Enquiry</button>
+    </form>
+  </section>
 
+  <!-- Footer (reuse from index.html) -->
+  <footer>
+    <p>📞 +91-9999999999 | ✉️ report@healthifylab.com</p>
+    <p>&copy; 2025 Healthify Lab. All rights reserved.</p>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/919999999999" class="whatsapp-float" target="_blank">
+    <img src="whatsapp-icon.png" alt="WhatsApp" />
+  </a>
 </body>
 </html>
