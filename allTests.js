@@ -1,53 +1,58 @@
 const tests = [
   {
-    name: "Complete Blood Count (CBC)",
-    mrp: "499",
-    offerPrice: "299",
-    description: "Measures WBC, RBC, Hemoglobin, Platelets etc.",
-    tat: "6 hrs"
+    name: "CBC (Complete Blood Count)",
+    mrp: 399,
+    offerPrice: 319,
+    description: "Measures WBC, RBC, Platelets, Hemoglobin and more.",
+    tat: "4-6 Hours"
   },
   {
-    name: "Thyroid Profile (T3, T4, TSH)",
-    mrp: "699",
-    offerPrice: "399",
-    description: "Evaluates thyroid hormones.",
-    tat: "12 hrs"
+    name: "Thyroid Profile (T3 T4 TSH)",
+    mrp: 499,
+    offerPrice: 399,
+    description: "Helps diagnose thyroid disorders such as hyper/hypothyroidism.",
+    tat: "6-8 Hours"
   },
   {
     name: "Fasting Blood Sugar (FBS)",
-    mrp: "299",
-    offerPrice: "199",
-    description: "Checks fasting blood sugar levels.",
-    tat: "4 hrs"
+    mrp: 299,
+    offerPrice: 239,
+    description: "Checks blood sugar level after fasting for 8-12 hours.",
+    tat: "2-4 Hours"
   },
   {
     name: "HbA1c (Glycated Hemoglobin)",
-    mrp: "799",
-    offerPrice: "499",
-    description: "Blood sugar control over 3 months.",
-    tat: "8 hrs"
-  },
-  {
-    name: "Lipid Profile",
-    mrp: "999",
-    offerPrice: "699",
-    description: "Cholesterol and triglyceride levels.",
-    tat: "10 hrs"
+    mrp: 499,
+    offerPrice: 399,
+    description: "Monitors long-term glucose levels over past 2-3 months.",
+    tat: "4-6 Hours"
   },
   {
     name: "Liver Function Test (LFT)",
-    mrp: "1099",
-    offerPrice: "799",
-    description: "Liver enzyme and protein check.",
-    tat: "12 hrs"
+    mrp: 799,
+    offerPrice: 639,
+    description: "Assesses liver health by checking various enzymes and proteins.",
+    tat: "8-10 Hours"
   },
   {
     name: "Kidney Function Test (KFT)",
-    mrp: "899",
-    offerPrice: "599",
-    description: "Urea, Creatinine and kidney health.",
-    tat: "10 hrs"
+    mrp: 749,
+    offerPrice: 599,
+    description: "Evaluates kidney performance through creatinine, urea and more.",
+    tat: "6-8 Hours"
+  },
+  {
+    name: "Vitamin D Test",
+    mrp: 999,
+    offerPrice: 799,
+    description: "Checks Vitamin D levels for bone and immune health.",
+    tat: "24 Hours"
+  },
+  {
+    name: "Vitamin B12 Test",
+    mrp: 899,
+    offerPrice: 719,
+    description: "Checks B12 levels critical for nerves and blood cell formation.",
+    tat: "24 Hours"
   }
 ];
-
-export default tests;
