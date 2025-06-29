@@ -1,156 +1,91 @@
+// routes/BookingForm.jsx
+
 import React, { useState } from "react";
 import { allTests } from "./allTests";
 import { allProfiles } from "./allProfiles";
 
 const BookingForm = () => {
-  const [form, setForm] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     age: "",
-    gender: "Male",
+    gender: "",
     mobile: "",
     address: "",
     pincode: "",
     date: "",
     time: "",
     selectedTests: [],
-    selectedProfiles: [],
+    selectedProfiles: []
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleMultiSelect = (name, value) => {
-    setForm((prev) => ({
+  const handleMultiSelectChange = (type, value) => {
+    setFormData((prev) => ({
       ...prev,
-      [name]: prev[name].includes(value)
-        ? prev[name].filter((v) => v !== value)
-        : [...prev[name], value],
+      [type]: Array.from(value, (option) => option.value)
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Booking Submitted", form);
-    alert("✅ Booking Submitted Successfully!");
-    // Optional: Send to Firebase or WhatsApp
+    alert("Booking successful! Thank you.");
+    console.log("Form Data:", formData);
+    // Firebase/WhatsApp/email logic can be added here
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-4 bg-white shadow rounded">
-      <h2 className="text-xl font-bold text-blue-700 mb-4">Book a Lab Test</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
-          <input
-            name="name"
-            placeholder="Patient Name"
-            value={form.name}
-            onChange={handleChange}
-            required
-            className="p-2 border rounded"
-          />
-          <input
-            name="age"
-            placeholder="Age"
-            type="number"
-            value={form.age}
-            onChange={handleChange}
-            required
-            className="p-2 border rounded"
-          />
-          <select
-            name="gender"
-            value={form.gender}
-            onChange={handleChange}
-            className="p-2 border rounded"
-          >
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </select>
-          <input
-            name="mobile"
-            placeholder="Mobile Number"
-            type="tel"
-            value={form.mobile}
-            onChange={handleChange}
-            required
-            className="p-2 border rounded"
-          />
-        </div>
+    <div className="p-4 max-w-3xl mx-auto bg-white rounded-xl shadow-md mt-4">
+      <h2 className="text-xl font-bold text-center mb-4">Book a Test</h2>
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
+        <input name="name" placeholder="Name" required onChange={handleChange} className="border p-2 rounded" />
+        <input name="age" placeholder="Age" required onChange={handleChange} className="border p-2 rounded" />
+        <select name="gender" required onChange={handleChange} className="border p-2 rounded">
+          <option value="">Select Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+        <input name="mobile" placeholder="Mobile" required onChange={handleChange} className="border p-2 rounded" />
+        <input name="address" placeholder="Address" required onChange={handleChange} className="border p-2 rounded" />
+        <input name="pincode" placeholder="Pincode" required onChange={handleChange} className="border p-2 rounded" />
+        <input type="date" name="date" required onChange={handleChange} className="border p-2 rounded" />
+        <input type="time" name="time" required onChange={handleChange} className="border p-2 rounded" />
 
-        <textarea
-          name="address"
-          placeholder="Full Address"
-          value={form.address}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        ></textarea>
-
-        <div className="grid grid-cols-2 gap-4">
-          <input
-            name="pincode"
-            placeholder="Pincode"
-            value={form.pincode}
-            onChange={handleChange}
-            className="p-2 border rounded"
-          />
-          <input
-            name="date"
-            type="date"
-            value={form.date}
-            onChange={handleChange}
-            className="p-2 border rounded"
-            required
-          />
-          <input
-            name="time"
-            type="time"
-            value={form.time}
-            onChange={handleChange}
-            className="p-2 border rounded"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="font-semibold text-blue-700">Select Tests:</label>
-          <div className="grid grid-cols-2 gap-2 mt-1">
-            {allTests.map((test, i) => (
-              <label key={i} className="text-sm">
-                <input
-                  type="checkbox"
-                  checked={form.selectedTests.includes(test.name)}
-                  onChange={() => handleMultiSelect("selectedTests", test.name)}
-                />{" "}
-                {test.name}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <label className="font-semibold text-blue-700">Select Profiles:</label>
-          <div className="grid grid-cols-2 gap-2 mt-1">
-            {allProfiles.map((p, i) => (
-              <label key={i} className="text-sm">
-                <input
-                  type="checkbox"
-                  checked={form.selectedProfiles.includes(p.name)}
-                  onChange={() => handleMultiSelect("selectedProfiles", p.name)}
-                />{" "}
-                {p.name}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        {/* Test Selection */}
+        <label className="font-semibold">Select Tests</label>
+        <select
+          multiple
+          value={formData.selectedTests}
+          onChange={(e) => handleMultiSelectChange("selectedTests", e.target.selectedOptions)}
+          className="border p-2 rounded h-32"
         >
+          {allTests.map((test, index) => (
+            <option key={index} value={test.name}>
+              {test.name} — <span className="line-through text-red-500">₹{test.mrp}</span> <span className="text-green-600">₹{test.price}</span>
+            </option>
+          ))}
+        </select>
+
+        {/* Profile Selection */}
+        <label className="font-semibold">Select Profiles</label>
+        <select
+          multiple
+          value={formData.selectedProfiles}
+          onChange={(e) => handleMultiSelectChange("selectedProfiles", e.target.selectedOptions)}
+          className="border p-2 rounded h-32"
+        >
+          {allProfiles.map((profile, index) => (
+            <option key={index} value={profile.name}>
+              {profile.name} — <span className="line-through text-red-500">₹{profile.mrp}</span> <span className="text-green-600">₹{profile.price}</span>
+            </option>
+          ))}
+        </select>
+
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
           Confirm Booking
         </button>
       </form>
