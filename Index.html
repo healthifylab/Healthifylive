@@ -2,47 +2,99 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Healthify Lab – Book Blood Tests at Home</title>
-    <meta name="description" content="Healthify Lab offers home blood testing. Get CBC, Thyroid, Full Body Checkups with doorstep sample collection." />
-    <meta name="keywords" content="Healthify, Blood Test, Full Body Checkup, CBC, Thyroid, Lab test at home" />
-    <meta name="author" content="Healthify Lab" />
-    <meta name="theme-color" content="#059669" />
-
-    <!-- Favicon -->
+    <meta name="description" content="Healthify Lab offers trusted pathology tests at your doorstep. Book Full Body Checkups, CBC, Thyroid & more.">
     <link rel="icon" href="./favicon.ico" />
-
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
-
-    <!-- Social Meta Tags -->
-    <meta property="og:title" content="Healthify Lab – Trusted Blood Tests" />
-    <meta property="og:description" content="Accurate, Affordable, At-home blood testing. Book now." />
-    <meta property="og:image" content="./hero-banner.jpg" />
-    <meta property="og:url" content="https://healthifylive.vercel.app/" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <script src="script.js" defer></script>
   </head>
+  <body>
 
-  <body style="font-family: 'Inter', sans-serif; margin: 0; padding: 0;">
+    <!-- Header -->
+    <header>
+      <img src="logo.png" alt="Healthify Logo" class="logo" />
+      <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="booking.html">Book a Test</a>
+      </nav>
+    </header>
 
-    <!-- Pre-React Placeholder Layout (for SEO/JS-disabled fallback) -->
-    <div style="text-align: center; padding: 2rem;">
-      <img src="./logo.png" alt="Healthify Logo" width="100" />
-      <h1>Healthify Lab</h1>
-      <p>Accurate. Reliable. Healthify.</p>
-      <p>Loading the best health care experience for you...</p>
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input type="text" placeholder="Search for Tests or Profiles..." id="searchBar" />
     </div>
 
-    <!-- Root div for React -->
-    <div id="root"></div>
+    <!-- Hero Banner -->
+    <section class="hero">
+      <div class="popup">
+        <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+        <h2>Full Body Checkup @ ₹499</h2>
+        <p>Home Sample Collection | Same-Day Report</p>
+        <a href="booking.html" class="btn">Book Now</a>
+      </div>
+    </section>
 
-    <!-- React Entry Point -->
-    <script type="module" src="main.jsx"></script>
+    <!-- Promo Cards -->
+    <section class="promotions">
+      <div class="promo-card">
+        <h3>CBC + ESR @ ₹299</h3>
+        <p>Same-day report | Accurate results</p>
+        <a href="booking.html?test=cbc" class="btn">Book Now</a>
+      </div>
+      <div class="promo-card">
+        <h3>Thyroid Profile @ ₹399</h3>
+        <p>T3, T4, TSH at discount</p>
+        <a href="booking.html?test=thyroid" class="btn">Book Now</a>
+      </div>
+      <div class="promo-card">
+        <h3>Diabetic Profile @ ₹699</h3>
+        <p>FBS, PPBS, HbA1c & more</p>
+        <a href="booking.html?profile=diabetic" class="btn">Book Now</a>
+      </div>
+    </section>
 
-    <noscript>
-      Please enable JavaScript to use the Healthify Lab website.
-    </noscript>
+    <!-- Why Choose -->
+    <section class="why-healthify">
+      <h2>Why Choose Healthify</h2>
+      <ul>
+        <li>🔬 Trusted pathology lab</li>
+        <li>💉 Hassle-free home collection</li>
+        <li>🧪 Advanced diagnostics</li>
+        <li>🚚 Fast turnaround</li>
+        <li>✅ Happy Customers</li>
+        <li>📞 Book today — your health deserves the best</li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h4>How do I book a test?</h4>
+        <p>Click on 'Book a Test' and fill out the form with your details.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Is home sample collection available?</h4>
+        <p>Yes! We offer free doorstep collection.</p>
+      </div>
+      <div class="faq-item">
+        <h4>When will I get my reports?</h4>
+        <p>Same-day for most tests, depending on the test type.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>📞 +91-9999999999 | ✉️ report@healthifylab.com</p>
+      <p>&copy; 2025 Healthify Lab. All rights reserved.</p>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/919999999999" target="_blank" class="whatsapp-float">
+      <img src="whatsapp-icon.png" alt="WhatsApp" />
+    </a>
   </body>
 </html>
