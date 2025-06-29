@@ -85,3 +85,21 @@ function showPopup(item, type) {
     `🧪 ${type === "test" ? "Test" : "Profile"}: ${item.name}\n\nDescription: ${item.description}\nTAT: ${item.tat}`
   );
 }
+// Contact form submission via EmailJS
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', '#contactForm')
+        .then(() => {
+          alert("✅ Enquiry sent! We will get back to you soon.");
+          contactForm.reset();
+        }, (error) => {
+          console.error("EmailJS error:", error);
+          alert("❌ Oops, something went wrong. Please try again.");
+        });
+    });
+  }
+});
+
