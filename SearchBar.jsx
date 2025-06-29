@@ -1,45 +1,54 @@
-import React, { useState } from "react";
+// routes/SearchBar.jsx
 
-const SearchBar = ({ allTests }) => {
+import React, { useState } from "react";
+import { allTests } from "./allTests";
+import { allProfiles } from "./allProfiles";
+
+const SearchBar = () => {
   const [query, setQuery] = useState("");
 
-  const filtered = allTests.filter((item) =>
+  const filteredTests = allTests.filter((item) =>
+    item.name.toLowerCase().includes(query.toLowerCase())
+  );
+  const filteredProfiles = allProfiles.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase())
   );
 
   return (
-    <div className="relative">
+    <div className="p-4 max-w-3xl mx-auto">
       <input
         type="text"
         placeholder="Search tests or profiles..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full p-2 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full border p-2 rounded shadow-sm"
       />
-      {query && (
-        <div className="absolute z-10 bg-white w-full max-h-60 overflow-y-auto shadow-lg mt-1 rounded border border-gray-200">
-          {filtered.length > 0 ? (
-            filtered.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-2 hover:bg-blue-50 cursor-pointer text-sm"
-              >
-                <div className="font-medium text-blue-700">{item.name}</div>
-                <div className="text-xs text-gray-600">
-                  MRP: <span className="line-through text-red-500">₹{item.mrp}</span>
-                  &nbsp;
-                  <span className="text-green-600 font-semibold">
-                    ₹{item.price}
-                  </span>
-                  &nbsp; • {item.tat}
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="p-2 text-gray-500 text-sm">No results found.</div>
-          )}
-        </div>
-      )}
+
+      <div className="mt-4 space-y-4">
+        {filteredTests.map((test, index) => (
+          <div key={index} className="border rounded p-3 shadow-sm">
+            <h3 className="font-semibold">{test.name}</h3>
+            <p className="text-sm text-gray-600">{test.description}</p>
+            <p className="text-sm">
+              <span className="text-red-500 line-through mr-2">₹{test.mrp}</span>
+              <span className="text-green-600 font-bold">₹{test.price}</span>
+              <span className="ml-4 text-gray-500">TAT: {test.tat}</span>
+            </p>
+          </div>
+        ))}
+
+        {filteredProfiles.map((profile, index) => (
+          <div key={index} className="border rounded p-3 shadow-sm">
+            <h3 className="font-semibold">{profile.name}</h3>
+            <p className="text-sm text-gray-600">Includes: {profile.tests.join(", ")}</p>
+            <p className="text-sm">
+              <span className="text-red-500 line-through mr-2">₹{profile.mrp}</span>
+              <span className="text-green-600 font-bold">₹{profile.price}</span>
+              <span className="ml-4 text-gray-500">TAT: {profile.tat}</span>
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
