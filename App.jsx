@@ -1,33 +1,50 @@
-// App.jsx
-import React from "react";
+// App.jsx – Final Combined File (Fixed Layout + All Sections)
+import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import BookingForm from "./components/BookingForm";
-import AdminPanel from "./components/AdminPanel"; // Optional route
+import AdminPanel from "./components/AdminPanel";
 import FAQ from "./components/FAQ";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import PromoPopup from "./components/PromoPopup";
-
 import { allTests } from "./data/allTests";
 
-function App() {
+const App = () => {
+  const [isAdmin, setIsAdmin] = useState(false); // For demo toggle only
+
   return (
-    <div className="bg-gray-50 min-h-screen pt-20">
+    <div className="bg-gray-50 min-h-screen">
       {/* 🎉 Promo Popup */}
       <PromoPopup />
 
-      {/* 🔍 Direct Search Bar (outside menu) */}
-      <SearchBar allTests={allTests} />
+      {/* 🔍 Search Bar Outside Header */}
+      <div className="w-[59%] mx-auto pt-5">
+        <SearchBar allTests={allTests} />
+      </div>
 
-      {/* 🧾 Booking Form */}
-      <BookingForm />
+      {/* 📋 Toggle for admin demo (in real use, protect this route) */}
+      <div className="text-right pr-6 pt-2">
+        <button
+          onClick={() => setIsAdmin(!isAdmin)}
+          className="text-xs text-blue-600 underline"
+        >
+          {isAdmin ? "Switch to User" : "Switch to Admin"}
+        </button>
+      </div>
 
-      {/* ❓ FAQs */}
-      <FAQ />
+      {/* 📋 Admin Panel or Booking View */}
+      {isAdmin ? (
+        <AdminPanel />
+      ) : (
+        <>
+          <BookingForm />
+          <FAQ />
+        </>
+      )}
 
-      {/* 🟢 Floating WhatsApp */}
+      {/* 🟢 WhatsApp Button */}
       <FloatingWhatsApp />
     </div>
   );
-}
+};
 
 export default App;
