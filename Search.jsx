@@ -1,48 +1,22 @@
-// Search.jsx – Integrated with Full Data List
+// Search.jsx – Real GD Labs Data
 import { useState } from "react";
 
 const testData = [
-  {
-    name: "Complete Blood Count (CBC)",
-    type: "Test",
-    price: 199,
-    mrp: 299,
-    tat: "Same Day",
-    description: "Measures various parameters of blood such as RBC, WBC, Platelets, etc."
-  },
-  {
-    name: "Liver Function Test (LFT)",
-    type: "Profile",
-    price: 699,
-    mrp: 899,
-    tat: "24 Hours",
-    description: "Evaluates liver health through various enzyme levels."
-  },
-  {
-    name: "Kidney Function Test (KFT)",
-    type: "Profile",
-    price: 649,
-    mrp: 849,
-    tat: "24 Hours",
-    description: "Checks for creatinine, urea, uric acid, and more."
-  },
-  {
-    name: "Vitamin D Test",
-    type: "Test",
-    price: 799,
-    mrp: 999,
-    tat: "24 Hours",
-    description: "Checks Vitamin D3 (25-OH) levels in the body."
-  },
-  {
-    name: "Thyroid Profile (T3 T4 TSH)",
-    type: "Profile",
-    price: 499,
-    mrp: 699,
-    tat: "Same Day",
-    description: "Tests for T3, T4, and TSH to assess thyroid health."
-  },
-  // Add more tests/profiles as needed...
+  { name: "Complete Blood Count (CBC)", type: "Test", price: 160, mrp: 200, tat: "Same Day", description: "Basic blood count including RBCs, WBCs, and Platelets." },
+  { name: "Liver Function Test (LFT)", type: "Profile", price: 440, mrp: 550, tat: "Same Day", description: "Analyzes liver enzymes, proteins, and bilirubin." },
+  { name: "Kidney Function Test (KFT)", type: "Profile", price: 360, mrp: 450, tat: "Same Day", description: "Assesses urea, creatinine, uric acid and other markers." },
+  { name: "Fasting Blood Sugar (FBS)", type: "Test", price: 80, mrp: 100, tat: "Same Day", description: "Measures glucose level after fasting." },
+  { name: "HbA1c (Glycated Hemoglobin)", type: "Test", price: 320, mrp: 400, tat: "Same Day", description: "Monitors long-term glucose levels (last 3 months)." },
+  { name: "TSH (Thyroid Stimulating Hormone)", type: "Test", price: 160, mrp: 200, tat: "Same Day", description: "Evaluates thyroid function." },
+  { name: "Lipid Profile", type: "Profile", price: 320, mrp: 400, tat: "Same Day", description: "Measures cholesterol and triglyceride levels." },
+  { name: "Vitamin D (25-OH)", type: "Test", price: 720, mrp: 900, tat: "24 Hours", description: "Assesses Vitamin D3 level in blood." },
+  { name: "Vitamin B12", type: "Test", price: 600, mrp: 750, tat: "24 Hours", description: "Checks Vitamin B12 levels." },
+  { name: "Iron Studies (Serum Iron, TIBC, % Saturation)", type: "Profile", price: 520, mrp: 650, tat: "24 Hours", description: "Analyzes iron deficiency or overload." },
+  { name: "Thyroid Profile (T3, T4, TSH)", type: "Profile", price: 400, mrp: 500, tat: "Same Day", description: "Comprehensive thyroid hormone test." },
+  { name: "Diabetes Profile", type: "Profile", price: 720, mrp: 900, tat: "Same Day", description: "Includes FBS, PPBS, HbA1c and more." },
+  { name: "Calcium Test", type: "Test", price: 160, mrp: 200, tat: "Same Day", description: "Checks calcium level in blood." },
+  { name: "Uric Acid Test", type: "Test", price: 120, mrp: 150, tat: "Same Day", description: "Used to detect gout or kidney issues." },
+  { name: "CRP (C-Reactive Protein)", type: "Test", price: 280, mrp: 350, tat: "Same Day", description: "Marker of inflammation or infection." },
 ];
 
 export default function Search() {
