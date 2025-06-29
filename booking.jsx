@@ -1,3 +1,6 @@
+import { db } from "../firebase";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+
 // Booking.jsx – Full Booking Form with Test Selection
 import { useState } from "react";
 
