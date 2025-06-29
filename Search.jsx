@@ -1,4 +1,4 @@
-// Search.jsx – Real GD Labs Data
+// Search.jsx – Highlighted Price with Red MRP Strikethrough
 import { useState } from "react";
 
 const testData = [
@@ -46,8 +46,9 @@ export default function Search() {
             <h2 className="font-semibold text-lg text-green-700">{item.name}</h2>
             <p className="text-sm text-gray-700 italic">{item.description}</p>
             <p className="text-sm">Type: {item.type}</p>
-            <p className="text-sm">MRP: <span className="line-through text-red-500">₹{item.mrp}</span></p>
-            <p className="text-sm font-semibold text-green-700">Offer Price: ₹{item.price}</p>
+            <p className="text-sm font-bold text-green-700">Offer Price: ₹{item.price}</p>
+            <p className="text-sm">MRP: <span className="text-red-600 line-through">₹{item.mrp}</span></p>
+            <p className="text-sm text-blue-700">You Save: ₹{item.mrp - item.price}</p>
             <p className="text-sm">TAT: {item.tat}</p>
           </div>
         ))}
