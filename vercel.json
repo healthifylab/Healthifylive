@@ -1,9 +1,22 @@
 {
+  "cleanUrls": true,
   "rewrites": [
-    { "source": "/book", "destination": "/book.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/search", "destination": "/search.html" }
+    { "source": "/",           "destination": "/index.html" },
+    { "source": "/booking",    "destination": "/booking.html" },
+    { "source": "/contact",    "destination": "/contact.html" },
+    { "source": "/about",      "destination": "/about.html" },
+    { "source": "/admin",      "destination": "/admin.html" }
+  ],
+  "redirects": [
+    { "source": "/home",       "destination": "/",            "permanent": true },
+    { "source": "/book",       "destination": "/booking",     "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    }
   ]
 }
