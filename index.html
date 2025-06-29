@@ -1,105 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Healthify Lab – Home</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Healthify - Pathology Lab for Home Sample Collection" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>Healthify Lab</title>
+    <script defer type="module" src="/src/main.jsx"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-gray-50 font-sans">
 
-  <!-- Navbar -->
-  <header class="navbar">
-    <img src="logo.png" alt="Healthify Logo" class="logo" />
-    <nav>
-      <a href="index.html">Home</a>
+    <!-- Header -->
+    <header class="bg-white shadow p-4 flex items-center justify-between">
+      <div class="text-xl font-bold text-blue-600">Healthify Lab</div>
+
+      <!-- Side Menu Trigger (Mobile) -->
+      <button onclick="document.getElementById('sideMenu').classList.toggle('hidden')" class="md:hidden">
+        ☰
+      </button>
+
+      <!-- Search Bar -->
+      <div class="hidden md:block w-[59%]">
+        <div id="search-root"></div>
+      </div>
+    </header>
+
+    <!-- Side Navigation Menu -->
+    <nav id="sideMenu" class="bg-white shadow-md p-4 w-56 fixed top-0 left-0 h-full hidden md:block">
+      <h2 class="text-lg font-semibold mb-4">Menu</h2>
+      <ul class="space-y-2">
+        <li><a href="/#home" class="text-blue-600 hover:underline">Home</a></li>
+        <li><a href="/#about" class="text-blue-600 hover:underline">About</a></li>
+        <li><a href="/#contact" class="text-blue-600 hover:underline">Contact</a></li>
+        <li><a href="/booking" class="text-blue-600 hover:underline">Booking</a></li>
+        <li><a href="/search" class="text-blue-600 hover:underline">Search</a></li>
+      </ul>
     </nav>
-  </header>
-  <header style="display: flex; justify-content: space-between; align-items: center;">
-  <nav>
-    <ul style="display: flex; gap: 1rem;">
-      <li><a href="index.html">Home</a></li>
-    </ul>
-  </nav>
-  <input type="text" id="searchBar" placeholder="Search tests or profiles..." style="width:59%; padding:6px;" />
-  </header>
-  
 
+    <!-- Main React App -->
+    <main class="p-4 mt-4 md:ml-60">
+      <div id="root"></div>
+    </main>
 
-  
-  <!-- Hero Section -->
-  <section class="hero">
-    <img src="banner-video.jpg" alt="Full Body Checkup" class="hero-img" />
-    <div class="hero-text">
-      <h1>Full Body Checkup @ ₹499</h1>
-      <p>Home Sample Collection | Same-Day Report</p>
-      <a href="book.html" class="hero-btn">Book Now</a>
-    </div>
-  </section>
-
-  <!-- Promo Cards Section -->
-  <section class="promo-slider">
-    <div class="card">
-      <img src="promo1.jpg" alt="Smart Checkup" />
-      <h3>Smart Body Checkup</h3>
-      <p>Includes CBC, LFT, KFT – <del style="color:red">₹1500</del> ₹1200</p>
-      <a href="book.html?profile=smart-body-checkup" class="book-btn">Book Now</a>
-    </div>
-    <div class="card">
-      <img src="promo2.jpg" alt="Diabetes Panel" />
-      <h3>Diabetes Panel</h3>
-      <p>FBS, PPBS, HbA1c – <del style="color:red">₹800</del> ₹640</p>
-      <a href="book.html?profile=diabetes-panel" class="book-btn">Book Now</a>
-    </div>
-    <div class="card">
-      <img src="promo3.jpg" alt="Vitamin Profile" />
-      <h3>Vitamin Profile</h3>
-      <p>Vitamin D & B12 – <del style="color:red">₹1100</del> ₹880</p>
-      <a href="book.html?profile=vitamin-profile" class="book-btn">Book Now</a>
-    </div>
-  </section>
-
-  <!-- Why Choose Healthify -->
-  <section class="why-healthify">
-    <h2>Why Choose Healthify</h2>
-    <ul>
-      <li>🔬 Your trusted partner in preventive healthcare</li>
-      <li>💉 Hassle-free sample collection at home</li>
-      <li>🧪 Advanced diagnostics & accurate reports</li>
-      <li>🚚 Fast turnaround | 📍 Local service</li>
-      <li>✅ 💙 Happy Customers</li>
-      <li>📞 Book your test today — because your health deserves the best</li>
-    </ul>
-  </section>
-
-  <section id="faq">
-  <h2>Frequently Asked Questions</h2>
-  <div>
-    <h4>How do I book a test?</h4>
-    <p>Select tests or profiles and fill your details in the booking form.</p>
-    <h4>Is home collection free?</h4>
-    <p>Yes, sample collection at home is free for all bookings.</p>
-    <h4>When will I get my report?</h4>
-    <p>Reports are delivered the same day or within 24 hours depending on the test.</p>
-  </div>
-</section>
-
-
-  <!-- WhatsApp Button -->
-  <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
-    <img src="whatsapp.png" alt="Chat with us" />
-  </a>
-
-  <!-- Footer -->
-  <footer>
-    <p>📞 +91 9503832889 | ✉️ healthifylab@gmail.com</p>
-    <p>Follow us: 
-      <a href="https://x.com/healthify_lab" target="_blank">X</a> | 
-      <a href="https://instagram.com/healthifylab" target="_blank">Instagram</a> | 
-      <a href="https://facebook.com/healthify" target="_blank">Facebook</a>
-    </p>
-    <p>© 2025 Healthify Lab</p>
-  </footer>
-
-</body>
+  </body>
 </html>
