@@ -40,7 +40,12 @@ const BookingForm = () => {
     e.preventDefault();
 
     // 👉 Send data to Firebase here or trigger WhatsApp/Email
-    console.log("Booking Submitted:", form);
+    console.log(import { db } from "../firebase"; // Firebase config file
+import { collection, addDoc } from "firebase/firestore";
+
+// inside handleSubmit
+await addDoc(collection(db, "bookings"), form);
+);
     alert("Booking confirmed! ✅");
   };
 
