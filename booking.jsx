@@ -1,4 +1,4 @@
-// Booking.jsx – Updated with GD Labs Tests and Highlighted Prices
+// Booking.jsx – Full Booking Form with Test Selection
 import { useState } from "react";
 
 const testData = [
@@ -21,11 +21,34 @@ const testData = [
 
 export default function Booking() {
   const [selected, setSelected] = useState([]);
+  const [form, setForm] = useState({
+    name: "",
+    age: "",
+    sex: "",
+    mobile: "",
+    address: "",
+    pincode: "",
+    date: "",
+    time: ""
+  });
+  const [submitted, setSubmitted] = useState(false);
 
   const toggleSelect = (name) => {
     setSelected(prev =>
       prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]
     );
+  };
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (selected.length === 0) return alert("Please select at least one test or profile.");
+    if (!form.name || !form.mobile || !form.date || !form.time) return alert("Please fill all required fields.");
+    setSubmitted(true);
+    console.log("Booking Submitted", { ...form, selected });
   };
 
   return (
@@ -52,16 +75,28 @@ export default function Booking() {
         ))}
       </div>
 
-      <div className="mt-8 max-w-xl mx-auto text-center">
-        <h2 className="text-xl font-bold mb-2">Selected Tests:</h2>
-        {selected.length === 0 ? (
-          <p className="text-gray-500">No test selected</p>
-        ) : (
-          <ul className="list-disc list-inside">
-            {selected.map((test, i) => <li key={i}>{test}</li>)}
-          </ul>
+      <form onSubmit={handleSubmit} className="max-w-3xl mx-auto bg-white mt-8 p-6 rounded shadow space-y-4">
+        <h2 className="text-xl font-bold mb-4">Patient Details</h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input className="border p-2 rounded" name="name" placeholder="Full Name*" value={form.name} onChange={handleChange} />
+          <input className="border p-2 rounded" name="age" placeholder="Age" value={form.age} onChange={handleChange} />
+          <input className="border p-2 rounded" name="sex" placeholder="Sex" value={form.sex} onChange={handleChange} />
+          <input className="border p-2 rounded" name="mobile" placeholder="Mobile Number*" value={form.mobile} onChange={handleChange} />
+          <input className="border p-2 rounded col-span-2" name="address" placeholder="Full Address" value={form.address} onChange={handleChange} />
+          <input className="border p-2 rounded" name="pincode" placeholder="Pincode" value={form.pincode} onChange={handleChange} />
+          <input className="border p-2 rounded" name="date" type="date" placeholder="Date*" value={form.date} onChange={handleChange} />
+          <input className="border p-2 rounded" name="time" type="time" placeholder="Time*" value={form.time} onChange={handleChange} />
+        </div>
+
+        <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700">
+          Confirm Booking
+        </button>
+
+        {submitted && (
+          <div className="mt-4 text-green-700 font-semibold">✅ Your booking has been submitted successfully!</div>
         )}
-      </div>
+      </form>
     </div>
   );
 }
