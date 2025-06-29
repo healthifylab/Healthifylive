@@ -45,7 +45,7 @@ import { collection, addDoc } from "firebase/firestore";
 
 // inside handleSubmit
 await addDoc(collection(db, "// inside handleSubmit (BookingForm)
-window.open(`https://wa.me/91${form.mobile}?text=Hi ${form.name}, your test booking at Healthify is confirmed for ${form.date} at ${form.time}.`, "_blank");
+window.open(`https://wa.me/91$9503832889{form.mobile}?text=Hi ${form.name}, your test booking at Healthify is confirmed for ${form.date} at ${form.time}.`, "_blank");
 ), form);
 );
     alert("Booking confirmed! ✅");
