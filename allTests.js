@@ -1,74 +1,53 @@
-// routes/allTests.js
-
-export const allTests = [
+const tests = [
   {
-    name: "CBC (Complete Blood Count)",
-    mrp: 300,
-    price: 199,
-    tat: "12 hrs",
-    description: "CBC (Complete Blood Count) test with TAT of 12 hrs"
-  },
-  {
-    name: "LFT (Liver Function Test)",
-    mrp: 600,
-    price: 449,
-    tat: "24 hrs",
-    description: "LFT (Liver Function Test) test with TAT of 24 hrs"
-  },
-  {
-    name: "KFT (Kidney Function Test)",
-    mrp: 700,
-    price: 499,
-    tat: "24 hrs",
-    description: "KFT (Kidney Function Test) test with TAT of 24 hrs"
-  },
-  {
-    name: "HbA1c",
-    mrp: 600,
-    price: 399,
-    tat: "12 hrs",
-    description: "HbA1c test with TAT of 12 hrs"
+    name: "Complete Blood Count (CBC)",
+    mrp: "499",
+    offerPrice: "299",
+    description: "Measures WBC, RBC, Hemoglobin, Platelets etc.",
+    tat: "6 hrs"
   },
   {
     name: "Thyroid Profile (T3, T4, TSH)",
-    mrp: 750,
-    price: 549,
-    tat: "24 hrs",
-    description: "Thyroid Profile (T3, T4, TSH) test with TAT of 24 hrs"
+    mrp: "699",
+    offerPrice: "399",
+    description: "Evaluates thyroid hormones.",
+    tat: "12 hrs"
   },
   {
-    name: "Vitamin B12",
-    mrp: 1100,
-    price: 849,
-    tat: "24 hrs",
-    description: "Vitamin B12 test with TAT of 24 hrs"
+    name: "Fasting Blood Sugar (FBS)",
+    mrp: "299",
+    offerPrice: "199",
+    description: "Checks fasting blood sugar levels.",
+    tat: "4 hrs"
   },
   {
-    name: "D-Dimer",
-    mrp: 1200,
-    price: 999,
-    tat: "24 hrs",
-    description: "D-Dimer test with TAT of 24 hrs"
+    name: "HbA1c (Glycated Hemoglobin)",
+    mrp: "799",
+    offerPrice: "499",
+    description: "Blood sugar control over 3 months.",
+    tat: "8 hrs"
   },
   {
-    name: "Amylase",
-    mrp: 600,
-    price: 399,
-    tat: "24 hrs",
-    description: "Amylase test with TAT of 24 hrs"
+    name: "Lipid Profile",
+    mrp: "999",
+    offerPrice: "699",
+    description: "Cholesterol and triglyceride levels.",
+    tat: "10 hrs"
   },
   {
-    name: "Ferritin",
-    mrp: 700,
-    price: 499,
-    tat: "24 hrs",
-    description: "Ferritin test with TAT of 24 hrs"
+    name: "Liver Function Test (LFT)",
+    mrp: "1099",
+    offerPrice: "799",
+    description: "Liver enzyme and protein check.",
+    tat: "12 hrs"
   },
   {
-    name: "PT/INR",
-    mrp: 600,
-    price: 449,
-    tat: "24 hrs",
-    description: "PT/INR test with TAT of 24 hrs"
+    name: "Kidney Function Test (KFT)",
+    mrp: "899",
+    offerPrice: "599",
+    description: "Urea, Creatinine and kidney health.",
+    tat: "10 hrs"
   }
 ];
+
+export default tests;
