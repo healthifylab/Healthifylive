@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Healthify Reminders</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+    import emailjs from "https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+      authDomain: "healthify-lab.firebaseapp.com",
+      projectId: "healthify-lab",
+      storageBucket: "healthify-lab.appspot.com",
+      messagingSenderId: "297003315332",
+      appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const todayStr = new Date().toISOString().split("T")[0];
+
+    emailjs.init("dJE_JHAoNTxxzTxiT");
+
+    async function sendReminders() {
+      const snapshot = await getDocs(collection(db, "bookings"));
+      const bookings = snapshot.docs.map(doc => doc.data());
+
+      const todaysBookings = bookings.filter(b => b.date === todayStr);
+
+      for (const b of todaysBookings) {
+        const templateParams = {
+          from_name: b.name,
+          mobile: b.mobile,
+          time: b.time,
+          tests: b.selectedTests?.join(", ") || "",
+          message: `Reminder: Your appointment is today at ${b.time}`
+        };
+
+        await emailjs.send("service_z3ac4pk", "template_5v6t6ku", templateParams)
+          .then(() => console.log(`Reminder sent to ${b.name}`))
+          .catch(e => console.error("Email failed", e));
+      }
+    }
+
+    sendReminders();
+  </script>
+</head>
+<body>
+  <h1>Healthify Reminder Trigger</h1>
+  <p>This file checks today's bookings and sends reminder emails via EmailJS.</p>
+</body>
+</html>
