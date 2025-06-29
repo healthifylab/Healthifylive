@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Healthify Lab - Book pathology tests online" />
+    <link rel="icon" href="./favicon.ico" />
+    <title>Healthify Lab</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8fafc;
+      }
+      .line-through-red {
+        text-decoration: line-through;
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-md p-4 flex items-center justify-between sticky top-0 z-50">
+      <div class="text-xl font-bold text-green-700">Healthify Lab</div>
+
+      <!-- Search Bar Desktop -->
+      <div class="hidden md:block w-[59%]">
+        <div id="search-root"></div>
+      </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-green-100 p-3 shadow flex gap-6 justify-center text-green-800 font-medium sticky top-[65px] z-40">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="about.html" class="hover:underline">About</a>
+      <a href="book.html" class="hover:underline">Book Test</a>
+      <a href="contact.html" class="hover:underline">Contact</a>
+      <a href="search.html" class="hover:underline">Search</a>
+    </nav>
+
+    <!-- React Mount Root -->
+    <main class="p-4">
+      <div id="root"></div>
+    </main>
+
+    <!-- React Script Entry -->
+    <script type="module" src=
+      
