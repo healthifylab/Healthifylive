@@ -1,7 +1,8 @@
 // firebase.js
-// Make sure to replace with your actual Firebase config
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
+// Replace with actual config
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT.firebaseapp.com",
@@ -12,4 +13,4 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export default app;
+export const db = getFirestore(app); // ✅ export Firestore
