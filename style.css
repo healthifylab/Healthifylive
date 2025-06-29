@@ -19,7 +19,7 @@ header.navbar {
 }
 
 .navbar .logo {
-  height: 70px; /* increased from 50px */
+  height: 100px; /* increased from 50px */
 }
 
 .navbar nav a {
