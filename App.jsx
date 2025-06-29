@@ -10,3 +10,18 @@ function App() {
 }
 
 export default App;
+import BookingForm from "./components/BookingForm";
+import FAQ from "./components/FAQ";
+import FloatingWhatsApp from "./components/FloatingWhatsApp";
+import PromoPopup from "./components/PromoPopup";
+
+function App() {
+  return (
+    <>
+      <PromoPopup />
+      <BookingForm />
+      <FAQ />
+      <FloatingWhatsApp />
+    </>
+  );
+}
