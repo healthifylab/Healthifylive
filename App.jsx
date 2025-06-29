@@ -1,13 +1,12 @@
-// 📁 File: src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import PromoPopup from "./components/PromoPopup";
-import Hero from "./components/Hero";
-import BookingForm from "./components/BookingForm";
-import SearchBar from "./components/SearchBar";
-import AdminPanel from "./components/AdminPanel";
-import { allTests } from "./data/allTests";
+import Header from "./Header";
+import PromoPopup from "./PromoPopup";
+import Hero from "./Hero";
+import BookingForm from "./BookingForm";
+import SearchBar from "./SearchBar";
+import AdminPanel from "./AdminPanel";
+import { allTests } from "./allTests";
 
 const App = () => {
   return (
