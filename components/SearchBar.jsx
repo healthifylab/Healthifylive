@@ -1,4 +1,3 @@
-// components/SearchBar.jsx
 import React, { useState } from "react";
 
 const SearchBar = ({ allTests }) => {
