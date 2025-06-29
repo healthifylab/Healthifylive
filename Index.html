@@ -23,9 +23,14 @@
   </head>
 
   <body class="min-h-screen">
-    <!-- Header -->
-    <header class="bg-white shadow-md p-4 flex items-center justify-between sticky top-0 z-50">
-      <div class="text-xl font-bold text-green-700">Healthify Lab</div>
+
+    <!-- HEADER -->
+    <header class="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-50">
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <img src="./logo.png" alt="Healthify Logo" class="h-10 w-10 object-contain" />
+        <span class="text-xl font-bold text-green-700">Healthify Lab</span>
+      </div>
 
       <!-- Search Bar Desktop -->
       <div class="hidden md:block w-[59%]">
@@ -33,7 +38,7 @@
       </div>
     </header>
 
-    <!-- Navigation Bar -->
+    <!-- NAVIGATION BAR -->
     <nav class="bg-green-100 p-3 shadow flex gap-6 justify-center text-green-800 font-medium sticky top-[65px] z-40">
       <a href="index.html" class="hover:underline">Home</a>
       <a href="about.html" class="hover:underline">About</a>
@@ -42,11 +47,17 @@
       <a href="search.html" class="hover:underline">Search</a>
     </nav>
 
-    <!-- React Mount Root -->
-    <main class="p-4">
+    <!-- HERO BANNER -->
+    <section class="w-full h-[240px] md:h-[360px] bg-cover bg-center mt-2 rounded shadow"
+      style="background-image: url('./hero-banner.jpg');">
+    </section>
+
+    <!-- REACT APP MOUNT POINT -->
+    <main class="p-4 max-w-6xl mx-auto">
       <div id="root"></div>
     </main>
 
-    <!-- React Script Entry -->
-    <script type="module" src=
-      
+    <!-- React JS Entry -->
+    <script type="module" src="./main.jsx"></script>
+  </body>
+</html>
