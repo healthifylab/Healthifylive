@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthify - Home</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 <body>
     <nav>
@@ -16,14 +17,11 @@
         </ul>
     </nav>
 
-    <header>
+    <header class="hero-banner">
         <h1>Welcome to Healthify</h1>
         <p>Book your home health tests today!</p>
-    </header>
-
-    <section class="hero-banner">
         <img src="assets/hero-health-checkup.jpg" alt="Health Checkup">
-    </section>
+    </header>
 
     <div id="callBackPopup" class="popup">
         <span class="close-btn">×</span>
@@ -34,10 +32,55 @@
         </form>
     </div>
 
+    <section class="promotional-cards">
+        <h2>Promotional Profiles</h2>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><div class="card"><img src="assets/full-body-checkup.jpg" alt="Full Body Checkup"></div></div>
+                <div class="swiper-slide"><div class="card"><img src="assets/diabetes-symptoms.jpg" alt="Diabetes Symptoms"></div></div>
+                <div class="swiper-slide"><div class="card"><img src="assets/vitamin-profile.jpg" alt="Vitamin Profile"></div></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <section class="why-choose">
+        <h2>Why Choose Healthify?</h2>
+        <ul>
+            <li>Home Visit Convenience</li>
+            <li>Affordable Pricing</li>
+            <li>Fast TAT</li>
+            <li>Expert Team</li>
+        </ul>
+    </section>
+
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details>
+            <summary>How do I book a test?</summary>
+            <p>Login and select your tests/profiles on the Book Test page.</p>
+        </details>
+        <details>
+            <summary>What is the TAT?</summary>
+            <p>Turnaround time varies by test, typically 12-48 hours.</p>
+        </details>
+    </section>
+
+    <section class="testimonials">
+        <h2>Testimonials</h2>
+        <p>"Great service at home! Highly recommend." - John D.</p>
+        <p>"Fast and reliable results." - Sarah K.</p>
+    </section>
+
+    <footer>
+        <p>Healthify © 2025 | Contact: +91 9503832889</p>
+    </footer>
+
     <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
         <img src="assets/whatsapp-icon.png" alt="WhatsApp">
     </a>
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="scripts/fetch-tests.js"></script>
 </body>
 </html>
