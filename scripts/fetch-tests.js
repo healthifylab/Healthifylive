@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         authDomain: "healthify-lab.firebaseapp.com",
         projectId: "healthify-lab",
         storageBucket: "healthify-lab.firebasestorage.app",
-        messagingSender患: "297003315332",
+        messagingSenderId: "297003315332",
         appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
         measurementId: "G-R0R3RYERZW"
     };
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const testsSelect = document.getElementById('tests');
     const profileSelect = document.getElementById('profiles');
     const preselectedTests = urlParams.get('tests')?.split(',').map(t => t.trim()) || [];
-    const preselectedProfiles = urlParams.get('profiles')?.split(',').map(p => p.trim()) || [];
+    const preselectedProfiles = urlParams.get('profiles')?.split(',').map(p => t.trim()) || [];
     if (testsSelect && preselectedTests.length) {
         for (let option of testsSelect.options) {
             if (preselectedTests.includes(option.value)) option.selected = true;
