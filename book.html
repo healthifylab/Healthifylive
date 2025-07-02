@@ -149,5 +149,30 @@
     window.startOTPLogin = startOTPLogin;
     document.getElementById('otpLoginBtn').addEventListener('click', startOTPLogin);
   </script>
+  <script type="module">
+  import { submitBooking } from './scripts/booking.js';
+
+  document.getElementById('bookingForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const data = {
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      date: document.getElementById('date').value,
+      address: document.getElementById('address').value.trim(),
+      pincode: document.getElementById('pincode').value.trim(),
+      landmark: document.getElementById('landmark').value.trim(),
+      tests: Array.from(document.querySelectorAll('#cart-items li')).map(li => li.textContent.replace('✔️ ', ''))
+    };
+
+    if (data.tests.length === 0) {
+      alert('❗ Please add at least one test or profile to the cart.');
+      return;
+    }
+
+    submitBooking(data);
+  });
+  </script>
+  
 </body>
 </html>
