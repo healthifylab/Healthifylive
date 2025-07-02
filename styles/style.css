@@ -155,3 +155,16 @@ img {
     flex: 0 0 30%;
   }
 }
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.whatsapp-float img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
