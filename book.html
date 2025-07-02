@@ -13,7 +13,7 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="book.html">Book Test</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="#contact">Contact Us</a></li>
         </ul>
     </nav>
 
@@ -21,19 +21,7 @@
         <h1>Healthify - Book Your Home Visit</h1>
     </header>
 
-    <section class="login-section" id="loginSection">
-        <h2>Login to Book</h2>
-        <form id="loginForm">
-            <input type="text" id="loginInput" placeholder="Email or Mobile" required>
-            <button type="submit">Get OTP</button>
-        </form>
-        <div id="otpSection" style="display:none;">
-            <input type="text" id="otpInput" placeholder="Enter OTP" required>
-            <button type="button" onclick="verifyOTP()">Verify</button>
-        </div>
-    </section>
-
-    <section class="book-test" id="bookTestSection" style="display:none;">
+    <section class="book-test" id="bookTestSection">
         <h2>Book Your Test</h2>
         <form id="bookTestForm">
             <label for="tests">Select Tests:</label>
@@ -46,11 +34,12 @@
             <label for="profiles">Select Profiles:</label>
             <select id="profiles" name="profiles" multiple>
                 <option value="full-body" data-mrp="2500" data-offer="2000" data-tat="48" data-desc="Full Body Checkup for comprehensive health assessment.">Full Body - MRP: ₹2500 <span style="color:red;">❌</span> Offer: ₹2000, TAT: 48h</option>
-                <option value="diabetes" data-mrp="1500" data-offer="1200" data-tat="24" data-desc="Diabetes Profile for sugar and related tests.">Diabetes - MRP: ₹1500 <span style="color:red;">❌</span> Offer: ₹1200, TAT: 24h</option>
+                <option value="diabetes" data-mrp="1500" data-offer="1200" data-tat="24" data-desc="Diabetes Profile for sugar and related tests.">Diabetes - MRP: ₹1500 <span style="color:red;">❌</span> Offer: ₹1200, TAT: ₹24h</option>
                 <option value="vitamin" data-mrp="1200" data-offer="960" data-tat="24" data-desc="Vitamin Profile to check vitamin levels.">Vitamin - MRP: ₹1200 <span style="color:red;">❌</span> Offer: ₹960, TAT: 24h</option>
                 <option value="thyroid" data-mrp="1000" data-offer="800" data-tat="24" data-desc="Thyroid Profile to assess thyroid function.">Thyroid - MRP: ₹1000 <span style="color:red;">❌</span> Offer: ₹800, TAT: 24h</option>
                 <option value="cardiac" data-mrp="2000" data-offer="1600" data-tat="48" data-desc="Cardiac Profile for heart health assessment.">Cardiac - MRP: ₹2000 <span style="color:red;">❌</span> Offer: ₹1600, TAT: 48h</option>
                 <option value="iron" data-mrp="600" data-offer="480" data-tat="24" data-desc="Iron Profile to check iron levels.">Iron - MRP: ₹600 <span style="color:red;">❌</span> Offer: ₹480, TAT: 24h</option>
+                <option value="full-body-499" data-mrp="600" data-offer="499" data-tat="24" data-desc="Basic Full Body Checkup with essential tests.">Full Body - MRP: ₹600 <span style="color:red;">❌</span> Offer: ₹499, TAT: 24h</option>
             </select>
 
             <div id="totalSection">
@@ -97,10 +86,15 @@
     </section>
 
     <footer>
-        <p>Healthify</p>
+        <p>Healthify © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+        <div class="social-media">
+            <a href="https://twitter.com/healthify_lab" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        </div>
     </footer>
 
-    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
         <img src="assets/whatsapp-icon.png" alt="WhatsApp">
     </a>
 
