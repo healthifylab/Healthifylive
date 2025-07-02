@@ -1,7 +1,17 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-import emailjs from "@emailjs/browser";
+// Initialize Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+    authDomain: "healthify-lab.firebaseapp.com",
+    projectId: "healthify-lab",
+    storageBucket: "healthify-lab.firebasestorage.app",
+    messagingSenderId: "297003315332",
+    appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
+    measurementId: "G-R0R3RYERZW"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize EmailJS
@@ -11,25 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
         console.error('EmailJS init failed:', error);
     }
-
-    // Initialize Firebase
-    const firebaseConfig = {
-        apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
-        authDomain: "healthify-lab.firebaseapp.com",
-        projectId: "healthify-lab",
-        storageBucket: "healthify-lab.firebasestorage.app",
-        messagingSenderId: "297003315332",
-        appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
-        measurementId: "G-R0R3RYERZW"
-    };
-    try {
-        initializeApp(firebaseConfig);
-        console.log('Firebase initialized');
-    } catch (error) {
-        console.error('Firebase init failed:', error);
-    }
-    const db = getFirestore();
-    const auth = getAuth();
 
     // Check login status
     const user = JSON.parse(localStorage.getItem('user'));
@@ -52,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const testsSelect = document.getElementById('tests');
     const profileSelect = document.getElementById('profiles');
     const preselectedTests = urlParams.get('tests')?.split(',').map(t => t.trim()) || [];
-    const preselectedProfiles = urlParams.get('profiles')?.split(',').map(p => t.trim()) || [];
+    const preselectedProfiles = urlParams.get('profiles')?.split(',').map(p => p.trim()) || [];
     if (testsSelect && preselectedTests.length) {
         for (let option of testsSelect.options) {
             if (preselectedTests.includes(option.value)) option.selected = true;
@@ -67,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Booking Form Submission
     const bookTestForm = document.getElementById('bookTestForm');
     if (bookTestForm) {
-        bookTestForm.onsubmit = async (e) => {
+        bookTestForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!loggedIn) {
                 alert('Please login first');
@@ -140,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Submitting booking:', bookingData);
 
                 // Save to Firebase
-                const docRef = await addDoc(collection(db, 'bookings'), bookingData);
+                const docRef = await db.collection('bookings').add(bookingData);
                 const bookingId = docRef.id;
                 console.log('Booking saved to Firebase, ID:', bookingId);
 
@@ -200,6 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert(errorText);
                 }
             }
-        };
+        });
     }
 });
