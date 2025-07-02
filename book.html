@@ -6,177 +6,6 @@
     <title>Healthify - Book Test</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <!-- Font Awesome for smiley icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        /* Form-specific styles */
-        .book-test {
-            display: flex;
-            justify-content: center;
-            padding: 40px 20px;
-            background-color: #f0f4f8;
-        }
-
-        .book-test-container {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            max-width: 600px;
-            width: 100%;
-        }
-
-        .book-test h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-
-        .book-test h2 i {
-            color: #28a745;
-            margin-right: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group label i {
-            margin-right: 8px;
-            color: #007bff;
-        }
-
-        .form-group select[multiple] {
-            width: 100%;
-            height: 120px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            background-color: #fff;
-        }
-
-        .form-group select[multiple] option {
-            padding: 5px;
-        }
-
-        .form-group select[multiple] option .strikethrough {
-            text-decoration: line-through;
-            color: #999;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #007bff;
-        }
-
-        #totalSection {
-            background-color: #e9f7ef;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        #totalSection p {
-            font-size: 16px;
-            color: #333;
-            margin: 5px 0;
-        }
-
-        #totalSection p i {
-            color: #28a745;
-            margin-right: 8px;
-        }
-
-        button[type="submit"] {
-            width: 100%;
-            padding: 12px;
-            background-color: #28a745;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #218838;
-        }
-
-        button[type="submit"] i {
-            margin-right: 8px;
-        }
-
-        .success-message {
-            display: none;
-            text-align: center;
-            color: #28a745;
-            margin-top: 20px;
-            font-size: 16px;
-        }
-
-        .success-message i {
-            margin-right: 8px;
-        }
-
-        #adminSection {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-        }
-
-        #adminSection select,
-        #adminSection button {
-            padding: 10px;
-            margin: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        @media (max-width: 480px) {
-            .book-test-container {
-                padding: 20px;
-            }
-
-            .book-test h2 {
-                font-size: 24px;
-            }
-
-            .form-group select[multiple] {
-                height: 100px;
-            }
-        }
-    </style>
 </head>
 <body>
     <nav>
@@ -184,7 +13,7 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="book.html">Book Test</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
         </ul>
     </nav>
 
@@ -194,10 +23,10 @@
 
     <section class="book-test" id="bookTestSection">
         <div class="book-test-container">
-            <h2><i class="fa-regular fa-calendar-check"></i> Book Your Test</h2>
+            <h2>📅 Book Your Test</h2>
             <form id="bookTestForm">
                 <div class="form-group">
-                    <label for="tests"><i class="fa-solid fa-vial"></i> Select Tests:</label>
+                    <label for="tests">🧪 Select Tests:</label>
                     <select id="tests" name="tests" multiple>
                         <option value="cbc" data-mrp="500" data-offer="400" data-tat="24" data-desc="Complete Blood Count to assess overall health.">
                             CBC - MRP: <span class="strikethrough">₹500</span> Offer: ₹400, TAT: 24h
@@ -212,7 +41,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="profiles"><i class="fa-solid fa-user-md"></i> Select Profiles:</label>
+                    <label for="profiles">🩺 Select Profiles:</label>
                     <select id="profiles" name="profiles" multiple>
                         <option value="full-body" data-mrp="2500" data-offer="2000" data-tat="48" data-desc="Full Body Checkup for comprehensive health assessment.">
                             Full Body - MRP: <span class="strikethrough">₹2500</span> Offer: ₹2000, TAT: 48h
@@ -239,46 +68,72 @@
                 </div>
 
                 <div id="totalSection">
-                    <p><i class="fa-solid fa-list-check"></i> Total Tests: <span id="totalTests">0</span></p>
-                    <p><i class="fa-solid fa-rupee-sign"></i> Total Price: ₹<span id="totalPrice">0</span></p>
+                    <p>📋 Total Tests: <span id="totalTests">0</span></p>
+                    <p>💰 Total Price: ₹<span id="totalPrice">0</span></p>
                 </div>
 
                 <div class="form-group">
-                    <label for="name"><i class="fa-regular fa-smile"></i> Name:</label>
+                    <label for="name">😊 Name:</label>
                     <input type="text" id="name" name="name" required placeholder="Enter your full name">
                 </div>
 
                 <div class="form-group">
-                    <label for="contact"><i class="fa-solid fa-envelope"></i> Contact (Email or Mobile):</label>
+                    <label for="contact">📧 Contact (Email or Mobile):</label>
                     <input type="text" id="contact" name="contact" required placeholder="Enter email or mobile">
                 </div>
 
                 <div class="form-group">
-                    <label for="address"><i class="fa-solid fa-home"></i> Address:</label>
+                    <label for="age">🎂 Age:</label>
+                    <input type="number" id="age" name="age" required placeholder="Enter your age">
+                </div>
+
+                <div class="form-group">
+                    <label for="sex">⚧ Sex:</label>
+                    <select id="sex" name="sex" required>
+                        <option value="" disabled selected>Select sex</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">🏠 Address:</label>
                     <textarea id="address" name="address" required placeholder="Enter your address"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="dateTime"><i class="fa-regular fa-calendar"></i> Scheduled Date and Time:</label>
-                    <input type="datetime-local" id="dateTime" name="dateTime" required>
+                    <label for="pincode">📍 Pincode:</label>
+                    <input type="text" id="pincode" name="pincode" required placeholder="Enter your pincode">
                 </div>
 
-                <button type="submit"><i class="fa-solid fa-check"></i> Book Now</button>
+                <div class="form-group">
+                    <label for="landmark">🏛️ Landmark:</label>
+                    <input type="text" id="landmark" name="landmark" required placeholder="Enter a nearby landmark">
+                </div>
+
+                <div class="form-group">
+                    <labeltheory data-tat="24" data-desc="Scheduled Date and Time:">
+                        <label for="dateTime">📅 Scheduled Date and Time:</label>
+                        <input type="datetime-local" id="dateTime" name="dateTime" required>
+                    </div>
+
+                <button type="submit" class="book-now">✅ Book Now</button>
 
                 <div class="success-message" id="success-message">
-                    <i class="fa-regular fa-smile-beam"></i> Booking submitted successfully!
+                    😄 Booking submitted successfully!
                 </div>
             </form>
 
             <div id="adminSection" style="display:none;">
-                <h3><i class="fa-solid fa-user-shield"></i> Admin Actions</h3>
+                <h3>🛡️ Admin Actions</h3>
                 <select id="bookingStatus">
                     <option value="pending">Pending</option>
                     <option value="confirmed">Confirm</option>
                     <option value="rejected">Reject</option>
                     <option value="rescheduled">Reschedule</option>
                 </select>
-                <button onclick="updateStatus()">Update Status</button>
+                <button onclick="updateStatus()" class="book-now">Update Status</button>
             </div>
         </div>
     </section>
@@ -286,9 +141,9 @@
     <section class="cards">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><div class="card"><img src="assets/Full Body Health Checkup.jpg" alt="Full Body Checkup"></div></div>
+                <div class="swiper-scroll"><div class="card"><img src="assets/Full Body Health Checkup.jpg" alt="Full Body Checkup"></div></div>
                 <div class="swiper-slide"><div class="card"><img src="assets/DIABETES SIMPTOMS.jpg" alt="Diabetes Symptoms"></div></div>
-                <div class="swiper-slide"><div class="card"><img src="assets/whatsapp.jpg" alt="Contact Us"></div></div>
+                <div class="swiper-slide"><div class="card"><img src="assets/whatsapp.jpg" alt="ContactLLVM0.2.0 Contact Us"></div></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -311,29 +166,6 @@
     <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cardsSwiper = new Swiper('.cards .swiper-container', {
-                slidesPerView: 1,
-                pagination: { el: '.swiper-pagination', clickable: true },
-                breakpoints: {
-                    768: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 }
-                }
-            });
-
-            // Show success message on form submission (placeholder)
-            document.getElementById('bookTestForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const successMessage = document.getElementById('success-message');
-                successMessage.style.display = 'block';
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 3000);
-                // Note: Actual form submission logic should be in fetch-tests.js
-            });
-        });
-    </script>
     <script src="scripts/fetch-tests.js"></script>
 </body>
 </html>
