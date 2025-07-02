@@ -16,8 +16,8 @@ nav {
 }
 
 .logo {
-    height: 140px;
-    margin-right: 20px;
+    height: 100px; /* Reduced for better mobile fit */
+    margin-right: 10px;
 }
 
 nav ul {
@@ -26,17 +26,18 @@ nav ul {
 }
 
 nav ul li {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 nav ul li a {
     text-decoration: none;
     color: #333;
+    font-size: 14px; /* Smaller text for mobile */
 }
 
 header.hero-banner {
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     background: transparent;
     color: #FFFFFF;
     width: 100%;
@@ -50,23 +51,26 @@ header.hero-banner img {
 
 .swiper-container {
     width: 100%;
-    padding: 10px 0;
+    padding: 0;
+    margin: 0 auto;
 }
 
 .swiper-slide {
     width: 100% !important;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .card {
-    width: 90%;
+    width: 80%; /* Reduced to fit within mobile screen */
     background: #FFFFFF;
     border: 1px solid #ccc;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     margin: 0 auto;
     border-radius: 8px;
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .card img {
@@ -75,7 +79,7 @@ header.hero-banner img {
 }
 
 .book-now {
-    padding: 10px 20px;
+    padding: 8px 16px;
     background: #00C4B4;
     color: #FFFFFF;
     border: none;
@@ -83,6 +87,7 @@ header.hero-banner img {
     margin-top: 10px;
     border-radius: 5px;
     text-decoration: none;
+    font-size: 14px; /* Smaller text for mobile */
 }
 
 .book-now:hover {
@@ -94,7 +99,7 @@ header.hero-banner img {
 }
 
 .why-choose, .faq, .testimonials, .contact {
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     background: #FFFFFF;
 }
@@ -105,13 +110,14 @@ header.hero-banner img {
 }
 
 .why-choose ul li {
-    margin: 10px 0;
-    font-size: 16px;
+    margin: 8px 0;
+    font-size: 14px; /* Smaller text for mobile */
 }
 
 details summary {
     cursor: pointer;
     font-weight: bold;
+    font-size: 14px;
 }
 
 details[open] summary {
@@ -119,10 +125,10 @@ details[open] summary {
 }
 
 .testimonial-card {
-    width: 70%;
+    width: 80%; /* Reduced to fit within mobile screen */
     background: #FFFFFF;
     border: 1px solid #ccc;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     margin: 0 auto;
     border-radius: 8px;
@@ -130,25 +136,28 @@ details[open] summary {
 
 .testimonial-card img {
     width: 70%;
-    height: 100px;
+    height: 80px; /* Reduced for better fit */
     border-radius: 50%;
     object-fit: cover;
 }
 
 .testimonial-card p {
-    margin: 10px 0;
+    margin: 8px 0;
     font-style: italic;
+    font-size: 14px;
 }
 
 .testimonial-card h4 {
     margin: 0;
     font-weight: bold;
+    font-size: 16px;
 }
 
 .contact .about p {
-    max-width: 800px;
+    max-width: 90%; /* Adjusted for mobile */
     margin: 10px auto;
     line-height: 1.6;
+    font-size: 14px;
 }
 
 footer {
@@ -165,8 +174,8 @@ footer .social-media {
 
 footer .social-media a {
     color: #333;
-    margin: 0 10px;
-    font-size: 20px;
+    margin: 0 8px;
+    font-size: 18px;
     text-decoration: none;
 }
 
@@ -181,14 +190,14 @@ footer .social-media a:hover {
     left: 50%;
     transform: translateX(-50%);
     background: #FFFFFF;
-    padding: 20px;
+    padding: 15px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     z-index: 1000;
-    width: 40%;
-    height: 200px;
+    width: 80%; /* Increased for mobile readability */
+    height: auto;
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .popup .close-btn {
@@ -196,24 +205,27 @@ footer .social-media a:hover {
     top: 5px;
     right: 10px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .whatsapp-float {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    right: 10px;
     z-index: 1000;
 }
 
 .whatsapp-float img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px; /* Reduced for better mobile fit */
 }
 
 /* Responsive Adjustments */
 @media (min-width: 768px) {
-    .card {
+    .logo {
+        height: 140px;
+    }
+    .card, .testimonial-card {
         width: 70%;
     }
     .swiper-slide {
@@ -224,5 +236,21 @@ footer .social-media a:hover {
     .testimonials .swiper-slide,
     .cards .swiper-slide {
         width: 33.33% !important;
+    }
+    nav ul li a, .why-choose ul li, details summary, .contact .about p, .testimonial-card p {
+        font-size: 16px;
+    }
+    .book-now {
+        font-size: 16px;
+    }
+    .testimonial-card img {
+        height: 100px;
+    }
+    .popup {
+        width: 40%;
+    }
+    .whatsapp-float img {
+        width: 50px;
+        height: 50px;
     }
 }
