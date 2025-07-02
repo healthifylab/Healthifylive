@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background: #FFFFFF;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 nav {
@@ -16,7 +17,7 @@ nav {
 }
 
 .logo {
-    height: 100px; /* Reduced for better mobile fit */
+    height: 70px; /* Further reduced for mobile */
     margin-right: 10px;
 }
 
@@ -32,7 +33,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: #333;
-    font-size: 14px; /* Smaller text for mobile */
+    font-size: 14px;
 }
 
 header.hero-banner {
@@ -53,6 +54,7 @@ header.hero-banner img {
     width: 100%;
     padding: 0;
     margin: 0 auto;
+    overflow: hidden; /* Ensure no overflow */
 }
 
 .swiper-slide {
@@ -60,34 +62,38 @@ header.hero-banner img {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box; /* Include padding in width */
 }
 
 .card {
-    width: 80%; /* Reduced to fit within mobile screen */
+    width: 85%; /* Adjusted to fit snugly */
+    max-width: 280px; /* Tighter cap for mobile */
     background: #FFFFFF;
     border: 1px solid #ccc;
-    padding: 15px;
+    padding: 8px; /* Reduced padding further */
     text-align: center;
     margin: 0 auto;
     border-radius: 8px;
-    box-sizing: border-box; /* Include padding in width calculation */
+    box-sizing: border-box; /* Include padding in width */
+    overflow: hidden; /* Prevent internal overflow */
 }
 
 .card img {
-    max-width: 100%;
+    max-width: 90%; /* Reduced image width */
     height: auto;
+    object-fit: contain; /* Ensure images fit within card */
 }
 
 .book-now {
-    padding: 8px 16px;
+    padding: 6px 12px; /* Reduced padding */
     background: #00C4B4;
     color: #FFFFFF;
     border: none;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 8px; /* Reduced margin */
     border-radius: 5px;
     text-decoration: none;
-    font-size: 14px; /* Smaller text for mobile */
+    font-size: 12px; /* Smaller text */
 }
 
 .book-now:hover {
@@ -99,7 +105,7 @@ header.hero-banner img {
 }
 
 .why-choose, .faq, .testimonials, .contact {
-    padding: 15px;
+    padding: 10px; /* Reduced padding */
     text-align: center;
     background: #FFFFFF;
 }
@@ -110,72 +116,74 @@ header.hero-banner img {
 }
 
 .why-choose ul li {
-    margin: 8px 0;
-    font-size: 14px; /* Smaller text for mobile */
+    margin: 6px 0; /* Reduced margin */
+    font-size: 13px; /* Smaller text */
 }
 
 details summary {
     cursor: pointer;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 details[open] summary {
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Reduced margin */
 }
 
 .testimonial-card {
-    width: 80%; /* Reduced to fit within mobile screen */
+    width: 85%;
+    max-width: 280px; /* Tighter cap */
     background: #FFFFFF;
     border: 1px solid #ccc;
-    padding: 15px;
+    padding: 8px;
     text-align: center;
     margin: 0 auto;
     border-radius: 8px;
+    box-sizing: border-box;
 }
 
 .testimonial-card img {
-    width: 70%;
-    height: 80px; /* Reduced for better fit */
+    width: 60%; /* Reduced image size */
+    height: 70px; /* Reduced height */
     border-radius: 50%;
     object-fit: cover;
 }
 
 .testimonial-card p {
-    margin: 8px 0;
+    margin: 6px 0;
     font-style: italic;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .testimonial-card h4 {
     margin: 0;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .contact .about p {
-    max-width: 90%; /* Adjusted for mobile */
-    margin: 10px auto;
-    line-height: 1.6;
-    font-size: 14px;
+    max-width: 90%;
+    margin: 8px auto;
+    line-height: 1.5;
+    font-size: 13px;
 }
 
 footer {
     text-align: center;
-    padding: 10px;
+    padding: 8px;
     background: #F5F5F5;
     border-top: 1px solid #ccc;
     width: 100%;
 }
 
 footer .social-media {
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 footer .social-media a {
     color: #333;
-    margin: 0 8px;
-    font-size: 18px;
+    margin: 0 6px;
+    font-size: 16px;
     text-decoration: none;
 }
 
@@ -186,18 +194,18 @@ footer .social-media a:hover {
 .popup {
     display: none;
     position: fixed;
-    top: 20%;
+    top: 15%; /* Adjusted for mobile */
     left: 50%;
     transform: translateX(-50%);
     background: #FFFFFF;
-    padding: 15px;
+    padding: 10px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     z-index: 1000;
-    width: 80%; /* Increased for mobile readability */
+    width: 85%;
     height: auto;
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .popup .close-btn {
@@ -205,7 +213,7 @@ footer .social-media a:hover {
     top: 5px;
     right: 10px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .whatsapp-float {
@@ -216,8 +224,8 @@ footer .social-media a:hover {
 }
 
 .whatsapp-float img {
-    width: 40px;
-    height: 40px; /* Reduced for better mobile fit */
+    width: 35px; /* Reduced size */
+    height: 35px;
 }
 
 /* Responsive Adjustments */
@@ -227,6 +235,8 @@ footer .social-media a:hover {
     }
     .card, .testimonial-card {
         width: 70%;
+        max-width: 400px;
+        padding: 15px;
     }
     .swiper-slide {
         width: 33.33% !important;
@@ -241,13 +251,16 @@ footer .social-media a:hover {
         font-size: 16px;
     }
     .book-now {
+        padding: 10px 20px;
         font-size: 16px;
     }
     .testimonial-card img {
+        width: 70%;
         height: 100px;
     }
     .popup {
         width: 40%;
+        top: 20%;
     }
     .whatsapp-float img {
         width: 50px;
