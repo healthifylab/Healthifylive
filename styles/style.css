@@ -20,10 +20,20 @@ nav ul li a {
     color: #333;
 }
 
-.hero-banner {
+header {
     text-align: center;
     padding: 20px;
     background: #e9ecef;
+}
+
+.hero-banner {
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-banner img {
+    max-width: 100%;
+    height: auto;
 }
 
 .cards .swiper-container {
@@ -54,18 +64,18 @@ nav ul li a {
     background: black;
 }
 
-.book-test {
+.book-test, .login-section {
     padding: 20px;
     text-align: center;
 }
 
-.book-test select {
+.book-test select, .book-test input, .book-test textarea, .login-section input {
     width: 100%;
     margin: 10px 0;
     padding: 5px;
 }
 
-.book-test button {
+.book-test button, .login-section button {
     padding: 10px 20px;
     background: #007bff;
     color: white;
@@ -73,8 +83,24 @@ nav ul li a {
     cursor: pointer;
 }
 
-.book-test button:hover {
+.book-test button:hover, .login-section button:hover {
     background: #0056b3;
+}
+
+#totalSection {
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+#adminSection {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f8f9fa;
+}
+
+#adminSection select, #adminSection button {
+    margin: 5px;
+    padding: 5px;
 }
 
 footer {
@@ -84,4 +110,25 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.popup .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
 }
