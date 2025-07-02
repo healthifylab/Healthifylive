@@ -1,1 +1,0 @@
-export const profiles = [...Array(25).keys()].map(i => ({ name: `Profile ${i+1}`, mrp: 1500, offer: 999, description: 'Auto profile', tat: '48 hrs' }));
