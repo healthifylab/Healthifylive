@@ -30,28 +30,24 @@ nav ul li a {
     color: #333;
 }
 
-header {
+header.hero-banner {
     text-align: center;
     padding: 20px;
     background: #e9ecef;
 }
 
-.hero-banner {
-    text-align: center;
-    padding: 20px;
-}
-
-.hero-banner img {
+header.hero-banner img {
     max-width: 100%;
     height: auto;
 }
 
-.cards .swiper-container {
+.promotional-cards .swiper-container {
     width: 100%;
     height: 300px;
+    margin: 20px 0;
 }
 
-.cards .swiper-slide {
+.promotional-cards .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,43 +70,32 @@ header {
     background: black;
 }
 
-.book-test, .login-section {
+.why-choose, .faq, .testimonials {
     padding: 20px;
     text-align: center;
 }
 
-.book-test select, .book-test input, .book-test textarea, .login-section input {
-    width: 100%;
+.why-choose ul {
+    list-style: none;
+    padding: 0;
+}
+
+.why-choose ul li {
     margin: 10px 0;
-    padding: 5px;
 }
 
-.book-test button, .login-section button {
-    padding: 10px 20px;
-    background: #007bff;
-    color: white;
-    border: none;
+details summary {
     cursor: pointer;
-}
-
-.book-test button:hover, .login-section button:hover {
-    background: #0056b3;
-}
-
-#totalSection {
-    margin: 20px 0;
     font-weight: bold;
 }
 
-#adminSection {
-    margin-top: 20px;
-    padding: 10px;
-    background: #f8f9fa;
+details[open] summary {
+    margin-bottom: 10px;
 }
 
-#adminSection select, #adminSection button {
-    margin: 5px;
-    padding: 5px;
+.testimonials p {
+    margin: 10px 0;
+    font-style: italic;
 }
 
 footer {
@@ -120,6 +105,7 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
+    border-top: 1px solid #ccc;
 }
 
 .popup {
