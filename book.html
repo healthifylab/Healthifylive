@@ -9,6 +9,7 @@
 </head>
 <body>
     <nav>
+        <img src="assets/logo-healthify.png" alt="Healthify Logo" class="logo">
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="book.html">Book Test</a></li>
@@ -40,14 +41,13 @@
                 <option value="cbc" data-mrp="500" data-offer="400" data-tat="24" data-desc="Complete Blood Count to assess overall health.">CBC - MRP: ₹500 <span style="color:red;">❌</span> Offer: ₹400, TAT: 24h</option>
                 <option value="lipid" data-mrp="800" data-offer="640" data-tat="24" data-desc="Lipid Profile to check cholesterol levels.">Lipid - MRP: ₹800 <span style="color:red;">❌</span> Offer: ₹640, TAT: 24h</option>
                 <option value="glucose" data-mrp="300" data-offer="240" data-tat="12" data-desc="Blood Glucose to monitor sugar levels.">Glucose - MRP: ₹300 <span style="color:red;">❌</span> Offer: ₹240, TAT: 12h</option>
-                <!-- Add more tests as needed -->
             </select>
 
             <label for="profiles">Select Profiles:</label>
             <select id="profiles" name="profiles" multiple>
                 <option value="full-body" data-mrp="2500" data-offer="2000" data-tat="48" data-desc="Full Body Checkup for comprehensive health assessment.">Full Body - MRP: ₹2500 <span style="color:red;">❌</span> Offer: ₹2000, TAT: 48h</option>
                 <option value="diabetes" data-mrp="1500" data-offer="1200" data-tat="24" data-desc="Diabetes Profile for sugar and related tests.">Diabetes - MRP: ₹1500 <span style="color:red;">❌</span> Offer: ₹1200, TAT: 24h</option>
-                <!-- Add more profiles as needed -->
+                <option value="vitamin" data-mrp="1200" data-offer="960" data-tat="24" data-desc="Vitamin Profile to check vitamin levels.">Vitamin - MRP: ₹1200 <span style="color:red;">❌</span> Offer: ₹960, TAT: 24h</option>
             </select>
 
             <div id="totalSection">
@@ -85,9 +85,9 @@
     <section class="cards">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><div class="card"><img src="assets/Full Body Health Checkup.jpg" alt="Full Body Checkup"></div></div>
-                <div class="swiper-slide"><div class="card"><img src="assets/DIABETES SIMPTOMS.jpg" alt="Diabetes Symptoms"></div></div>
-                <div class="swiper-slide"><div class="card"><img src="assets/whatsapp.jpg" alt="Contact Us"></div></div>
+                <div class="swiper-slide"><div class="card"><img src="assets/full-body-checkup.jpg" alt="Full Body Checkup"></div></div>
+                <div class="swiper-slide"><div class="card"><img src="assets/diabetes-symptoms.jpg" alt="Diabetes Symptoms"></div></div>
+                <div class="swiper-slide"><div class="card"><img src="assets/vitamin-profile.jpg" alt="Vitamin Profile"></div></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -96,6 +96,10 @@
     <footer>
         <p>Healthify</p>
     </footer>
+
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
+        <img src="assets/whatsapp-icon.png" alt="WhatsApp">
+    </a>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
