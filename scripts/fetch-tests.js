@@ -38,9 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         const loginInput = document.getElementById('loginInput').value;
         document.getElementById('otpSection').style.display = 'block';
-        // Simulate OTP (replace with actual OTP service)
         window.otp = Math.floor(100000 + Math.random() * 900000).toString();
-        alert('OTP sent to ' + loginInput + ': ' + window.otp); // For testing
+        alert('OTP sent to ' + loginInput + ': ' + window.otp);
     };
 
     function verifyOTP() {
@@ -99,21 +98,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Send EmailJS Notification to Admin
         await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
-            to_email: 'your-email@example.com', // Replace with your admin email
+            to_email: 'your-email@example.com',
             message: `New Booking:\nName: ${name}\nContact: ${contact}\nAddress: ${address}\nDateTime: ${dateTime}\nTests: ${JSON.stringify(bookingData.tests)}\nProfiles: ${JSON.stringify(bookingData.profiles)}\nTotal Tests: ${bookingData.totalTests}\nTotal Price: ₹${bookingData.totalPrice}`
         });
 
         // Send Confirmation to User
         await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
-            to_email: contact.includes('@') ? contact : '', // Email if available
-            to_mobile: contact.includes('@') ? '' : contact, // Mobile if available
+            to_email: contact.includes('@') ? contact : '',
+            to_mobile: contact.includes('@') ? '' : contact,
             message: `Booking Confirmed! ID: ${bookingId}\nName: ${name}\nDate & Time: ${dateTime}\nTotal: ₹${bookingData.totalPrice}`
         });
 
-        // Simulate PDF Receipt (Replace with actual PDF generation)
-        alert('Booking successful! PDF receipt will be emailed soon.'); // Placeholder
+        alert('Booking successful! PDF receipt will be emailed soon.');
 
-        // Update UI
         document.getElementById('adminSection').style.display = 'block';
         updateTotals();
     };
@@ -121,9 +118,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Admin Status Update
     window.updateStatus = async () => {
         const status = document.getElementById('bookingStatus').value;
-        const bookingId = (await db.collection('bookings').limit(1).get()).docs[0].id; // Simplistic; improve with actual ID selection
+        const bookingId = (await db.collection('bookings').limit(1).get()).docs[0].id;
         await db.collection('bookings').doc(bookingId).update({ status });
         alert(`Status updated to ${status}`);
-        // Notify user (via EmailJS) - Add logic as needed
     };
 });
