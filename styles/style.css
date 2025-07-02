@@ -4,13 +4,14 @@ body {
   font-family: Arial, sans-serif;
   background: #f9f9f9;
   color: #333;
+  line-height: 1.6;
 }
 
 header.header {
   position: sticky;
   top: 0;
   background: #f0f0f0;
-  padding: 10px 15px;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,51 +41,41 @@ header.header nav a {
 /* Hero Section */
 .hero-banner {
   width: 100%;
-  max-width: 1200px; /* Cap width for large screens */
+  max-width: 1280px; /* Cap for large screens */
   height: auto;
-  max-height: 60vh; /* Responsive height */
-  min-height: 120px; /* Smaller minimum for mobile */
-  object-fit: contain; /* Show full image without cropping */
+  max-height: 70vh; /* Flexible height */
+  min-height: 100px; /* Minimum for small screens */
+  object-fit: cover; /* Revert to cover for better fill */
   border-radius: 10px;
-  margin: 10px auto;
+  margin: 15px auto;
   display: block;
+  box-sizing: border-box;
 }
 
 /* Promo Slider */
 .promo-slider {
   display: flex;
-  flex-wrap: nowrap; /* Revert to horizontal scroll for consistency */
-  overflow-x: auto;
+  flex-wrap: wrap; /* Stack on mobile for better UX */
   gap: 15px;
-  margin: 20px 10px;
+  margin: 20px 15px;
   padding: 10px;
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-  justify-content: flex-start;
-}
-
-.promo-slider::-webkit-scrollbar {
-  height: 6px;
-}
-
-.promo-slider::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 3px;
+  justify-content: center;
 }
 
 .promo-card {
-  flex: 0 0 clamp(160px, 40vw, 240px); /* Smaller, responsive cards */
+  flex: 0 1 clamp(150px, 45vw, 220px); /* Responsive card size */
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
   border-radius: 8px;
   box-sizing: border-box;
+  background: #fff;
 }
 
 .promo-card img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3; /* Consistent aspect ratio */
+  aspect-ratio: 3 / 2; /* Consistent aspect ratio */
   object-fit: cover;
   border-radius: 8px;
   max-width: 100%;
@@ -99,6 +90,7 @@ header.header nav a {
   cursor: pointer;
   margin-top: 10px;
   width: 100%;
+  font-size: 14px;
 }
 
 /* Booking Form */
@@ -107,8 +99,8 @@ form {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 15px;
-  max-width: 600px; /* Cap form width */
+  margin: 15px auto;
+  max-width: 500px;
   box-sizing: border-box;
 }
 
@@ -145,7 +137,7 @@ form button {
 .faq-item {
   background: #eef;
   padding: 10px;
-  boarder-radius: 6px;
+  border-radius: 6px;
   margin-bottom: 10px;
 }
 
@@ -157,26 +149,15 @@ form button {
 
 .testimonial-slider {
   display: flex;
-  flex-wrap: nowrap; /* Horizontal scroll for testimonials */
-  overflow-x: auto;
+  flex-wrap: wrap; /* Stack on mobile */
   gap: 15px;
-  margin: 0 10px;
+  margin: 0 15px;
   padding: 10px;
-  scroll-behavior: smooth;
- 可在优化后的代码中，删除了多余的代码片段：scrollbar-width: thin;
-}
-
-.testimonial-slider::-webkit-scrollbar {
-  height: 6px;
-}
-
-.testimonial-slider::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 3px;
+  justify-content: center;
 }
 
 .testimonial {
-  flex: 0 0 clamp(140px, 40vw, 200px); /* Smaller testimonials */
+  flex: 0 1 clamp(140px, 45vw, 200px);
   padding: 10px;
   background: #fff;
   border-radius: 12px;
@@ -186,8 +167,8 @@ form button {
 }
 
 .testimonial img {
-  width: clamp(50px, 12vw, 70px); /* Smaller, responsive images */
-  height: clamp(50px, 12vw, 70px);
+  width: clamp(50px, 15vw, 70px);
+  height: clamp(50px, 15vw, 70px);
   border-radius: 50%;
   object-fit: cover;
   margin: 0 auto 10px;
@@ -200,6 +181,7 @@ form button {
 
 .testimonial strong {
   display: block;
+ 1740
   font-size: 12px;
   color: #0077cc;
 }
@@ -225,8 +207,8 @@ footer.footer .social-icons a:hover {
 /* WhatsApp Floating Icon */
 .whatsapp-float {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 15px;
+  right: 15px;
   background: #25d366;
   border-radius: 50%;
   padding: 10px;
@@ -234,20 +216,16 @@ footer.footer .social-icons a:hover {
 }
 
 .whatsapp-float img {
-  width: clamp(20px, 4vw, 28px);
-  height: clamp(20px, 4vw, 28px);
+  width: clamp(24px, 5vw, 30px);
+  height: clamp(24px, 5vw, 30px);
 }
 
 /* Misc */
 h2,
 h3,
 h4 {
-  font-size: 18px;
+  font-size: clamp(18px, 4vw, 22px);
   color: #333;
-}
-
-h2 {
-  font-size: clamp(24px, 5vw, 28px); /* Responsive heading size */
 }
 
 ul {
@@ -262,26 +240,62 @@ ul li {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .hero-banner {
-    max-height: 40vh;
-    min-height: 100px;
+    max-height: 50vh;
+    min-height: 80px;
+  }
+
+  .promo-slider {
+    flex-wrap: nowrap; /* Optional: revert to horizontal scroll */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+  }
+
+  .promo-slider::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .promo-slider::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
   }
 
   .promo-card {
-    flex: 0 0 clamp(140px, 80vw, 200px);
+    flex: 0 0 clamp(130px, 80vw, 180px);
+  }
+
+  .testimonial-slider {
+    flex-wrap: nowrap; /* Optional: horizontal scroll */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+  }
+
+  .testimonial-slider::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .testimonial-slider::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
   }
 
   .testimonial {
-    flex: 0 0 clamp(120px, 80vw, 180px);
+    flex: 0 0 clamp(120px, 80vw, 160px);
   }
 
   .testimonial img {
-    width: clamp(40px, 10vw, 60px);
-    height: clamp(40px, 10vw, 60බ5px);
+    width: clamp(40px, 12vw, 60px);
+    height: clamp(40px, 12vw, 60px);
+  }
+
+  header.header {
+    padding: 10px;
   }
 
   header.header nav {
     font-size: 12px;
-    gap: 10px;
+    gap: 8px;
   }
 
   form {
@@ -292,36 +306,28 @@ ul li {
 
 @media (max-width: 480px) {
   .hero-banner {
-    max-height: 30vh;
-    min-height: 80px;
+    max-height: 40vh;
+    min-height: 60px;
   }
 
   .promo-card {
-    flex: 0 0 clamp(100px, 90vw, 160px);
-  }
-
-  .testimonial {
     flex: 0 0 clamp(100px, 90vw, 140px);
   }
 
+  .testimonial {
+    flex: 0 0 clamp(100px, 90vw, 130px);
+  }
+
   .testimonial img {
-    width: clamp(36px, 8vw, 50px);
-    height: clamp(36px, 8vw, 50px);
+    width: clamp(36px, 10vw, 50px);
+    height: clamp(36px, 10vw, 50px);
   }
 
   .whatsapp-float {
     padding: 8px;
+    bottom: 10px;
+    right: 10px;
   }
 
   .whatsapp-float img {
-    width: clamp(18px, 3vw, 24px);
-    height: clamp(18px, 3vw, 24px);
-  }
-}
-
-/* Fallback for missing images */
-img:not([src]),
-img[src=""] {
-  background: #ccc;
-  min-height: 80px;
-}
+    width: clamp
