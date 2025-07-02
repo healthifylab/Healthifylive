@@ -9,7 +9,7 @@ nav {
     display: flex;
     align-items: center;
     padding: 10px;
-    background: #00C4B4;
+    background: #333; /* Default color, not teal */
     color: #FFFFFF;
 }
 
@@ -35,7 +35,7 @@ nav ul li a {
 header.hero-banner {
     text-align: center;
     padding: 20px;
-    background: #00C4B4;
+    background: #00C4B4; /* Teal from healthians.com */
     color: #FFFFFF;
     width: 100%;
     margin: 0 auto;
@@ -59,12 +59,13 @@ header.hero-banner img {
 
 .card {
     width: 70%;
-    background: #F5F5F5;
+    background: #0056b3; /* Blue for cards */
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
     margin: 0 auto;
     border-radius: 8px;
+    color: #FFFFFF;
 }
 
 .card img {
@@ -87,10 +88,10 @@ header.hero-banner img {
 }
 
 .swiper-pagination-bullet {
-    background: #00C4B4;
+    background: #0056b3; /* Blue for pagination */
 }
 
-.why-choose, .faq, .testimonials, .about {
+.why-choose, .faq, .testimonials, .contact {
     padding: 20px;
     text-align: center;
     background: #FFFFFF;
@@ -117,12 +118,13 @@ details[open] summary {
 
 .testimonial-card {
     width: 70%;
-    background: #F5F5F5;
+    background: #0056b3; /* Blue for testimonial cards */
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
     margin: 0 auto;
     border-radius: 8px;
+    color: #FFFFFF;
 }
 
 .testimonial-card img {
@@ -142,7 +144,7 @@ details[open] summary {
     font-weight: bold;
 }
 
-.about p {
+.contact .about p {
     max-width: 800px;
     margin: 10px auto;
     line-height: 1.6;
@@ -151,9 +153,10 @@ details[open] summary {
 footer {
     text-align: center;
     padding: 10px;
-    background: #F5F5F5;
+    background: #0056b3; /* Blue for footer */
     border-top: 1px solid #ccc;
     width: 100%;
+    color: #FFFFFF;
 }
 
 footer .social-media {
@@ -161,7 +164,7 @@ footer .social-media {
 }
 
 footer .social-media a {
-    color: #333;
+    color: #FFFFFF;
     margin: 0 10px;
     font-size: 20px;
     text-decoration: none;
