@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Swiper
-    const swiper = new Swiper('.swiper-container', {
+    // Initialize Swiper instances
+    const promoSwiper = new Swiper('.promo-swiper', {
+        slidesPerView: 1,
+        pagination: { el: '.swiper-pagination', clickable: true }
+    });
+    const featSwiper = new Swiper('.feat-swiper', {
+        slidesPerView: 1,
+        pagination: { el: '.swiper-pagination', clickable: true }
+    });
+    const testiSwiper = new Swiper('.testi-swiper', {
         slidesPerView: 1,
         pagination: { el: '.swiper-pagination', clickable: true }
     });
@@ -32,25 +40,40 @@ document.addEventListener('DOMContentLoaded', function() {
         popup.style.display = 'none';
     };
 
-    // Login Logic (Simulated OTP)
+    // OTP Logic
     let loggedIn = false;
+    let generatedOTP = null;
     document.getElementById('loginForm').onsubmit = (e) => {
         e.preventDefault();
         const loginInput = document.getElementById('loginInput').value;
+        generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
         document.getElementById('otpSection').style.display = 'block';
-        window.otp = Math.floor(100000 + Math.random() * 900000).toString();
-        alert('OTP sent to ' + loginInput + ': ' + window.otp);
+        alert('OTP sent to ' + loginInput + ': ' + generatedOTP); // For testing; replace with SMS service
     };
 
     function verifyOTP() {
         const otpInput = document.getElementById('otpInput').value;
-        if (otpInput === window.otp) {
+        if (otpInput === generatedOTP) {
             loggedIn = true;
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('bookTestSection').style.display = 'block';
         } else {
-            alert('Invalid OTP');
+            alert('Invalid OTP. Please try again.');
         }
+    }
+
+    // Preselect Profile from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const preselectedProfile = urlParams.get('profile');
+    if (preselectedProfile) {
+        const profileSelect = document.getElementById('profiles');
+        for (let option of profileSelect.options) {
+            if (option.value === preselectedProfile) {
+                option.selected = true;
+                break;
+            }
+        }
+        updateTotals();
     }
 
     // Calculate Totals
@@ -110,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         alert('Booking successful! PDF receipt will be emailed soon.');
-
         document.getElementById('adminSection').style.display = 'block';
         updateTotals();
     };
