@@ -13,6 +13,8 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="book.html">Book Test</a></li>
+            <li><a href="cart.html">My Cart</a></li>
+            <li><a href="my-bookings.html">My Bookings</a></li>
             <li><a href="contact.html">Contact Us</a></li>
         </ul>
     </nav>
@@ -28,14 +30,35 @@
                 <div class="form-group">
                     <label for="tests">🧪 Select Tests:</label>
                     <select id="tests" name="tests" multiple>
-                        <option value="cbc" data-mrp="500" data-offer="400" data-tat="24" data-desc="Complete Blood Count to assess overall health.">
+                        <option value="CBC" data-mrp="500" data-offer="400" data-tat="24 hours" data-desc="Complete Blood Count to assess overall health.">
                             CBC - MRP: <span class="strikethrough">₹500</span> Offer: ₹400, TAT: 24h
                         </option>
-                        <option value="lipid" data-mrp="800" data-offer="640" data-tat="24" data-desc="Lipid Profile to check cholesterol levels.">
-                            Lipid - MRP: <span class="strikethrough">₹800</span> Offer: ₹640, TAT: 24h
+                        <option value="Lipid Profile" data-mrp="800" data-offer="640" data-tat="24 hours" data-desc="Measures cholesterol and triglyceride levels.">
+                            Lipid Profile - MRP: <span class="strikethrough">₹800</span> Offer: ₹640, TAT: 24h
                         </option>
-                        <option value="glucose" data-mrp="300" data-offer="240" data-tat="12" data-desc="Blood Glucose to monitor sugar levels.">
-                            Glucose - MRP: <span class="strikethrough">₹300</span> Offer: ₹240, TAT: 12h
+                        <option value="Blood Glucose" data-mrp="300" data-offer="240" data-tat="12 hours" data-desc="Monitors blood sugar levels for diabetes.">
+                            Blood Glucose - MRP: <span class="strikethrough">₹300</span> Offer: ₹240, TAT: 12h
+                        </option>
+                        <option value="HbA1c" data-mrp="600" data-offer="480" data-tat="24 hours" data-desc="Assesses long-term blood sugar control.">
+                            HbA1c - MRP: <span class="strikethrough">₹600</span> Offer: ₹480, TAT: 24h
+                        </option>
+                        <option value="Liver Function Test" data-mrp="900" data-offer="720" data-tat="24 hours" data-desc="Evaluates liver health and enzyme levels.">
+                            Liver Function Test - MRP: <span class="strikethrough">₹900</span> Offer: ₹720, TAT: 24h
+                        </option>
+                        <option value="Kidney Function Test" data-mrp="850" data-offer="680" data-tat="24 hours" data-desc="Assesses kidney function and electrolyte balance.">
+                            Kidney Function Test - MRP: <span class="strikethrough">₹850</span> Offer: ₹680, TAT: 24h
+                        </option>
+                        <option value="Thyroid Function Test" data-mrp="700" data-offer="560" data-tat="24 hours" data-desc="Measures thyroid hormone levels (T3, T4, TSH).">
+                            Thyroid Function Test - MRP: <span class="strikethrough">₹700</span> Offer: ₹560, TAT: 24h
+                        </option>
+                        <option value="Vitamin D" data-mrp="1500" data-offer="1200" data-tat="24 hours" data-desc="Checks vitamin D levels for bone health.">
+                            Vitamin D - MRP: <span class="strikethrough">₹1500</span> Offer: ₹1200, TAT: 24h
+                        </option>
+                        <option value="Iron Profile" data-mrp="600" data-offer="480" data-tat="24 hours" data-desc="Evaluates iron levels and anemia risk.">
+                            Iron Profile - MRP: <span class="strikethrough">₹600</span> Offer: ₹480, TAT: 24h
+                        </option>
+                        <option value="C-Reactive Protein" data-mrp="400" data-offer="320" data-tat="24 hours" data-desc="Measures inflammation in the body.">
+                            C-Reactive Protein - MRP: <span class="strikethrough">₹400</span> Offer: ₹320, TAT: 24h
                         </option>
                     </select>
                 </div>
@@ -43,26 +66,26 @@
                 <div class="form-group">
                     <label for="profiles">🩺 Select Profiles:</label>
                     <select id="profiles" name="profiles" multiple>
-                        <option value="full-body" data-mrp="2500" data-offer="2000" data-tat="48" data-desc="Full Body Checkup for comprehensive health assessment.">
-                            Full Body - MRP: <span class="strikethrough">₹2500</span> Offer: ₹2000, TAT: 48h
+                        <option value="Full Body Checkup" data-mrp="2500" data-offer="2000" data-tat="48 hours" data-desc="Comprehensive health assessment with 60+ tests.">
+                            Full Body Checkup - MRP: <span class="strikethrough">₹2500</span> Offer: ₹2000, TAT: 48h
                         </option>
-                        <option value="diabetes" data-mrp="1500" data-offer="1200" data-tat="24" data-desc="Diabetes Profile for sugar and related tests.">
-                            Diabetes - MRP: <span class="strikethrough">₹1500</span> Offer: ₹1200, TAT: 24h
+                        <option value="Diabetes Profile" data-mrp="1500" data-offer="1200" data-tat="24 hours" data-desc="Tests for diabetes management and monitoring.">
+                            Diabetes Profile - MRP: <span class="strikethrough">₹1500</span> Offer: ₹1200, TAT: 24h
                         </option>
-                        <option value="vitamin" data-mrp="1200" data-offer="960" data-tat="24" data-desc="Vitamin Profile to check vitamin levels.">
-                            Vitamin - MRP: <span class="strikethrough">₹1200</span> Offer: ₹960, TAT: 24h
+                        <option value="Vitamin Profile" data-mrp="1200" data-offer="960" data-tat="24 hours" data-desc="Checks vitamin D, B12, and other vitamin levels.">
+                            Vitamin Profile - MRP: <span class="strikethrough">₹1200</span> Offer: ₹960, TAT: 24h
                         </option>
-                        <option value="thyroid" data-mrp="1000" data-offer="800" data-tat="24" data-desc="Thyroid Profile to assess thyroid function.">
-                            Thyroid - MRP: <span class="strikethrough">₹1000</span> Offer: ₹800, TAT: 24h
+                        <option value="Thyroid Profile" data-mrp="1000" data-offer="800" data-tat="24 hours" data-desc="Assesses thyroid function with T3, T4, TSH.">
+                            Thyroid Profile - MRP: <span class="strikethrough">₹1000</span> Offer: ₹800, TAT: 24h
                         </option>
-                        <option value="cardiac" data-mrp="2000" data-offer="1600" data-tat="48" data-desc="Cardiac Profile for heart health assessment.">
-                            Cardiac - MRP: <span class="strikethrough">₹2000</span> Offer: ₹1600, TAT: 48h
+                        <option value="Cardiac Profile" data-mrp="2000" data-offer="1600" data-tat="48 hours" data-desc="Evaluates heart health with lipid and cardiac markers.">
+                            Cardiac Profile - MRP: <span class="strikethrough">₹2000</span> Offer: ₹1600, TAT: 48h
                         </option>
-                        <option value="iron" data-mrp="600" data-offer="480" data-tat="24" data-desc="Iron Profile to check iron levels.">
-                            Iron - MRP: <span class="strikethrough">₹600</span> Offer: ₹480, TAT: 24h
+                        <option value="Iron Deficiency Profile" data-mrp="600" data-offer="480" data-tat="24 hours" data-desc="Checks iron levels and anemia markers.">
+                            Iron Deficiency Profile - MRP: <span class="strikethrough">₹600</span> Offer: ₹480, TAT: 24h
                         </option>
-                        <option value="full-body-499" data-mrp="600" data-offer="499" data-tat="24" data-desc="Basic Full Body Checkup with essential tests.">
-                            Full Body - MRP: <span class="strikethrough">₹600</span> Offer: ₹499, TAT: 24h
+                        <option value="Basic Full Body Checkup" data-mrp="600" data-offer="499" data-tat="24 hours" data-desc="Essential health check with 40+ tests.">
+                            Basic Full Body Checkup - MRP: <span class="strikethrough">₹600</span> Offer: ₹499, TAT: 24h
                         </option>
                     </select>
                 </div>
@@ -113,10 +136,9 @@
                 </div>
 
                 <div class="form-group">
-                    <labeltheory data-tat="24" data-desc="Scheduled Date and Time:">
-                        <label for="dateTime">📅 Scheduled Date and Time:</label>
-                        <input type="datetime-local" id="dateTime" name="dateTime" required>
-                    </div>
+                    <label for="dateTime">📅 Scheduled Date and Time:</label>
+                    <input type="datetime-local" id="dateTime" name="dateTime" required>
+                </div>
 
                 <button type="submit" class="book-now">✅ Book Now</button>
 
@@ -141,9 +163,9 @@
     <section class="cards">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-scroll"><div class="card"><img src="assets/Full Body Health Checkup.jpg" alt="Full Body Checkup"></div></div>
+                <div class="swiper-slide"><div class="card"><img src="assets/Full Body Health Checkup.jpg" alt="Full Body Checkup"></div></div>
                 <div class="swiper-slide"><div class="card"><img src="assets/DIABETES SIMPTOMS.jpg" alt="Diabetes Symptoms"></div></div>
-                <div class="swiper-slide"><div class="card"><img src="assets/whatsapp.jpg" alt="ContactLLVM0.2.0 Contact Us"></div></div>
+                <div class="swiper-slide"><div class="card"><img src="assets/whatsapp.jpg" alt="Contact Us"></div></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -166,6 +188,8 @@
     <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js"></script>
+    <script src="scripts/test-data.js"></script>
     <script src="scripts/fetch-tests.js"></script>
 </body>
 </html>
