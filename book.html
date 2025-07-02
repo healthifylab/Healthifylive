@@ -1,107 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthify - Book Test</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-</head>
-<body>
-    <nav>
-        <img src="assets/logo-healthify.png" alt="Healthify Logo" class="logo">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="book.html">Book Test</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-        </ul>
-    </nav>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cardsSwiper = new Swiper('.cards .swiper-container', {
+            slidesPerView: 1,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            }
+        });
 
-    <header>
-        <h1>Healthify - Book Your Home Visit</h1>
-    </header>
-
-    <section class="book-test" id="bookTestSection">
-        <h2>Book Your Test</h2>
-        <form id="bookTestForm">
-            <label for="tests">Select Tests:</label>
-            <select id="tests" name="tests" multiple>
-                <option value="cbc" data-mrp="500" data-offer="400" data-tat="24" data-desc="Complete Blood Count to assess overall health.">CBC - MRP: ₹500 <span style="color:red;">❌</span> Offer: ₹400, TAT: 24h</option>
-                <option value="lipid" data-mrp="800" data-offer="640" data-tat="24" data-desc="Lipid Profile to check cholesterol levels.">Lipid - MRP: ₹800 <span style="color:red;">❌</span> Offer: ₹640, TAT: 24h</option>
-                <option value="glucose" data-mrp="300" data-offer="240" data-tat="12" data-desc="Blood Glucose to monitor sugar levels.">Glucose - MRP: ₹300 <span style="color:red;">❌</span> Offer: ₹240, TAT: 12h</option>
-            </select>
-
-            <label for="profiles">Select Profiles:</label>
-            <select id="profiles" name="profiles" multiple>
-                <option value="full-body" data-mrp="2500" data-offer="2000" data-tat="48" data-desc="Full Body Checkup for comprehensive health assessment.">Full Body - MRP: ₹2500 <span style="color:red;">❌</span> Offer: ₹2000, TAT: 48h</option>
-                <option value="diabetes" data-mrp="1500" data-offer="1200" data-tat="24" data-desc="Diabetes Profile for sugar and related tests.">Diabetes - MRP: ₹1500 <span style="color:red;">❌</span> Offer: ₹1200, TAT: ₹24h</option>
-                <option value="vitamin" data-mrp="1200" data-offer="960" data-tat="24" data-desc="Vitamin Profile to check vitamin levels.">Vitamin - MRP: ₹1200 <span style="color:red;">❌</span> Offer: ₹960, TAT: 24h</option>
-                <option value="thyroid" data-mrp="1000" data-offer="800" data-tat="24" data-desc="Thyroid Profile to assess thyroid function.">Thyroid - MRP: ₹1000 <span style="color:red;">❌</span> Offer: ₹800, TAT: 24h</option>
-                <option value="cardiac" data-mrp="2000" data-offer="1600" data-tat="48" data-desc="Cardiac Profile for heart health assessment.">Cardiac - MRP: ₹2000 <span style="color:red;">❌</span> Offer: ₹1600, TAT: 48h</option>
-                <option value="iron" data-mrp="600" data-offer="480" data-tat="24" data-desc="Iron Profile to check iron levels.">Iron - MRP: ₹600 <span style="color:red;">❌</span> Offer: ₹480, TAT: 24h</option>
-                <option value="full-body-499" data-mrp="600" data-offer="499" data-tat="24" data-desc="Basic Full Body Checkup with essential tests.">Full Body - MRP: ₹600 <span style="color:red;">❌</span> Offer: ₹499, TAT: 24h</option>
-            </select>
-
-            <div id="totalSection">
-                <p>Total Tests: <span id="totalTests">0</span></p>
-                <p>Total Price: ₹<span id="totalPrice">0</span></p>
-            </div>
-
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="contact">Contact (Email or Mobile):</label>
-            <input type="text" id="contact" name="contact" required>
-
-            <label for="address">Address:</label>
-            <textarea id="address" name="address" required></textarea>
-
-            <label for="dateTime">Scheduled Date and Time:</label>
-            <input type="datetime-local" id="dateTime" name="dateTime" required>
-
-            <button type="submit">Book Now</button>
-        </form>
-
-        <div id="adminSection" style="display:none;">
-            <h3>Admin Actions</h3>
-            <select id="bookingStatus">
-                <option value="pending">Pending</option>
-                <option value="confirmed">Confirm</option>
-                <option value="rejected">Reject</option>
-                <option value="rescheduled">Reschedule</option>
-            </select>
-            <button onclick="updateStatus()">Update Status</button>
-        </div>
-    </section>
-
-    <section class="cards">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><div class="card"><img src="assets/Full Body Health Checkup.jpg" alt="Full Body Checkup"></div></div>
-                <div class="swiper-slide"><div class="card"><img src="assets/DIABETES SIMPTOMS.jpg" alt="Diabetes Symptoms"></div></div>
-                <div class="swiper-slide"><div class="card"><img src="assets/whatsapp.jpg" alt="Contact Us"></div></div>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
-
-    <footer>
-        <p>Healthify © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
-        <div class="social-media">
-            <a href="https://twitter.com/healthify_lab" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        </div>
-    </footer>
-
-    <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
-        <img src="assets/whatsapp-icon.png" alt="WhatsApp">
-    </a>
-
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
-    <script src="scripts/fetch-tests.js"></script>
-</body>
-</html>
+        // Other existing scripts (e.g., form handling) would go here if provided
+    });
+</script>
+<script src="scripts/fetch-tests.js"></script>
