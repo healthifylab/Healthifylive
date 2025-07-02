@@ -10,56 +10,87 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/book">Book Test</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="book.html">Book Test</a></li>
             <li><a href="/contact">Contact</a></li>
         </ul>
     </nav>
 
     <header>
-        <h1>Healthify - Book Your Test</h1>
+        <h1>Healthify - Book Your Home Visit</h1>
     </header>
 
-    <section class="hero-banner">
-        <h2>Book Your Health Test Today</h2>
-        <!-- Hero banner content (images from assets can be added here) -->
+    <section class="login-section" id="loginSection">
+        <h2>Login to Book</h2>
+        <form id="loginForm">
+            <input type="text" id="loginInput" placeholder="Email or Mobile" required>
+            <button type="submit">Get OTP</button>
+        </form>
+        <div id="otpSection" style="display:none;">
+            <input type="text" id="otpInput" placeholder="Enter OTP" required>
+            <button type="button" onclick="verifyOTP()">Verify</button>
+        </div>
+    </section>
+
+    <section class="book-test" id="bookTestSection" style="display:none;">
+        <h2>Book Your Test</h2>
+        <form id="bookTestForm">
+            <label for="tests">Select Tests:</label>
+            <select id="tests" name="tests" multiple>
+                <option value="cbc" data-mrp="500" data-offer="400" data-tat="24" data-desc="Complete Blood Count to assess overall health.">CBC - MRP: ₹500 <span style="color:red;">❌</span> Offer: ₹400, TAT: 24h</option>
+                <option value="lipid" data-mrp="800" data-offer="640" data-tat="24" data-desc="Lipid Profile to check cholesterol levels.">Lipid - MRP: ₹800 <span style="color:red;">❌</span> Offer: ₹640, TAT: 24h</option>
+                <option value="glucose" data-mrp="300" data-offer="240" data-tat="12" data-desc="Blood Glucose to monitor sugar levels.">Glucose - MRP: ₹300 <span style="color:red;">❌</span> Offer: ₹240, TAT: 12h</option>
+                <!-- Add more tests as needed -->
+            </select>
+
+            <label for="profiles">Select Profiles:</label>
+            <select id="profiles" name="profiles" multiple>
+                <option value="full-body" data-mrp="2500" data-offer="2000" data-tat="48" data-desc="Full Body Checkup for comprehensive health assessment.">Full Body - MRP: ₹2500 <span style="color:red;">❌</span> Offer: ₹2000, TAT: 48h</option>
+                <option value="diabetes" data-mrp="1500" data-offer="1200" data-tat="24" data-desc="Diabetes Profile for sugar and related tests.">Diabetes - MRP: ₹1500 <span style="color:red;">❌</span> Offer: ₹1200, TAT: 24h</option>
+                <!-- Add more profiles as needed -->
+            </select>
+
+            <div id="totalSection">
+                <p>Total Tests: <span id="totalTests">0</span></p>
+                <p>Total Price: ₹<span id="totalPrice">0</span></p>
+            </div>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="contact">Contact (Email or Mobile):</label>
+            <input type="text" id="contact" name="contact" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+
+            <label for="dateTime">Scheduled Date and Time:</label>
+            <input type="datetime-local" id="dateTime" name="dateTime" required>
+
+            <button type="submit">Book Now</button>
+        </form>
+
+        <div id="adminSection" style="display:none;">
+            <h3>Admin Actions</h3>
+            <select id="bookingStatus">
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirm</option>
+                <option value="rejected">Reject</option>
+                <option value="rescheduled">Reschedule</option>
+            </select>
+            <button onclick="updateStatus()">Update Status</button>
+        </div>
     </section>
 
     <section class="cards">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><div class="card"><img src="assets/Thyroid Test.jpg" alt="Thyroid Test"></div></div>
                 <div class="swiper-slide"><div class="card"><img src="assets/Full Body Health Checkup.jpg" alt="Full Body Checkup"></div></div>
                 <div class="swiper-slide"><div class="card"><img src="assets/DIABETES SIMPTOMS.jpg" alt="Diabetes Symptoms"></div></div>
                 <div class="swiper-slide"><div class="card"><img src="assets/whatsapp.jpg" alt="Contact Us"></div></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
-    </section>
-
-    <section class="book-test">
-        <h2>Book Test</h2>
-        <form id="bookTestForm">
-            <label for="tests">Select Tests:</label>
-            <select id="tests" name="tests" multiple>
-                <option value="cbc">Complete Blood Count (CBC)</option>
-                <option value="lipid">Lipid Profile</option>
-                <option value="glucose">Blood Glucose</option>
-                <option value="thyroid">Thyroid Function Test</option>
-                <option value="liver">Liver Function Test</option>
-                <option value="kidney">Kidney Function Test</option>
-                <option value="vitamin-d">Vitamin D</option>
-                <option value="hba1c">Hemoglobin A1c</option>
-            </select>
-            <label for="profiles">Select Profiles:</label>
-            <select id="profiles" name="profiles" multiple>
-                <option value="full-body">Full Body Checkup</option>
-                <option value="diabetes">Diabetes Profile</option>
-                <option value="cardiac">Cardiac Profile</option>
-                <option value="senior">Senior Citizen Profile</option>
-                <option value="womens-health">Women’s Health Profile</option>
-            </select>
-            <button type="submit">Book Now</button>
-        </form>
     </section>
 
     <footer>
