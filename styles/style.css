@@ -217,7 +217,7 @@ footer .social-media a:hover {
         width: 70%;
     }
     .swiper-slide {
-        width: 33.33% !important; /* Allow multiple slides on desktop */
+        width: 33.33% !important;
     }
     .featured-profiles .swiper-slide,
     .promotional-cards .swiper-slide,
