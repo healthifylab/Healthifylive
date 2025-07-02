@@ -24,6 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
             1024: { slidesPerView: 3 }
         }
     });
+    const cardsSwiper = new Swiper('.cards .swiper-container', {
+        slidesPerView: 1,
+        pagination: { el: '.swiper-pagination', clickable: true },
+        breakpoints: {
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 }
+        }
+    });
 
     // Initialize EmailJS
     emailjs.init('dJE_JHAoNTxxzTxiT');
@@ -38,8 +46,13 @@ document.addEventListener('DOMContentLoaded', function() {
         appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
         measurementId: "G-R0R3RYERZW"
     };
-    const app = firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+    const auth = firebase.auth();
+
+    // Check login status
+    const user = JSON.parse(localStorage.getItem('user'));
+    const loggedIn = !!user;
 
     // Call-back Popup
     const popup = document.getElementById('callBackPopup');
@@ -53,30 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
             popup.style.display = 'none';
         };
     }
-
-    // OTP Logic
-    let loggedIn = false;
-    let generatedOTP = null;
-    const loginForm = document.getElementById('loginForm');
-    if (loginForm) {
-        loginForm.onsubmit = (e) => {
-            e.preventDefault();
-            const loginInput = document.getElementById('loginInput').value;
-            generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-            document.getElementById('otpSection').style.display = 'block';
-            alert('OTP sent to ' + loginInput + ': ' + generatedOTP); // Replace with SMS service
-        };
-    }
-    window.verifyOTP = function() {
-        const otpInput = document.getElementById('otpInput').value;
-        if (otpInput === generatedOTP) {
-            loggedIn = true;
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('bookTestSection').style.display = 'block';
-        } else {
-            alert('Invalid OTP. Please try again.');
-        }
-    };
 
     // Preselect Profile from URL or Cart
     const urlParams = new URLSearchParams(window.location.search);
@@ -94,10 +83,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     if (cartItems.length > 0 && (profileSelect || testsSelect)) {
         cartItems.forEach(item => {
-            const selectElement = item.type === 'profile' ? profileSelect : testsSelect;
+            const selectElement = item.TestType === 'Profile' ? profileSelect : testsSelect;
             if (selectElement) {
                 for (let option of selectElement.options) {
-                    if (option.value === item.value) {
+                    if (option.value === item.TestName) {
                         option.selected = true;
                         break;
                     }
@@ -118,8 +107,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Update cart in localStorage
         const cartItems = [
-            ...Array.from(tests).map(opt => ({ type: 'test', value: opt.value })),
-            ...Array.from(profiles).map(opt => ({ type: 'profile', value: opt.value }))
+            ...Array.from(tests).map(opt => ({
+                TestType: 'Test',
+                TestName: opt.value,
+                offerPrice: parseInt(opt.dataset.offer),
+                MRP: parseInt(opt.dataset.mrp),
+                TAT: opt.dataset.tat,
+                Description: opt.dataset.desc
+            })),
+            ...Array.from(profiles).map(opt => ({
+                TestType: 'Profile',
+                TestName: opt.value,
+                offerPrice: parseInt(opt.dataset.offer),
+                MRP: parseInt(opt.dataset.mrp),
+                TAT: opt.dataset.tat,
+                Description: opt.dataset.desc
+            }))
         ];
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
@@ -145,11 +148,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const profiles = document.getElementById('profiles').selectedOptions;
             const name = document.getElementById('name').value;
             const contact = document.getElementById('contact').value;
-            const age = document.getElementById('age')?.value || '';
-            const sex = document.getElementById('sex')?.value || '';
+            const age = document.getElementById('age').value;
+            const sex = document.getElementById('sex').value;
             const address = document.getElementById('address').value;
-            const pincode = document.getElementById('pincode')?.value || '';
-            const landmark = document.getElementById('landmark')?.value || '';
+            const pincode = document.getElementById('pincode').value;
+            const landmark = document.getElementById('landmark').value;
             const dateTime = document.getElementById('dateTime').value;
 
             if (tests.length === 0 && profiles.length === 0) {
@@ -159,19 +162,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const bookingData = {
                 tests: Array.from(tests).map(opt => ({
-                    name: opt.value,
-                    offer: opt.dataset.offer,
-                    tat: opt.dataset.tat,
-                    desc: opt.dataset.desc
+                    TestName: opt.value,
+                    offerPrice: parseInt(opt.dataset.offer),
+                    MRP: parseInt(opt.dataset.mrp),
+                    TAT: opt.dataset.tat,
+                    Description: opt.dataset.desc
                 })),
                 profiles: Array.from(profiles).map(opt => ({
-                    name: opt.value,
-                    offer: opt.dataset.offer,
-                    tat: opt.dataset.tat,
-                    desc: opt.dataset.desc
+                    TestName: opt.value,
+                    offerPrice: parseInt(opt.dataset.offer),
+                    MRP: parseInt(opt.dataset.mrp),
+                    TAT: opt.dataset.tat,
+                    Description: opt.dataset.desc
                 })),
                 name,
-                contact,
+                email: contact.includes('@') ? contact : '',
+                mobile: contact.includes('@') ? '' : contact,
                 age,
                 sex,
                 address,
@@ -189,11 +195,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const docRef = await db.collection('bookings').add(bookingData);
                 const bookingId = docRef.id;
 
-                // Save to localStorage for my-bookings.html
+                // Save to localStorage for my-bookings.html and generate-report.js
                 localStorage.setItem('lastBooking', JSON.stringify({
                     ...bookingData,
-                    tests: bookingData.tests.map(t => t.name),
-                    profiles: bookingData.profiles.map(p => p.name)
+                    tests: bookingData.tests,
+                    profiles: bookingData.profiles
                 }));
 
                 // Send EmailJS Notification to Admin
@@ -204,8 +210,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Send Confirmation to User
                 await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
-                    to_email: contact.includes('@') ? contact : '',
-                    to_mobile: contact.includes('@') ? '' : contact,
+                    to_email: bookingData.email,
+                    to_mobile: bookingData.mobile,
                     message: `Booking Confirmed! ID: ${bookingId}\nName: ${name}\nDate & Time: ${dateTime}\nTotal: ₹${bookingData.totalPrice}`
                 });
 
@@ -216,13 +222,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('totalTests').textContent = '0';
                 document.getElementById('totalPrice').textContent = '0';
                 document.getElementById('adminSection').style.display = 'block';
-                localStorage.removeItem('cartItems'); // Clear cart
+                localStorage.removeItem('cartItems');
                 setTimeout(() => {
                     successMessage.style.display = 'none';
+                    window.location.href = 'my-bookings.html';
                 }, 3000);
-
-                // Redirect to my-bookings.html
-                window.location.href = 'my-bookings.html';
             } catch (error) {
                 console.error('Error:', error);
                 alert('Booking failed. Please try again.');
@@ -233,7 +237,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Admin Status Update
     window.updateStatus = async () => {
         const status = document.getElementById('bookingStatus').value;
-        const bookingId = (await db.collection('bookings').limit(1).get()).docs[0].id;
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            alert('Admin login required');
+            return;
+        }
+        const bookings = await db.collection('bookings')
+            .where('mobile', '==', user.phone || '')
+            .where('email', '==', user.email || '')
+            .limit(1).get();
+        if (bookings.empty) {
+            alert('No booking found');
+            return;
+        }
+        const bookingId = bookings.docs[0].id;
         await db.collection('bookings').doc(bookingId).update({ status });
         alert(`Status updated to ${status}`);
     };
