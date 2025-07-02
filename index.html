@@ -118,10 +118,71 @@
   <!-- Footer -->
   <footer style="text-align:center; padding: 20px; background:#f1f1f1;">
     <p>Healthify © 2025 | Contact: +91 9503832889 | Email: report@healthifylab.com</p>
-    <p>
-      <a href="#"><img src="assets/x-icon.png" alt="Twitter" height="20"></a>
-      <a href="#"><img src="assets/instagram-icon.png" alt="Instagram" height="20"></a>
-      <a href="#"><img src="assets/facebook-icon.png" alt="Facebook" height="20"></a>
+    <p><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .footer-icons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: #f8f9fa; /* Light background, adjust to match your theme */
+    }
+    .footer-icons a {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+    }
+    .footer-icons svg {
+      fill: #000; /* Black icons, adjust to your brand color (e.g., Healthify’s blue) */
+      width: 100%;
+      height: 100%;
+      transition: fill 0.3s;
+    }
+    .footer-icons svg:hover {
+      fill: #007bff; /* Hover effect, matches Healthify’s potential blue theme */
+    }
+    @media (max-width: 600px) {
+      .footer-icons {
+        gap: 15px;
+        padding: 15px;
+      }
+      .footer-icons a {
+        width: 28px;
+        height: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <footer>
+    <div class="footer-icons">
+      <!-- X Icon -->
+      <a href="https://x.com/healthify_lab" target="_blank" aria-label="Follow Healthify on X">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4 L20 20 M20 4 L4 20" stroke="#000" stroke-width="2"/>
+        </svg>
+      </a>
+      <!-- Instagram Icon -->
+      <a href="https://instagram.com/healthifylab" target="_blank" aria-label="Follow Healthify on Instagram">
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="#000" stroke-width="2"/>
+          <circle cx="12" cy="12" r="5" fill="none" stroke="#000" stroke-width="2"/>
+          <circle cx="17" cy="7" r="1" fill="#000"/>
+        </svg>
+      </a>
+      <!-- Facebook Icon -->
+      <a href="https://facebook.com/healthify" target="_blank" aria-label="Follow Healthify on Facebook">
+        <svg viewBox="0 0 24 24">
+          <path d="M15 4h-3c-2.2 0-4 1.8-4 4v3H6v4h2v5h4v-5h3l1-4h-4V8c0-.6.4-1 1-1h3V4z" fill="#000"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
+</body>
+</html>
     </p>
   </footer>
 
