@@ -1,1 +1,0 @@
-export const tests = [...Array(100).keys()].map(i => ({ name: `Test ${i+1}`, mrp: 500, offer: 400, description: 'Auto description', tat: '24 hrs' }));
