@@ -174,5 +174,10 @@
   });
   </script>
   
+<script type="module">
+  import { startOTPLogin } from './scripts/firebase-auth.js';
+
+  document.getElementById('otpLoginBtn').addEventListener('click', startOTPLogin);
+</script>
 </body>
 </html>
