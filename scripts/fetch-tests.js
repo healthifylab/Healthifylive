@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         authDomain: "healthify-lab.firebaseapp.com",
         projectId: "healthify-lab",
         storageBucket: "healthify-lab.firebasestorage.app",
-        messagingSenderId: "297003315332",
+        messagingSender患: "297003315332",
         appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
         measurementId: "G-R0R3RYERZW"
     };
@@ -149,19 +149,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Booking saved to localStorage');
 
                 // Send EmailJS Admin Email
-                const adminEmailResponse = await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_email: 'report@healthifylab.com',
                     message: `New Booking:\nID: ${bookingId}\nName: ${name}\nContact: ${contact}\nAge: ${age}\nSex: ${sex}\nAddress: ${address}\nPincode: ${pincode}\nLandmark: ${landmark}\nDateTime: ${dateTime}\nTests: ${JSON.stringify(bookingData.tests)}\nProfiles: ${JSON.stringify(bookingData.profiles)}\nTotal Tests: ${bookingData.totalTests}\nTotal Price: ₹${bookingData.totalPrice}`
                 });
-                console.log('Admin email sent, Event ID:', adminEmailResponse.eventId || 'N/A');
+                console.log('Admin email sent');
 
                 // Send EmailJS User Confirmation
-                const userEmailResponse = await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_email: bookingData.email || 'report@healthifylab.com',
-                    to_mobile: bookingData.mobile,
                     message: `Booking Confirmed! ID: ${bookingId}\nName: ${name}\nDate & Time: ${dateTime}\nTotal: ₹${bookingData.totalPrice}`
                 });
-                console.log('User confirmation sent, Event ID:', userEmailResponse.eventId || 'N/A');
+                console.log('User confirmation sent');
 
                 // Show Success Message
                 if (successMessage) {
@@ -189,8 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Booking error:', error);
                 let errorText = 'Booking failed. Please try again.';
                 if (error.message.includes('Firebase')) errorText = `Booking failed: Firebase error (${error.code || error.message})`;
-                else if (error.status === 400 || error.message.includes('EmailJS')) errorText = 'Booking failed: EmailJS error. Check service/template ID.';
-                else if (error.code) errorText = `Booking failed: ${error.code}`;
+                else if (error.status === 400) errorText = 'Booking failed: EmailJS error. Check service/template ID.';
                 if (errorMessage) {
                     errorMessage.style.display = 'block';
                     errorMessage.textContent = `❌ ${errorText}`;
