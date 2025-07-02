@@ -1,9 +1,10 @@
 // firebase-auth.js
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, signInWithPhoneNumber, RecaptchaVerifier, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { initializeApp } from "firebase/app";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { getAnalytics } from "firebase/analytics";
 
-// Firebase config (from your project)
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
   authDomain: "healthify-lab.firebaseapp.com",
@@ -14,26 +15,19 @@ const firebaseConfig = {
   measurementId: "G-R0R3RYERZW"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
-// Recaptcha setup
-window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-  'size': 'invisible',
-  'callback': (response) => {
-    // reCAPTCHA solved - allow signInWithPhoneNumber.
-    console.log("Recaptcha verified");
-  }
-}, auth);
+// Export auth and OTP login helper
+export { auth };
 
-// Send OTP
 export function sendOTP(phoneNumber) {
+  window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+    size: 'invisible',
+    callback: () => {}
+  }, auth);
+
   return signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
 }
-
-// Logout
-export function logout() {
-  return signOut(auth);
-}
-
-export { auth };
