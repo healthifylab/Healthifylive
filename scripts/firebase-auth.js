@@ -1,10 +1,6 @@
-// firebase-auth.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-import { initializeApp } from "firebase/app";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
-
-// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
   authDomain: "healthify-lab.firebaseapp.com",
@@ -15,19 +11,44 @@ const firebaseConfig = {
   measurementId: "G-R0R3RYERZW"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
-// Export auth and OTP login helper
-export { auth };
-
-export function sendOTP(phoneNumber) {
-  window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-    size: 'invisible',
-    callback: () => {}
-  }, auth);
-
-  return signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
+// ✅ Set up invisible reCAPTCHA only once
+let recaptchaVerifier;
+function getOrCreateRecaptcha(auth) {
+  if (!recaptchaVerifier) {
+    recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
+      size: "invisible",
+      callback: () => {},
+    });
+  }
+  return recaptchaVerifier;
 }
+
+export function sendOTP(phone) {
+  const verifier = getOrCreateRecaptcha(auth);
+  return signInWithPhoneNumber(auth, phone, verifier);
+}
+
+export function startOTPLogin() {
+  const phone = document.getElementById("phoneInput").value.trim();
+  if (!phone.startsWith("+91")) {
+    alert("Include +91 before number");
+    return;
+  }
+
+  sendOTP(phone)
+    .then((confirmationResult) => {
+      const code = prompt("Enter OTP:");
+      return confirmationResult.confirm(code);
+    })
+    .then((result) => {
+      alert("✅ Logged in as " + result.user.phoneNumber);
+    })
+    .catch((error) => {
+      alert("❌ OTP failed: " + error.message);
+    });
+}
+
+export { auth };
