@@ -11,7 +11,7 @@ header.header {
   position: sticky;
   top: 0;
   background: #f0f0f0;
-  padding: 10px 20px;
+  padding: 10px 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,14 +20,14 @@ header.header {
 }
 
 header.header .logo {
-  height: 50px;
+  max-height: 50px;
   width: auto;
   object-fit: contain;
 }
 
 header.header nav {
   display: flex;
-  gap: 15px;
+  gap: 12px;
   font-size: 14px;
   align-items: center;
 }
@@ -41,13 +41,13 @@ header.header nav a {
 /* Hero Section */
 .hero-banner {
   width: 100%;
-  max-width: 1280px; /* Cap for large screens */
+  max-width: 1200px; /* Cap for large screens */
   height: auto;
-  max-height: 70vh; /* Flexible height */
-  min-height: 100px; /* Minimum for small screens */
-  object-fit: cover; /* Revert to cover for better fill */
+  max-height: 50vh; /* Reduced for better scaling */
+  min-height: 80px; /* Smaller minimum */
+  object-fit: contain; /* Prevent cropping */
   border-radius: 10px;
-  margin: 15px auto;
+  margin: 10px auto;
   display: block;
   box-sizing: border-box;
 }
@@ -55,17 +55,17 @@ header.header nav a {
 /* Promo Slider */
 .promo-slider {
   display: flex;
-  flex-wrap: wrap; /* Stack on mobile for better UX */
-  gap: 15px;
-  margin: 20px 15px;
+  flex-wrap: wrap; /* Stack cards on mobile */
+  gap: 10px;
+  margin: 15px;
   padding: 10px;
   justify-content: center;
 }
 
 .promo-card {
-  flex: 0 1 clamp(150px, 45vw, 220px); /* Responsive card size */
+  flex: 0 1 clamp(140px, 90%, 200px); /* Tighter range for responsiveness */
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 8px;
   text-align: center;
   border-radius: 8px;
   box-sizing: border-box;
@@ -74,11 +74,11 @@ header.header nav a {
 
 .promo-card img {
   width: 100%;
+  max-width: 100%;
   height: auto;
-  aspect-ratio: 3 / 2; /* Consistent aspect ratio */
+  aspect-ratio: 4 / 3; /* Consistent aspect ratio */
   object-fit: cover;
   border-radius: 8px;
-  max-width: 100%;
 }
 
 .promo-card button {
@@ -88,19 +88,19 @@ header.header nav a {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 8px;
   width: 100%;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 /* Booking Form */
 form {
-  padding: 15px;
+  padding: 10px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 15px auto;
-  max-width: 500px;
+  margin: 10px auto;
+  max-width: 480px; /* Smaller form width */
   box-sizing: border-box;
 }
 
@@ -108,11 +108,11 @@ form input,
 form textarea,
 form select {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
+  padding: 8px;
+  margin-bottom: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 13px;
   box-sizing: border-box;
 }
 
@@ -121,7 +121,7 @@ form button {
   padding: 10px;
   background-color: #28a745;
   color: white;
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -129,36 +129,36 @@ form button {
 
 /* FAQ Section */
 #faq {
-  padding: 15px;
-  max-width: 800px;
+  padding: 10px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
 .faq-item {
   background: #eef;
-  padding: 10px;
+  padding: 8px;
   border-radius: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 /* Testimonials Section */
 #testimonials {
   background: #fff;
-  padding: 15px;
+  padding: 10px;
 }
 
 .testimonial-slider {
   display: flex;
   flex-wrap: wrap; /* Stack on mobile */
-  gap: 15px;
+  gap: 10px;
   margin: 0 15px;
   padding: 10px;
   justify-content: center;
 }
 
 .testimonial {
-  flex: 0 1 clamp(140px, 45vw, 200px);
-  padding: 10px;
+  flex: 0 1 clamp(120px, 90%, 180px); /* Smaller cards */
+  padding: 8px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
@@ -167,22 +167,22 @@ form button {
 }
 
 .testimonial img {
-  width: clamp(50px, 15vw, 70px);
-  height: clamp(50px, 15vw, 70px);
+  width: clamp(40px, 12vw, 60px); /* Smaller images */
+  height: clamp(40px, 12vw, 60px);
   border-radius: 50%;
   object-fit: cover;
-  margin: 0 auto 10px;
+  margin: 0 auto 8px;
 }
 
 .testimonial p {
-  font-size: 14px;
+  font-size: 13px;
   color: #555;
+  margin: 5px 0;
 }
 
 .testimonial strong {
   display: block;
- 1740
-  font-size: 12px;
+  font-size: 11px;
   color: #0077cc;
 }
 
@@ -190,7 +190,7 @@ form button {
 footer.footer {
   background: #333;
   color: #fff;
-  padding: 15px;
+  padding: 10px;
   text-align: center;
 }
 
@@ -207,25 +207,26 @@ footer.footer .social-icons a:hover {
 /* WhatsApp Floating Icon */
 .whatsapp-float {
   position: fixed;
-  bottom: 15px;
-  right: 15px;
+  bottom: 10px;
+  right: 10px;
   background: #25d366;
   border-radius: 50%;
-  padding: 10px;
+  padding: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .whatsapp-float img {
-  width: clamp(24px, 5vw, 30px);
-  height: clamp(24px, 5vw, 30px);
+  width: clamp(20px, 4vw, 24px);
+  height: clamp(20px, 4vw, 24px);
 }
 
 /* Misc */
 h2,
 h3,
 h4 {
-  font-size: clamp(18px, 4vw, 22px);
+  font-size: clamp(16px, 4vw, 20px);
   color: #333;
+  margin: 10px 0;
 }
 
 ul {
@@ -240,82 +241,16 @@ ul li {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .hero-banner {
-    max-height: 50vh;
-    min-height: 80px;
-  }
-
-  .promo-slider {
-    flex-wrap: nowrap; /* Optional: revert to horizontal scroll */
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-  }
-
-  .promo-slider::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  .promo-slider::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 3px;
-  }
-
-  .promo-card {
-    flex: 0 0 clamp(130px, 80vw, 180px);
-  }
-
-  .testimonial-slider {
-    flex-wrap: nowrap; /* Optional: horizontal scroll */
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-  }
-
-  .testimonial-slider::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  .testimonial-slider::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 3px;
-  }
-
-  .testimonial {
-    flex: 0 0 clamp(120px, 80vw, 160px);
-  }
-
-  .testimonial img {
-    width: clamp(40px, 12vw, 60px);
-    height: clamp(40px, 12vw, 60px);
-  }
-
-  header.header {
-    padding: 10px;
-  }
-
-  header.header nav {
-    font-size: 12px;
-    gap: 8px;
-  }
-
-  form {
-    padding: 10px;
-    margin: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-banner {
     max-height: 40vh;
     min-height: 60px;
   }
 
   .promo-card {
-    flex: 0 0 clamp(100px, 90vw, 140px);
+    flex: 0 1 clamp(120px, 85%, 160px);
   }
 
   .testimonial {
-    flex: 0 0 clamp(100px, 90vw, 130px);
+    flex: 0 1 clamp(100px, 85%, 140px);
   }
 
   .testimonial img {
@@ -323,11 +258,77 @@ ul li {
     height: clamp(36px, 10vw, 50px);
   }
 
-  .whatsapp-float {
+  header.header {
     padding: 8px;
-    bottom: 10px;
-    right: 10px;
+  }
+
+  header.header nav {
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  form {
+    padding: 8px;
+    margin: 8px;
+  }
+
+  .promo-slider,
+  .testimonial-slider {
+    flex-wrap: nowrap; /* Optional: horizontal scroll */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+  }
+
+  .promo-slider::-webkit-scrollbar,
+  .testimonial-slider::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  .promo-slider::-webkit-scrollbar-thumb,
+  .testimonial-slider::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-banner {
+    max-height: 30vh;
+    min-height: 50px;
+  }
+
+  .promo-card {
+    flex: 0 1 clamp(100px, 95%, 130px);
+  }
+
+  .testimonial {
+    flex: 0 1 clamp(90px, 95%, 120px);
+  }
+
+  .testimonial img {
+    width: clamp(32px, 8vw, 45px);
+    height: clamp(32px, 8vw, 45px);
+  }
+
+  .whatsapp-float {
+    padding: 6px;
+    bottom: 8px;
+    right: 8px;
   }
 
   .whatsapp-float img {
-    width: clamp
+    width: clamp(18px, 3vw, 22px);
+    height: clamp(18px, 3vw, 22px);
+  }
+}
+
+/* Fallback for missing images */
+img:not([src]),
+img[src=""] {
+  background: #ddd;
+  min-height: 50px;
+  width: 100%;
+  display: block;
+  border: 1px solid #ccc;
+}
