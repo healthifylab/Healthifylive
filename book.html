@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Test – Healthify</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles/style.css"/>
+  <script defer src="scripts/tests-data.js"></script>
+</head>
+<body>
+
+  <!-- 🔝 Sticky Header -->
+  <header class="header">
+    <a href="index.html"><img src="assets/logo.png" class="logo" alt="Logo" /></a>
+    <h2>📋 Book Your Test</h2>
+  </header>
+
+  <!-- 🛒 Cart Data + Patient Info -->
+  <main style="padding: 20px">
+    <h3>🧪 Selected Tests/Profiles</h3>
+    <div id="cartItems"></div>
+
+    <form id="bookingForm">
+      <h3>👤 Patient Details</h3>
+      <label>Name: <input type="text" name="name" required /></label><br/>
+      <label>Mobile: <input type="tel" name="mobile" required /></label><br/>
+      <label>Email: <input type="email" name="email" required /></label><br/>
+      <label>Age: <input type="number" name="age" required /></label><br/>
+      <label>Sex:
+        <select name="sex" required>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </label><br/>
+      <label>Address: <textarea name="address" required></textarea></label><br/>
+      <label>Pincode: <input type="text" name="pincode" required /></label><br/>
+      <label>Landmark: <input type="text" name="landmark" /></label><br/>
+      <label>Preferred Date: <input type="date" name="date" required /></label><br/>
+      <label>Preferred Time: <input type="time" name="time" required /></label><br/>
+
+      <label for="tests">Select Tests:</label>
+      <select id="tests" name="tests" multiple required>
+        <!-- Test options will be dynamically populated here -->
+      </select><br/><br/>
+
+      <label for="profiles">Select Profiles:</label>
+      <select id="profiles" name="profiles" multiple required>
+        <!-- Profile options will be dynamically populated here -->
+      </select><br/><br/>
+
+      <button type="submit">✅ Confirm Booking</button>
+    </form>
+  </main>
+
+  <script>
+    // Load cart data (from localStorage)
+    const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    const cartItems = document.getElementById("cartItems");
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = "<p>Your cart is empty. Please go to Home to select tests.</p>";
+    } else {
+      let cartHTML = "<ul>";
+      cart.forEach(item => {
+        cartHTML += `<li>${item.TestName} – ₹${item.offerPrice}</li>`;
+      });
+      cartHTML += "</ul>";
+      cartItems.innerHTML = cartHTML;
+    }
+
+    // Populate test and profile dropdowns
+    const testData = [
+      { TestName: "Full Body Checkup", offerPrice: 7999 },
+      { TestName: "Diabetes Test", offerPrice: 999 },
+      { TestName: "Heart Health Profile", offerPrice: 1999 },
+      { TestName: "Thyroid Profile", offerPrice: 1199 },
+      // Add more test data here
+    ];
+
+    const profileData = [
+      { TestName: "Heart Health Profile", offerPrice: 1999 },
+      { TestName: "Thyroid Profile", offerPrice: 1199 },
+      { TestName: "Liver Function Profile", offerPrice: 2499 },
+      // Add more profile data here
+    ];
+
+    const testSelect = document.getElementById("tests");
+    const profileSelect = document.getElementById("profiles");
+
+    testData.forEach(test => {
+      const option = document.createElement("option");
+      option.value = test.TestName;
+      option.textContent = `${test.TestName} – ₹${test.offerPrice}`;
+      testSelect.appendChild(option);
+    });
+
+    profileData.forEach(profile => {
+      const option = document.createElement("option");
+      option.value = profile.TestName;
+      option.textContent = `${profile.TestName} – ₹${profile.offerPrice}`;
+      profileSelect.appendChild(option);
+    });
+
+    // Handle form submission
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const bookingData = {
+        name: form.name.value,
+        mobile: form.mobile.value,
+        email: form.email.value,
+        age: form.age.value,
+        sex: form.sex.value,
+        address: form.address.value,
+        pincode: form.pincode.value,
+        landmark: form.landmark.value,
+        date: form.date.value,
+        time: form.time.value,
+        tests: Array.from(form.tests.selectedOptions).map(option => option.value),
+        profiles: Array.from(form.profiles.selectedOptions).map(option => option.value)
+      };
+
+      // Store booking data
+      localStorage.setItem("lastBooking", JSON.stringify(bookingData));
+
+      // Redirect to booking confirmation page
+      window.location.href = "my-bookings.html";
+    });
+  </script>
+
+</body>
+</html>
