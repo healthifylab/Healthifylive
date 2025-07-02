@@ -9,7 +9,7 @@ nav {
     display: flex;
     align-items: center;
     padding: 10px;
-    background: transparent; /* Transparent header */
+    background: transparent;
     color: #333;
     position: relative;
     z-index: 1000;
@@ -37,8 +37,8 @@ nav ul li a {
 header.hero-banner {
     text-align: center;
     padding: 20px;
-    background: transparent; /* Teal for hero */
-    color: #Ffffff;
+    background: transparent;
+    color: #FFFFFF;
     width: 100%;
     margin: 0 auto;
 }
@@ -48,20 +48,20 @@ header.hero-banner img {
     height: auto;
 }
 
-.featured-profiles .swiper-container.feat-swiper, .promotional-cards .swiper-container.promo-swiper, .testimonials .swiper-container.testi-swiper {
+.swiper-container {
     width: 100%;
-    margin: 20px 0;
+    padding: 10px 0;
 }
 
-.featured-profiles .swiper-slide, .promotional-cards .swiper-slide, .testimonials .swiper-slide {
+.swiper-slide {
+    width: 100% !important;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .card {
-    width: 70%;
-    background: #FFFFFF; /* Reverted to white */
+    width: 90%;
+    background: #FFFFFF;
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
@@ -76,7 +76,7 @@ header.hero-banner img {
 
 .book-now {
     padding: 10px 20px;
-    background: #00C4B4; /* Teal for buttons */
+    background: #00C4B4;
     color: #FFFFFF;
     border: none;
     cursor: pointer;
@@ -90,7 +90,7 @@ header.hero-banner img {
 }
 
 .swiper-pagination-bullet {
-    background: #00C4B4; /* Teal for pagination */
+    background: #00C4B4;
 }
 
 .why-choose, .faq, .testimonials, .contact {
@@ -120,7 +120,7 @@ details[open] summary {
 
 .testimonial-card {
     width: 70%;
-    background: #FFFFFF; /* Reverted to white */
+    background: #FFFFFF;
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
@@ -154,7 +154,7 @@ details[open] summary {
 footer {
     text-align: center;
     padding: 10px;
-    background: #F5F5F5; /* Reverted to gray */
+    background: #F5F5F5;
     border-top: 1px solid #ccc;
     width: 100%;
 }
@@ -177,7 +177,7 @@ footer .social-media a:hover {
 .popup {
     display: none;
     position: fixed;
-    top: 20%; /* Below hero section */
+    top: 20%;
     left: 50%;
     transform: translateX(-50%);
     background: #FFFFFF;
@@ -191,7 +191,7 @@ footer .social-media a:hover {
     font-size: 18px;
 }
 
-.popup .close-btn <x> {
+.popup .close-btn {
     position: absolute;
     top: 5px;
     right: 10px;
@@ -209,4 +209,20 @@ footer .social-media a:hover {
 .whatsapp-float img {
     width: 50px;
     height: 50px;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+    .card {
+        width: 70%;
+    }
+    .swiper-slide {
+        width: 33.33% !important; /* Allow multiple slides on desktop */
+    }
+    .featured-profiles .swiper-slide,
+    .promotional-cards .swiper-slide,
+    .testimonials .swiper-slide,
+    .cards .swiper-slide {
+        width: 33.33% !important;
+    }
 }
