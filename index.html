@@ -24,6 +24,11 @@
         <img src="assets/hero-health-checkup.jpg" alt="Health Checkup" style="width: 100%; height: auto;">
     </header>
 
+    <div id="promoPopup" class="popup">
+        <span class="close-btn">×</span>
+        <p>Full Body Checkup at ₹499, Home Sample Collection | Same Day Report | <a href="book.html?profile=full-body-499" class="book-now">Book Now</a></p>
+    </div>
+
     <div id="callBackPopup" class="popup">
         <span class="close-btn">×</span>
         <h3>Request a Call Back</h3>
@@ -104,21 +109,21 @@
         <div class="swiper-container testi-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div class="testimonial-card">
+                    <div class="card">
                         <img src="assets/user1.jpg" alt="Rajesh Sharma">
                         <p>"Excellent home service! Highly recommend."</p>
                         <h4>Rajesh Sharma</h4>
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="testimonial-card">
+                    <div class="card">
                         <img src="assets/user2.jpg" alt="Priya Desai">
                         <p>"Fast and reliable results, very satisfied."</p>
                         <h4>Priya Desai</h4>
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="testimonial-card">
+                    <div class="card">
                         <img src="assets/user3.jpg" alt="Anil Patel">
                         <p>"Great experience with accurate reports."</p>
                         <h4>Anil Patel</h4>
@@ -157,16 +162,25 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const promoSwiper = new Swiper('.promo-swiper', {
-                slidesPerView: 1, // Show only one card at a time
+                slidesPerView: 1,
                 pagination: { el: '.swiper-pagination', clickable: true }
             });
             const featSwiper = new Swiper('.feat-swiper', {
-                slidesPerView: 1, // Show only one card at a time
+                slidesPerView: 1,
                 pagination: { el: '.swiper-pagination', clickable: true }
             });
             const testiSwiper = new Swiper('.testi-swiper', {
-                slidesPerView: 1, // Show only one card at a time
+                slidesPerView: 1,
                 pagination: { el: '.swiper-pagination', clickable: true }
+            });
+
+            // Promo Popup
+            const promoPopup = document.getElementById('promoPopup');
+            setTimeout(() => promoPopup.style.display = 'block', 2000);
+            document.querySelectorAll('.close-btn').forEach(btn => {
+                btn.onclick = () => {
+                    btn.parentElement.style.display = 'none';
+                };
             });
         });
     </script>
