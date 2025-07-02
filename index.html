@@ -117,11 +117,21 @@
         document.addEventListener('DOMContentLoaded', function() {
             const promoSwiper = new Swiper('.promo-swiper', {
                 slidesPerView: 1,
-                pagination: { el: '.swiper-pagination', clickable: true }
+                pagination: { el: '.swiper-pagination', clickable: true },
+                spaceBetween: 10,
+                breakpoints: {
+                    640: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
             });
             const testiSwiper = new Swiper('.testi-swiper', {
                 slidesPerView: 1,
-                pagination: { el: '.swiper-pagination', clickable: true }
+                pagination: { el: '.swiper-pagination', clickable: true },
+                spaceBetween: 10,
+                breakpoints: {
+                    640: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
             });
         });
     </script>
