@@ -1,135 +1,74 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Book Test – Healthify</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="styles/style.css"/>
-  <script defer src="scripts/tests-data.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthify - Book Test</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="/book">Book Test</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
 
-  <!-- 🔝 Sticky Header -->
-  <header class="header">
-    <a href="index.html"><img src="assets/logo.png" class="logo" alt="Logo" /></a>
-    <h2>📋 Book Your Test</h2>
-  </header>
+    <header>
+        <h1>Healthify - Book Your Test</h1>
+    </header>
 
-  <!-- 🛒 Cart Data + Patient Info -->
-  <main style="padding: 20px">
-    <h3>🧪 Selected Tests/Profiles</h3>
-    <div id="cartItems"></div>
+    <section class="hero-banner">
+        <h2>Book Your Health Test Today</h2>
+        <!-- Hero banner content (images from assets can be added here) -->
+    </section>
 
-    <form id="bookingForm">
-      <h3>👤 Patient Details</h3>
-      <label>Name: <input type="text" name="name" required /></label><br/>
-      <label>Mobile: <input type="tel" name="mobile" required /></label><br/>
-      <label>Email: <input type="email" name="email" required /></label><br/>
-      <label>Age: <input type="number" name="age" required /></label><br/>
-      <label>Sex:
-        <select name="sex" required>
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
-        </select>
-      </label><br/>
-      <label>Address: <textarea name="address" required></textarea></label><br/>
-      <label>Pincode: <input type="text" name="pincode" required /></label><br/>
-      <label>Landmark: <input type="text" name="landmark" /></label><br/>
-      <label>Preferred Date: <input type="date" name="date" required /></label><br/>
-      <label>Preferred Time: <input type="time" name="time" required /></label><br/>
+    <section class="cards">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><div class="card"><img src="assets/Full Body Health Checkup.jpg" alt="Full Body Checkup"></div></div>
+                <div class="swiper-slide"><div class="card"><img src="assets/DIABETES SIMPTOMS.jpg" alt="Diabetes Symptoms"></div></div>
+                <div class="swiper-slide"><div class="card"><img src="assets/whatsapp.jpg" alt="Contact Us"></div></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
 
-      <label for="tests">Select Tests:</label>
-      <select id="tests" name="tests" multiple required>
-        <!-- Test options will be dynamically populated here -->
-      </select><br/><br/>
+    <section class="book-test">
+        <h2>Book Test</h2>
+        <form id="bookTestForm">
+            <label for="tests">Select Tests:</label>
+            <select id="tests" name="tests" multiple>
+                <option value="cbc">Complete Blood Count (CBC)</option>
+                <option value="lipid">Lipid Profile</option>
+                <option value="glucose">Blood Glucose</option>
+                <option value="thyroid">Thyroid Function Test</option>
+                <option value="liver">Liver Function Test</option>
+                <option value="kidney">Kidney Function Test</option>
+                <option value="vitamin-d">Vitamin D</option>
+                <option value="hba1c">Hemoglobin A1c</option>
+            </select>
+            <label for="profiles">Select Profiles:</label>
+            <select id="profiles" name="profiles" multiple>
+                <option value="full-body">Full Body Checkup</option>
+                <option value="diabetes">Diabetes Profile</option>
+                <option value="cardiac">Cardiac Profile</option>
+                <option value="senior">Senior Citizen Profile</option>
+                <option value="womens-health">Women’s Health Profile</option>
+            </select>
+            <button type="submit">Book Now</button>
+        </form>
+    </section>
 
-      <label for="profiles">Select Profiles:</label>
-      <select id="profiles" name="profiles" multiple required>
-        <!-- Profile options will be dynamically populated here -->
-      </select><br/><br/>
+    <footer>
+        <p>Healthify</p>
+    </footer>
 
-      <button type="submit">✅ Confirm Booking</button>
-    </form>
-  </main>
-
-  <script>
-    // Load cart data (from localStorage)
-    const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    const cartItems = document.getElementById("cartItems");
-
-    if (cart.length === 0) {
-      cartItems.innerHTML = "<p>Your cart is empty. Please go to Home to select tests.</p>";
-    } else {
-      let cartHTML = "<ul>";
-      cart.forEach(item => {
-        cartHTML += `<li>${item.TestName} – ₹${item.offerPrice}</li>`;
-      });
-      cartHTML += "</ul>";
-      cartItems.innerHTML = cartHTML;
-    }
-
-    // Populate test and profile dropdowns
-    const testData = [
-      { TestName: "Full Body Checkup", offerPrice: 7999 },
-      { TestName: "Diabetes Test", offerPrice: 999 },
-      { TestName: "Heart Health Profile", offerPrice: 1999 },
-      { TestName: "Thyroid Profile", offerPrice: 1199 },
-      // Add more test data here
-    ];
-
-    const profileData = [
-      { TestName: "Heart Health Profile", offerPrice: 1999 },
-      { TestName: "Thyroid Profile", offerPrice: 1199 },
-      { TestName: "Liver Function Profile", offerPrice: 2499 },
-      // Add more profile data here
-    ];
-
-    const testSelect = document.getElementById("tests");
-    const profileSelect = document.getElementById("profiles");
-
-    testData.forEach(test => {
-      const option = document.createElement("option");
-      option.value = test.TestName;
-      option.textContent = `${test.TestName} – ₹${test.offerPrice}`;
-      testSelect.appendChild(option);
-    });
-
-    profileData.forEach(profile => {
-      const option = document.createElement("option");
-      option.value = profile.TestName;
-      option.textContent = `${profile.TestName} – ₹${profile.offerPrice}`;
-      profileSelect.appendChild(option);
-    });
-
-    // Handle form submission
-    document.getElementById("bookingForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      const form = e.target;
-      const bookingData = {
-        name: form.name.value,
-        mobile: form.mobile.value,
-        email: form.email.value,
-        age: form.age.value,
-        sex: form.sex.value,
-        address: form.address.value,
-        pincode: form.pincode.value,
-        landmark: form.landmark.value,
-        date: form.date.value,
-        time: form.time.value,
-        tests: Array.from(form.tests.selectedOptions).map(option => option.value),
-        profiles: Array.from(form.profiles.selectedOptions).map(option => option.value)
-      };
-
-      // Store booking data
-      localStorage.setItem("lastBooking", JSON.stringify(bookingData));
-
-      // Redirect to booking confirmation page
-      window.location.href = "my-bookings.html";
-    });
-  </script>
-
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+    <script src="scripts/fetch-tests.js"></script>
 </body>
 </html>
