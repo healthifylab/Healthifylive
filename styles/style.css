@@ -37,8 +37,8 @@ nav ul li a {
 header.hero-banner {
     text-align: center;
     padding: 20px;
-    background: #00C4B4; /* Teal for hero */
-    color: #FFFFFF;
+    background: transparent; /* Teal for hero */
+    color: #Ffffff;
     width: 100%;
     margin: 0 auto;
 }
@@ -129,7 +129,7 @@ details[open] summary {
 }
 
 .testimonial-card img {
-    width: 100px;
+    width: 70%;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
@@ -191,7 +191,7 @@ footer .social-media a:hover {
     font-size: 18px;
 }
 
-.popup .close-btn {
+.popup .close-btn <x> {
     position: absolute;
     top: 5px;
     right: 10px;
