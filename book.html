@@ -1,118 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Healthify Lab - Book Test</title>
-  <link rel="stylesheet" href="styles/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
+  <header>
+    <div class="logo">
+      <img src="assets/logo-healthify.png" alt="Healthify Logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="book.html">Book Test</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<header>
-<div id="recaptcha-container"></div>
-  <div class="logo">
-    <img src="assets/logo-healthify.png" alt="Healthify Logo">
-  </div>
-  <nav>
-    <ul>
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="book.html">Book Test</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-    </ul>
-  </nav>
-</header>
+  <main style="padding: 20px;">
+    <h2 class="section-title">Book a Test</h2>
 
-<main style="padding: 20px;">
-  <h2 class="section-title">Book a Test</h2>
-  <div class="select-box">
-    <i class="fa fa-flask"></i>
-    <select id="test-select">
-      <option value="">🔍 Select a Test...</option>
-      <option value="thyroid">Thyroid Profile</option>
-      <option value="cardiac">Cardiac Profile</option>
-      <option value="iron">Iron Profile</option>
-    </select>
-  </div>
-
-  <div class="select-box">
-    <i class="fa fa-heartbeat"></i>
-    <select id="profile-select">
-      <option value="">👥 Select a Profile...</option>
-      <option value="fullbody">Full Body Checkup</option>
-      <option value="diabetes">Diabetes Check</option>
-      <option value="liver">Liver Profile</option>
-    </select>
-  </div>
-<div id="recaptcha-container"></div>
-  
-  <div style="text-align:center; margin-top:20px;">
-    <button id="add-btn" style="padding:12px 20px; font-size:16px; background:#00a884; color:white; border:none; border-radius:6px; cursor:pointer;">
-      Add to Cart 😊
-    </button>
-  </div>
-
-  <div id="cart" style="max-width:400px; margin:30px auto;">
-    <h3>Your Cart</h3>
-    <ul id="cart-items" style="list-style:none; padding:0;"></ul>
-  </div>
-
-  <section id="callback" style="text-align: center; margin-top: 40px;">
-    <h2>Request a Call Back</h2>
-    <form id="callbackForm">
-      <input type="tel" id="phoneNumber" placeholder="Enter your phone number" required style="padding: 10px; width: 250px; border-radius: 6px; border: 1px solid #ccc;">
-      <button type="submit" style="padding: 10px 20px; background-color: #00a884; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
-        Submit
+    <!-- OTP Login -->
+    <section style="text-align:center; margin-top: 30px;">
+      <h2>Login with OTP</h2>
+      <input type="tel" id="phoneInput" placeholder="Enter +91XXXXXXXXXX" style="padding:10px; width:260px; border-radius:6px; border:1px solid #ccc;">
+      <button id="otpLoginBtn" style="padding:10px 20px; background-color:#007bff; color:white; border:none; border-radius:6px; margin-left:10px;">
+        Send OTP 🔐
       </button>
-    </form>
-    <p id="callbackMessage" style="color: green; margin-top: 10px;"></p>
-  </section>
-</main>
+    </section>
 
-<a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
-  <img src="assets/whatsapp-icon.png" alt="WhatsApp" style="height: 60px; width: 60px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); position: fixed; bottom: 20px; right: 20px; z-index: 999;">
-</a>
+    <div id="recaptcha-container"></div>
 
-<footer>…</footer>
+    <!-- Select Test/Profile -->
+    <div class="select-box">
+      <i class="fa fa-flask"></i>
+      <select id="test-select">
+        <option value="">🔍 Select a Test...</option>
+        <option value="thyroid">Thyroid Profile</option>
+        <option value="cardiac">Cardiac Profile</option>
+        <option value="iron">Iron Profile</option>
+      </select>
+    </div>
 
-<script>
-const cartItems = [];
-const testSelect = document.getElementById('test-select');
-const profileSelect = document.getElementById('profile-select');
-const addBtn = document.getElementById('add-btn');
-const cartList = document.getElementById('cart-items');
+    <div class="select-box">
+      <i class="fa fa-heartbeat"></i>
+      <select id="profile-select">
+        <option value="">👥 Select a Profile...</option>
+        <option value="fullbody">Full Body Checkup</option>
+        <option value="diabetes">Diabetes Check</option>
+        <option value="liver">Liver Profile</option>
+      </select>
+    </div>
 
-addBtn.onclick = () => {
-  const test = testSelect.value;
-  const prof = profileSelect.value;
-  if (!test && !prof) {
-    alert('Please select a test or profile');
-    return;
-  }
-  const item = test ? testSelect.options[testSelect.selectedIndex].text : profileSelect.options[profileSelect.selectedIndex].text;
-  cartItems.push(item);
-  const li = document.createElement('li');
-  li.textContent = `✔️ ${item}`;
-  cartList.appendChild(li);
-  testSelect.value = '';
-  profileSelect.value = '';
-};
+    <div style="text-align:center; margin-top:20px;">
+      <button id="add-btn" style="padding:12px 20px; font-size:16px; background:#00a884; color:white; border:none; border-radius:6px; cursor:pointer;">
+        Add to Cart 😊
+      </button>
+    </div>
 
-document.getElementById('callbackForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const number = document.getElementById('phoneNumber').value.trim();
-  const message = document.getElementById('callbackMessage');
+    <div id="cart" style="max-width:400px; margin:30px auto;">
+      <h3>Your Cart</h3>
+      <ul id="cart-items" style="list-style:none; padding:0;"></ul>
+    </div>
 
-  if (!number || number.length < 10) {
-    message.style.color = 'red';
-    message.textContent = 'Please enter a valid phone number 📱';
-  } else {
-    message.style.color = 'green';
-    message.textContent = '✅ Thank you! We will call you shortly.';
-    document.getElementById('phoneNumber').value = '';
-  }
-});
-</script>
+    <!-- Callback Form -->
+    <section id="callback" style="text-align: center; margin-top: 40px;">
+      <h2>Request a Call Back</h2>
+      <form id="callbackForm">
+        <input type="tel" id="phoneNumber" placeholder="Enter your phone number" required style="padding: 10px; width: 250px; border-radius: 6px; border: 1px solid #ccc;">
+        <button type="submit" style="padding: 10px 20px; background-color: #00a884; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
+          Submit
+        </button>
+      </form>
+      <p id="callbackMessage" style="color: green; margin-top: 10px;"></p>
+    </section>
+  </main>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
+    <img src="assets/whatsapp-icon.png" alt="WhatsApp" style="height: 60px; width: 60px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+  </a>
+
+  <footer>…</footer>
+
+  <!-- Cart & Callback Script -->
+  <script>
+    const cartItems = [];
+    const testSelect = document.getElementById('test-select');
+    const profileSelect = document.getElementById('profile-select');
+    const addBtn = document.getElementById('add-btn');
+    const cartList = document.getElementById('cart-items');
+
+    addBtn.onclick = () => {
+      const test = testSelect.value;
+      const prof = profileSelect.value;
+      if (!test && !prof) {
+        alert('Please select a test or profile');
+        return;
+      }
+      const item = test ? testSelect.options[testSelect.selectedIndex].text : profileSelect.options[profileSelect.selectedIndex].text;
+      cartItems.push(item);
+      const li = document.createElement('li');
+      li.textContent = `✔️ ${item}`;
+      cartList.appendChild(li);
+      testSelect.value = '';
+      profileSelect.value = '';
+    };
+
+    document.getElementById('callbackForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const number = document.getElementById('phoneNumber').value.trim();
+      const message = document.getElementById('callbackMessage');
+
+      if (!number || number.length < 10) {
+        message.style.color = 'red';
+        message.textContent = 'Please enter a valid phone number 📱';
+      } else {
+        message.style.color = 'green';
+        message.textContent = '✅ Thank you! We will call you shortly.';
+        document.getElementById('phoneNumber').value = '';
+      }
+    });
+  </script>
+
+  <!-- Firebase OTP Script -->
+  <script type="module">
+    import { startOTPLogin } from './scripts/firebase-auth.js';
+    window.startOTPLogin = startOTPLogin;
+    document.getElementById('otpLoginBtn').addEventListener('click', startOTPLogin);
+  </script>
 </body>
 </html>
