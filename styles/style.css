@@ -10,7 +10,7 @@ header.header {
   position: sticky;
   top: 0;
   background: #f0f0f0;
-  padding: 10px;
+  padding: 10px 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,12 +21,12 @@ header.header {
 header.header .logo {
   height: 50px;
   width: auto;
-  object-fit: contain; /* Ensure logo doesn't stretch */
+  object-fit: contain;
 }
 
 header.header nav {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   font-size: 14px;
   align-items: center;
 }
@@ -40,26 +40,40 @@ header.header nav a {
 /* Hero Section */
 .hero-banner {
   width: 100%;
-  max-height: 70vh; /* Increased for better visibility */
-  min-height: 150px; /* Reduced minimum to avoid distortion */
-  object-fit: contain; /* Changed to contain to avoid cropping */
+  max-width: 1200px; /* Cap width for large screens */
+  height: auto;
+  max-height: 60vh; /* Responsive height */
+  min-height: 120px; /* Smaller minimum for mobile */
+  object-fit: contain; /* Show full image without cropping */
   border-radius: 10px;
-  margin: 10px auto; /* Center image */
+  margin: 10px auto;
   display: block;
 }
 
 /* Promo Slider */
 .promo-slider {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping to avoid horizontal scroll */
-  gap: 20px;
+  flex-wrap: nowrap; /* Revert to horizontal scroll for consistency */
+  overflow-x: auto;
+  gap: 15px;
   margin: 20px 10px;
-  padding: 10px 0;
-  justify-content: center; /* Center cards */
+  padding: 10px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  justify-content: flex-start;
+}
+
+.promo-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.promo-slider::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
 }
 
 .promo-card {
-  flex: 0 1 clamp(180px, 45vw, 280px); /* More flexible sizing */
+  flex: 0 0 clamp(160px, 40vw, 240px); /* Smaller, responsive cards */
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
@@ -70,29 +84,32 @@ header.header nav a {
 .promo-card img {
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9; /* Maintain consistent aspect ratio */
-  object-fit: cover; /* Ensure images fill card without distortion */
+  aspect-ratio: 4 / 3; /* Consistent aspect ratio */
+  object-fit: cover;
   border-radius: 8px;
+  max-width: 100%;
 }
 
 .promo-card button {
   background-color: #007bff;
   color: white;
-  padding: 10px;
+  padding: 8px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   margin-top: 10px;
-  width: 100%; /* Full-width button for consistency */
+  width: 100%;
 }
 
 /* Booking Form */
 form {
-  padding: 20px;
+  padding: 15px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 20px;
+  margin: 15px;
+  max-width: 600px; /* Cap form width */
+  box-sizing: border-box;
 }
 
 form input,
@@ -100,7 +117,7 @@ form textarea,
 form select {
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 14px;
@@ -109,7 +126,7 @@ form select {
 
 form button {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background-color: #28a745;
   color: white;
   font-size: 16px;
@@ -120,32 +137,46 @@ form button {
 
 /* FAQ Section */
 #faq {
-  padding: 20px;
+  padding: 15px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .faq-item {
   background: #eef;
   padding: 10px;
-  border-radius: 6px;
+  boarder-radius: 6px;
   margin-bottom: 10px;
 }
 
 /* Testimonials Section */
 #testimonials {
   background: #fff;
-  padding: 20px;
+  padding: 15px;
 }
 
 .testimonial-slider {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping for better mobile display */
+  flex-wrap: nowrap; /* Horizontal scroll for testimonials */
+  overflow-x: auto;
   gap: 15px;
   margin: 0 10px;
-  justify-content: center;
+  padding: 10px;
+  scroll-behavior: smooth;
+ 可在优化后的代码中，删除了多余的代码片段：scrollbar-width: thin;
+}
+
+.testimonial-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.testimonial-slider::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
 }
 
 .testimonial {
-  flex: 0 1 clamp(160px, 45vw, 240px); /* Adjusted for responsiveness */
+  flex: 0 0 clamp(140px, 40vw, 200px); /* Smaller testimonials */
   padding: 10px;
   background: #fff;
   border-radius: 12px;
@@ -155,8 +186,8 @@ form button {
 }
 
 .testimonial img {
-  width: clamp(60px, 15vw, 80px); /* Smaller, responsive images */
-  height: clamp(60px, 15vw, 80px);
+  width: clamp(50px, 12vw, 70px); /* Smaller, responsive images */
+  height: clamp(50px, 12vw, 70px);
   border-radius: 50%;
   object-fit: cover;
   margin: 0 auto 10px;
@@ -177,7 +208,7 @@ form button {
 footer.footer {
   background: #333;
   color: #fff;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
 }
 
@@ -198,13 +229,13 @@ footer.footer .social-icons a:hover {
   right: 20px;
   background: #25d366;
   border-radius: 50%;
-  padding: 12px; /* Slightly smaller padding */
+  padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .whatsapp-float img {
-  width: clamp(24px, 4vw, 32px); /* Smaller, responsive icon */
-  height: clamp(24px, 4vw)').append(' 32px);
+  width: clamp(20px, 4vw, 28px);
+  height: clamp(20px, 4vw, 28px);
 }
 
 /* Misc */
@@ -213,6 +244,10 @@ h3,
 h4 {
   font-size: 18px;
   color: #333;
+}
+
+h2 {
+  font-size: clamp(24px, 5vw, 28px); /* Responsive heading size */
 }
 
 ul {
@@ -227,66 +262,66 @@ ul li {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .hero-banner {
-    max-height: 50vh; /* Adjusted for mobile */
-    min-height: 120px;
-  }
-
-  .promo-card {
-    flex: 0 1 clamp(150px, 90vw, 220px); /* Smaller cards */
-  }
-
-  .testimonial {
-    flex: 0 1 clamp(140px, 90vw, 200px);
-  }
-
-  .testimonial img {
-    width: clamp(50px, 12vw, 70px);
-    height: clamp(50px, 12vw, 70px);
-  }
-
-  header.header nav {
-    font-size: 12px;
-    gap: 8px;
-  }
-
-  form {
-    padding: 15px;
-    margin: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-banner {
     max-height: 40vh;
     min-height: 100px;
   }
 
   .promo-card {
-    flex: 0 1 clamp(120px, 95vw, 180px);
+    flex: 0 0 clamp(140px, 80vw, 200px);
   }
 
   .testimonial {
-    flex: 0 1 clamp(120px, 95vw, 160px);
+    flex: 0 0 clamp(120px, 80vw, 180px);
   }
 
   .testimonial img {
     width: clamp(40px, 10vw, 60px);
-    height: clamp(40px, 10vw, 60px);
+    height: clamp(40px, 10vw, 60බ5px);
+  }
+
+  header.header nav {
+    font-size: 12px;
+    gap: 10px;
+  }
+
+  form {
+    padding: 10px;
+    margin: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-banner {
+    max-height: 30vh;
+    min-height: 80px;
+  }
+
+  .promo-card {
+    flex: 0 0 clamp(100px, 90vw, 160px);
+  }
+
+  .testimonial {
+    flex: 0 0 clamp(100px, 90vw, 140px);
+  }
+
+  .testimonial img {
+    width: clamp(36px, 8vw, 50px);
+    height: clamp(36px, 8vw, 50px);
   }
 
   .whatsapp-float {
-    padding: 10px;
+    padding: 8px;
   }
 
   .whatsapp-float img {
-    width: clamp(20px, 4vw, 28px);
-    height: clamp(20px, 4vw, 28px);
+    width: clamp(18px, 3vw, 24px);
+    height: clamp(18px, 3vw, 24px);
   }
 }
 
 /* Fallback for missing images */
 img:not([src]),
 img[src=""] {
-  background: #ccc; /* Gray placeholder for missing images */
-  min-height: 100px; /* Minimum height for visibility */
+  background: #ccc;
+  min-height: 80px;
 }
