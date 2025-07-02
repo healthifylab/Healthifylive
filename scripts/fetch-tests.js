@@ -3,13 +3,13 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import emailjs from "@emailjs/browser";
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     // Initialize EmailJS
     try {
         emailjs.init('dJE_JHAoNTxxzTxiT');
-        console.log('EmailJS initialized with public key: dJE_JHAoNTxxzTxiT');
+        console.log('EmailJS initialized');
     } catch (error) {
-        console.error('EmailJS initialization failed:', error);
+        console.error('EmailJS init failed:', error);
     }
 
     // Initialize Firebase
@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
         measurementId: "G-R0R3RYERZW"
     };
     try {
-        const app = initializeApp(firebaseConfig);
-        console.log('Firebase initialized successfully');
+        initializeApp(firebaseConfig);
+        console.log('Firebase initialized');
     } catch (error) {
-        console.error('Firebase initialization failed:', error);
+        console.error('Firebase init failed:', error);
     }
     const db = getFirestore();
     const auth = getAuth();
@@ -38,56 +38,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Pre-fill form from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
-    const preselectedTests = urlParams.get('tests')?.split(',').map(t => t.trim()) || [];
-    const preselectedProfiles = urlParams.get('profiles')?.split(',').map(p => p.trim()) || [];
-    const profileSelect = document.getElementById('profiles');
-    const testsSelect = document.getElementById('tests');
-    const nameInput = document.getElementById('name');
-    const contactInput = document.getElementById('contact');
-    const ageInput = document.getElementById('age');
-    const sexInput = document.getElementById('sex');
-    const addressInput = document.getElementById('address');
-    const pincodeInput = document.getElementById('pincode');
-    const landmarkInput = document.getElementById('landmark');
-    const dateTimeInput = document.getElementById('dateTime');
-
-    // Pre-fill form fields
-    if (urlParams.has('name')) nameInput.value = urlParams.get('name');
-    if (urlParams.has('contact')) contactInput.value = urlParams.get('contact');
-    if (urlParams.has('age')) ageInput.value = urlParams.get('age');
-    if (urlParams.has('sex')) sexInput.value = urlParams.get('sex');
-    if (urlParams.has('address')) addressInput.value = urlParams.get('address').replace(/\+/g, ' ');
-    if (urlParams.has('pincode')) pincodeInput.value = urlParams.get('pincode');
-    if (urlParams.has('landmark')) landmarkInput.value = urlParams.get('landmark');
-    if (urlParams.has('dateTime')) dateTimeInput.value = decodeURIComponent(urlParams.get('dateTime'));
+    const fields = ['name', 'contact', 'age', 'sex', 'address', 'pincode', 'landmark', 'dateTime'];
+    fields.forEach(field => {
+        const input = document.getElementById(field);
+        if (input && urlParams.has(field)) {
+            input.value = field === 'address' ? urlParams.get(field).replace(/\+/g, ' ') : 
+                          field === 'dateTime' ? decodeURIComponent(urlParams.get(field)) : 
+                          urlParams.get(field);
+        }
+    });
 
     // Preselect tests and profiles
-    if (preselectedTests.length > 0 && testsSelect) {
+    const testsSelect = document.getElementById('tests');
+    const profileSelect = document.getElementById('profiles');
+    const preselectedTests = urlParams.get('tests')?.split(',').map(t => t.trim()) || [];
+    const preselectedProfiles = urlParams.get('profiles')?.split(',').map(p => p.trim()) || [];
+    if (testsSelect && preselectedTests.length) {
         for (let option of testsSelect.options) {
             if (preselectedTests.includes(option.value)) option.selected = true;
         }
     }
-    if (preselectedProfiles.length > 0 && profileSelect) {
+    if (profileSelect && preselectedProfiles.length) {
         for (let option of profileSelect.options) {
             if (preselectedProfiles.includes(option.value)) option.selected = true;
         }
     }
-
-    // Update cart from URL parameters
-    const testsList = JSON.parse(localStorage.getItem('testsList') || '[]');
-    const profilesList = JSON.parse(localStorage.getItem('profilesList') || '[]');
-    const cartItems = [
-        ...preselectedTests.map(testName => {
-            const test = testsList.find(t => t.TestName === testName);
-            return test ? { ...test, TestType: 'Test' } : null;
-        }).filter(Boolean),
-        ...preselectedProfiles.map(profileName => {
-            const profile = profilesList.find(p => p.TestName === profileName);
-            return profile ? { ...profile, TestType: 'Profile' } : null;
-        }).filter(Boolean)
-    ];
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    console.log('Cart updated from URL:', cartItems);
 
     // Booking Form Submission
     const bookTestForm = document.getElementById('bookTestForm');
@@ -100,10 +75,133 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            const tests = document.getElementById('tests').selectedOptions;
-            const profiles = document.getElementById('profiles').selectedOptions;
+            const tests = testsSelect?.selectedOptions || [];
+            const profiles = profileSelect?.selectedOptions || [];
             const name = document.getElementById('name').value;
             const contact = document.getElementById('contact').value;
             const age = document.getElementById('age').value;
             const sex = document.getElementById('sex').value;
-            const address = document.getElement
+            const address = document.getElementById('address').value;
+            const pincode = document.getElementById('pincode').value;
+            const landmark = document.getElementById('landmark').value;
+            const dateTime = document.getElementById('dateTime').value;
+
+            if (tests.length === 0 && profiles.length === 0) {
+                alert('Select at least one test or profile');
+                return;
+            }
+            if (!name || !contact || !age || !sex || !address || !pincode || !landmark || !dateTime) {
+                alert('Fill all required fields');
+                return;
+            }
+            if (!/^\d{6}$/.test(pincode)) {
+                alert('Pincode must be 6 digits');
+                return;
+            }
+            if (!/^\d{10}$/.test(contact) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)) {
+                alert('Contact must be a 10-digit number or valid email');
+                return;
+            }
+
+            const bookingData = {
+                tests: Array.from(tests).map(opt => ({
+                    TestName: opt.value,
+                    offerPrice: parseInt(opt.dataset.offer || 0),
+                    MRP: parseInt(opt.dataset.mrp || 0),
+                    TAT: opt.dataset.tat || '',
+                    Description: opt.dataset.desc || ''
+                })),
+                profiles: Array.from(profiles).map(opt => ({
+                    TestName: opt.value,
+                    offerPrice: parseInt(opt.dataset.offer || 0),
+                    MRP: parseInt(opt.dataset.mrp || 0),
+                    TAT: opt.dataset.tat || '',
+                    Description: opt.dataset.desc || ''
+                })),
+                name,
+                email: contact.includes('@') ? contact : '',
+                mobile: contact.includes('@') ? '' : contact,
+                age,
+                sex,
+                address,
+                pincode,
+                landmark,
+                date: dateTime.split('T')[0],
+                time: dateTime.split('T')[1],
+                status: 'pending',
+                totalTests: tests.length + profiles.length,
+                totalPrice: (Array.from(tests).reduce((sum, opt) => sum + parseInt(opt.dataset.offer || 0), 0) + 
+                            Array.from(profiles).reduce((sum, opt) => sum + parseInt(opt.dataset.offer || 0), 0)).toString()
+            };
+
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+            try {
+                console.log('Submitting booking:', bookingData);
+
+                // Save to Firebase
+                const docRef = await addDoc(collection(db, 'bookings'), bookingData);
+                const bookingId = docRef.id;
+                console.log('Booking saved to Firebase, ID:', bookingId);
+
+                // Save to localStorage
+                localStorage.setItem('lastBooking', JSON.stringify({ ...bookingData, bookingId }));
+                console.log('Booking saved to localStorage');
+
+                // Send EmailJS Admin Email
+                const adminEmailResponse = await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                    to_email: 'report@healthifylab.com',
+                    message: `New Booking:\nID: ${bookingId}\nName: ${name}\nContact: ${contact}\nAge: ${age}\nSex: ${sex}\nAddress: ${address}\nPincode: ${pincode}\nLandmark: ${landmark}\nDateTime: ${dateTime}\nTests: ${JSON.stringify(bookingData.tests)}\nProfiles: ${JSON.stringify(bookingData.profiles)}\nTotal Tests: ${bookingData.totalTests}\nTotal Price: ₹${bookingData.totalPrice}`
+                });
+                console.log('Admin email sent, Event ID:', adminEmailResponse.eventId || 'N/A');
+
+                // Send EmailJS User Confirmation
+                const userEmailResponse = await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                    to_email: bookingData.email || 'report@healthifylab.com',
+                    to_mobile: bookingData.mobile,
+                    message: `Booking Confirmed! ID: ${bookingId}\nName: ${name}\nDate & Time: ${dateTime}\nTotal: ₹${bookingData.totalPrice}`
+                });
+                console.log('User confirmation sent, Event ID:', userEmailResponse.eventId || 'N/A');
+
+                // Show Success Message
+                if (successMessage) {
+                    successMessage.style.display = 'block';
+                    successMessage.textContent = `✅ Booking confirmed! ID: ${bookingId}`;
+                    if (errorMessage) errorMessage.style.display = 'none';
+                    console.log('Success message displayed');
+                } else {
+                    console.error('Success message element not found');
+                    alert(`Booking confirmed! ID: ${bookingId}`);
+                }
+                bookTestForm.reset();
+                if (document.getElementById('totalTests')) document.getElementById('totalTests').textContent = '0';
+                if (document.getElementById('totalPrice')) document.getElementById('totalPrice').textContent = '0';
+                localStorage.removeItem('cartItems');
+                console.log('Form reset and cart cleared');
+
+                // Redirect after 7 seconds
+                setTimeout(() => {
+                    if (successMessage) successMessage.style.display = 'none';
+                    alert(`Booking confirmed! ID: ${bookingId}. Redirecting...`);
+                    window.location.href = 'my-bookings.html';
+                }, 7000);
+            } catch (error) {
+                console.error('Booking error:', error);
+                let errorText = 'Booking failed. Please try again.';
+                if (error.message.includes('Firebase')) errorText = `Booking failed: Firebase error (${error.code || error.message})`;
+                else if (error.status === 400 || error.message.includes('EmailJS')) errorText = 'Booking failed: EmailJS error. Check service/template ID.';
+                else if (error.code) errorText = `Booking failed: ${error.code}`;
+                if (errorMessage) {
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = `❌ ${errorText}`;
+                    if (successMessage) successMessage.style.display = 'none';
+                    console.log('Error message displayed:', errorText);
+                    setTimeout(() => errorMessage.style.display = 'none', 7000);
+                } else {
+                    console.error('Error message element not found');
+                    alert(errorText);
+                }
+            }
+        };
+    }
+});
