@@ -34,36 +34,51 @@ header.hero-banner {
     text-align: center;
     padding: 20px;
     background: #e9ecef;
+    width: 100%;
+    margin: 0 auto;
 }
 
 header.hero-banner img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
 }
 
-.promotional-cards .swiper-container.promo-swiper {
+.featured-profiles .swiper-container.feat-swiper, .promotional-cards .swiper-container.promo-swiper, .testimonials .swiper-container.testi-swiper {
     width: 100%;
-    height: 300px;
     margin: 20px 0;
 }
 
-.promotional-cards .swiper-slide {
+.featured-profiles .swiper-slide, .promotional-cards .swiper-slide, .testimonials .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .card {
-    width: 90%;
+    width: 70%; /* Decreased from 90% */
     background: white;
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
+    margin: 0 auto;
 }
 
 .card img {
     max-width: 100%;
     height: auto;
+}
+
+.book-now {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.book-now:hover {
+    background: #0056b3;
 }
 
 .swiper-pagination-bullet {
@@ -94,18 +109,13 @@ details[open] summary {
     margin-bottom: 10px;
 }
 
-.testimonials .swiper-container.testi-swiper {
-    width: 100%;
-    height: 300px;
-    margin: 20px 0;
-}
-
 .testimonial-card {
-    width: 90%;
+    width: 70%; /* Decreased from 90% */
     background: white;
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
+    margin: 0 auto;
 }
 
 .testimonial-card img {
