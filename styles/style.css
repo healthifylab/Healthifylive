@@ -2,13 +2,15 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background: #FFFFFF;
 }
 
 nav {
     display: flex;
     align-items: center;
     padding: 10px;
-    background: #f4f4f4;
+    background: #00C4B4;
+    color: #FFFFFF;
 }
 
 .logo {
@@ -27,13 +29,14 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #333;
+    color: #FFFFFF;
 }
 
 header.hero-banner {
     text-align: center;
     padding: 20px;
-    background: #e9ecef;
+    background: #00C4B4;
+    color: #FFFFFF;
     width: 100%;
     margin: 0 auto;
 }
@@ -55,12 +58,13 @@ header.hero-banner img {
 }
 
 .card {
-    width: 70%; /* Decreased from 90% */
-    background: white;
+    width: 70%;
+    background: #F5F5F5;
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
     margin: 0 auto;
+    border-radius: 8px;
 }
 
 .card img {
@@ -70,24 +74,26 @@ header.hero-banner img {
 
 .book-now {
     padding: 10px 20px;
-    background: #007bff;
-    color: white;
+    background: #00C4B4;
+    color: #FFFFFF;
     border: none;
     cursor: pointer;
     margin-top: 10px;
+    border-radius: 5px;
 }
 
 .book-now:hover {
-    background: #0056b3;
+    background: #009687;
 }
 
 .swiper-pagination-bullet {
-    background: black;
+    background: #00C4B4;
 }
 
-.why-choose, .faq, .testimonials {
+.why-choose, .faq, .testimonials, .about {
     padding: 20px;
     text-align: center;
+    background: #FFFFFF;
 }
 
 .why-choose ul {
@@ -110,12 +116,13 @@ details[open] summary {
 }
 
 .testimonial-card {
-    width: 70%; /* Decreased from 90% */
-    background: white;
+    width: 70%;
+    background: #F5F5F5;
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
     margin: 0 auto;
+    border-radius: 8px;
 }
 
 .testimonial-card img {
@@ -135,14 +142,18 @@ details[open] summary {
     font-weight: bold;
 }
 
+.about p {
+    max-width: 800px;
+    margin: 10px auto;
+    line-height: 1.6;
+}
+
 footer {
     text-align: center;
     padding: 10px;
-    background: #f4f4f4;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    background: #F5F5F5;
     border-top: 1px solid #ccc;
+    width: 100%;
 }
 
 footer .social-media {
@@ -157,7 +168,7 @@ footer .social-media a {
 }
 
 footer .social-media a:hover {
-    color: #007bff;
+    color: #00C4B4;
 }
 
 .popup {
