@@ -5,189 +5,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Healthify Lab</title>
   <link rel="stylesheet" href="styles/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
-  <!-- Header with logo and navigation -->
-  <header>
-    <div class="logo">
-      <img src="assets/logo-healthify.png" alt="Healthify Logo">
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="book.html">Book Test</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <img src="assets/hero-banner.jpg" alt="Hero Banner">
-  </section>
-
-  <!-- Welcome Text -->
-  <section>
-    <h2 class="section-title">Welcome to Healthify</h2>
-    <p style="text-align:center;">Book your home health tests today!</p>
-  </section>
-
-  <!-- Call Back -->
-  <section>
-    <h3 class="section-title">Request a Call Back</h3>
-    <div style="text-align: center; margin-bottom: 20px;">
-      <input type="text" placeholder="Enter your phone number">
-      <button>Submit</button>
-    </div>
-  </section>
-
-  <!-- Featured Profiles -->
-  <section>
-    <h3 class="section-title">Featured Profiles</h3>
-    <div class="card-container">
-      <div class="card">
-        <img src="assets/thyroid.jpg" alt="Thyroid Profile">
-        <h4>Thyroid Profile</h4>
-        <p><button>Book Now</button></p>
-      </div>
-      <div class="card">
-        <img src="assets/cardiac.jpg" alt="Cardiac Profile">
-        <h4>Cardiac Profile</h4>
-        <p><button>Book Now</button></p>
-      </div>
-      <div class="card">
-        <img src="assets/iron.jpg" alt="Iron Profile">
-        <h4>Iron Profile</h4>
-        <p><button>Book Now</button></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Promotional Profiles -->
-  <section>
-    <h3 class="section-title">Promotional Profiles</h3>
-    <div class="card-container">
-      <div class="card">
-        <img src="assets/promo1.jpg" alt="Health Checkup">
-      </div>
-      <div class="card">
-        <img src="assets/promo2.jpg" alt="Diabetes Symptoms">
-      </div>
-      <div class="card">
-        <img src="assets/promo3.jpg" alt="Liver Profile">
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Choose -->
-  <section>
-    <h3 class="section-title">Why Choose Healthify?</h3>
-    <ul style="max-width: 600px; margin: 0 auto 30px; padding: 0 20px;">
-      <li>🔬 Healthify Lab - Your trusted partner in preventive healthcare.</li>
-      <li>💉 Hassle-free sample collection at home</li>
-      <li>🧪 Advanced diagnostics & accurate reports</li>
-      <li>🚚 Fast turnaround | 📍 Convenient location</li>
-      <li>✅ 💙 Happy Customers</li>
-      <li>📞 Book your test today — because your health deserves the best.</li>
+<header>
+  <div class="logo">
+    <img src="assets/logo-healthify.png" alt="Healthify Logo" />
+  </div>
+  <nav>
+    <ul>
+      <li><a class="active" href="index.html">Home</a></li>
+      <li><a href="book.html">Book Test</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
     </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <img src="assets/banner-1.jpg" alt="Healthify Lab Banner" style="width:100%; border-radius:12px;" />
   </section>
 
-  <!-- Testimonials -->
   <section>
-    <h3 class="section-title">Testimonials</h3>
-    <div class="testimonial-container">
-      <div class="testimonial">
-        <img src="assets/user1.jpg" alt="Rajesh Sharma">
-        <p>"Excellent home service! Highly recommend."</p>
-        <strong>Rajesh Sharma</strong>
+    <h1 class="section-title">Welcome to Healthify</h1>
+    <p style="text-align:center;">Book your home health tests today! 🧪</p>
+  </section>
+
+  <section id="callback" style="text-align: center;">
+    <h2>Request a Call Back</h2>
+    <form id="callbackForm">
+      <input type="tel" id="phoneNumber" placeholder="Enter your phone number" required />
+      <button type="submit">Submit</button>
+    </form>
+    <p id="callbackMessage"></p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Featured Profiles</h2>
+    <div class="profile-grid">
+      <div class="card">
+        <img src="assets/thyroid.jpg" alt="Thyroid Profile" />
+        <p><strong>Thyroid Profile</strong></p>
       </div>
-      <div class="testimonial">
-        <img src="assets/user2.jpg" alt="Priya Desai">
-        <p>"Fast and reliable results, very satisfied."</p>
-        <strong>Priya Desai</strong>
-      </div>
-      <div class="testimonial">
-        <img src="assets/user3.jpg" alt="Anil Patel">
-        <p>"Great experience with accurate reports."</p>
-        <strong>Anil Patel</strong>
+      <div class="card">
+        <img src="assets/cardiac.jpg" alt="Cardiac Profile" />
+        <p><strong>Cardiac Profile</strong></p>
       </div>
     </div>
   </section>
+</main>
 
-  <!-- Footer -->
-  <footer style="text-align:center; padding: 20px; background:#f1f1f1;">
-    <p>Healthify © 2025 | Contact: +91 9503832889 | Email: report@healthifylab.com</p>
-    <p><!DOCTYPE html>
-<html>
-<head>
-  <style>
-    .footer-icons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      background: #f8f9fa; /* Light background, adjust to match your theme */
-    }
-    .footer-icons a {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-    }
-    .footer-icons svg {
-      fill: #000; /* Black icons, adjust to your brand color (e.g., Healthify’s blue) */
-      width: 100%;
-      height: 100%;
-      transition: fill 0.3s;
-    }
-    .footer-icons svg:hover {
-      fill: #007bff; /* Hover effect, matches Healthify’s potential blue theme */
-    }
-    @media (max-width: 600px) {
-      .footer-icons {
-        gap: 15px;
-        padding: 15px;
-      }
-      .footer-icons a {
-        width: 28px;
-        height: 28px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <footer>
-    <div class="footer-icons">
-      <!-- X Icon -->
-      <a href="https://x.com/healthify_lab" target="_blank" aria-label="Follow Healthify on X">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 4 L20 20 M20 4 L4 20" stroke="#000" stroke-width="2"/>
-        </svg>
-      </a>
-      <!-- Instagram Icon -->
-      <a href="https://instagram.com/healthifylab" target="_blank" aria-label="Follow Healthify on Instagram">
-        <svg viewBox="0 0 24 24">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="#000" stroke-width="2"/>
-          <circle cx="12" cy="12" r="5" fill="none" stroke="#000" stroke-width="2"/>
-          <circle cx="17" cy="7" r="1" fill="#000"/>
-        </svg>
-      </a>
-      <!-- Facebook Icon -->
-      <a href="https://facebook.com/healthify" target="_blank" aria-label="Follow Healthify on Facebook">
-        <svg viewBox="0 0 24 24">
-          <path d="M15 4h-3c-2.2 0-4 1.8-4 4v3H6v4h2v5h4v-5h3l1-4h-4V8c0-.6.4-1 1-1h3V4z" fill="#000"/>
-        </svg>
-      </a>
-    </div>
-  </footer>
-</body>
-</html>
-    </p>
-  </footer>
-
-</body>
-</html>
 <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
   <img src="assets/whatsapp-icon.png" alt="WhatsApp" />
 </a>
+
+<footer>
+  <p>&copy; 2025 Healthify | Contact: +91 9503832889 | Email: report@healthifylab.com</p>
+</footer>
+
+<script>
+document.getElementById('callbackForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const number = document.getElementById('phoneNumber').value.trim();
+  const message = document.getElementById('callbackMessage');
+
+  if (!number || number.length < 10) {
+    message.style.color = 'red';
+    message.textContent = '📱 Please enter a valid phone number';
+  } else {
+    message.style.color = 'green';
+    message.textContent = '✅ Thank you! We will call you shortly.';
+    document.getElementById('phoneNumber').value = '';
+  }
+});
+</script>
+
+</body>
+</html>
