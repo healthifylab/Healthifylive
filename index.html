@@ -21,7 +21,7 @@
     <header class="hero-banner">
         <h1>Welcome to Healthify</h1>
         <p>Book your home health tests today!</p>
-        <img src="assets/hero-health-checkup.jpg" alt="Health Checkup">
+        <img src="assets/hero-health-checkup.jpg" alt="Health Checkup" style="width: 100%; height: auto;">
     </header>
 
     <div id="callBackPopup" class="popup">
@@ -32,6 +32,36 @@
             <button type="submit">Submit</button>
         </form>
     </div>
+
+    <section class="featured-profiles">
+        <h2>Featured Profiles</h2>
+        <div class="swiper-container feat-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/thyroid-profile.jpg" alt="Thyroid Profile">
+                        <h4>Thyroid Profile</h4>
+                        <button onclick="window.location.href='book.html?profile=thyroid'" class="book-now">Book Now</button>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/cardiac-profile.jpg" alt="Cardiac Profile">
+                        <h4>Cardiac Profile</h4>
+                        <button onclick="window.location.href='book.html?profile=cardiac'" class="book-now">Book Now</button>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/iron-profile.jpg" alt="Iron Profile">
+                        <h4>Iron Profile</h4>
+                        <button onclick="window.location.href='book.html?profile=iron'" class="book-now">Book Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
 
     <section class="promotional-cards">
         <h2>Promotional Profiles</h2>
@@ -117,21 +147,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             const promoSwiper = new Swiper('.promo-swiper', {
                 slidesPerView: 1,
-                pagination: { el: '.swiper-pagination', clickable: true },
-                spaceBetween: 10,
-                breakpoints: {
-                    640: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 }
-                }
+                pagination: { el: '.swiper-pagination', clickable: true }
+            });
+            const featSwiper = new Swiper('.feat-swiper', {
+                slidesPerView: 1,
+                pagination: { el: '.swiper-pagination', clickable: true }
             });
             const testiSwiper = new Swiper('.testi-swiper', {
                 slidesPerView: 1,
-                pagination: { el: '.swiper-pagination', clickable: true },
-                spaceBetween: 10,
-                breakpoints: {
-                    640: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 }
-                }
+                pagination: { el: '.swiper-pagination', clickable: true }
             });
         });
     </script>
