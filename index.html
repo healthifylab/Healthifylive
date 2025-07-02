@@ -35,7 +35,7 @@
 
     <section class="promotional-cards">
         <h2>Promotional Profiles</h2>
-        <div class="swiper-container">
+        <div class="swiper-container promo-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide"><div class="card"><img src="assets/full-body-checkup.jpg" alt="Full Body Checkup"></div></div>
                 <div class="swiper-slide"><div class="card"><img src="assets/diabetes-symptoms.jpg" alt="Diabetes Symptoms"></div></div>
@@ -71,8 +71,32 @@
 
     <section class="testimonials">
         <h2>Testimonials</h2>
-        <p>"Great service at home! Highly recommend." - John D.</p>
-        <p>"Fast and reliable results." - Sarah K.</p>
+        <div class="swiper-container testi-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <img src="assets/user1.jpg" alt="Rajesh Sharma">
+                        <p>"Excellent home service! Highly recommend."</p>
+                        <h4>Rajesh Sharma</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <img src="assets/user2.jpg" alt="Priya Desai">
+                        <p>"Fast and reliable results, very satisfied."</p>
+                        <h4>Priya Desai</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <img src="assets/user3.jpg" alt="Anil Patel">
+                        <p>"Great experience with accurate reports."</p>
+                        <h4>Anil Patel</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
     </section>
 
     <footer>
@@ -89,6 +113,18 @@
     </a>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const promoSwiper = new Swiper('.promo-swiper', {
+                slidesPerView: 1,
+                pagination: { el: '.swiper-pagination', clickable: true }
+            });
+            const testiSwiper = new Swiper('.testi-swiper', {
+                slidesPerView: 1,
+                pagination: { el: '.swiper-pagination', clickable: true }
+            });
+        });
+    </script>
     <script src="scripts/fetch-tests.js"></script>
 </body>
 </html>
