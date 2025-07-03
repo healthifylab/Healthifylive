@@ -53,6 +53,10 @@ export default function Home() {
           </ul>
           <p className="mt-4 text-center font-medium">📞 Book your test today — because your health deserves the best.</p>
         </div>
+  import Faq from '../components/Faq';
+...
+<Faq />
+
 
         {/* FAQs */}
         <div className="bg-white mt-12 p-6 rounded-xl shadow-md max-w-4xl">
