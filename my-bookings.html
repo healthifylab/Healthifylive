@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Bookings – Healthify</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles/style.css"/>
+</head>
+<body>
+
+  <!-- 🔝 Sticky Header -->
+  <header class="header">
+    <a href="index.html"><img src="assets/logo.png" class="logo" alt="Logo" /></a>
+    <h2>📋 My Bookings</h2>
+  </header>
+
+  <!-- 🧾 Booking Details + PDF Download -->
+  <main style="padding: 20px">
+    <div id="bookingInfo"></div>
+    <div id="pdfSection" style="margin-top: 20px;"></div>
+    <button id="whatsappShareBtn">📲 Share via WhatsApp</button>
+  </main>
+
+  <script>
+    const bookingData = JSON.parse(localStorage.getItem("lastBooking") || "{}");
+
+    if (!bookingData.name) {
+      document.getElementById("bookingInfo").innerHTML = "<p>No recent bookings found.</p>";
+    } else {
+      const testList = (bookingData.tests || [])
+        .map(t => `<li>${t} – ₹499</li>`)
+        .join(""); // Example price, replace with actual dynamic price
+
+      document.getElementById("bookingInfo").innerHTML = `
+        <p><strong>👤 Name:</strong> ${bookingData.name}</p>
+        <p><strong>📱 Mobile:</strong> ${bookingData.mobile}</p>
+        <p><strong>📧 Email:</strong> ${bookingData.email}</p>
+        <p><strong>📅 Date:</strong> ${bookingData.date}</p>
+        <p><strong>🎂 Age:</strong> ${bookingData.age}, <strong>⚧ Sex:</strong> ${bookingData.sex}</p>
+        <p><strong>🏠 Address:</strong> ${bookingData.address}, ${bookingData.pincode}, Landmark: ${bookingData.landmark}</p>
+        <p><strong>🧪 Tests Booked:</strong></p>
+        <ul>${testList}</ul>
+      `;
+
+      // WhatsApp Share Button Logic
+      const whatsappMessage = encodeURIComponent(`
+        Healthify Booking Confirmation
+        🧪 Tests: ${bookingData.tests.join(", ")}
+        📱 Mobile: ${bookingData.mobile}
+        🧑‍⚕️ Name: ${bookingData.name}
+        📧 Email: ${bookingData.email}
+        🏠 Address: ${bookingData.address}, ${bookingData.pincode}, ${bookingData.landmark}
+        📅 Preferred Date: ${bookingData.date}
+        ⏰ Preferred Time: ${bookingData.time}
+      `);
+
+      const whatsappShareBtn = document.getElementById("whatsappShareBtn");
+      whatsappShareBtn.onclick = function() {
+        window.open(`https://wa.me/919503832889?text=${whatsappMessage}`, "_blank");
+      };
+
+      // Generate PDF button
+      document.getElementById("pdfSection").innerHTML = `
+        <button onclick="generateBookingPDF()">📄 Download PDF Report</button>
+      `;
+    }
+  </script>
+
+  <script src="scripts/generate-report.js"></script>
+</body>
+</html>
