@@ -1,16 +1,32 @@
-// ✅ _app.js — Applies global styles and layout
+// ✅ Global App Configuration
+import '../styles/globals.css';
+import { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
 
-import '@/styles/globals.css'
-import Head from 'next/head'
+const firebaseConfig = {
+  apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+  authDomain: "healthify-lab.firebaseapp.com",
+  projectId: "healthify-lab",
+  storageBucket: "healthify-lab.appspot.com",
+  messagingSenderId: "297003315332",
+  appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
+  measurementId: "G-R0R3RYERZW"
+};
 
-export default function App({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    const app = initializeApp(firebaseConfig);
+    getAnalytics(app);
+  }, []);
+
   return (
     <>
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
       <Component {...pageProps} />
+      <Analytics />
     </>
-  )
+  );
 }
+
+export default MyApp;
