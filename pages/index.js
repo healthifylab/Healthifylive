@@ -53,6 +53,12 @@ export default function Home() {
           </ul>
           <p className="mt-4 text-center font-medium">📞 Book your test today — because your health deserves the best.</p>
         </div>
+ 
+  import WhyHealthify from '../components/WhyHealthify';
+...
+<WhyHealthify />
+
+  
   import Faq from '../components/Faq';
 ...
 <Faq />
