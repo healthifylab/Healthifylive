@@ -1,141 +1,269 @@
-/* Reset & Base */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f5f8fa;
-  color: #333;
-  line-height: 1.6;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #ffffff;
-  padding: 10px 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 999;
+nav {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: transparent;
+    color: #333;
+    position: relative;
+    z-index: 1000;
 }
 
-.logo img {
-  height: 60px;
-  max-width: 100%;
+.logo {
+    height: 60px; /* Further reduced */
+    margin-right: 8px;
 }
 
 nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 8px;
 }
 
 nav ul li a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
+    text-decoration: none;
+    color: #333;
+    font-size: 12px; /* Smaller for mobile */
 }
 
-nav ul li a:hover,
-nav ul li a.active {
-  background-color: #00a884;
-  color: white;
+header.hero-banner {
+    text-align: center;
+    padding: 10px;
+    background: transparent;
+    color: #FFFFFF;
+    width: 100%;
+    margin: 0 auto;
 }
 
-/* Section Title */
-.section-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
-  font-weight: 600;
+header.hero-banner img {
+    width: 100%;
+    height: auto;
 }
 
-/* Select Boxes */
-.select-box {
-  margin: 20px 0;
-  position: relative;
+.swiper-container {
+    width: 100% !important;
+    padding: 0;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
-.select-box i {
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%);
-  color: #00a884;
-}
-
-.select-box select {
-  width: 100%;
-  padding: 12px 40px 12px 36px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  appearance: none;
-  background-color: #fff;
-}
-
-/* Cart */
-#cart {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-#cart ul li {
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-  font-size: 16px;
-}
-
-/* Buttons */
-button {
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-/* Form Inputs */
-input[type="tel"],
-select {
-  font-family: 'Poppins', sans-serif;
-}
-
-/* WhatsApp Floating Icon */
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  nav ul {
-    flex-direction: row;
-    flex-wrap: wrap;
+.swiper-slide {
+    width: 100% !important;
+    display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
+    align-items: center;
+    box-sizing: border-box;
+}
 
-  .select-box select {
-    padding: 12px 12px 12px 40px;
-  }
+.card {
+    width: 90%; /* Ensured to fit */
+    max-width: 250px; /* Tighter cap */
+    background: #FFFFFF;
+    border: 1px solid #ccc;
+    padding: 6px; /* Minimized padding */
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 6px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.card img {
+    max-width: 80%; /* Reduced image size */
+    height: auto;
+    object-fit: contain;
+}
+
+.book-now {
+    padding: 5px 10px; /* Reduced further */
+    background: #00C4B4;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    margin-top: 6px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.book-now:hover {
+    background: #009687;
+}
+
+.swiper-pagination-bullet {
+    background: #00C4B4;
+}
+
+.why-choose, .faq, .testimonials, .contact {
+    padding: 10px;
+    text-align: center;
+    background: #FFFFFF;
+}
+
+.why-choose ul {
+    list-style: none;
+    padding: 0;
+}
+
+.why-choose ul li {
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+details summary {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+details[open] summary {
+    margin-bottom: 6px;
+}
+
+.testimonial-card {
+    width: 90%;
+    max-width: 250px;
+    background: #FFFFFF;
+    border: 1px solid #ccc;
+    padding: 6px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.testimonial-card img {
+    width: 50%; /* Further reduced */
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonial-card p {
+    margin: 5px 0;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.testimonial-card h4 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.contact .about p {
+    max-width: 90%;
+    margin: 6px auto;
+    line-height: 1.4;
+    font-size: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 6px;
+    background: #F5F5F5;
+    border-top: 1px solid #ccc;
+    width: 100%;
+}
+
+footer .social-media {
+    margin-top: 6px;
+}
+
+footer .social-media a {
+    color: #333;
+    margin: 0 5px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+footer .social-media a:hover {
+    color: #00C4B4;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 10%; /* Adjusted for mobile */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFFFFF;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    width: 85%;
+    height: auto;
+    text-align: center;
+    font-size: 12px;
+}
+
+.popup .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    z-index: 1000;
+}
+
+.whatsapp-float img {
+    width: 30px; /* Reduced size */
+    height: 30px;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+    .logo {
+        height: 140px;
+    }
+    .card, .testimonial-card {
+        width: 70%;
+        max-width: 400px;
+        padding: 15px;
+    }
+    .swiper-slide {
+        width: 33.33% !important;
+    }
+    .featured-profiles .swiper-slide,
+    .promotional-cards .swiper-slide,
+    .testimonials .swiper-slide,
+    .cards .swiper-slide {
+        width: 33.33% !important;
+    }
+    nav ul li a, .why-choose ul li, details summary, .contact .about p, .testimonial-card p {
+        font-size: 16px;
+    }
+    .book-now {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    .testimonial-card img {
+        width: 70%;
+        height: 100px;
+    }
+    .popup {
+        width: 40%;
+        top: 20%;
+    }
+    .whatsapp-float img {
+        width: 50px;
+        height: 50px;
+    }
 }
