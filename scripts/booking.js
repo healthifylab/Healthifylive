@@ -71,9 +71,10 @@ export function startOTPLogin() {
     });
 }
 
-// Footer HTML to be included in all pages
-const footerHTML = `
-<footer style="text-align: center; padding: 30px 10px; background-color: #f8f8f8; margin-top: 50px;">
+// Inject footer
+const footer = document.createElement('footer');
+footer.style = "text-align: center; padding: 30px 10px; background-color: #f8f8f8; margin-top: 50px;";
+footer.innerHTML = `
   <p style="margin-bottom: 10px;">Follow us on</p>
   <div style="font-size: 24px;">
     <a href="https://twitter.com/healthify_lab" target="_blank" style="margin: 0 10px; color: #1DA1F2;">
@@ -87,11 +88,14 @@ const footerHTML = `
     </a>
   </div>
   <p style="margin-top: 10px;">&copy; 2025 Healthify Lab. All rights reserved.</p>
-</footer>
 `;
+document.body.appendChild(footer);
 
-// Optional: Inject footer dynamically if using JS templates
-if (typeof document !== 'undefined') {
-  const footerContainer = document.querySelector("footer");
-  if (footerContainer) footerContainer.innerHTML = footerHTML;
-}
+// Floating Cart Icon
+const cartBtn = document.createElement("div");
+cartBtn.innerHTML = `
+  <a href="book.html#cart" style="position: fixed; bottom: 90px; right: 20px; background-color: #00a884; padding: 10px 15px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 999;">
+    <i class="fas fa-shopping-cart" style="color:white; font-size: 20px;"></i>
+  </a>
+`;
+document.body.appendChild(cartBtn);
