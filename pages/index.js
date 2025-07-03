@@ -1,10 +1,5 @@
-// ✅ Full Code Structure Overview:
-// I will now share the complete essential files for your project.
-// Paste each into your GitHub repo in the right place.
-
-// ==============================
-// 1. /pages/index.js
-// ==============================
+// ✅ Fixed index.js
+// Paste this into your /pages/index.js file
 
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
@@ -43,6 +38,47 @@ export default function Home() {
           <Image src="/assets/Text_Welcome1.jpg" alt="Promo 1" width={400} height={300} className="rounded-xl shadow-md" />
           <Image src="/assets/Text_Welcome2.jpg" alt="Promo 2" width={400} height={300} className="rounded-xl shadow-md" />
           <Image src="/assets/Text_Welcome3.jpg" alt="Promo 3" width={400} height={300} className="rounded-xl shadow-md" />
+        </div>
+
+        {/* Why Choose Healthify */}
+        <div className="bg-white mt-12 p-6 rounded-xl shadow-md max-w-4xl">
+          <h2 className="text-2xl font-semibold text-center mb-4 text-green-700">🔬 Why Choose Healthify Lab</h2>
+          <ul className="list-disc list-inside space-y-2 text-gray-700">
+            <li>Your trusted partner in preventive healthcare.</li>
+            <li>💉 Hassle-free sample collection at home</li>
+            <li>🧪 Advanced diagnostics & accurate reports</li>
+            <li>🚚 Fast turnaround</li>
+            <li>📍 Serving Mumbai, Navi Mumbai, Thane</li>
+            <li>✅ 💙 Happy Customers</li>
+          </ul>
+          <p className="mt-4 text-center font-medium">📞 Book your test today — because your health deserves the best.</p>
+        </div>
+
+        {/* FAQs */}
+        <div className="bg-white mt-12 p-6 rounded-xl shadow-md max-w-4xl">
+          <h2 className="text-2xl font-semibold text-center mb-4 text-green-700">❓ Frequently Asked Questions</h2>
+          <ul className="space-y-4">
+            <li>
+              <strong>Q: How do I book a test?</strong>
+              <p>A: Click on the "Book Your Test" button and fill in the form. Our technician will contact you shortly.</p>
+            </li>
+            <li>
+              <strong>Q: Do you provide home sample collection?</strong>
+              <p>A: Yes, we specialize in home sample collection across Mumbai, Navi Mumbai, and Thane.</p>
+            </li>
+            <li>
+              <strong>Q: How soon will I receive my reports?</strong>
+              <p>A: Most test reports are delivered within 24-48 hours to your email and WhatsApp.</p>
+            </li>
+            <li>
+              <strong>Q: Is the lab certified?</strong>
+              <p>A: We work with certified partner labs for accurate diagnostics, even though we are not NABL-accredited ourselves.</p>
+            </li>
+            <li>
+              <strong>Q: What if I have more questions?</strong>
+              <p>A: Contact us at <a href="mailto:report@healthifylab.com" className="text-blue-600">report@healthifylab.com</a> or WhatsApp us at 9503832889.</p>
+            </li>
+          </ul>
         </div>
       </main>
 
