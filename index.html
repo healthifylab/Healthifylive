@@ -1,86 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Healthify Lab</title>
-  <link rel="stylesheet" href="styles/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthify - Home</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 <body>
+    <nav>
+        <img src="assets/logo-healthify.png" alt="Healthify Logo" class="logo">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="book.html">Book Test</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
 
-<header>
-  <div class="logo">
-    <img src="assets/logo-healthify.png" alt="Healthify Logo" />
-  </div>
-  <nav>
-    <ul>
-      <li><a class="active" href="index.html">Home</a></li>
-      <li><a href="book.html">Book Test</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-    </ul>
-  </nav>
-</header>
+    <header class="hero-banner">
+        <h1>Welcome to Healthify</h1>
+        <p>Book your home health tests today!</p>
+        <img src="assets/hero-health-checkup.jpg" alt="Health Checkup" style="width: 100%; height: auto;">
+    </header>
 
-<main>
-  <section class="hero">
-    <img src="assets/banner-1.jpg" alt="Healthify Lab Banner" style="width:100%; border-radius:12px;" />
-  </section>
-
-  <section>
-    <h1 class="section-title">Welcome to Healthify</h1>
-    <p style="text-align:center;">Book your home health tests today! 🧪</p>
-  </section>
-
-  <section id="callback" style="text-align: center;">
-    <h2>Request a Call Back</h2>
-    <form id="callbackForm">
-      <input type="tel" id="phoneNumber" placeholder="Enter your phone number" required />
-      <button type="submit">Submit</button>
-    </form>
-    <p id="callbackMessage"></p>
-  </section>
-
-  <section>
-    <h2 class="section-title">Featured Profiles</h2>
-    <div class="profile-grid">
-      <div class="card">
-        <img src="assets/thyroid.jpg" alt="Thyroid Profile" />
-        <p><strong>Thyroid Profile</strong></p>
-      </div>
-      <div class="card">
-        <img src="assets/cardiac.jpg" alt="Cardiac Profile" />
-        <p><strong>Cardiac Profile</strong></p>
-      </div>
+    <div id="promoPopup" class="popup">
+        <span class="close-btn">×</span>
+        <p>Full Body Checkup at ₹499, Home Sample Collection | Same Day Report | <a href="book.html?profile=full-body-499" class="book-now">Book Now</a></p>
     </div>
-  </section>
-</main>
 
-<a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
-  <img src="assets/whatsapp-icon.png" alt="WhatsApp" />
-</a>
+    <div id="callBackPopup" class="popup">
+        <span class="close-btn">×</span>
+        <h3>Request a Call Back</h3>
+        <form id="callBackForm">
+            <input type="tel" placeholder="Enter your phone number" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
-<footer>
-  <p>&copy; 2025 Healthify | Contact: +91 9503832889 | Email: report@healthifylab.com</p>
-</footer>
+    <section class="featured-profiles">
+        <h2>Featured Profiles</h2>
+        <div class="swiper feat-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/thyroid-profile.jpg" alt="Thyroid Profile">
+                        <h4>Thyroid Profile</h4>
+                        <button onclick="window.location.href='book.html?profile=thyroid'" class="book-now">Book Now</button>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/cardiac-profile.jpg" alt="Cardiac Profile">
+                        <h4>Cardiac Profile</h4>
+                        <button onclick="window.location.href='book.html?profile=cardiac'" class="book-now">Book Now</button>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/iron-profile.jpg" alt="Iron Profile">
+                        <h4>Iron Profile</h4>
+                        <button onclick="window.location.href='book.html?profile=iron'" class="book-now">Book Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
 
-<script>
-document.getElementById('callbackForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const number = document.getElementById('phoneNumber').value.trim();
-  const message = document.getElementById('callbackMessage');
+    <section class="promotional-cards">
+        <h2>Promotional Profiles</h2>
+        <div class="swiper promo-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/full-body-checkup.jpg" alt="Full Body Checkup">
+                        <h4>Full Body Checkup</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/diabetes-symptoms.jpg" alt="Diabetes Symptoms">
+                        <h4>Diabetes Symptoms</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/vitamin-profile.jpg" alt="Vitamin Profile">
+                        <h4>Vitamin Profile</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
 
-  if (!number || number.length < 10) {
-    message.style.color = 'red';
-    message.textContent = '📱 Please enter a valid phone number';
-  } else {
-    message.style.color = 'green';
-    message.textContent = '✅ Thank you! We will call you shortly.';
-    document.getElementById('phoneNumber').value = '';
-  }
-});
-</script>
+    <section class="why-choose">
+        <h2>Why Choose Healthify?</h2>
+        <ul>
+            <li>🔬 Healthify Lab - Your trusted partner in preventive healthcare.</li>
+            <li>💉 Hassle-free sample collection at home</li>
+            <li>🧪 Advanced diagnostics & accurate reports</li>
+            <li>🚚 Fast turnaround | 📍</li>
+            <li>✅ 💙 Happy Customers</li>
+            <li>📞 Book your test today — because your health deserves the best.</li>
+        </ul>
+    </section>
 
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details>
+            <summary>How do I book a test?</summary>
+            <p>Login and select your tests/profiles on the Book Test page.</p>
+        </details>
+        <details>
+            <summary>What is the TAT?</summary>
+            <p>Turnaround time varies by test, typically 12-48 hours.</p>
+        </details>
+    </section>
+
+    <section class="testimonials">
+        <h2>Testimonials</h2>
+        <div class="swiper testi-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/user1.jpg" alt="Rajesh Sharma">
+                        <p>"Excellent home service! Highly recommend."</p>
+                        <h4>Rajesh Sharma</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/user2.jpg" alt="Priya Desai">
+                        <p>"Fast and reliable results, very satisfied."</p>
+                        <h4>Priya Desai</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/user3.jpg" alt="Anil Patel">
+                        <p>"Great experience with accurate reports."</p>
+                        <h4>Anil Patel</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us 🌟</h2>
+        <div class="about">
+            <p><strong>Mission: 🌱</strong> At Healthify Diagnostic Lab, we are committed to providing accessible, accurate, and affordable diagnostic services to empower individuals to take charge of their health. Our vision is to revolutionize preventive healthcare across India.</p>
+            <p><strong>Services: 🩺</strong> We offer a wide range of health checkups, including Full Body Checkups, Diabetic Profiles, Thyroid Profiles, Cardiac Risk Assessments, and more, all with home sample collection for your convenience.</p>
+            <p><strong>Address: 📍</strong> Healthify Diagnostic Lab, 123 Health Avenue, Airoli, Navi Mumbai, Maharashtra, India - 400708</p>
+            <p><strong>Contact: 📞</strong> Phone: +91 9503832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+            <p><strong>Established: 🎉</strong> 2020 | <strong>Certifications: ✅</strong> ISO 9001:2015, NABL Accredited</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Healthify © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+        <div class="social-media">
+            <a href="https://twitter.com/healthify_lab" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
+        <img src="assets/whatsapp-icon.png" alt="WhatsApp">
+    </a>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const featSwiper = new Swiper('.feat-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                breakpoints: {
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
+            });
+            const promoSwiper = new Swiper('.promo-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                breakpoints: {
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
+            });
+            const testiSwiper = new Swiper('.testi-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                breakpoints: {
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
+            });
+
+            // Promo Popup
+            const promoPopup = document.getElementById('promoPopup');
+            setTimeout(() => promoPopup.style.display = 'block', 2000);
+            document.querySelectorAll('.close-btn').forEach(btn => {
+                btn.onclick = () => {
+                    btn.parentElement.style.display = 'none';
+                };
+            });
+        });
+    </script>
+    <script src="scripts/fetch-tests.js"></script>
 </body>
 </html>
