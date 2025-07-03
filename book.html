@@ -9,7 +9,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
-
 <header>
   <div class="logo">
     <img src="assets/logo-healthify.png" alt="Healthify Logo" />
@@ -23,135 +22,95 @@
   </nav>
 </header>
 
-<main style="padding: 20px; max-width: 500px; margin: auto;">
+<main style="padding: 20px;">
   <h2 class="section-title">Book a Test</h2>
 
-  <!-- OTP Login -->
-  <section style="text-align:center;">
-    <h3>Login with OTP</h3>
-    <div id="recaptcha-container"></div>
-    <input type="tel" id="phoneInput" placeholder="Enter +91XXXXXXXXXX" style="padding:10px; width:100%; margin-top: 10px; border-radius:6px; border:1px solid #ccc;" />
-    <button id="otpLoginBtn" style="padding:10px 20px; margin-top: 10px; background-color:#007bff; color:white; border:none; border-radius:6px; cursor:pointer;">
-      Send OTP 🔐
-    </button>
-  </section>
-
   <!-- Test Dropdown -->
-  <div class="select-box" style="margin-top: 30px;">
-    <label for="test-select">🧪 Select Test:</label>
-    <select id="test-select"></select>
+  <div class="select-box">
+    <label for="test-select">🧪 Select a Test:</label>
+    <select id="test-select">
+      <option value="">Choose a test...</option>
+    </select>
   </div>
 
   <!-- Profile Dropdown -->
   <div class="select-box">
-    <label for="profile-select">👥 Select Profile:</label>
-    <select id="profile-select"></select>
+    <label for="profile-select">👤 Select a Profile:</label>
+    <select id="profile-select">
+      <option value="">Choose a profile...</option>
+    </select>
   </div>
 
-  <!-- Add to Cart -->
+  <!-- Add Button -->
   <div style="text-align:center; margin-top:20px;">
     <button id="add-btn" style="padding:12px 20px; font-size:16px; background:#00a884; color:white; border:none; border-radius:6px; cursor:pointer;">
-      Add to Cart 😊
+      Add to Cart 🛒
     </button>
   </div>
 
-  <!-- Cart Display -->
+  <!-- Cart List -->
   <div id="cart" style="max-width:400px; margin:30px auto;">
     <h3>Your Cart</h3>
     <ul id="cart-items" style="list-style:none; padding:0;"></ul>
   </div>
-
-  <!-- Callback Form -->
-  <section id="callback" style="text-align: center; margin-top: 40px;">
-    <h2>Request a Call Back</h2>
-    <form id="callbackForm">
-      <input type="tel" id="phoneNumber" placeholder="Enter your phone number" required style="padding: 10px; width: 250px; border-radius: 6px; border: 1px solid #ccc;">
-      <button type="submit" style="padding: 10px 20px; background-color: #00a884; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
-        Submit
-      </button>
-    </form>
-    <p id="callbackMessage" style="color: green; margin-top: 10px;"></p>
-  </section>
 </main>
 
-<!-- WhatsApp Floating Button -->
+<!-- Floating WhatsApp -->
 <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
   <img src="assets/whatsapp-icon.png" alt="WhatsApp" style="height: 60px; width: 60px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); position: fixed; bottom: 20px; right: 20px; z-index: 999;">
 </a>
 
-<!-- Scripts -->
-<script type="module">
-import { startOTPLogin } from "./scripts/firebase-auth.js";
+<script src="scripts/tests-data.js"></script>
+<script>
+  const testSelect = document.getElementById("test-select");
+  const profileSelect = document.getElementById("profile-select");
+  const cartItems = [];
+  const cartList = document.getElementById("cart-items");
 
-document.getElementById("otpLoginBtn").addEventListener("click", () => {
-  startOTPLogin();
-});
+  const tests = JSON.parse(localStorage.getItem("testsList")) || [];
+  const profiles = JSON.parse(localStorage.getItem("profilesList")) || [];
 
-// Load data from localStorage
-const sampleTests = JSON.parse(localStorage.getItem("testsList") || "[]");
-const sampleProfiles = JSON.parse(localStorage.getItem("profilesList") || "[]");
-
-const testSelect = document.getElementById("test-select");
-const profileSelect = document.getElementById("profile-select");
-
-// Populate test dropdown
-testSelect.innerHTML = `<option value="">🔍 Choose a Test...</option>`;
-sampleTests.forEach(test => {
-  const opt = document.createElement("option");
-  opt.value = test.TestName;
-  opt.innerHTML = `🧪 <b>${test.TestName}</b> — <strike style="color:red;">₹${test.MRP}</strike> <strong>₹${test.offerPrice}</strong> | ⏱️ ${test.TAT}`;
-  testSelect.appendChild(opt);
-});
-
-// Populate profile dropdown
-profileSelect.innerHTML = `<option value="">👥 Choose a Profile...</option>`;
-sampleProfiles.forEach(profile => {
-  const opt = document.createElement("option");
-  const displayName = `Healthify ${profile.TestName}`;
-  opt.value = displayName;
-  opt.innerHTML = `👤 <b>${displayName}</b> — <strike style="color:red;">₹${profile.MRP}</strike> <strong>₹${profile.offerPrice}</strong> | ⏱️ ${profile.TAT}`;
-  profileSelect.appendChild(opt);
-});
-
-const cartItems = [];
-const addBtn = document.getElementById('add-btn');
-const cartList = document.getElementById('cart-items');
-
-addBtn.onclick = () => {
-  const testVal = testSelect.value;
-  const profVal = profileSelect.value;
-  if (!testVal && !profVal) {
-    alert('Please select a test or profile');
-    return;
+  function formatOption(item) {
+    return `${item.TestName} - ₹<del>${item.MRP}</del> <strong>₹${item.offerPrice}</strong>`;
   }
 
-  const selected = testVal ? testVal : profVal;
-  cartItems.push(selected);
-
-  const li = document.createElement('li');
-  li.textContent = `✔️ ${selected}`;
-  cartList.appendChild(li);
-
-  testSelect.value = '';
-  profileSelect.value = '';
-};
-
-// Callback form
-document.getElementById('callbackForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const number = document.getElementById('phoneNumber').value.trim();
-  const message = document.getElementById('callbackMessage');
-
-  if (!number || number.length < 10) {
-    message.style.color = 'red';
-    message.textContent = 'Please enter a valid phone number 📱';
-  } else {
-    message.style.color = 'green';
-    message.textContent = '✅ Thank you! We will call you shortly.';
-    document.getElementById('phoneNumber').value = '';
+  function populateSelect(select, items) {
+    items.forEach(item => {
+      const opt = document.createElement("option");
+      opt.value = item.TestName;
+      opt.innerHTML = formatOption(item);
+      select.appendChild(opt);
+    });
   }
-});
+
+  populateSelect(testSelect, tests);
+  populateSelect(profileSelect, profiles);
+
+  document.getElementById("add-btn").onclick = () => {
+    const selectedTest = testSelect.value;
+    const selectedProfile = profileSelect.value;
+    const selected = tests.concat(profiles).find(item => item.TestName === selectedTest || item.TestName === selectedProfile);
+
+    if (!selected) {
+      alert("Please select a test or profile");
+      return;
+    }
+
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div style="padding:10px; margin:10px 0; border:1px solid #ccc; border-radius:8px;">
+        <strong>${selected.TestName}</strong><br/>
+        <span>🧾 ${selected.Description}</span><br/>
+        <span>🧪 Parameters: ${selected.NoofParameters}</span><br/>
+        <span>⏱ TAT: ${selected.TAT}</span><br/>
+        <span>💰 Price: <del>₹${selected.MRP}</del> <strong style="color:green;">₹${selected.offerPrice}</strong></span>
+      </div>`;
+    cartItems.push(selected);
+    cartList.appendChild(li);
+
+    testSelect.value = "";
+    profileSelect.value = "";
+  };
 </script>
-
 </body>
 </html>
