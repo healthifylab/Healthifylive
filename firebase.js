@@ -1,0 +1,1 @@
+// Firebase initialization with provided config
