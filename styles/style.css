@@ -267,3 +267,12 @@ footer .social-media a:hover {
         height: 50px;
     }
 }
+/* Add this to the end of style.css */
+.contact-icons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.contact-icons i {
+    margin: 0 10px;
+}
