@@ -1,1 +1,0 @@
-// Footer with Why Choose Healthify and FAQs

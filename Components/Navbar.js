@@ -1,1 +1,0 @@
-// Navbar with logo and navigation
