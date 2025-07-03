@@ -22,9 +22,10 @@ nav {
 }
 
 .logo {
-    height: 100px; /* Increased from 60px for better visibility on mobile */
-    margin-right: 15px; /* Increased spacing */
-    object-fit: contain; /* Maintain aspect ratio */
+    height: 100px;
+    width: 70%;
+    margin-right: 15px;
+    object-fit: contain;
 }
 
 nav ul {
@@ -33,7 +34,7 @@ nav ul {
 }
 
 nav ul li {
-    margin-right: 15px; /* Increased spacing */
+    margin-right: 15px;
 }
 
 nav ul li a {
@@ -279,23 +280,25 @@ footer .social-media a:hover {
     left: 50%;
     transform: translateX(-50%);
     background: #FFFFFF;
-    padding: 10px;
+    padding: 20px; /* Increased padding for better spacing */
     border: 1px solid #E0E0E0;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     z-index: 1000;
-    width: 85%;
+    width: 70%; /* Decreased to 70% as requested */
+    min-height: 400px; /* Increased height for more content space */
     height: auto;
     text-align: center;
     font-size: 14px;
     color: #2E2E2E;
+    overflow-y: auto; /* Enable scrolling if content exceeds height */
 }
 
 .popup .close-btn {
     position: absolute;
-    top: 5px;
-    right: 10px;
+    top: 10px;
+    right: 15px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 18px;
     color: #FF6F61;
 }
 
@@ -324,7 +327,8 @@ footer .social-media a:hover {
 /* Responsive Adjustments */
 @media (min-width: 768px) {
     .logo {
-        height: 200px; /* Increased from 140px for desktop prominence */
+        height: 250px;
+        width: 70%;
     }
     .card, .testimonial-card {
         width: 70%;
@@ -353,8 +357,9 @@ footer .social-media a:hover {
         height: 200px;
     }
     .popup {
-        width: 40%;
-        top: 20%;
+        width: 70%; /* Maintain 70% width on desktop */
+        min-height: 450px; /* Slightly increased for desktop */
+        padding: 30px;
     }
     .whatsapp-float img {
         width: 50px;
