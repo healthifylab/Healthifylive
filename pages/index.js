@@ -1,0 +1,1 @@
+// Home page with promotional images, booking CTA and WhatsApp button
