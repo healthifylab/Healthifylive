@@ -22,7 +22,7 @@ nav {
 }
 
 .logo {
-    height: 100px;
+    height: 120px;
     width: 70%;
     margin-right: 15px;
     object-fit: contain;
@@ -57,11 +57,11 @@ header.hero-banner {
     width: 100%;
     margin: 0 auto;
     position: relative;
-    min-height: 350px;
+    min-height: 450px; /* Increased from 350px for better visibility */
 }
 
 header.hero-banner h1 {
-    font-size: 32px;
+    font-size: 36px; /* Increased for prominence */
     font-weight: 700;
     position: absolute;
     top: 20px;
@@ -70,26 +70,26 @@ header.hero-banner h1 {
     width: 90%;
     background: rgba(0, 0, 0, 0.5);
     color: #FFFFFF;
-    padding: 10px;
-    border-radius: 6px;
+    padding: 15px; /* Increased padding */
+    border-radius: 8px;
 }
 
 header.hero-banner p {
-    font-size: 16px;
+    font-size: 18px; /* Increased for readability */
     position: absolute;
-    top: 70px;
+    top: 90px; /* Adjusted to fit larger h1 */
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
     color: #FFFFFF;
     background: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border-radius: 6px;
+    padding: 12px; /* Increased padding */
+    border-radius: 8px;
 }
 
 header.hero-banner img {
     width: 100%;
-    height: 350px;
+    height: 450px; /* Increased from 350px to match min-height */
     object-fit: cover;
     position: relative;
     z-index: -1;
@@ -140,6 +140,13 @@ header.hero-banner img {
     font-weight: 500;
     color: #2E2E2E;
     margin: 10px 0;
+}
+
+.card video {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px 6px 0 0;
 }
 
 .book-now {
@@ -280,17 +287,17 @@ footer .social-media a:hover {
     left: 50%;
     transform: translateX(-50%);
     background: #FFFFFF;
-    padding: 20px; /* Increased padding for better spacing */
+    padding: 20px;
     border: 1px solid #E0E0E0;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     z-index: 1000;
-    width: 70%; /* Decreased to 70% as requested */
-    min-height: 400px; /* Increased height for more content space */
+    width: 70%;
+    min-height: 400px;
     height: auto;
     text-align: center;
-    font-size: 14px;
+    font-size: 18px; /* Increased from 14px to match larger size */
     color: #2E2E2E;
-    overflow-y: auto; /* Enable scrolling if content exceeds height */
+    overflow-y: auto;
 }
 
 .popup .close-btn {
@@ -300,6 +307,16 @@ footer .social-media a:hover {
     cursor: pointer;
     font-size: 18px;
     color: #FF6F61;
+}
+
+.popup p, .popup h3 {
+    font-size: 18px; /* Consistent font size for all text */
+}
+
+.popup input, .popup button {
+    font-size: 16px; /* Adjusted for form elements */
+    padding: 8px;
+    margin: 5px 0;
 }
 
 .whatsapp-float {
@@ -357,18 +374,26 @@ footer .social-media a:hover {
         height: 200px;
     }
     .popup {
-        width: 70%; /* Maintain 70% width on desktop */
-        min-height: 450px; /* Slightly increased for desktop */
+        width: 70%;
+        min-height: 450px;
         padding: 30px;
+        font-size: 20px; /* Increased for desktop */
+    }
+    .popup p, .popup h3 {
+        font-size: 20px; /* Consistent with container */
+    }
+    .popup input, .popup button {
+        font-size: 18px;
+        padding: 10px;
     }
     .whatsapp-float img {
         width: 50px;
         height: 50px;
     }
     header.hero-banner h1 {
-        font-size: 36px;
+        font-size: 40px; /* Increased for desktop prominence */
     }
     header.hero-banner p {
-        font-size: 18px;
+        font-size: 22px; /* Increased for readability */
     }
 }
