@@ -1,8 +1,12 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background: #FFFFFF;
+    color: #333333;
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
@@ -10,14 +14,15 @@ nav {
     display: flex;
     align-items: center;
     padding: 10px;
-    background: transparent;
-    color: #333;
+    background: #FFFFFF;
+    color: #333333;
     position: relative;
     z-index: 1000;
+    border-bottom: 1px solid #E0E0E0;
 }
 
 .logo {
-    height: 60px; /* Further reduced */
+    height: 60px;
     margin-right: 8px;
 }
 
@@ -32,17 +37,32 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #333;
-    font-size: 12px; /* Smaller for mobile */
+    color: #333333;
+    font-size: 12px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #00C4B4;
 }
 
 header.hero-banner {
     text-align: center;
     padding: 10px;
-    background: transparent;
-    color: #FFFFFF;
+    background: #F5F5F5;
+    color: #333333;
     width: 100%;
     margin: 0 auto;
+}
+
+header.hero-banner h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+header.hero-banner p {
+    font-size: 14px;
 }
 
 header.hero-banner img {
@@ -50,7 +70,7 @@ header.hero-banner img {
     height: auto;
 }
 
-.swiper-container {
+.swiper {
     width: 100% !important;
     padding: 0;
     margin: 0 auto;
@@ -66,26 +86,33 @@ header.hero-banner img {
 }
 
 .card {
-    width: 90%; /* Ensured to fit */
-    max-width: 250px; /* Tighter cap */
+    width: 90%;
+    max-width: 250px;
     background: #FFFFFF;
-    border: 1px solid #ccc;
-    padding: 6px; /* Minimized padding */
+    border: 1px solid #E0E0E0;
+    padding: 6px;
     text-align: center;
     margin: 0 auto;
     border-radius: 6px;
     box-sizing: border-box;
     overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .card img {
-    max-width: 80%; /* Reduced image size */
+    max-width: 80%;
     height: auto;
     object-fit: contain;
 }
 
+.card h4 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+}
+
 .book-now {
-    padding: 5px 10px; /* Reduced further */
+    padding: 5px 10px;
     background: #00C4B4;
     color: #FFFFFF;
     border: none;
@@ -94,6 +121,8 @@ header.hero-banner img {
     border-radius: 4px;
     text-decoration: none;
     font-size: 12px;
+    font-weight: 500;
+    transition: background 0.3s;
 }
 
 .book-now:hover {
@@ -118,12 +147,14 @@ header.hero-banner img {
 .why-choose ul li {
     margin: 5px 0;
     font-size: 12px;
+    color: #333333;
 }
 
 details summary {
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 12px;
+    color: #333333;
 }
 
 details[open] summary {
@@ -134,16 +165,17 @@ details[open] summary {
     width: 90%;
     max-width: 250px;
     background: #FFFFFF;
-    border: 1px solid #ccc;
+    border: 1px solid #E0E0E0;
     padding: 6px;
     text-align: center;
     margin: 0 auto;
     border-radius: 6px;
     box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .testimonial-card img {
-    width: 50%; /* Further reduced */
+    width: 50%;
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
@@ -153,12 +185,14 @@ details[open] summary {
     margin: 5px 0;
     font-style: italic;
     font-size: 12px;
+    color: #666666;
 }
 
 .testimonial-card h4 {
     margin: 0;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 14px;
+    color: #333333;
 }
 
 .contact .about p {
@@ -166,14 +200,25 @@ details[open] summary {
     margin: 6px auto;
     line-height: 1.4;
     font-size: 12px;
+    color: #333333;
 }
 
 footer {
     text-align: center;
     padding: 6px;
     background: #F5F5F5;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #E0E0E0;
+    color: #333333;
     width: 100%;
+}
+
+footer a {
+    color: #333333;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #00C4B4;
 }
 
 footer .social-media {
@@ -181,10 +226,11 @@ footer .social-media {
 }
 
 footer .social-media a {
-    color: #333;
+    color: #333333;
     margin: 0 5px;
     font-size: 14px;
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 footer .social-media a:hover {
@@ -194,18 +240,19 @@ footer .social-media a:hover {
 .popup {
     display: none;
     position: fixed;
-    top: 10%; /* Adjusted for mobile */
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
     background: #FFFFFF;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #E0E0E0;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     z-index: 1000;
     width: 85%;
     height: auto;
     text-align: center;
     font-size: 12px;
+    color: #333333;
 }
 
 .popup .close-btn {
@@ -214,6 +261,7 @@ footer .social-media a:hover {
     right: 10px;
     cursor: pointer;
     font-size: 14px;
+    color: #FF6F61;
 }
 
 .whatsapp-float {
@@ -224,8 +272,18 @@ footer .social-media a:hover {
 }
 
 .whatsapp-float img {
-    width: 30px; /* Reduced size */
+    width: 30px;
     height: 30px;
+}
+
+.contact-icons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.contact-icons i {
+    margin: 0 10px;
+    font-size: 24px;
 }
 
 /* Responsive Adjustments */
@@ -266,13 +324,4 @@ footer .social-media a:hover {
         width: 50px;
         height: 50px;
     }
-}
-/* Add this to the end of style.css */
-.contact-icons {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.contact-icons i {
-    margin: 0 10px;
 }
