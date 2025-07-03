@@ -9,137 +9,109 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="assets/logo-healthify.png" alt="Healthify Logo" />
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="book.html" class="active">Book Test</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main style="padding: 20px;">
-    <h2 class="section-title">Book a Test</h2>
+<header>
+  <div class="logo">
+    <img src="assets/logo-healthify.png" alt="Healthify Logo" />
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="book.html" class="active">Book Test</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <!-- OTP Login -->
-    <section style="text-align:center;">
-      <h3>Login with OTP</h3>
-      <div id="recaptcha-container"></div>
-      <input type="tel" id="phoneInput" placeholder="Enter +91XXXXXXXXXX" style="padding:10px; width:250px; border-radius:6px; border:1px solid #ccc;" />
-      <button id="otpLoginBtn" style="padding:10px 20px; background:#00a884; color:white; border:none; border-radius:6px; cursor:pointer;">Send OTP</button>
-    </section>
+<main style="padding: 20px;">
+  <h2 class="section-title">Book a Test</h2>
 
-    <!-- Select Tests -->
-    <div class="select-box">
-      <i class="fa fa-flask"></i>
-      <select id="test-select">
-        <option value="">🔍 Select a Test...</option>
-      </select>
-    </div>
+  <section style="text-align:center;">
+    <h3>Login with OTP</h3>
+    <input type="tel" id="phoneInput" placeholder="Enter +91XXXXXXXXXX" style="padding:10px; width:250px; border-radius:6px; border:1px solid #ccc;" />
+    <button id="otpLoginBtn" style="padding:10px 20px; background:#00a884; color:white; border:none; border-radius:6px; cursor:pointer;">Send OTP</button>
+    <div id="recaptcha-container"></div>
+  </section>
 
-    <div class="select-box">
-      <i class="fa fa-heartbeat"></i>
-      <select id="profile-select">
-        <option value="">👥 Select a Profile...</option>
-      </select>
-    </div>
+  <div class="select-box">
+    <i class="fa fa-flask"></i>
+    <select id="test-select">
+      <option value="">🔍 Select a Test...</option>
+    </select>
+  </div>
 
-    <div style="text-align:center; margin-top:20px;">
-      <button id="add-btn" style="padding:12px 20px; font-size:16px; background:#00a884; color:white; border:none; border-radius:6px; cursor:pointer;">
-        Add to Cart 😊
+  <div class="select-box">
+    <i class="fa fa-heartbeat"></i>
+    <select id="profile-select">
+      <option value="">👥 Select a Profile...</option>
+    </select>
+  </div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button id="add-btn" style="padding:12px 20px; font-size:16px; background:#00a884; color:white; border:none; border-radius:6px; cursor:pointer;">
+      Add to Cart 😊
+    </button>
+  </div>
+
+  <div id="cart" style="max-width:400px; margin:30px auto; display:none;">
+    <h3>Your Cart</h3>
+    <ul id="cart-items" style="list-style:none; padding:0;"></ul>
+  </div>
+
+  <section id="callback" style="text-align: center; margin-top: 40px;">
+    <h2>Request a Call Back</h2>
+    <form id="callbackForm">
+      <input type="tel" id="phoneNumber" placeholder="Enter your phone number" required style="padding: 10px; width: 250px; border-radius: 6px; border: 1px solid #ccc;">
+      <button type="submit" style="padding: 10px 20px; background-color: #00a884; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
+        Submit
       </button>
-    </div>
+    </form>
+    <p id="callbackMessage" style="color: green; margin-top: 10px;"></p>
+  </section>
+</main>
 
-    <!-- Cart -->
-    <div id="cart" style="max-width:500px; margin:30px auto;">
-      <h3>Your Cart</h3>
-      <ul id="cart-items" style="list-style:none; padding:0;"></ul>
-    </div>
+<a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
+  <img src="assets/whatsapp-icon.png" alt="WhatsApp" style="height: 60px; width: 60px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+</a>
 
-    <!-- Call back form -->
-    <section id="callback" style="text-align: center; margin-top: 40px;">
-      <h2>Request a Call Back</h2>
-      <form id="callbackForm">
-        <input type="tel" id="phoneNumber" placeholder="Enter your phone number" required style="padding: 10px; width: 250px; border-radius: 6px; border: 1px solid #ccc;">
-        <button type="submit" style="padding: 10px 20px; background-color: #00a884; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
-          Submit
-        </button>
-      </form>
-      <p id="callbackMessage" style="color: green; margin-top: 10px;"></p>
-    </section>
-  </main>
+<footer style="text-align: center; padding: 30px 10px; background-color: #f8f8f8; margin-top: 50px;">
+  <p style="margin-bottom: 10px;">Follow us on</p>
+  <div style="font-size: 24px;">
+    <a href="https://twitter.com/healthify_lab" target="_blank" style="margin: 0 10px; color: #1DA1F2;">
+      <i class="fab fa-x-twitter"></i>
+    </a>
+    <a href="https://instagram.com/healthifylab" target="_blank" style="margin: 0 10px; color: #C13584;">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://facebook.com/healthify" target="_blank" style="margin: 0 10px; color: #4267B2;">
+      <i class="fab fa-facebook"></i>
+    </a>
+  </div>
+  <p style="margin-top: 10px;">&copy; 2025 Healthify Lab. All rights reserved.</p>
+</footer>
 
-  <!-- WhatsApp -->
-  <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
-    <img src="assets/whatsapp-icon.png" alt="WhatsApp" style="height: 60px; width: 60px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); position: fixed; bottom: 20px; right: 20px; z-index: 999;">
-  </a>
+<script type="module" src="scripts/firebase-auth.js"></script>
+<script type="module" src="scripts/booking.js"></script>
+<script type="module" src="scripts/cart-ui.js"></script>
+<script>
+  import("./scripts/tests-data.js").then(({ sampleTests, sampleProfiles }) => {
+    const testSelect = document.getElementById("test-select");
+    const profileSelect = document.getElementById("profile-select");
 
-  <script src="scripts/tests-data.js"></script>
-  <script type="module" src="scripts/firebase-auth.js"></script>
-  <script type="module" src="scripts/booking.js"></script>
-  <script>
-    import("./scripts/cart-ui.js"); // Floating cart icon UI
-
-    document.getElementById('otpLoginBtn').addEventListener('click', () => {
-      import("./scripts/booking.js").then(module => module.startOTPLogin());
-    });
-
-    const cartItems = [];
-    const testSelect = document.getElementById('test-select');
-    const profileSelect = document.getElementById('profile-select');
-    const addBtn = document.getElementById('add-btn');
-    const cartList = document.getElementById('cart-items');
-
-    const testsList = JSON.parse(localStorage.getItem("testsList"));
-    const profilesList = JSON.parse(localStorage.getItem("profilesList"));
-
-    testsList.forEach(test => {
+    sampleTests.forEach((test) => {
       const opt = document.createElement("option");
       opt.value = test.TestName;
       opt.textContent = `${test.TestName} - ₹${test.offerPrice} (MRP ₹${test.MRP})`;
       testSelect.appendChild(opt);
     });
 
-    profilesList.forEach(profile => {
+    sampleProfiles.forEach((profile) => {
       const opt = document.createElement("option");
       opt.value = profile.TestName;
-      opt.textContent = `${profile.TestName} - ₹${profile.offerPrice} (MRP ₹${profile.MRP})`;
+      opt.textContent = `Healthify ${profile.TestName} - ₹${profile.offerPrice} (MRP ₹${profile.MRP})`;
       profileSelect.appendChild(opt);
     });
-
-    addBtn.onclick = () => {
-      const test = testSelect.value;
-      const prof = profileSelect.value;
-      if (!test && !prof) {
-        alert('Please select a test or profile');
-        return;
-      }
-      const item = test ? testSelect.options[testSelect.selectedIndex].text : profileSelect.options[profileSelect.selectedIndex].text;
-      cartItems.push(item);
-      const li = document.createElement('li');
-      li.textContent = `✔️ ${item}`;
-      cartList.appendChild(li);
-      testSelect.value = '';
-      profileSelect.value = '';
-    };
-
-    document.getElementById('callbackForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const number = document.getElementById('phoneNumber').value.trim();
-      const message = document.getElementById('callbackMessage');
-      if (!number || number.length < 10) {
-        message.style.color = 'red';
-        message.textContent = 'Please enter a valid phone number 📱';
-      } else {
-        message.style.color = 'green';
-        message.textContent = '✅ Thank you! We will call you shortly.';
-        document.getElementById('phoneNumber').value = '';
-      }
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
