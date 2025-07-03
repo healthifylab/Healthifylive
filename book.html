@@ -36,25 +36,16 @@
     </button>
   </section>
 
-  <!-- Select Test/Profile -->
+  <!-- Test Dropdown -->
   <div class="select-box" style="margin-top: 30px;">
-    <i class="fa fa-flask"></i>
-    <select id="test-select">
-      <option value="">🔍 Select a Test...</option>
-      <option value="thyroid">Thyroid Profile</option>
-      <option value="cardiac">Cardiac Profile</option>
-      <option value="iron">Iron Profile</option>
-    </select>
+    <label for="test-select">🧪 Select Test:</label>
+    <select id="test-select"></select>
   </div>
 
+  <!-- Profile Dropdown -->
   <div class="select-box">
-    <i class="fa fa-heartbeat"></i>
-    <select id="profile-select">
-      <option value="">👥 Select a Profile...</option>
-      <option value="fullbody">Full Body Checkup</option>
-      <option value="diabetes">Diabetes Check</option>
-      <option value="liver">Liver Profile</option>
-    </select>
+    <label for="profile-select">👥 Select Profile:</label>
+    <select id="profile-select"></select>
   </div>
 
   <!-- Add to Cart -->
@@ -70,7 +61,7 @@
     <ul id="cart-items" style="list-style:none; padding:0;"></ul>
   </div>
 
-  <!-- Callback Request -->
+  <!-- Callback Form -->
   <section id="callback" style="text-align: center; margin-top: 40px;">
     <h2>Request a Call Back</h2>
     <form id="callbackForm">
@@ -88,55 +79,78 @@
   <img src="assets/whatsapp-icon.png" alt="WhatsApp" style="height: 60px; width: 60px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); position: fixed; bottom: 20px; right: 20px; z-index: 999;">
 </a>
 
-<footer>…</footer>
-
 <!-- Scripts -->
-<script type="module" src="scripts/firebase-auth.js"></script>
+<script type="module">
+import { startOTPLogin } from "./scripts/firebase-auth.js";
 
-<script>
-  import { startOTPLogin } from "./scripts/firebase-auth.js";
+document.getElementById("otpLoginBtn").addEventListener("click", () => {
+  startOTPLogin();
+});
 
-  const cartItems = [];
-  const testSelect = document.getElementById('test-select');
-  const profileSelect = document.getElementById('profile-select');
-  const addBtn = document.getElementById('add-btn');
-  const cartList = document.getElementById('cart-items');
-  const otpBtn = document.getElementById('otpLoginBtn');
+// Load data from localStorage
+const sampleTests = JSON.parse(localStorage.getItem("testsList") || "[]");
+const sampleProfiles = JSON.parse(localStorage.getItem("profilesList") || "[]");
 
-  otpBtn.addEventListener("click", () => {
-    startOTPLogin();
-  });
+const testSelect = document.getElementById("test-select");
+const profileSelect = document.getElementById("profile-select");
 
-  addBtn.onclick = () => {
-    const test = testSelect.value;
-    const prof = profileSelect.value;
-    if (!test && !prof) {
-      alert('Please select a test or profile');
-      return;
-    }
-    const item = test ? testSelect.options[testSelect.selectedIndex].text : profileSelect.options[profileSelect.selectedIndex].text;
-    cartItems.push(item);
-    const li = document.createElement('li');
-    li.textContent = `✔️ ${item}`;
-    cartList.appendChild(li);
-    testSelect.value = '';
-    profileSelect.value = '';
-  };
+// Populate test dropdown
+testSelect.innerHTML = `<option value="">🔍 Choose a Test...</option>`;
+sampleTests.forEach(test => {
+  const opt = document.createElement("option");
+  opt.value = test.TestName;
+  opt.innerHTML = `🧪 <b>${test.TestName}</b> — <strike style="color:red;">₹${test.MRP}</strike> <strong>₹${test.offerPrice}</strong> | ⏱️ ${test.TAT}`;
+  testSelect.appendChild(opt);
+});
 
-  document.getElementById('callbackForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const number = document.getElementById('phoneNumber').value.trim();
-    const message = document.getElementById('callbackMessage');
+// Populate profile dropdown
+profileSelect.innerHTML = `<option value="">👥 Choose a Profile...</option>`;
+sampleProfiles.forEach(profile => {
+  const opt = document.createElement("option");
+  const displayName = `Healthify ${profile.TestName}`;
+  opt.value = displayName;
+  opt.innerHTML = `👤 <b>${displayName}</b> — <strike style="color:red;">₹${profile.MRP}</strike> <strong>₹${profile.offerPrice}</strong> | ⏱️ ${profile.TAT}`;
+  profileSelect.appendChild(opt);
+});
 
-    if (!number || number.length < 10) {
-      message.style.color = 'red';
-      message.textContent = 'Please enter a valid phone number 📱';
-    } else {
-      message.style.color = 'green';
-      message.textContent = '✅ Thank you! We will call you shortly.';
-      document.getElementById('phoneNumber').value = '';
-    }
-  });
+const cartItems = [];
+const addBtn = document.getElementById('add-btn');
+const cartList = document.getElementById('cart-items');
+
+addBtn.onclick = () => {
+  const testVal = testSelect.value;
+  const profVal = profileSelect.value;
+  if (!testVal && !profVal) {
+    alert('Please select a test or profile');
+    return;
+  }
+
+  const selected = testVal ? testVal : profVal;
+  cartItems.push(selected);
+
+  const li = document.createElement('li');
+  li.textContent = `✔️ ${selected}`;
+  cartList.appendChild(li);
+
+  testSelect.value = '';
+  profileSelect.value = '';
+};
+
+// Callback form
+document.getElementById('callbackForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const number = document.getElementById('phoneNumber').value.trim();
+  const message = document.getElementById('callbackMessage');
+
+  if (!number || number.length < 10) {
+    message.style.color = 'red';
+    message.textContent = 'Please enter a valid phone number 📱';
+  } else {
+    message.style.color = 'green';
+    message.textContent = '✅ Thank you! We will call you shortly.';
+    document.getElementById('phoneNumber').value = '';
+  }
+});
 </script>
 
 </body>
