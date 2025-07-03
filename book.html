@@ -23,12 +23,121 @@
   </nav>
 </header>
 
-<main style="padding: 20px;">
-
+<main style="padding: 20px; max-width: 500px; margin: auto;">
   <h2 class="section-title">Book a Test</h2>
 
   <!-- OTP Login -->
   <section style="text-align:center;">
     <h3>Login with OTP</h3>
-    <input type="tel" id="phoneInput" placeholder="Enter +91XXXXXXXXXX" style="padding:10px; width:250px; border-radius:6px; border:1px solid #ccc;" />
-    <button id="otpLoginBtn" style="
+    <div id="recaptcha-container"></div>
+    <input type="tel" id="phoneInput" placeholder="Enter +91XXXXXXXXXX" style="padding:10px; width:100%; margin-top: 10px; border-radius:6px; border:1px solid #ccc;" />
+    <button id="otpLoginBtn" style="padding:10px 20px; margin-top: 10px; background-color:#007bff; color:white; border:none; border-radius:6px; cursor:pointer;">
+      Send OTP 🔐
+    </button>
+  </section>
+
+  <!-- Select Test/Profile -->
+  <div class="select-box" style="margin-top: 30px;">
+    <i class="fa fa-flask"></i>
+    <select id="test-select">
+      <option value="">🔍 Select a Test...</option>
+      <option value="thyroid">Thyroid Profile</option>
+      <option value="cardiac">Cardiac Profile</option>
+      <option value="iron">Iron Profile</option>
+    </select>
+  </div>
+
+  <div class="select-box">
+    <i class="fa fa-heartbeat"></i>
+    <select id="profile-select">
+      <option value="">👥 Select a Profile...</option>
+      <option value="fullbody">Full Body Checkup</option>
+      <option value="diabetes">Diabetes Check</option>
+      <option value="liver">Liver Profile</option>
+    </select>
+  </div>
+
+  <!-- Add to Cart -->
+  <div style="text-align:center; margin-top:20px;">
+    <button id="add-btn" style="padding:12px 20px; font-size:16px; background:#00a884; color:white; border:none; border-radius:6px; cursor:pointer;">
+      Add to Cart 😊
+    </button>
+  </div>
+
+  <!-- Cart Display -->
+  <div id="cart" style="max-width:400px; margin:30px auto;">
+    <h3>Your Cart</h3>
+    <ul id="cart-items" style="list-style:none; padding:0;"></ul>
+  </div>
+
+  <!-- Callback Request -->
+  <section id="callback" style="text-align: center; margin-top: 40px;">
+    <h2>Request a Call Back</h2>
+    <form id="callbackForm">
+      <input type="tel" id="phoneNumber" placeholder="Enter your phone number" required style="padding: 10px; width: 250px; border-radius: 6px; border: 1px solid #ccc;">
+      <button type="submit" style="padding: 10px 20px; background-color: #00a884; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
+        Submit
+      </button>
+    </form>
+    <p id="callbackMessage" style="color: green; margin-top: 10px;"></p>
+  </section>
+</main>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
+  <img src="assets/whatsapp-icon.png" alt="WhatsApp" style="height: 60px; width: 60px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+</a>
+
+<footer>…</footer>
+
+<!-- Scripts -->
+<script type="module" src="scripts/firebase-auth.js"></script>
+
+<script>
+  import { startOTPLogin } from "./scripts/firebase-auth.js";
+
+  const cartItems = [];
+  const testSelect = document.getElementById('test-select');
+  const profileSelect = document.getElementById('profile-select');
+  const addBtn = document.getElementById('add-btn');
+  const cartList = document.getElementById('cart-items');
+  const otpBtn = document.getElementById('otpLoginBtn');
+
+  otpBtn.addEventListener("click", () => {
+    startOTPLogin();
+  });
+
+  addBtn.onclick = () => {
+    const test = testSelect.value;
+    const prof = profileSelect.value;
+    if (!test && !prof) {
+      alert('Please select a test or profile');
+      return;
+    }
+    const item = test ? testSelect.options[testSelect.selectedIndex].text : profileSelect.options[profileSelect.selectedIndex].text;
+    cartItems.push(item);
+    const li = document.createElement('li');
+    li.textContent = `✔️ ${item}`;
+    cartList.appendChild(li);
+    testSelect.value = '';
+    profileSelect.value = '';
+  };
+
+  document.getElementById('callbackForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const number = document.getElementById('phoneNumber').value.trim();
+    const message = document.getElementById('callbackMessage');
+
+    if (!number || number.length < 10) {
+      message.style.color = 'red';
+      message.textContent = 'Please enter a valid phone number 📱';
+    } else {
+      message.style.color = 'green';
+      message.textContent = '✅ Thank you! We will call you shortly.';
+      document.getElementById('phoneNumber').value = '';
+    }
+  });
+</script>
+
+</body>
+</html>
