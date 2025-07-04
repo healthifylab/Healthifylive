@@ -13,6 +13,9 @@
   padding: 10px 20px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
@@ -30,7 +33,6 @@
 /* Hero Banner */
 .hero-banner {
   position: relative;
-  text-align: center;
 }
 
 .hero-banner img {
@@ -40,26 +42,81 @@
   object-fit: cover;
 }
 
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+/* Search Section */
+.search-section {
+  padding: 20px;
+  text-align: center;
 }
 
-.hero-text h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.hero-text p {
-  font-size: 1.2rem;
+.search-section h2 {
+  font-size: 2rem;
   margin-bottom: 20px;
 }
 
-.cta-button {
+#search-test-profile {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-section button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Promotional Cards */
+.promo-cards {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.promo-cards h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.cards-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.card {
+  flex: 0 0 250px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.card-button {
   display: inline-block;
   padding: 10px 20px;
   background-color: #007bff;
@@ -68,42 +125,21 @@
   border-radius: 5px;
 }
 
-/* Booking Form */
-.booking-form {
+/* Why Choose Healthify */
+.why-choose {
   padding: 40px 20px;
   text-align: center;
+  background-color: #f0f8ff;
 }
 
-.booking-form h2 {
+.why-choose h2 {
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
-#booking-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-#booking-form input,
-#booking-form select {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-#booking-form button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.why-choose p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 /* Testimonials */
@@ -117,14 +153,18 @@
   margin-bottom: 20px;
 }
 
+.testimonials-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
 .testimonial {
-  display: inline-block;
-  width: 100%;
-  max-width: 300px;
-  margin: 10px;
-  padding: 20px;
+  flex: 0 0 250px;
   background-color: #f8f8f8;
   border-radius: 10px;
+  padding: 20px;
 }
 
 .testimonial img {
@@ -144,78 +184,70 @@
   color: #555;
 }
 
-/* WhatsApp Status */
-.healthify-status {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+/* Booking Form */
+.booking-form {
+  padding: 40px 20px;
+  text-align: center;
 }
 
-.healthify-status h2 {
+.booking-form h2 {
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
-.status-item {
+#booking-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #e5ddd5;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 10px;
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
-}
-
-.status-item img {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 10px;
-}
-
-.status-item p {
-  font-size: 1rem;
-  color: #111b21;
-}
-
-/* Popup */
-.popup {
-  display: block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  max-width: 90%;
-  text-align: center;
-  z-index: 1000;
-}
-
-.popup img {
-  width: 100%;
+  gap: 15px;
   max-width: 400px;
-  height: auto;
-  margin-bottom: 10px;
+  margin: 0 auto;
 }
 
-.popup p {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
+.form-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
 }
 
-.popup button {
+.form-icon {
+  width: 24px;
+  height: 24px;
+}
+
+#booking-form input,
+#booking-form select {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#booking-form button {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* Contact */
+.contact {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.contact p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 /* Footer */
@@ -251,41 +283,27 @@
   .nav a {
     margin: 5px 0;
   }
-  .hero-text h1 {
-    font-size: 1.8rem;
-  }
-  .hero-text p {
-    font-size: 1rem;
-  }
   .hero-banner img {
     max-height: 400px;
   }
-  .booking-form h2 {
+  .search-section h2,
+  .promo-cards h2,
+  .why-choose h2,
+  .testimonials h2,
+  .booking-form h2,
+  .contact h2 {
     font-size: 1.8rem;
   }
+  #search-test-profile,
   #booking-form {
     max-width: 90%;
   }
-  .testimonials h2 {
-    font-size: 1.8rem;
-  }
+  .card,
   .testimonial {
-    max-width: 90%;
+    flex: 0 0 200px;
   }
-  .healthify-status h2 {
-    font-size: 1.8rem;
-  }
-  .status-item {
-    max-width: 90%;
-  }
-  .popup p {
-    font-size: 1.2rem;
-  }
-  .social-icons {
-    gap: 10px;
-  }
-  .social-icons img {
-    width: 28px;
-    height: 28px;
+  .why-choose p,
+  .contact p {
+    font-size: 1rem;
   }
 }
