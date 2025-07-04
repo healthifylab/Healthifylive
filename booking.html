@@ -45,6 +45,7 @@
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box;
         }
         .form-group select[multiple] {
             height: 100px;
@@ -65,10 +66,15 @@
             margin-top: 20px;
             padding: 10px;
             border-radius: 4px;
+            text-align: center;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
         }
         .error {
-            color: red;
-            text-align: center;
+            background-color: #f8d7da;
+            color: #721c24;
         }
         table {
             width: 100%;
@@ -83,6 +89,16 @@
         th {
             background-color: #f2f2f2;
         }
+        .truncate {
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .truncate:hover {
+            white-space: normal;
+            overflow: visible;
+        }
         .social-media {
             text-align: center;
             margin-top: 20px;
@@ -91,13 +107,18 @@
             width: 30px;
             margin: 0 10px;
         }
+        .loading {
+            text-align: center;
+            padding: 10px;
+            color: #555;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
         import { getFirestore, collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-        
+
         const firebaseConfig = {
             apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
             authDomain: "healthify-lab.firebaseapp.com",
@@ -174,31 +195,25 @@
                 <div class="form-group">
                     <label for="profile-dropdown">Select Profiles:</label>
                     <select id="profile-dropdown" name="profiles" multiple></select>
-                </div>fetch('/tests.json')
-  .then(response => response.json())
-  .then(data => {
-    const testSelect = document.getElementById('testSelect');
-    data.forEach(item => {
-      const option = document.createElement('option');
-      option.value = item.Test_Name;
-      option.text = `${item.Test_Name} - Rs. ${item.Healthify_Offer_Price} (MRP: ${item.MRP})`;
-      testSelect.appendChild(option);
-    });
-
+                </div>
                 <button type="submit">Book Now</button>
             </form>
             <div id="confirmation"></div>
         </div>
         <div class="form-section">
             <h2>Test Catalog</h2>
-            <table id="testCatalog">
+            <div id="loading" class="loading">Loading test catalog...</div>
+            <table id="testCatalog" style="display: none;">
                 <thead>
                     <tr>
                         <th>Test Name</th>
                         <th>Category</th>
                         <th>Sample Type</th>
-                        <th>Price (Rs.)</th>
+                        <th>Offer Price (Rs.)</th>
+                        <th>MRP (Rs.)</th>
                         <th>Description</th>
+                        <th>Tests Included</th>
+                        <th>TAT</th>
                     </tr>
                 </thead>
                 <tbody id="testTableBody"></tbody>
@@ -216,14 +231,14 @@
 
         async function loadTests() {
             try {
-                const response = await fetch('public/tests.json');
+                const response = await fetch('/tests.json');
                 if (!response.ok) {
                     throw new Error('Failed to fetch tests data');
                 }
                 const tests = await response.json();
                 const seenTestNames = new Set();
                 const validTests = tests.filter(test => {
-                    if (!test.Test_Name || !test.Sample_Type || !test.MRP || test.MRP <= 0) {
+                    if (!test.Test_Name || !test.Sample_Type || !test.MRP || test.MRP <= 0 || !test.Healthify_Offer_Price || !test.TAT) {
                         console.warn(`Skipping invalid test: ${JSON.stringify(test)}`);
                         return false;
                     }
@@ -237,30 +252,41 @@
                 const testDropdown = document.getElementById("test-dropdown");
                 const profileDropdown = document.getElementById("profile-dropdown");
                 const tableBody = document.getElementById("testTableBody");
+                const loadingDiv = document.getElementById("loading");
+                const testCatalogTable = document.getElementById("testCatalog");
 
                 validTests.forEach(data => {
                     const option = document.createElement("option");
                     option.value = data.Test_Name;
-                    option.text = `${data.Test_Name} - Rs. ${data.MRP}`;
-                    option.title = data.Test_Description || "No description available";
+                    option.text = `${data.Test_Name} - Rs. ${data.Healthify_Offer_Price} (MRP: ${data.MRP})`;
+                    option.title = `${data.Description}\nTests Included: ${data.Tests_Included}`;
                     if (data.Category === "Individual Tests") {
                         testDropdown.appendChild(option);
-                    } else if (data.Category === "Healthify Body Profiles") {
+                    } else if (data.Category === "Health Checkup Profiles") {
                         profileDropdown.appendChild(option.cloneNode(true));
                     }
-                    const description = data.Test_Parameters_Included 
-                        ? `${data.Test_Description || "No description"}<br><strong>Included:</strong> ${data.Test_Parameters_Included}`
-                        : data.Test_Description || "No description available";
+                    const description = data.Description || "No description available";
+                    const testsIncluded = data.Tests_Included || "N/A";
                     const row = `
                         <tr>
                             <td>${data.Test_Name}</td>
                             <td>${data.Category}</td>
                             <td>${data.Sample_Type}</td>
+                            <td>${data.Healthify_Offer_Price}</td>
                             <td>${data.MRP}</td>
-                            <td>${description}</td>
+                            <td class="truncate">${description}</td>
+                            <td class="truncate">${testsIncluded}</td>
+                            <td>${data.TAT}</td>
                         </tr>`;
                     tableBody.innerHTML += row;
                 });
+
+                if (validTests.length === 0) {
+                    throw new Error("No valid tests found in data");
+                }
+
+                loadingDiv.style.display = "none";
+                testCatalogTable.style.display = "table";
 
                 $("#testCatalog").DataTable({
                     responsive: true,
@@ -268,17 +294,12 @@
                     searching: true,
                     ordering: true
                 });
-
-                if (validTests.length === 0) {
-                    throw new Error("No valid tests found in data");
-                }
             } catch (error) {
                 console.error("Error loading tests:", error);
-                document.getElementById("testTableBody").innerHTML = `<tr><td colspan="5" class="error">Error loading test catalog: ${error.message}</td></tr>`;
+                document.getElementById("loading").textContent = `Error loading test catalog: ${error.message}`;
+                document.getElementById("loading").className = "error";
             }
         }
-
-        loadTests();
 
         document.getElementById("booking-form").addEventListener("submit", async function(event) {
             event.preventDefault();
@@ -302,48 +323,68 @@
             if (data.tests.length === 0 && data.profiles.length === 0) {
                 const confirmation = document.getElementById("confirmation");
                 confirmation.style.display = "block";
-                confirmation.style.color = "red";
+                confirmation.className = "error";
                 confirmation.textContent = "Please select at least one test or profile.";
                 return;
             }
 
             const bookingId = `HFL${Date.now()}`;
+            const testsData = await (await fetch('/tests.json')).json();
+            const selectedTests = data.tests.concat(data.profiles);
+            const totalOfferPrice = selectedTests.reduce((sum, testName) => {
+                const test = testsData.find(t => t.Test_Name === testName);
+                return sum + (test ? parseFloat(test.Healthify_Offer_Price) : 0);
+            }, 0);
+            const tats = selectedTests.map(testName => {
+                const test = testsData.find(t => t.Test_Name === testName);
+                return test ? test.TAT : "Unknown";
+            }).join(", ");
 
             try {
-                await setDoc(doc(db, "bookings", bookingId), data);
+                await setDoc(doc(db, "bookings", bookingId), {
+                    ...data,
+                    totalOfferPrice,
+                    tats
+                });
 
                 await emailjs.send("service_z3ac4pk", "template_5v6t6ku", {
                     ...data,
                     booking_id: bookingId,
-                    tests: data.tests.join(", "),
-                    profiles: data.profiles.join(", ")
+                    tests: data.tests.join(", ") || "None",
+                    profiles: data.profiles.join(", ") || "None",
+                    total_offer_price: totalOfferPrice.toFixed(2),
+                    tats
                 });
 
                 const confirmation = document.getElementById("confirmation");
                 confirmation.style.display = "block";
-                confirmation.textContent = `Booking successful! Your Booking ID: ${bookingId}`;
+                confirmation.className = "success";
+                confirmation.textContent = `Booking successful! Booking ID: ${bookingId}, Total: Rs. ${totalOfferPrice.toFixed(2)}, Results in: ${tats}`;
 
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                doc.text("Healthify Booking Receipt", 10, 10);
+                doc.text("Healthifylive Booking Receipt", 10, 10);
                 doc.text(`Booking ID: ${bookingId}`, 10, 20);
                 doc.text(`Name: ${data.name}`, 10, 30);
                 doc.text(`Mobile: ${data.mobile}`, 10, 40);
                 doc.text(`Tests: ${data.tests.join(", ") || "None"}`, 10, 50);
                 doc.text(`Profiles: ${data.profiles.join(", ") || "None"}`, 10, 60);
-                doc.text(`Date: ${data.appointment_date}`, 10, 70);
-                doc.text(`Time: ${data.appointment_time}`, 10, 80);
+                doc.text(`Total Offer Price: Rs. ${totalOfferPrice.toFixed(2)}`, 10, 70);
+                doc.text(`Results in: ${tats}`, 10, 80);
+                doc.text(`Date: ${data.appointment_date}`, 10, 90);
+                doc.text(`Time: ${data.appointment_time}`, 10, 100);
                 doc.save(`Healthify_Booking_${bookingId}.pdf`);
             } catch (error) {
                 console.error("Error during booking:", error);
                 const confirmation = document.getElementById("confirmation");
                 confirmation.style.display = "block";
-                confirmation.style.color = "red";
+                confirmation.className = "error";
                 confirmation.textContent = `Error during booking: ${error.message}`;
             }
         });
 
         document.addEventListener("DOMContentLoaded", () => {
+            loadTests();
             const selectedTests = JSON.parse(localStorage.getItem("selectedTests") || "[]");
             if (selectedTests.length > 0) {
                 const testDropdown = document.getElementById("test-dropdown");
