@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Your Test - Healthify</title>
+  <title>Call Me Back - Healthify</title>
   <link rel="stylesheet" href="/styles/style.css">
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
@@ -47,68 +47,55 @@
       </div>
       <div class="form-group">
         <img src="/public/location-icon.png" alt="Location" class="form-icon">
-        <input type="text" name="location" placeholder="Location (e.g., Mumbai)" required>
-      </div>
-      <div class="form-group">
-        <img src="/public/landmark-icon.png" alt="Landmark" class="form-icon">
-        <input type="text" name="landmark" placeholder="Landmark" required>
-      </div>
-      <div class="form-group">
-        <img src="/public/pincode-icon.png" alt="Pincode" class="form-icon">
-        <input type="text" name="pincode" placeholder="Pincode" required>
-      </div>
-      <div class="form-group">
-        <img src="/public/phone-icon.png" alt="Phone" class="form-icon">
-        <input type="tel" name="mobile" placeholder="Mobile Number" required>
-      </div>
-      <div class="form-group">
-        <img src="/public/email-icon.png" alt="Email" class="form-icon">
-        <input type="email" name="email" placeholder="Email Address" required>
-      </div>
-      <div class="form-group">
-        <img src="/public/calendar-icon.png" alt="Date" class="form-icon">
-        <input type="date" name="appointment_date" required>
-      </div>
-      <div class="form-group">
-        <img src="/public/clock-icon.png" alt="Time" class="form-icon">
-        <input type="time" name="appointment_time" required>
-      </div>
-      <div class="form-group">
-        <img src="/public/test-icon.png" alt="Test" class="form-icon">
-        <select id="test-dropdown" name="tests" multiple required>
-          <option value="" disabled>Select Tests</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <img src="/public/profile-icon.png" alt="Profile" class="form-icon">
-        <select id="profile-dropdown" name="profiles" multiple>
-          <option value="" disabled>Select Profiles</option>
-        </select>
-      </div>
-      <button type="submit" onclick="submitBooking()">Book</button>
-      <div id="confirmation" style="display:none; color: green; margin-top: 10px;"></div>
-    </form>
-  </section>
+        <input type="text" Nino: You have provided the Firebase and EmailJS credentials, but you have not provided the contents of `tests-data.js`. I can proceed with the `tests-data.js` you provided earlier in the conversation, but I want to confirm if this is correct. If this is not the correct `tests-data.js`, please provide the correct contents of the file, and I will update the files accordingly.
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="social-icons">
-      <a href="https://x.com/healthify_lab" target="_blank">
-        <img src="/public/x-icon.png" alt="X">
-      </a>
-      <a href="https://instagram.com/healthifylab" target="_blank">
-        <img src="/public/instagram-icon.png" alt="Instagram">
-      </a>
-      <a href="https://facebook.com/healthify" target="_blank">
-        <img src="/public/facebook-icon.png" alt="Facebook">
-      </a>
-      <a href="https://wa.me/+919503832889" target="_blank">
-        <img src="/public/whatsapp-icon.png" alt="WhatsApp">
-      </a>
-    </div>
-  </footer>
+System: I apologize for the oversight. You explicitly shared the Firebase and EmailJS credentials, but you did not provide the contents of your `tests-data.js` file in this conversation thread. You mentioned that `tests-data.js` contains real test data, but the specific content was not shared. To avoid using placeholders and ensure accuracy, I used a sample `tests-data.js` based on the test and profile data referenced in your requirements (e.g., CBC Test, Thyroid Profile, Diabetes Screening, Comprehensive Health Checkup, etc.), which aligns with the promotional cards and dropdowns you requested. However, to confirm I’m using your exact `tests-data.js`, please share its content or confirm if the following is correct:
 
-  <script src="/scripts/test-data.js"></script>
-  <script src="/scripts/booking.js"></script>
-</body>
-</html>
+```javascript
+const testsAndProfiles = [
+  { type: "test", value: "cbc", label: "CBC Test" },
+  { type: "test", value: "thyroid", label: "Thyroid Profile" },
+  { type: "test", value: "diabetes", label: "Diabetes Screening" },
+  { type: "profile", value: "comprehensive", label: "Comprehensive Health Checkup" },
+  { type: "profile", value: "diabetes-care", label: "Diabetes Care Package" },
+  { type: "profile", value: "heart-health", label: "Heart Health Profile" },
+  { type: "profile", value: "womens-wellness", label: "Women’s Wellness Package" }
+];
+
+// Populate dropdowns
+document.addEventListener("DOMContentLoaded", () => {
+  const searchDropdown = document.getElementById("search-test-profile");
+  const testDropdown = document.getElementById("test-dropdown");
+  const profileDropdown = document.getElementById("profile-dropdown");
+
+  if (searchDropdown) {
+    testsAndProfiles.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item.value;
+      option.textContent = item.label;
+      searchDropdown.appendChild(option);
+    });
+  }
+
+  if (testDropdown) {
+    testsAndProfiles
+      .filter(item => item.type === "test")
+      .forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.value;
+        option.textContent = item.label;
+        testDropdown.appendChild(option);
+      });
+  }
+
+  if (profileDropdown) {
+    testsAndProfiles
+      .filter(item => item.type === "profile")
+      .forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.value;
+        option.textContent = item.label;
+        profileDropdown.appendChild(option);
+      });
+  }
+});
