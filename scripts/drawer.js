@@ -1,4 +1,4 @@
-// scripts/drawer.js
+// scripts/Drawer.js
 document.addEventListener("DOMContentLoaded", () => {
   const drawer = document.createElement('div');
   drawer.id = "swipeDrawer";
@@ -8,12 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
       <button id="closeDrawer">✖️</button>
     </div>
     <ul>
-      <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="contact.html">📞 Contact</a></li>
-      <li><a href="index.html#about">ℹ️ About</a></li>
-      <li><a href="book.html">🧪 Book a Test</a></li>
-      <li><a href="cart.html">🛒 My Cart</a></li>
-      <li><a href="mybookings.html">📋 My Bookings</a></li>
+      <li><a href="/index.html">🏠 Home</a></li>
+      <li><a href="/contact.html">📞 Contact</a></li>
+      <li><a href="/index.html#about">ℹ️ About</a></li>
+      <li><a href="/booking.html">🧪 Book a Test</a></li>
+      <li><a href="/cart.html">🛒 My Cart</a></li>
+      <li><a href="/mybookings.html">📋 My Bookings</a></li>
     </ul>
   `;
   drawer.classList.add("drawer");
@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
   openBtn.onclick = () => drawer.classList.add("open");
   drawer.querySelector("#closeDrawer").onclick = () => drawer.classList.remove("open");
 
-  // Add CSS for drawer (inline for now, move to style.css if persistent)
   const style = document.createElement("style");
   style.textContent = `
     .drawer { position: fixed; top: 0; left: -250px; width: 250px; height: 100%; background: #fff; transition: left 0.3s; z-index: 1000; box-shadow: 2px 0 5px rgba(0,0,0,0.2); }
