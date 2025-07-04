@@ -5,12 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Healthify</title>
   <link rel="stylesheet" href="/styles/style.css">
+  <!-- Firebase and EmailJS SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 <body>
-  <!-- Your existing website content (e.g., hero banner, testimonials) -->
-  
+  <!-- Header -->
+  <header class="header">
+    <img src="/public/healthify-logo.png" alt="Healthify Logo" class="logo">
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/tests">Tests</a>
+      <a href="/booking">Book Now</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <img src="/public/hero-banner.jpg" alt="Healthify Lab">
+    <div class="hero-text">
+      <h1>Welcome to Healthify</h1>
+      <p>Your trusted pathology lab for accurate diagnostics in Mumbai, Navi Mumbai, and Thane.</p>
+      <a href="/booking" class="cta-button">Book a Test Now</a>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <section class="booking-form">
+    <h2>Book Your Test</h2>
+    <form id="booking-form">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <select name="test" required>
+        <option value="" disabled selected>Select Test</option>
+        <option value="cbc">CBC Test</option>
+        <option value="thyroid">Thyroid Profile</option>
+        <option value="diabetes">Diabetes Screening</option>
+      </select>
+      <button type="submit" onclick="submitBooking()">Submit Booking</button>
+    </form>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <h2>What Our Patients Say</h2>
+    <div class="testimonial">
+      <img src="/public/testimonial-old-woman.jpg" alt="Old Woman">
+      <p>"Healthify’s tests in Mumbai were quick and reliable!"</p>
+      <span>– Mrs. Sharma, Mumbai</span>
+    </div>
+    <div class="testimonial">
+      <img src="/public/testimonial-neha.jpg" alt="Neha">
+      <p>"Neha here! Loved the service in Navi Mumbai."</p>
+      <span>– Neha, Navi Mumbai</span>
+    </div>
+    <div class="testimonial">
+      <img src="/public/testimonial-woman.jpg" alt="Woman">
+      <p>"Accurate results and great staff in Thane!"</p>
+      <span>– Priya, Thane</span>
+    </div>
+    <div class="testimonial">
+      <img src="/public/testimonial-patient.jpg" alt="Patient">
+      <p>"Healthify made my health checkup so easy!"</p>
+      <span>– Raj, Mumbai</span>
+    </div>
+  </section>
+
   <!-- WhatsApp Status Section (Vertical View) -->
-  <div class="healthify-status">
+  <section class="healthify-status">
+    <h2>Healthify Updates</h2>
     <div class="status-item">
       <img src="/public/whatsapp-icon.png" alt="WhatsApp Status">
       <p>Book your CBC test today! Stay healthy with Healthify.</p>
@@ -19,9 +84,16 @@
       <img src="/public/whatsapp-icon.png" alt="WhatsApp Status">
       <p>Exclusive health packages now available! Contact us.</p>
     </div>
+  </section>
+
+  <!-- Popup -->
+  <div class="popup" id="promo-popup">
+    <img src="/public/popup-image.jpg" alt="Promotion">
+    <p>Special Offer: 20% off on all health packages this week!</p>
+    <button onclick="document.getElementById('promo-popup').style.display='none'">Close</button>
   </div>
 
-  <!-- Footer with Social Media and WhatsApp Icons -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="social-icons">
       <a href="https://x.com/healthify_lab" target="_blank">
@@ -38,5 +110,8 @@
       </a>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script src="/scripts/booking.js"></script>
 </body>
 </html>
