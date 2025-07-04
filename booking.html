@@ -174,7 +174,17 @@
                 <div class="form-group">
                     <label for="profile-dropdown">Select Profiles:</label>
                     <select id="profile-dropdown" name="profiles" multiple></select>
-                </div>
+                </div>fetch('/tests.json')
+  .then(response => response.json())
+  .then(data => {
+    const testSelect = document.getElementById('testSelect');
+    data.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.Test_Name;
+      option.text = `${item.Test_Name} - Rs. ${item.Healthify_Offer_Price} (MRP: ${item.MRP})`;
+      testSelect.appendChild(option);
+    });
+
                 <button type="submit">Book Now</button>
             </form>
             <div id="confirmation"></div>
