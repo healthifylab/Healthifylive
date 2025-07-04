@@ -4,134 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthifylive - Book a Test</title>
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            padding: 20px 0;
-        }
-        .header img {
-            max-width: 150px;
-        }
-        .form-section {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        .form-section h2 {
-            margin-top: 0;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .form-group select[multiple] {
-            height: 100px;
-        }
-        button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        #confirmation, #loginStatus {
-            display: none;
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 4px;
-            text-align: center;
-        }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .truncate {
-            max-width: 200px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .truncate:hover {
-            white-space: normal;
-            overflow: visible;
-        }
-        .social-media {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .social-media img {
-            width: 30px;
-            margin: 0 10px;
-        }
-        .loading {
-            text-align: center;
-            padding: 10px;
-            color: #555;
-        }
-        #searchInput {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .result-item {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        .result-item:last-child {
-            border-bottom: none;
-        }
-        .strike {
-            text-decoration: line-through;
-            color: #888;
-        }
-    </style>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script type="module">
@@ -178,7 +52,7 @@
     <div id="recaptcha-container"></div>
     <div class="container">
         <div class="header">
-            <img src="/logo.png" alt="Healthifylive Logo">
+            <img src="/public/logo.png" alt="Healthifylive Logo">
             <h1>Healthifylive - Book a Test</h1>
         </div>
         <div class="form-section">
@@ -267,10 +141,10 @@
             </table>
         </div>
         <div class="social-media">
-            <a href="https://x.com/healthifylive"><img src="/x-icon.png" alt="X"></a>
-            <a href="https://instagram.com/healthifylive"><img src="/instagram-icon.png" alt="Instagram"></a>
-            <a href="https://facebook.com/healthifylive"><img src="/facebook-icon.png" alt="Facebook"></a>
-            <a href="https://wa.me/1234567890"><img src="/whatsapp-icon.png" alt="WhatsApp"></a>
+            <a href="https://x.com/healthifylive"><img src="/public/x-icon.png" alt="X"></a>
+            <a href="https://instagram.com/healthifylive"><img src="/public/instagram-icon.png" alt="Instagram"></a>
+            <a href="https://facebook.com/healthifylive"><img src="/public/facebook-icon.png" alt="Facebook"></a>
+            <a href="https://wa.me/919503832889"><img src="/public/whatsapp-icon.png" alt="WhatsApp"></a>
         </div>
     </div>
     <script>
@@ -278,7 +152,7 @@
 
         async function loadTests() {
             try {
-                const response = await fetch('/tests.json');
+                const response = await fetch('/public/tests.json');
                 if (!response.ok) {
                     throw new Error('Failed to fetch tests data');
                 }
@@ -343,14 +217,18 @@
                     ordering: true
                 });
 
-                // Pre-fill dropdowns from cart
+                // Pre-fill dropdowns from cart or query
+                const urlParams = new URLSearchParams(window.location.search);
+                const fromCart = urlParams.get('cart') === 'true';
                 const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-                cartItems.forEach(item => {
-                    const testOption = testDropdown.querySelector(`option[value="${item.Test_Name}"]`);
-                    const profileOption = profileDropdown.querySelector(`option[value="${item.Test_Name}"]`);
-                    if (testOption) testOption.selected = true;
-                    if (profileOption) profileOption.selected = true;
-                });
+                if (fromCart || cartItems.length) {
+                    cartItems.forEach(item => {
+                        const testOption = testDropdown.querySelector(`option[value="${item.Test_Name}"]`);
+                        const profileOption = profileDropdown.querySelector(`option[value="${item.Test_Name}"]`);
+                        if (testOption) testOption.selected = true;
+                        if (profileOption) profileOption.selected = true;
+                    });
+                }
             } catch (error) {
                 console.error("Error loading tests:", error);
                 document.getElementById("loading").textContent = `Error loading test catalog: ${error.message}`;
@@ -386,7 +264,7 @@
             }
 
             const bookingId = `HFL${Date.now()}`;
-            const testsData = await (await fetch('/tests.json')).json();
+            const testsData = await (await fetch('/public/tests.json')).json();
             const selectedTests = data.tests.concat(data.profiles);
             const totalOfferPrice = selectedTests.reduce((sum, testName) => {
                 const test = testsData.find(t => t.Test_Name === testName);
@@ -433,7 +311,29 @@
                 doc.text(`Time: ${data.appointment_time}`, 10, 100);
                 doc.save(`Healthify_Booking_${bookingId}.pdf`);
 
-                // Clear cart after booking
+                // Store lastBooking
+                localStorage.setItem("lastBooking", JSON.stringify({
+                    name: data.name,
+                    mobile: data.mobile,
+                    email: data.email,
+                    appointment_date: data.appointment_date,
+                    appointment_time: data.appointment_time,
+                    age: data.age,
+                    sex: data.sex,
+                    address: data.address,
+                    pincode: data.pincode,
+                    landmark: data.landmark,
+                    tests: testsData.filter(t => data.tests.includes(t.Test_Name)).map(t => ({
+                        Test_Name: t.Test_Name,
+                        Healthify_Offer_Price: t.Healthify_Offer_Price
+                    })),
+                    profiles: testsData.filter(t => data.profiles.includes(t.Test_Name)).map(t => ({
+                        Test_Name: t.Test_Name,
+                        Healthify_Offer_Price: t.Healthify_Offer_Price
+                    }))
+                }));
+
+                // Clear cart
                 localStorage.removeItem("cartItems");
             } catch (error) {
                 console.error("Error during booking:", error);
