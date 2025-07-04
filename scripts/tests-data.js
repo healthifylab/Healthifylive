@@ -1,4 +1,4 @@
-// tests-data.js
+// test-data.js
 
 const sampleTests = [
   {
@@ -8,7 +8,9 @@ const sampleTests = [
     offerPrice: 249,
     NoofParameters: 24,
     TAT: "24 hours",
-    TestType: "Test"
+    TestType: "Test",
+    image: "assets/cbc-profile.jpg", // Add image path for consistency with fetch-tests.js
+    id: "cbc" // Add ID for booking URL compatibility
   },
   {
     TestName: "Lipid Profile",
@@ -17,7 +19,9 @@ const sampleTests = [
     offerPrice: 649,
     NoofParameters: 8,
     TAT: "24 hours",
-    TestType: "Test"
+    TestType: "Test",
+    image: "assets/lipid-profile.jpg",
+    id: "lipid"
   },
   {
     TestName: "Blood Glucose",
@@ -26,7 +30,9 @@ const sampleTests = [
     offerPrice: 249,
     NoofParameters: 1,
     TAT: "12 hours",
-    TestType: "Test"
+    TestType: "Test",
+    image: "assets/blood-glucose.jpg",
+    id: "glucose"
   },
   {
     TestName: "Vitamin D",
@@ -35,7 +41,9 @@ const sampleTests = [
     offerPrice: 1199,
     NoofParameters: 1,
     TAT: "24 hours",
-    TestType: "Test"
+    TestType: "Test",
+    image: "assets/vitamin-d.jpg",
+    id: "vitamin-d"
   }
 ];
 
@@ -47,7 +55,9 @@ const sampleProfiles = [
     offerPrice: 1999,
     NoofParameters: 60,
     TAT: "48 hours",
-    TestType: "Profile"
+    TestType: "Profile",
+    image: "assets/full-body-checkup.jpg",
+    id: "full-body-1999"
   },
   {
     TestName: "Healthify Diabetes Profile",
@@ -56,7 +66,9 @@ const sampleProfiles = [
     offerPrice: 1199,
     NoofParameters: 30,
     TAT: "24 hours",
-    TestType: "Profile"
+    TestType: "Profile",
+    image: "assets/diabetes-profile.jpg",
+    id: "diabetes"
   },
   {
     TestName: "Healthify Cardiac Profile",
@@ -65,9 +77,15 @@ const sampleProfiles = [
     offerPrice: 1599,
     NoofParameters: 15,
     TAT: "48 hours",
-    TestType: "Profile"
+    TestType: "Profile",
+    image: "assets/cardiac-profile.jpg",
+    id: "cardiac"
   }
 ];
 
+// Store data in localStorage for fallback
 localStorage.setItem("testsList", JSON.stringify(sampleTests));
 localStorage.setItem("profilesList", JSON.stringify(sampleProfiles));
+
+// Export for potential use in other scripts
+export { sampleTests, sampleProfiles };
