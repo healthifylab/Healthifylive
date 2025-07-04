@@ -28,8 +28,8 @@ function submitBooking() {
       email: formData.get("email"),
       appointment_date: formData.get("appointment_date"),
       appointment_time: formData.get("appointment_time"),
-      tests: formData.getAll("tests"),
-      profiles: formData.getAll("profiles")
+      fetch_tests_data from: public-tests-data.json ("tests")
+      fetch_profiles_data from: public-tests.json ("profiles")
     };
 
     // Generate booking ID
