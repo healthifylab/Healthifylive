@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthifylive - Book a Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,7 +62,7 @@
         button:hover {
             background-color: #218838;
         }
-        #confirmation {
+        #confirmation, #loginStatus {
             display: none;
             margin-top: 20px;
             padding: 10px;
@@ -112,12 +113,31 @@
             padding: 10px;
             color: #555;
         }
+        #searchInput {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .result-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .strike {
+            text-decoration: line-through;
+            color: #888;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
         import { getFirestore, collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
@@ -130,20 +150,46 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const auth = getAuth(app);
         window.db = db;
+
+        onAuthStateChanged(auth, user => {
+            const form = document.getElementById("booking-form");
+            const loginStatus = document.getElementById("loginStatus");
+            if (user) {
+                form.style.display = "block";
+                loginStatus.style.display = "none";
+            } else {
+                form.style.display = "none";
+                loginStatus.style.display = "block";
+                loginStatus.className = "error";
+                loginStatus.textContent = "Please log in to book tests.";
+            }
+        });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs/3.8.0/email.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="module" src="/scripts/cart-ui.js"></script>
+    <script src="/scripts/Drawer.js"></script>
+    <script type="module" src="/scripts/Firebase-auth.js"></script>
+    <script src="/scripts/Search.js"></script>
 </head>
 <body>
+    <div id="recaptcha-container"></div>
     <div class="container">
         <div class="header">
             <img src="/logo.png" alt="Healthifylive Logo">
             <h1>Healthifylive - Book a Test</h1>
         </div>
         <div class="form-section">
+            <h2>Search Tests</h2>
+            <input type="text" id="searchInput" placeholder="Search tests or profiles...">
+            <div id="searchResults"></div>
+        </div>
+        <div class="form-section">
             <h2>Book a Diagnostic Test</h2>
-            <form id="booking-form">
+            <div id="loginStatus"></div>
+            <form id="booking-form" style="display: none;">
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
@@ -214,6 +260,7 @@
                         <th>Description</th>
                         <th>Tests Included</th>
                         <th>TAT</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="testTableBody"></tbody>
@@ -277,6 +324,7 @@
                             <td class="truncate">${description}</td>
                             <td class="truncate">${testsIncluded}</td>
                             <td>${data.TAT}</td>
+                            <td><button onclick='cartUI.addToCart("${data.Test_Name}")'>➕ Add to Cart</button></td>
                         </tr>`;
                     tableBody.innerHTML += row;
                 });
@@ -293,6 +341,15 @@
                     paging: true,
                     searching: true,
                     ordering: true
+                });
+
+                // Pre-fill dropdowns from cart
+                const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+                cartItems.forEach(item => {
+                    const testOption = testDropdown.querySelector(`option[value="${item.Test_Name}"]`);
+                    const profileOption = profileDropdown.querySelector(`option[value="${item.Test_Name}"]`);
+                    if (testOption) testOption.selected = true;
+                    if (profileOption) profileOption.selected = true;
                 });
             } catch (error) {
                 console.error("Error loading tests:", error);
@@ -344,7 +401,8 @@
                 await setDoc(doc(db, "bookings", bookingId), {
                     ...data,
                     totalOfferPrice,
-                    tats
+                    tats,
+                    userId: auth.currentUser ? auth.currentUser.uid : "anonymous"
                 });
 
                 await emailjs.send("service_z3ac4pk", "template_5v6t6ku", {
@@ -374,6 +432,9 @@
                 doc.text(`Date: ${data.appointment_date}`, 10, 90);
                 doc.text(`Time: ${data.appointment_time}`, 10, 100);
                 doc.save(`Healthify_Booking_${bookingId}.pdf`);
+
+                // Clear cart after booking
+                localStorage.removeItem("cartItems");
             } catch (error) {
                 console.error("Error during booking:", error);
                 const confirmation = document.getElementById("confirmation");
@@ -385,18 +446,6 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             loadTests();
-            const selectedTests = JSON.parse(localStorage.getItem("selectedTests") || "[]");
-            if (selectedTests.length > 0) {
-                const testDropdown = document.getElementById("test-dropdown");
-                const profileDropdown = document.getElementById("profile-dropdown");
-                selectedTests.forEach(value => {
-                    const testOption = testDropdown.querySelector(`option[value="${value}"]`);
-                    const profileOption = profileDropdown.querySelector(`option[value="${value}"]`);
-                    if (testOption) testOption.selected = true;
-                    if (profileOption) profileOption.selected = true;
-                });
-                localStorage.removeItem("selectedTests");
-            }
         });
     </script>
 </body>
