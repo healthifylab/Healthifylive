@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,298 +8,330 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f4f4f4;
         }
         .container {
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .header img {
+            max-width: 150px;
+        }
+        .form-section {
             background: white;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
-        h1 {
-            text-align: center;
-            color: #333;
+        .form-section h2 {
+            margin-top: 0;
         }
         .form-group {
             margin-bottom: 15px;
         }
-        label {
+        .form-group label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
         }
-        input, select {
+        .form-group input, .form-group select {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box;
+        }
+        .form-group select[multiple] {
+            height: 100px;
         }
         button {
-            width: 100%;
-            padding: 10px;
             background-color: #28a745;
             color: white;
+            padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
         }
         button:hover {
             background-color: #218838;
         }
-        #message {
-            margin-top: 10px;
-            text-align: center;
-            color: #28a745;
+        #confirmation {
             display: none;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
         }
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            input, select, button {
-                font-size: 14px;
-            }
+        .error {
+            color: red;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .social-media {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .social-media img {
+            width: 30px;
+            margin: 0 10px;
         }
     </style>
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <img src="/logo.png" alt="Healthify Lab Logo">
-        <nav>
-            <a href="/index.html">Home</a>
-            <a href="/contact.html">Contact</a>
-        </nav>
-    </div>
-    <div class="form-container">
-        <img src="/booking-icon.png" alt="Booking Icon" class="form-icon">
-        <h2>Book Your Test</h2>
-        <form id="booking-form">
-            <label>Name:</label><input type="text" name="name" required>
-            <label>Age:</label><input type="number" name="age" required>
-            <label>Sex:</label>
-            <select name="sex" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-            <label>State:</label>
-            <select name="state" id="state" required>
-                <option value="">Select State</option>
-                <!-- Populated dynamically -->
-            </select>
-            <label>City:</label>
-            <select name="city" id="city" required>
-                <option value="">Select City</option>
-                <!-- Populated dynamically -->
-            </select>
-            <label>Pincode:</label><input type="text" name="pincode" id="pincode" required>
-            <label>Address:</label><input type="text" name="address" required>
-            <label>Landmark:</label><input type="text" name="landmark" required>
-            <label>Mobile:</label><input type="tel" name="mobile" required>
-            <label>Email:</label><input type="email" name="email" required>
-            <label>Appointment Date:</label><input type="date" name="appointment_date" required>
-            <label>Appointment Time:</label><input type="time" name="appointment_time" required>
-            <label>Tests:</label>
-            <select multiple name="tests" id="test-dropdown"></public/tests-data.json>>
-            <label>Profiles:</label>
-            <select multiple name="profiles" id="profile-dropdown"></public/tests-data.json>
-            <button type="submit" onclick="submitBooking()">Book Now</button>
-       fetch_test_data from : public/test-data.json
-        </form>
-        <div id="confirmation"></div>
-    </div>
-    <div class="container">
-        <h2>Test Catalog</h2>
-        <table id="testCatalog" class="display">
-            <thead>
-                <tr>
-                    <th>Test Name</th>
-                    <th>Category</th>
-                    <th>Sample Type</th>
-                    <th>MRP (Rs.)</th>
-                    <th>Description/Parameters</th>
-                </tr>
-            </thead>
-            <tbody id="testTableBody"></tbody>
-        </table>
-        <div class="social-links">
-            <a href="https://x.com/HealthifyLab"><img src="/x-icon.png" alt="X"></a>
-            <a href="https://instagram.com/HealthifyLab"><img src="/instagram-icon.png" alt="Instagram"></a>
-          <a href="https://facebook.com/Healthify"><img src="/facebook-icon.png" alt="facebook"></a>
-        </div>
-    </div>
-    <div class="whatsapp-float">
-        <a href="https://wa.me/919503832889" target="_blank"><img src="/whatsapp-icon.png" alt="WhatsApp"></a>
-    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-    <script>
-        // Initialize Firebase
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getFirestore, collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+        
         const firebaseConfig = {
             apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
-            authDomain: "https://healthify-lab.firebaseapp.com",
+            authDomain: "healthify-lab.firebaseapp.com",
             projectId: "healthify-lab",
             storageBucket: "healthify-lab.firebasestorage.app",
             messagingSenderId: "297003315332",
             appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
         };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
 
-        // Initialize EmailJS
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        window.db = db;
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs/3.8.0/email.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/logo.png" alt="Healthifylive Logo">
+            <h1>Healthifylive - Book a Test</h1>
+        </div>
+        <div class="form-section">
+            <h2>Book a Diagnostic Test</h2>
+            <form id="booking-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" required>
+                </div>
+                <div class="form-group">
+                    <label for="sex">Sex:</label>
+                    <select id="sex" name="sex" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pincode">Pincode:</label>
+                    <input type="text" id="pincode" name="pincode" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="landmark">Landmark:</label>
+                    <input type="text" id="landmark" name="landmark">
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="tel" id="mobile" name="mobile" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointment_date">Appointment Date:</label>
+                    <input type="date" id="appointment_date" name="appointment_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointment_time">Appointment Time:</label>
+                    <input type="time" id="appointment_time" name="appointment_time" required>
+                </div>
+                <div class="form-group">
+                    <label for="test-dropdown">Select Tests:</label>
+                    <select id="test-dropdown" name="tests" multiple></select>
+                </div>
+                <div class="form-group">
+                    <label for="profile-dropdown">Select Profiles:</label>
+                    <select id="profile-dropdown" name="profiles" multiple></select>
+                </div>
+                <button type="submit">Book Now</button>
+            </form>
+            <div id="confirmation"></div>
+        </div>
+        <div class="form-section">
+            <h2>Test Catalog</h2>
+            <table id="testCatalog">
+                <thead>
+                    <tr>
+                        <th>Test Name</th>
+                        <th>Category</th>
+                        <th>Sample Type</th>
+                        <th>Price (Rs.)</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody id="testTableBody"></tbody>
+            </table>
+        </div>
+        <div class="social-media">
+            <a href="https://x.com/healthifylive"><img src="/x-icon.png" alt="X"></a>
+            <a href="https://instagram.com/healthifylive"><img src="/instagram-icon.png" alt="Instagram"></a>
+            <a href="https://facebook.com/healthifylive"><img src="/facebook-icon.png" alt="Facebook"></a>
+            <a href="https://wa.me/1234567890"><img src="/whatsapp-icon.png" alt="WhatsApp"></a>
+        </div>
+    </div>
+    <script>
         emailjs.init("dJE_JHAoNTxxzTxiT");
 
-        // State and city data (sample, replace with API data)
-        const states = ["Maharashtra"= {
-            Maharashtra: ["Mumbai", "Navi Mumbai", "Thane", "Pune"],
-            
-        };
-
-        // Populate state dropdown
-        const stateDropdown = document.getElementById("state");
-        states.forEach(state => {
-            const option = document.createElement("option");
-            option.value = state;
-            option.text = state;
-            stateDropdown.appendChild(option);
-        });
-
-        // Update city dropdown based on state
-        document.getElementById("state").addEventListener("change", function() {
-            const cityDropdown = document.getElementById("city");
-            cityDropdown.innerHTML = '<option value="">Select City</option>';
-            const selectedState = this.value;
-            if (citiesByState[selectedState]) {
-                citiesByState[selectedState].forEach(city => {
-                    const option = document.createElement("option");
-                    option.value = city;
-                    option.text = city;
-                    cityDropdown.appendChild(option);
-                });
-            }
-        });
-
-        // Auto-fetch state/city from pincode
-        document.getElementById("pincode").addEventListener("input", function() {
-            const pincode = this.value;
-            if (pincode.length === 6) {
-                fetch(`http://api.postalpincode.in/pincode/${pincode}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data[0].Status === "Success") {
-                            const postOffice = data[0].PostOffice[0];
-                            document.getElementById("state").value = postOffice.State;
-                            const cityDropdown = document.getElementById("city");
-                            cityDropdown.innerHTML = '<option value="">Select City</option>';
-                            const option = document.createElement("option");
-                            option.value = postOffice.District;
-                            option.text = postOffice.District;
-                            cityDropdown.appendChild(option);
-                            cityDropdown.value = postOffice.District;
-                        }
-                    })
-                    .catch(error => console.error("Pincode API error:", error));
-            }
-        });
-
         async function loadTests() {
-            const querySnapshot = await db.collection("tests").get();
-            const testDropdown = document.getElementById("test-dropdown");
-            const profileDropdown = document.getElementById("profile-dropdown");
-            const tableBody = document.getElementById("testTableBody");
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                const option = document.createElement("option");
-                option.value = data.Test_Name;
-                option.text = `${data.Test_Name} - Rs. ${data.MRP}`;
-                if (data.Category === "Individual Tests") {
-                    testDropdown.appendChild(option);
-                } else {
-                    profileDropdown.appendChild(option.cloneNode(true));
+            try {
+                const response = await fetch('public/tests.json');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch tests data');
                 }
-                const description = data.Test_Parameters_Included ? `${data.Test_Description}<br><strong>Included:</strong> ${data.Test_Parameters_Included}` : data.Test_Description;
-                const row = `
-                    <tr>
-                        <td>${data.Test_Name}</td>
-                        <td>${data.Category}</td>
-                        <td>${data.Sample_Type}</td>
-                        <td>${data.MRP}</td>
-                        <td>${description}</td>
-                    </tr>`;
-                tableBody.innerHTML += row;
-            });
+                const tests = await response.json();
+                const seenTestNames = new Set();
+                const validTests = tests.filter(test => {
+                    if (!test.Test_Name || !test.Sample_Type || !test.MRP || test.MRP <= 0) {
+                        console.warn(`Skipping invalid test: ${JSON.stringify(test)}`);
+                        return false;
+                    }
+                    if (seenTestNames.has(test.Test_Name)) {
+                        return false;
+                    }
+                    seenTestNames.add(test.Test_Name);
+                    return true;
+                });
 
-            $("#testCatalog").DataTable({
-                responsive: true,
-                paging: true,
-                searching: true,
-                ordering: true
-            });
+                const testDropdown = document.getElementById("test-dropdown");
+                const profileDropdown = document.getElementById("profile-dropdown");
+                const tableBody = document.getElementById("testTableBody");
+
+                validTests.forEach(data => {
+                    const option = document.createElement("option");
+                    option.value = data.Test_Name;
+                    option.text = `${data.Test_Name} - Rs. ${data.MRP}`;
+                    option.title = data.Test_Description || "No description available";
+                    if (data.Category === "Individual Tests") {
+                        testDropdown.appendChild(option);
+                    } else if (data.Category === "Healthify Body Profiles") {
+                        profileDropdown.appendChild(option.cloneNode(true));
+                    }
+                    const description = data.Test_Parameters_Included 
+                        ? `${data.Test_Description || "No description"}<br><strong>Included:</strong> ${data.Test_Parameters_Included}`
+                        : data.Test_Description || "No description available";
+                    const row = `
+                        <tr>
+                            <td>${data.Test_Name}</td>
+                            <td>${data.Category}</td>
+                            <td>${data.Sample_Type}</td>
+                            <td>${data.MRP}</td>
+                            <td>${description}</td>
+                        </tr>`;
+                    tableBody.innerHTML += row;
+                });
+
+                $("#testCatalog").DataTable({
+                    responsive: true,
+                    paging: true,
+                    searching: true,
+                    ordering: true
+                });
+
+                if (validTests.length === 0) {
+                    throw new Error("No valid tests found in data");
+                }
+            } catch (error) {
+                console.error("Error loading tests:", error);
+                document.getElementById("testTableBody").innerHTML = `<tr><td colspan="5" class="error">Error loading test catalog: ${error.message}</td></tr>`;
+            }
         }
+
         loadTests();
 
-        function submitBooking() {
-            const form = document.getElementById("booking-form");
-            if (form) {
-                const formData = new FormData(form);
-                const data = {
-                    name: formData.get("name"),
-                    age: formData.get("age"),
-                    sex: formData.get("sex"),
-                    state: formData.get("state"),
-                    city: formData.get("city"),
-                    pincode: formData.get("pincode"),
-                    address: formData.get("address"),
-                    landmark: formData.get("landmark"),
-                    mobile: formData.get("mobile"),
-                    email: formData.get("email"),
-                    appointment_date: formData.get("appointment_date"),
-                    appointment_time: formData.get("appointment_time"),
-                    tests: formData.getAll("tests"),
-                    profiles: formData.getAll("profiles")
-                };
+        document.getElementById("booking-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get("name"),
+                age: formData.get("age"),
+                sex: formData.get("sex"),
+                pincode: formData.get("pincode"),
+                address: formData.get("address"),
+                landmark: formData.get("landmark"),
+                mobile: formData.get("mobile"),
+                email: formData.get("email"),
+                appointment_date: formData.get("appointment_date"),
+                appointment_time: formData.get("appointment_time"),
+                tests: formData.getAll("tests"),
+                profiles: formData.getAll("profiles"),
+                timestamp: new Date().toISOString()
+            };
 
-                const bookingId = `HFL${Date.now()}`;
-
-                db.collection("bookings").doc(bookingId).set(data)
-                    .then(() => {
-                        emailjs.send("service_z3ac4pk", "template_5v6t6ku", {
-                            ...data,
-                            booking_id: bookingId,
-                            tests: data.tests.join(", "),
-                            profiles: data.profiles.join(", ")
-                        })
-                            .then(() => {
-                                const confirmation = document.getElementById("confirmation");
-                                confirmation.style.display = "block";
-                                confirmation.textContent = `Booking successful! Your Booking ID: ${bookingId}`;
-
-                                const { jsPDF } = window.jspdf;
-                                const doc = new jsPDF();
-                                doc.text("Healthify Booking Receipt", 10, 10);
-                                doc.text(`Booking ID: ${bookingId}`, 10, 20);
-                                doc.text(`Name: ${data.name}`, 10, 30);
-                                doc.text(`Mobile: ${data.mobile}`, 10, 40);
-                                doc.text(`Tests: ${data.tests.join(", ")}`, 10, 50);
-                                doc.text(`Profiles: ${data.profiles.join(", ")}`, 10, 60);
-                                doc.text(`Date: ${data.appointment_date}`, 10, 70);
-                                doc.text(`Time: ${data.appointment_time}`, 10, 80);
-                                doc.save(`Healthify_Booking_${bookingId}.pdf`);
-                            })
-                            .catch(error => console.error("EmailJS error:", error));
-                    })
-                    .catch(error => console.error("Firestore error:", error));
+            if (data.tests.length === 0 && data.profiles.length === 0) {
+                const confirmation = document.getElementById("confirmation");
+                confirmation.style.display = "block";
+                confirmation.style.color = "red";
+                confirmation.textContent = "Please select at least one test or profile.";
+                return;
             }
-        }
+
+            const bookingId = `HFL${Date.now()}`;
+
+            try {
+                await setDoc(doc(db, "bookings", bookingId), data);
+
+                await emailjs.send("service_z3ac4pk", "template_5v6t6ku", {
+                    ...data,
+                    booking_id: bookingId,
+                    tests: data.tests.join(", "),
+                    profiles: data.profiles.join(", ")
+                });
+
+                const confirmation = document.getElementById("confirmation");
+                confirmation.style.display = "block";
+                confirmation.textContent = `Booking successful! Your Booking ID: ${bookingId}`;
+
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.text("Healthify Booking Receipt", 10, 10);
+                doc.text(`Booking ID: ${bookingId}`, 10, 20);
+                doc.text(`Name: ${data.name}`, 10, 30);
+                doc.text(`Mobile: ${data.mobile}`, 10, 40);
+                doc.text(`Tests: ${data.tests.join(", ") || "None"}`, 10, 50);
+                doc.text(`Profiles: ${data.profiles.join(", ") || "None"}`, 10, 60);
+                doc.text(`Date: ${data.appointment_date}`, 10, 70);
+                doc.text(`Time: ${data.appointment_time}`, 10, 80);
+                doc.save(`Healthify_Booking_${bookingId}.pdf`);
+            } catch (error) {
+                console.error("Error during booking:", error);
+                const confirmation = document.getElementById("confirmation");
+                confirmation.style.display = "block";
+                confirmation.style.color = "red";
+                confirmation.textContent = `Error during booking: ${error.message}`;
+            }
+        });
 
         document.addEventListener("DOMContentLoaded", () => {
             const selectedTests = JSON.parse(localStorage.getItem("selectedTests") || "[]");
@@ -308,12 +339,10 @@
                 const testDropdown = document.getElementById("test-dropdown");
                 const profileDropdown = document.getElementById("profile-dropdown");
                 selectedTests.forEach(value => {
-                    if (testDropdown.querySelector(`option[value="${value}"]`)) {
-                        testDropdown.querySelector(`option[value="${value}"]`).selected = true;
-                    }
-                    if (profileDropdown.querySelector(`option[value="${value}"]`)) {
-                        profileDropdown.querySelector(`option[value="${value}"]`).selected = true;
-                    }
+                    const testOption = testDropdown.querySelector(`option[value="${value}"]`);
+                    const profileOption = profileDropdown.querySelector(`option[value="${value}"]`);
+                    if (testOption) testOption.selected = true;
+                    if (profileOption) profileOption.selected = true;
                 });
                 localStorage.removeItem("selectedTests");
             }
