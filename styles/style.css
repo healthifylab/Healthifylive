@@ -1,72 +1,291 @@
-// scripts/booking.js
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { auth, sendOTP } from "./firebase-auth.js";
-
-// EmailJS
-const EMAIL_SERVICE_ID = "service_z3ac4pk";
-const EMAIL_TEMPLATE_ID = "template_5v6t6ku";
-const EMAIL_PUBLIC_KEY = "dJE_JHAoNTxxzTxiT";
-
-const db = getFirestore();
-
-export async function submitBooking(data) {
-  try {
-    const user = auth.currentUser;
-    if (!user) throw new Error("User not logged in");
-
-    const bookingData = {
-      ...data,
-      uid: user.uid,
-      phone: user.phoneNumber,
-      createdAt: serverTimestamp(),
-    };
-
-    // Save to Firestore
-    await addDoc(collection(db, "bookings"), bookingData);
-
-    // Send email using EmailJS
-    await emailjs.send(
-      EMAIL_SERVICE_ID,
-      EMAIL_TEMPLATE_ID,
-      {
-        name: data.name,
-        email: data.email,
-        phone: user.phoneNumber,
-        date: data.date,
-        address: data.address,
-        tests: data.tests.join(", "),
-        pincode: data.pincode,
-        landmark: data.landmark,
-      },
-      EMAIL_PUBLIC_KEY
-    );
-
-    alert("✅ Booking submitted & email sent successfully!");
-    localStorage.removeItem("cartItems");
-  } catch (error) {
-    console.error("❌ Booking error:", error);
-    alert("Booking failed. Please try again.");
-  }
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-export function startOTPLogin(phoneInputId = "phoneInput") {
-  const phone = document.getElementById(phoneInputId).value.trim();
-  if (!phone.startsWith("+91") || phone.length !== 13) {
-    alert("Please enter a valid Indian mobile number (e.g., +919876543210).");
-    return;
-  }
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-  sendOTP(phone)
-    .then((confirmationResult) => {
-      const code = prompt("Enter the OTP you received:");
-      return confirmationResult.confirm(code);
-    })
-    .then((result) => {
-      console.log("✅ Logged in:", result.user.phoneNumber);
-      alert("Login successful!");
-    })
-    .catch((error) => {
-      console.error("❌ OTP error:", error);
-      alert("Failed to verify OTP.");
-    });
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+.nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Hero Banner */
+.hero-banner {
+  position: relative;
+  text-align: center;
+}
+
+.hero-banner img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Booking Form */
+.booking-form {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.booking-form h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+#booking-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#booking-form input,
+#booking-form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#booking-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Testimonials */
+.testimonials {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.testimonials h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.testimonial {
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+}
+
+.testimonial img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.testimonial p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.testimonial span {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* WhatsApp Status */
+.healthify-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.healthify-status h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e5ddd5;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.status-item img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.status-item p {
+  font-size: 1rem;
+  color: #111b21;
+}
+
+/* Popup */
+.popup {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  max-width: 90%;
+  text-align: center;
+  z-index: 1000;
+}
+
+.popup img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.popup p {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.popup button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons img {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav a {
+    margin: 5px 0;
+  }
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+  .hero-banner img {
+    max-height: 400px;
+  }
+  .booking-form h2 {
+    font-size: 1.8rem;
+  }
+  #booking-form {
+    max-width: 90%;
+  }
+  .testimonials h2 {
+    font-size: 1.8rem;
+  }
+  .testimonial {
+    max-width: 90%;
+  }
+  .healthify-status h2 {
+    font-size: 1.8rem;
+  }
+  .status-item {
+    max-width: 90%;
+  }
+  .popup p {
+    font-size: 1.2rem;
+  }
+  .social-icons {
+    gap: 10px;
+  }
+  .social-icons img {
+    width: 28px;
+    height: 28px;
+  }
 }
