@@ -1,72 +1,35 @@
-// scripts/booking.js
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { auth, sendOTP } from "./firebase-auth.js";
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+  authDomain: "https://healthify-lab.firebaseapp.com",
+  projectId: "healthify-lab",
+  storageBucket: "healthify-lab.firebasestorage.app",
+  messagingSenderId: "297003315332",
+  appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+};
+firebase.initializeApp(firebaseConfig);
 
-// EmailJS
-const EMAIL_SERVICE_ID = "service_z3ac4pk";
-const EMAIL_TEMPLATE_ID = "template_5v6t6ku";
-const EMAIL_PUBLIC_KEY = "dJE_JHAoNTxxzTxiT";
+// Initialize EmailJS
+emailjs.init(dJE_JHAoNTxxzTxiT);
 
-const db = getFirestore();
-
-export async function submitBooking(data) {
-  try {
-    const user = auth.currentUser;
-    if (!user) throw new Error("User not logged in");
-
-    const bookingData = {
-      ...data,
-      uid: user.uid,
-      phone: user.phoneNumber,
-      createdAt: serverTimestamp(),
+function submitBooking() {
+  const form = document.getElementById("booking-form");
+  if (form) {
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      test: formData.get("test")
     };
 
     // Save to Firestore
-    await addDoc(collection(db, "bookings"), bookingData);
-
-    // Send email using EmailJS
-    await emailjs.send(
-      EMAIL_SERVICE_ID,
-      EMAIL_TEMPLATE_ID,
-      {
-        name: data.name,
-        email: data.email,
-        phone: user.phoneNumber,
-        date: data.date,
-        address: data.address,
-        tests: data.tests.join(", "),
-        pincode: data.pincode,
-        landmark: data.landmark,
-      },
-      EMAIL_PUBLIC_KEY
-    );
-
-    alert("✅ Booking submitted & email sent successfully!");
-    localStorage.removeItem("cartItems");
-  } catch (error) {
-    console.error("❌ Booking error:", error);
-    alert("Booking failed. Please try again.");
+    firebase.firestore().collection("bookings").add(data)
+      .then(() => {
+        // Send EmailJS
+        emailjs.send("service_z3ac4pk", "template_5v6t6ku", data)
+          .then(() => alert("Booking submitted successfully!"))
+          .catch(error => console.error("EmailJS error:", error));
+      })
+      .catch(error => console.error("Firestore error:", error));
   }
-}
-
-export function startOTPLogin(phoneInputId = "phoneInput") {
-  const phone = document.getElementById(phoneInputId).value.trim();
-  if (!phone.startsWith("+91") || phone.length !== 13) {
-    alert("Please enter a valid Indian mobile number (e.g., +919876543210).");
-    return;
-  }
-
-  sendOTP(phone)
-    .then((confirmationResult) => {
-      const code = prompt("Enter the OTP you received:");
-      return confirmationResult.confirm(code);
-    })
-    .then((result) => {
-      console.log("✅ Logged in:", result.user.phoneNumber);
-      alert("Login successful!");
-    })
-    .catch((error) => {
-      console.error("❌ OTP error:", error);
-      alert("Failed to verify OTP.");
-    });
 }
