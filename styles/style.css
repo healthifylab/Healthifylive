@@ -1,338 +1,399 @@
-/* Mobile-first global styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
-  color: #333;
-  line-height: 1.5;
-  overflow-x: hidden; /* Prevent horizontal overflow */
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #F5F7FA;
+    color: #2E2E2E;
+    overflow-x: hidden;
 }
 
-/* Header */
-header.header {
-  position: sticky;
-  top: 0;
-  background: #f0f0f0;
-  padding: 8px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 999;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+nav {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #FFFFFF;
+    color: #2E2E2E;
+    position: relative;
+    z-index: 1000;
+    border-bottom: 1px solid #E0E0E0;
 }
 
-header.header .logo {
-  max-height: 40px;
-  width: auto;
-  object-fit: contain;
+.logo {
+    height: 120px;
+    width: 70%;
+    margin-right: 15px;
+    object-fit: contain;
 }
 
-header.header nav {
-  display: flex;
-  gap: 8px;
-  font-size: 12px;
+nav ul {
+    list-style: none;
+    display: flex;
 }
 
-header.header nav a {
-  text-decoration: none;
-  color: #0077cc;
-  font-weight: bold;
+nav ul li {
+    margin-right: 15px;
 }
 
-/* Hero Section */
-.hero-banner {
-  width: 100%;
-  max-width: 100%; /* No overflow */
-  height: auto;
-  max-height: 40vh; /* Tighter for mobile */
-  min-height: 60px;
-  object-fit: contain;
-  border-radius: 8px;
-  margin: 8px auto;
-  display: block;
+nav ul li a {
+    text-decoration: none;
+    color: #2E2E2E;
+    font-size: 12px;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
-/* Promo Slider */
-.promo-slider {
-  display: flex;
-  flex-wrap: wrap; /* Stack cards */
-  gap: 8px;
-  margin: 10px;
-  padding: 8px;
-  justify-content: center;
-  overflow-x: hidden; /* Prevent slider overflow */
+nav ul li a:hover {
+    color: #00C4B4;
 }
 
-.promo-card {
-  flex: 0 1 clamp(120px, 95%, 180px); /* Ultra-responsive */
-  border: 1px solid #ddd;
-  padding: 6px;
-  text-align: center;
-  border-radius: 6px;
-  background: #fff;
+header.hero-banner {
+    text-align: center;
+    padding: 20px 10px;
+    background: #F5F7FA;
+    color: #2E2E2E;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    min-height: 450px;
 }
 
-.promo-card img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 6px;
+header.hero-banner h1 {
+    font-size: 36px;
+    font-weight: 700;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #FFFFFF;
+    padding: 15px;
+    border-radius: 8px;
 }
 
-.promo-card button {
-  background-color: #007bff;
-  color: white;
-  padding: 6px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 6px;
-  width: 100%;
-  font-size: 12px;
+header.hero-banner p {
+    font-size: 18px;
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    color: #FFFFFF;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 12px;
+    border-radius: 8px;
 }
 
-/* Booking Form */
-form {
-  padding: 8px;
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 8px;
-  max-width: 400px;
+header.hero-banner img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    position: relative;
+    z-index: -1;
 }
 
-form input,
-form textarea,
-form select {
-  width: 100%;
-  padding: 6px;
-  margin-bottom: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 12px;
+.swiper {
+    width: 100% !important;
+    padding: 0;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
-form button {
-  width: 100%;
-  padding: 8px;
-  background-color: #28a745;
-  color: white;
-  font-size: 13px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+.swiper-slide {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 }
 
-/* FAQ Section */
-#faq {
-  padding: 8px;
-  max-width: 600px;
-  margin: 0 auto;
+.card {
+    width: 90%;
+    max-width: 300px;
+    height: 400px;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.faq-item {
-  background: #eef;
-  padding: 6px;
-  border-radius: 5px;
-  margin-bottom: 6px;
+.card img {
+    max-width: 80%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px;
 }
 
-/* Testimonials Section */
-#testimonials {
-  background: #fff;
-  padding: 8px;
+.card h4 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #2E2E2E;
+    margin: 10px 0;
 }
 
-.testimonial-slider {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0 10px;
-  padding: 8px;
-  justify-content: center;
-  overflow-x: hidden;
+.card video {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px 6px 0 0;
 }
 
-.testimonial {
-  flex: 0 1 clamp(100px, 95%, 160px);
-  padding: 6px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
+.book-now {
+    padding: 8px 16px;
+    background: #00C4B4;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.3s;
 }
 
-.testimonial img {
-  width: clamp(36px, 10vw, 50px);
-  height: clamp(36px, 10vw, 50px);
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 6px;
+.book-now:hover {
+    background: #009687;
 }
 
-.testimonial p {
-  font-size: 12px;
-  color: #555;
-  margin: 4px 0;
+.swiper-pagination-bullet {
+    background: #00C4B4;
 }
 
-.testimonial strong {
-  display: block;
-  font-size: 10px;
-  color: #0077cc;
+.why-choose, .faq, .testimonials, .contact {
+    padding: 20px 10px;
+    text-align: center;
+    background: #F5F7FA;
 }
 
-/* Footer */
-footer.footer {
-  background: #333;
-  color: #fff;
-  padding: 8px;
-  text-align: center;
+.why-choose ul {
+    list-style: none;
+    padding: 0;
 }
 
-footer.footer .social-icons a {
-  color: #fff;
-  margin: 0 4px;
-  text-decoration: none;
+.why-choose ul li {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #666666;
 }
 
-footer.footer .social-icons a:hover {
-  text-decoration: underline;
+details summary {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    color: #2E2E2E;
 }
 
-/* WhatsApp Floating Icon */
+details[open] summary {
+    margin-bottom: 10px;
+}
+
+.testimonial-card {
+    width: 90%;
+    max-width: 300px;
+    height: 400px;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonial-card img {
+    width: 50%;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.testimonial-card p {
+    margin: 10px 0;
+    font-style: italic;
+    font-size: 14px;
+    color: #666666;
+}
+
+.testimonial-card h4 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 16px;
+    color: #2E2E2E;
+}
+
+.contact .about p {
+    max-width: 90%;
+    margin: 10px auto;
+    line-height: 1.6;
+    font-size: 14px;
+    color: #666666;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #FFFFFF;
+    border-top: 1px solid #E0E0E0;
+    color: #2E2E2E;
+    width: 100%;
+}
+
+footer a {
+    color: #2E2E2E;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #00C4B4;
+}
+
+footer .social-media {
+    margin-top: 10px;
+}
+
+footer .social-media a {
+    color: #2E2E2E;
+    margin: 0 5px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer .social-media a:hover {
+    color: #00C4B4;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFFFFF;
+    padding: 20px;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    width: 70%;
+    min-height: 400px;
+    height: auto;
+    text-align: center;
+    font-size: 18px;
+    color: #2E2E2E;
+    overflow-y: auto;
+}
+
+.popup .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #FF6F61;
+}
+
+.popup p, .popup h3 {
+    font-size: 18px;
+}
+
+.popup input, .popup button {
+    font-size: 16px;
+    padding: 8px;
+    margin: 5px 0;
+}
+
 .whatsapp-float {
-  position: fixed;
-  bottom: 8px;
-  right: 8px;
-  background: #25d366;
-  border-radius: 50%;
-  padding: 6px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    z-index: 1000;
 }
 
 .whatsapp-float img {
-  width: clamp(18px, 4vw, 22px);
-  height: clamp(18px, 4vw, 22px);
+    width: 30px;
+    height: 30px;
 }
 
-/* Misc */
-h2,
-h3,
-h4 {
-  font-size: clamp(14px, 3.5vw, 18px);
-  color: #333;
-  margin: 8px 0;
+.contact-icons {
+    margin-top: 20px;
+    text-align: center;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-ul li {
-  margin: 4px 0;
+.contact-icons i {
+    margin: 0 10px;
+    font-size: 24px;
 }
 
 /* Responsive Adjustments */
-@media (min-width: 769px) {
-  .hero-banner {
-    max-height: 50vh;
-    min-height: 100px;
-  }
-
-  .promo-card {
-    flex: 0 1 clamp(160px, 30%, 220px);
-  }
-
-  .testimonial {
-    flex: 0 1 clamp(140px, 30%, 200px);
-  }
-
-  .testimonial img {
-    width: clamp(50px, 8vw, 60px);
-    height: clamp(50px, 8vw, 60px);
-  }
-
-  header.header {
-    padding: 10px 20px;
-  }
-
-  header.header nav {
-    font-size: 14px;
-    gap: 12px;
-  }
-
-  form {
-    padding: 12px;
-    margin: 12px auto;
-    max-width: 500px;
-  }
-
-  .promo-slider,
-  .testimonial-slider {
-    flex-wrap: nowrap; /* Horizontal scroll for larger screens */
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-  }
-
-  .promo-slider::-webkit-scrollbar,
-  .testimonial-slider::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  .promo-slider::-webkit-scrollbar-thumb,
-  .testimonial-slider::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 3px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-banner {
-    max-height: 30vh;
-    min-height: 50px;
-  }
-
-  .promo-card {
-    flex: 0 1 clamp(90px, 95%, 120px);
-  }
-
-  .testimonial {
-    flex: 0 1 clamp(80px, 95%, 110px);
-  }
-
-  .testimonial img {
-    width: clamp(30px, 8vw, 40px);
-    height: clamp(30px, 8vw, 40px);
-  }
-
-  .whatsapp-float {
-    padding: 5px;
-    bottom: 6px;
-    right: 6px;
-  }
-
-  .whatsapp-float img {
-    width: clamp(16px, 3vw, 20px);
-    height: clamp(16px, 3vw, 20px);
-  }
-}
-
-/* Fallback for missing images */
-img:not([src]),
-img[src=""] {
-  background: #ddd;
-  min-height: 40px;
-  width: 100%;
-  display: block;
-  border: 1px solid #ccc;
+@media (min-width: 768px) {
+    .logo {
+        height: 250px;
+        width: 70%;
+    }
+    .card, .testimonial-card {
+        width: 70%;
+        max-width: 300px;
+        height: 450px;
+        padding: 15px;
+    }
+    .swiper-slide {
+        width: 33.33% !important;
+    }
+    .featured-profiles .swiper-slide,
+    .promotional-cards .swiper-slide,
+    .testimonials .swiper-slide,
+    .cards .swiper-slide {
+        width: 33.33% !important;
+    }
+    nav ul li a, .why-choose ul li, details summary, .contact .about p, .testimonial-card p {
+        font-size: 16px;
+    }
+    .book-now {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    .testimonial-card img {
+        width: 70%;
+        height: 200px;
+    }
+    .popup {
+        width: 70%;
+        min-height: 450px;
+        padding: 30px;
+        font-size: 20px;
+    }
+    .popup p, .popup h3 {
+        font-size: 20px;
+    }
+    .popup input, .popup button {
+        font-size: 18px;
+        padding: 10px;
+    }
+    .whatsapp-float img {
+        width: 50px;
+        height: 50px;
+    }
+    header.hero-banner h1 {
+        font-size: 40px;
+    }
+    header.hero-banner p {
+        font-size: 22px;
+    }
 }
