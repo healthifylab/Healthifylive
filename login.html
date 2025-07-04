@@ -1,28 +1,36 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Patient Login – Healthify</title>
+  <title>🔐 Patient Login – Healthify</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="styles/style.css"/>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <script defer src="scripts/firebase-auth.js"></script>
+  <script type="module" src="scripts/firebase-auth.js"></script>
 </head>
 <body>
-  <header class="header">
-    <a href="index.html"><img src="assets/logo.png" class="logo" alt="Logo"/></a>
-    <h2>🔐 Patient Login</h2>
+  <nav>
+    <img src="assets/logo-healthify.png" alt="Healthify Logo" class="logo">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="book.html">Book Test</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>🔐 Patient Login</h1>
   </header>
 
   <main style="padding: 20px">
     <h3>Login with Mobile Number</h3>
     <input type="tel" id="phoneInput" placeholder="+91XXXXXXXXXX" required />
     <div id="recaptcha-container"></div>
-    <button onclick="sendOTP()">📲 Send OTP</button><br/><br/>
+    <button onclick="startOTPLogin()">📲 Send OTP</button><br/><br/>
     
-    <input type="text" id="otpInput" placeholder="Enter OTP" />
-    <button onclick="verifyOTP()">✅ Verify OTP</button><br/><br/>
+    <input type="text" id="otpInput" placeholder="Enter OTP" style="display:none;" />
+    <button id="verifyOTPBtn" onclick="verifyOTP()" style="display:none;">✅ Verify OTP</button><br/><br/>
 
     <hr/>
 
@@ -32,6 +40,26 @@
 
     <div id="loginStatus" style="margin-top: 10px; color: green;"></div>
   </main>
+
+  <footer>
+    <p>Healthify © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+    <div class="social-media">
+      <a href="https://twitter.com/healthify_lab" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
+    <img src="assets/whatsapp-icon.png" alt="WhatsApp">
+  </a>
+
+  <script type="module">
+    function verifyOTP() {
+      const code = document.getElementById("otpInput").value;
+      // This should be handled by firebase-auth.js's sendOTP promise chain
+      alert("OTP verification not implemented here; use sendOTP flow.");
+    }
+  </script>
 </body>
 </html>
-
