@@ -1,127 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Healthify</title>
-  <link rel="stylesheet" href="/styles/style.css">
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthify Lab Test Catalog</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { text-align: center; color: #333; }
+        .logo { max-width: 150px; height: auto; display: block; margin: 0 auto 20px; }
+        table { width: 100%; font-size: 16px; }
+        th, td { padding: 10px; text-align: left; }
+        .social-links { text-align: center; margin-top: 20px; }
+        .social-links img { width: 30px; margin: 0 10px; }
+        @media (max-width: 600px) { table, th, td { font-size: 14px; } .logo { max-width: 100px; } }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <a href="/"><img src="/public/healthify-logo.png" alt="Healthify Logo" class="logo"></a>
-    <nav class="nav">
-      <a href="/book">Book Now</a>
-      <a href="/contact">Contact</a>
-    </nav>
-  </header>
-
-  <!-- Hero Banner -->
-  <section class="hero-banner">
-    <img src="/public/hero-banner.jpg" alt="Healthify Lab">
-  </section>
-
-  <!-- Search Test/Profile -->
-  <section class="search-section">
-    <h2>Search Tests or Profiles</h2>
-    <select id="search-test-profile" multiple>
-      <option value="" disabled>Select Test or Profile</option>
-    </select>
-    <button onclick="redirectToBooking()">Book Selected</button>
-  </section>
-
-  <!-- Promotional Cards (Horizontal Swipable) -->
-  <section class="promo-cards">
-    <h2>Our Health Packages</h2>
-    <div class="cards-container">
-      <div class="card">
-        <img src="/public/card1.jpg" alt="Comprehensive Health Checkup">
-        <h3>Comprehensive Health Checkup</h3>
-        <p>Includes CBC, Thyroid, Lipid Profile, and more.</p>
-        <a href="/book" class="card-button">Book Now</a>
-      </div>
-      <div class="card">
-        <img src="/public/card2.jpg" alt="Diabetes Care Package">
-        <h3>Diabetes Care Package</h3>
-        <p>Monitor blood sugar, HbA1c, and kidney function.</p>
-        <a href="/book" class="card-button">Book Now</a>
-      </div>
-      <div class="card">
-        <img src="/public/card3.jpg" alt="Heart Health Profile">
-        <h3>Heart Health Profile</h3>
-        <p>Assess cholesterol, ECG, and cardiac markers.</p>
-        <a href="/book" class="card-button">Book Now</a>
-      </div>
-      <div class="card">
-        <img src="/public/card4.jpg" alt="Women’s Wellness Package">
-        <h3>Women’s Wellness Package</h3>
-        <p>Comprehensive tests for women’s health.</p>
-        <a href="/book" class="card-button">Book Now</a>
-      </div>
+    <div class="container">
+        <img src="/logo.png" alt="Healthify Lab Logo" class="logo">
+        <h1>Healthify Lab Test Catalog</h1>
+        <table id="testCatalog" class="display">
+            <thead>
+                <tr>
+                    <th>Test Name</th>
+                    <th>Category</th>
+                    <th>Sample Type</th>
+                    <th>MRP (Rs.)</th>
+                    <th>Description/Parameters</th>
+                </tr>
+            </thead>
+            <tbody id="testTableBody"></tbody>
+        </table>
+        <div class="social-links">
+            <a href="https://x.com/HealthifyLab"><img src="/x-icon.png" alt="X"></a>
+            <a href="https://instagram.com/HealthifyLab"><img src="/instagram-icon.png" alt="Instagram"></a>
+        </div>
     </div>
-  </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-  <!-- Why Choose Healthify -->
-  <section class="why-choose">
-    <h2>Why Choose Healthify</h2>
-    <p>🔬 <strong>Healthify Lab</strong><br>Your trusted partner in preventive healthcare.</p>
-    <p>💉 Hassle-free sample collection at home</p>
-    <p>🧪 Advanced diagnostics & accurate reports</p>
-    <p>🚚 Fast turnaround | 📍</p>
-    <p>✅ 💙 Happy Customers</p>
-    <p>📞 Book your test today — because your health deserves the best.</p>
-  </section>
+        const firebaseConfig = {
+            // INSERT YOUR FIREBASE CONFIG HERE (from Firebase Console: Project Settings > General > Your Apps > Web)
+            // Example: apiKey: "your-api-key", authDomain: "your-project-id.firebaseapp.com", etc.
+        };
 
-  <!-- Testimonials (Horizontal) -->
-  <section class="testimonials">
-    <h2>What Our Patients Say</h2>
-    <div class="testimonials-container">
-      <div class="testimonial">
-        <img src="/public/testimonial-old-woman.jpg" alt="Mrs. Sharma">
-        <p>"Healthify’s tests in Mumbai were quick and reliable!"</p>
-        <span>– Mrs. Sharma, Mumbai</span>
-      </div>
-      <div class="testimonial">
-        <img src="/public/testimonial-neha.jpg" alt="Neha">
-        <p>"Neha here! Loved the service in Navi Mumbai."</p>
-        <span>– Neha, Navi Mumbai</span>
-      </div>
-      <div class="testimonial">
-        <img src="/public/testimonial-woman.jpg" alt="Priya">
-        <p>"Accurate results and great staff in Thane!"</p>
-        <span>– Priya, Thane</span>
-      </div>
-      <div class="testimonial">
-        <img src="/public/testimonial-patient.jpg" alt="Raj">
-        <p>"Healthify made my health checkup so easy!"</p>
-        <span>– Raj, Mumbai</span>
-      </div>
-    </div>
-  </section>
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="social-icons">
-      <a href="https://x.com/healthify_lab" target="_blank">
-        <img src="/public/x-icon.png" alt="X">
-      </a>
-      <a href="https://instagram.com/healthifylab" target="_blank">
-        <img src="/public/instagram-icon.png" alt="Instagram">
-      </a>
-      <a href="https://facebook.com/healthify" target="_blank">
-        <img src="/public/facebook-icon.png" alt="Facebook">
-      </a>
-      <a href="https://wa.me/+919503832889" target="_blank">
-        <img src="/public/whatsapp-icon.png" alt="WhatsApp">
-      </a>
-    </div>
-  </footer>
+        async function loadTests() {
+            const querySnapshot = await getDocs(collection(db, "tests"));
+            const tableBody = document.getElementById('testTableBody');
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const description = data.Test_Parameters_Included ? `${data.Test_Description}<br><strong>Included:</strong> ${data.Test_Parameters_Included}` : data.Test_Description;
+                const row = `
+                    <tr>
+                        <td>${data.Test_Name}</td>
+                        <td>${data.Category}</td>
+                        <td>${data.Sample_Type}</td>
+                        <td>${data.MRP}</td>
+                        <td>${description}</td>
+                    </tr>`;
+                tableBody.innerHTML += row;
+            });
 
-  <script src="/scripts/tests-data.js"></script>
-  <script src="/scripts/booking.js"></script>
+            $('#testCatalog').DataTable({
+                responsive: true,
+                paging: true,
+                searching: true,
+                ordering: true
+            });
+        }
+        loadTests();
+    </script>
 </body>
 </html>
