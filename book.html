@@ -1,77 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthify - Book Test</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Test - Healthify</title>
+  <link rel="stylesheet" href="/styles/style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <nav>
-        <img src="assets/logo-healthify.png" alt="Healthify Logo" class="logo">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="book.html">Book Test</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
+  <!-- Header -->
+  <header class="header">
+    <a href="/"><img src="/public/healthify-logo.png" alt="Healthify Logo" class="logo"></a>
+    <nav class="nav">
+      <a href="/booking">Book Now</a>
+      <a href="/contact">Contact</a>
     </nav>
+  </header>
 
-    <header>
-        <h1>Book Your Test</h1>
-    </header>
+  <!-- Booking Form -->
+  <section class="booking-form">
+    <h2>Call Me Back</h2>
+    <form id="booking-form">
+      <div class="form-group">
+        <img src="/public/user-icon.png" alt="User" class="form-icon">
+        <input type="text" name="name" placeholder="Full Name" required>
+      </div>
+      <div class="form-group">
+        <img src="/public/age-icon.png" alt="Age" class="form-icon">
+        <input type="number" name="age" placeholder="Age" required>
+      </div>
+      <div class="form-group">
+        <img src="/public/gender-icon.png" alt="Gender" class="form-icon">
+        <select name="sex" required>
+          <option value="" disabled selected>Sex</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <img src="/public/location-icon.png" alt="Location" class="form-icon">
+        <input type="text" name="address" placeholder="Address" required>
+      </div>
+      <div class="form-group">
+        <img src="/public/location-icon.png" alt="Location" class="form-icon">
+        <input type="text" name="location" placeholder="Location (e.g., Mumbai)" required>
+      </div>
+      <div class="form-group">
+        <img src="/public/landmark-icon.png" alt="Landmark" class="form-icon">
+        <input type="text" name="landmark" placeholder="Landmark" required>
+      </div>
+      <div class="form-group">
+        <img src="/public/pincode-icon.png" alt="Pincode" class="form-icon">
+        <input type="text" name="pincode" placeholder="Pincode" required>
+      </div>
+      <div class="form-group">
+        <img src="/public/phone-icon.png" alt="Phone" class="form-icon">
+        <input type="tel" name="mobile" placeholder="Mobile Number" required>
+      </div>
+      <div class="form-group">
+        <img src="/public/email-icon.png" alt="Email" class="form-icon">
+        <input type="email" name="email" placeholder="Email Address" required>
+      </div>
+      <div class="form-group">
+        <img src="/public/calendar-icon.png" alt="Date" class="form-icon">
+        <input type="date" name="appointment_date" required>
+      </div>
+      <div class="form-group">
+        <img src="/public/clock-icon.png" alt="Time" class="form-icon">
+        <input type="time" name="appointment_time" required>
+      </div>
+      <div class="form-group">
+        <img src="/public/test-icon.png" alt="Test" class="form-icon">
+        <select id="test-dropdown" name="tests" multiple required>
+          <option value="" disabled>Select Tests</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <img src="/public/profile-icon.png" alt="Profile" class="form-icon">
+        <select id="profile-dropdown" name="profiles" multiple>
+          <option value="" disabled>Select Profiles</option>
+        </select>
+      </div>
+      <button type="submit" onclick="submitBooking()">Book</button>
+      <div id="confirmation" style="display:none; color: green; margin-top: 10px;"></div>
+    </form>
+  </section>
 
-    <section class="cards">
-        <h2>Available Tests</h2>
-        <div class="swiper book-swiper">
-            <div class="swiper-wrapper" id="testCards">
-                <!-- Test cards will be dynamically inserted here -->
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="social-icons">
+      <a href="https://x.com/healthify_lab" target="_blank">
+        <img src="/public/x-icon.png" alt="X">
+      </a>
+      <a href="https://instagram.com/healthifylab" target="_blank">
+        <img src="/public/instagram-icon.png" alt="Instagram">
+      </a>
+      <a href="https://facebook.com/healthify" target="_blank">
+        <img src="/public/facebook-icon.png" alt="Facebook">
+      </a>
+      <a href="https://wa.me/+919503832889" target="_blank">
+        <img src="/public/whatsapp-icon.png" alt="WhatsApp">
+      </a>
+    </div>
+  </footer>
 
-    <section class="booking-form" style="padding: 20px; max-width: 500px; margin: 20px auto;">
-        <h2>Book Your Test</h2>
-        <form id="bookingForm">
-            <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <input type="tel" name="phone" placeholder="+91XXXXXXXXXX" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <input type="date" name="date" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <input type="text" name="address" placeholder="Your Address" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <input type="text" name="pincode" placeholder="Pincode" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <input type="text" name="landmark" placeholder="Landmark" style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <input type="hidden" name="tests" id="selectedTests">
-            <button type="submit" style="width: 100%; padding: 10px; background-color: #00a884; color: white; border: none; cursor: pointer;">Submit Booking</button>
-        </form>
-    </section>
-
-    <footer>
-        <p>Healthify © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
-        <div class="social-media">
-            <a href="https://twitter.com/healthify_lab" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        </div>
-    </footer>
-
-    <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
-        <img src="assets/whatsapp-icon.png" alt="WhatsApp">
-    </a>
-
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- EmailJS SDK -->
-    <script type="module" src="scripts/fetch-tests.js"></script>
-    <script type="module" src="scripts/booking.js"></script>
-    <script>
-        document.getElementById("bookingForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const tests = JSON.parse(localStorage.getItem("cartItems") || "[]").map(t => t.TestName);
-            formData.set("tests", JSON.stringify(tests));
-            await submitBooking(Object.fromEntries(formData));
-        });
-    </script>
+  <script src="/scripts/test-data.js"></script>
+  <script src="/scripts/booking.js"></script>
 </body>
 </html>
