@@ -22,9 +22,10 @@
     <main>
       <h1>🔐 Patient Login</h1>
       <h3>Login with Mobile Number</h3>
-      <input type="tel" id="phoneInput" placeholder="+91XXXXXXXXXX" required>
       <div id="recaptcha-container"></div>
-      <button onclick="startOTPLogin()">📲 Send OTP</button><br><br>
+      <input type="tel" id="phoneInput" placeholder="+91XXXXXXXXXX" required>
+      <button onclick="startOTPLogin()">📲 Send OTP</button>
+      <button onclick="startOTPLogin()" style="display:none;" id="resendOTPBtn">🔄 Resend OTP</button><br><br>
       <input type="text" id="otpInput" placeholder="Enter OTP" style="display:none;">
       <button id="verifyOTPBtn" onclick="verifyOTP()" style="display:none;">✅ Verify OTP</button><br><br>
       <hr>
@@ -46,48 +47,71 @@
     </a>
   </div>
   <script type="module">
-    import { sendOTP } from "/scripts/Firebase-auth.js";
+    import { sendOTP, sendEmailLink } from "/scripts/Firebase-auth.js";
+
+    console.log("Scripts loaded, sendOTP and sendEmailLink available:", typeof sendOTP, typeof sendEmailLink);
 
     function startOTPLogin() {
       const phoneNumber = document.getElementById("phoneInput").value;
+      const loginStatus = document.getElementById("loginStatus");
+      console.log("Starting OTP for:", phoneNumber);
       if (!phoneNumber.match(/^\+91[0-9]{10}$/)) {
-        document.getElementById("loginStatus").textContent = "❌ Invalid phone number.";
+        loginStatus.className = "error";
+        loginStatus.textContent = "❌ Invalid phone number. Use +91 followed by 10 digits.";
         return;
       }
+      loginStatus.textContent = "📲 Sending OTP...";
       sendOTP(phoneNumber).then(confirmationResult => {
         window.confirmationResult = confirmationResult;
         document.getElementById("otpInput").style.display = "block";
         document.getElementById("verifyOTPBtn").style.display = "block";
-        document.getElementById("loginStatus").textContent = "📲 OTP sent!";
+        document.getElementById("resendOTPBtn").style.display = "block";
+        loginStatus.className = "success";
+        loginStatus.textContent = "📲 OTP sent! Check SMS (may be in spam) or use test code.";
       }).catch(error => {
         console.error("OTP error:", error);
-        document.getElementById("loginStatus").textContent = "❌ Failed to send OTP.";
+        loginStatus.className = "error";
+        loginStatus.textContent = `❌ Failed to send OTP: ${error.message}. Check test number or plan.`;
       });
     }
 
     function verifyOTP() {
       const code = document.getElementById("otpInput").value;
+      const loginStatus = document.getElementById("loginStatus");
+      console.log("Verifying OTP:", code);
       if (!window.confirmationResult) {
-        document.getElementById("loginStatus").textContent = "❌ No OTP request found.";
+        loginStatus.className = "error";
+        loginStatus.textContent = "❌ No OTP request found. Request a new OTP.";
         return;
       }
       window.confirmationResult.confirm(code).then(result => {
-        document.getElementById("loginStatus").textContent = "✅ Login successful!";
+        loginStatus.className = "success";
+        loginStatus.textContent = "✅ Login successful!";
         window.location.href = "/booking.html";
       }).catch(error => {
         console.error("OTP verification error:", error);
-        document.getElementById("loginStatus").textContent = "❌ Invalid OTP.";
+        loginStatus.className = "error";
+        loginStatus.textContent = `❌ Invalid OTP: ${error.message}`;
       });
     }
 
     function sendEmailLink() {
       const email = document.getElementById("emailInput").value;
+      const loginStatus = document.getElementById("loginStatus");
+      console.log("Sending email link to:", email);
       if (!email) {
-        document.getElementById("loginStatus").textContent = "❌ Please enter an email.";
+        loginStatus.className = "error";
+        loginStatus.textContent = "❌ Please enter a valid email.";
         return;
       }
-      import("/scripts/Firebase-auth.js").then(module => {
-        module.sendEmailLink(email);
+      loginStatus.textContent = "📧 Sending login link...";
+      sendEmailLink(email).then(() => {
+        loginStatus.className = "success";
+        loginStatus.textContent = "📧 Login link sent! Check email (may be in spam).";
+      }).catch(error => {
+        console.error("Email link error:", error);
+        loginStatus.className = "error";
+        loginStatus.textContent = `❌ Failed to send login link: ${error.message}.`;
       });
     }
   </script>
