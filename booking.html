@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthify Lab Booking</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
+        .form-container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; border-radius: 8px; }
+        label, input, select { display: block; width: 100%; margin: 10px 0; }
+        input, select { padding: 10px; font-size: 16px; }
+        button { padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; font-size: 16px; }
+        #confirmation { display: none; color: green; font-weight: bold; margin-top: 10px; }
+        .logo { max-width: 150px; height: auto; display: block; margin: 0 auto 20px; }
+        .social-links { text-align: center; margin-top: 20px; }
+        .social-links img { width: 30px; margin: 0 10px; }
+        @media (max-width: 600px) { .form-container { padding: 10px; } input, select, button { font-size: 14px; } .logo { max-width: 100px; } }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <img src="/logo.png" alt="Healthify Lab Logo" class="logo">
+        <h2>Book Your Test</h2>
+        <form id="booking-form">
+            <label>Name:</label><input type="text" name="name" required>
+            <label>Age:</label><input type="number" name="age" required>
+            <label>Sex:</label>
+            <select name="sex" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <label>Address:</label><input type="text" name="address" required>
+            <label>Location:</label><input type="text" name="location" required>
+            <label>Landmark:</label><input type="text" name="landmark" required>
+            <label>Pincode:</label><input type="text" name="pincode" required>
+            <label>Mobile:</label><input type="tel" name="mobile" required>
+            <label>Email:</label><input type="email" name="email" required>
+            <label>Appointment Date:</label><input type="date" name="appointment_date" required>
+            <label>Appointment Time:</label><input type="time" name="appointment_time" required>
+            <label>Tests:</label>
+            <select multiple name="tests" id="test-dropdown"></select>
+            <label>Profiles:</label>
+            <select multiple name="profiles" id="profile-dropdown"></select>
+            <button type="submit" onclick="submitBooking()">Book Now</button>
+        </form>
+        <div id="confirmation"></div>
+        <div class="social-links">
+            <a href="https://x.com/HealthifyLab"><img src="/x-icon.png" alt="X"></a>
+            <a href="https://instagram.com/HealthifyLab"><img src="/instagram-icon.png" alt="Instagram"></a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+            authDomain: "https://healthify-lab.firebaseapp.com",
+            projectId: "healthify-lab",
+            storageBucket: "healthify-lab.firebasestorage.app",
+            messagingSenderId: "297003315332",
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        emailjs.init("dJE_JHAoNTxxzTxiT");
+
+        async function loadTests() {
+            const querySnapshot = await getDocs(collection(db, "tests"));
+            const testDropdown = document.getElementById('test-dropdown');
+            const profileDropdown = document.getElementById('profile-dropdown');
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const option = document.createElement('option');
+                option.value = data.Test_Name;
+                option.text = `${data.Test_Name} - Rs. ${data.MRP}`;
+                if (data.Category === "Individual Tests") {
+                    testDropdown.appendChild(option);
+                } else {
+                    profileDropdown.appendChild(option.cloneNode(true));
+                }
+            });
+        }
+        loadTests();
+
+        function submitBooking() {
+            const form = document.getElementById("booking-form");
+            if (form) {
+                const formData = new FormData(form);
+                const data = {
+                    name: formData.get("name"),
+                    age: formData.get("age"),
+                    sex: formData.get("sex"),
+                    address: formData.get("address"),
+                    location: formData.get("location"),
+                    landmark: formData.get("landmark"),
+                    pincode: formData.get("pincode"),
+                    mobile: formData.get("mobile"),
+                    email: formData.get("email"),
+                    appointment_date: formData.get("appointment_date"),
+                    appointment_time: formData.get("appointment_time"),
+                    tests: formData.getAll("tests"),
+                    profiles: formData.getAll("profiles")
+                };
+
+                const bookingId = `HFL${Date.now()}`;
+
+                firebase.firestore().collection("bookings").doc(bookingId).set(data)
+                    .then(() => {
+                        emailjs.send("service_z3ac4pk", "template_5v6t6ku", {
+                            ...data,
+                            booking_id: bookingId,
+                            tests: data.tests.join(", "),
+                            profiles: data.profiles.join(", ")
+                        })
+                            .then(() => {
+                                const confirmation = document.getElementById("confirmation");
+                                confirmation.style.display = "block";
+                                confirmation.textContent = `Booking successful! Your Booking ID: ${bookingId}`;
+
+                                const { jsPDF } = window.jspdf;
+                                const doc = new jsPDF();
+                                doc.text("Healthify Booking Receipt", 10, 10);
+                                doc.text(`Booking ID: ${bookingId}`, 10, 20);
+                                doc.text(`Name: ${data.name}`, 10, 30);
+                                doc.text(`Mobile: ${data.mobile}`, 10, 40);
+                                doc.text(`Tests: ${data.tests.join(", ")}`, 10, 50);
+                                doc.text(`Profiles: ${data.profiles.join(", ")}`, 10, 60);
+                                doc.text(`Date: ${data.appointment_date}`, 10, 70);
+                                doc.text(`Time: ${data.appointment_time}`, 10, 80);
+                                doc.save(`Healthify_Booking_${bookingId}.pdf`);
+                            })
+                            .catch(error => console.error("EmailJS error:", error));
+                    })
+                    .catch(error => console.error("Firestore error:", error));
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const selectedTests = JSON.parse(localStorage.getItem("selectedTests") || "[]");
+            if (selectedTests.length > 0) {
+                const testDropdown = document.getElementById("test-dropdown");
+                const profileDropdown = document.getElementById("profile-dropdown");
+                selectedTests.forEach(value => {
+                    if (testDropdown.querySelector(`option[value="${value}"]`)) {
+                        testDropdown.querySelector(`option[value="${value}"]`).selected = true;
+                    }
+                    if (profileDropdown.querySelector(`option[value="${value}"]`)) {
+                        profileDropdown.querySelector(`option[value="${value}"]`).selected = true;
+                    }
+                });
+                localStorage.removeItem("selectedTests");
+            }
+        });
+    </script>
+</body>
+</html>
