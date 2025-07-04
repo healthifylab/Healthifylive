@@ -1,61 +1,44 @@
-// firebase-auth.js
-
+// scripts/firebase-auth.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
-import {
-  getAuth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
-  authDomain: "healthify-lab.firebaseapp.com",
-  projectId: "healthify-lab",
-  storageBucket: "healthify-lab.firebasestorage.app",
-  messagingSenderId: "297003315332",
-  appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
-  measurementId: "G-R0R3RYERZW"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
-let recaptchaVerifier;
-function getOrCreateRecaptcha(auth) {
-  if (!recaptchaVerifier) {
-    recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
+export function sendOTP(phoneNumber) {
+  const recaptchaContainer = document.getElementById("recaptcha-container");
+  if (!window.recaptchaVerifier) {
+    window.recaptchaVerifier = new RecaptchaVerifier(recaptchaContainer, {
       size: "invisible",
-      callback: () => {},
-    });
-  }
-  return recaptchaVerifier;
-}
-
-export function sendOTP(phone) {
-  const verifier = getOrCreateRecaptcha(auth);
-  return signInWithPhoneNumber(auth, phone, verifier);
-}
-
-export function startOTPLogin() {
-  const phone = document.getElementById("phoneInput").value.trim();
-  if (!phone.startsWith("+91")) {
-    alert("Include +91 before number");
-    return;
+      callback: (response) => {}
+    }, auth);
   }
 
-  sendOTP(phone)
-    .then((confirmationResult) => {
-      const code = prompt("Enter OTP:");
-      return confirmationResult.confirm(code);
-    })
-    .then((result) => {
-      alert("✅ Logged in as " + result.user.phoneNumber);
+  return signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
+}
+
+export function sendEmailLink(email) {
+  const actionCodeSettings = {
+    url: "http://localhost:3000/login.html",
+    handleCodeInApp: true,
+  };
+  auth.sendSignInLinkToEmail(email, actionCodeSettings)
+    .then(() => {
+      window.localStorage.setItem("emailForSignIn", email);
+      document.getElementById("loginStatus").textContent = "📧 Login link sent to your email!";
     })
     .catch((error) => {
-      alert("❌ OTP failed: " + error.message);
+      console.error("Email link error:", error);
+      document.getElementById("loginStatus").textContent = "❌ Failed to send link.";
     });
 }
-
-export { auth };
