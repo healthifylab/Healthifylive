@@ -42,7 +42,6 @@ export async function submitBooking(data) {
     );
 
     alert("✅ Booking submitted & email sent successfully!");
-    // Clear cart after successful booking
     localStorage.removeItem("cartItems");
   } catch (error) {
     console.error("❌ Booking error:", error);
