@@ -3,84 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthify Lab Test Catalog</title>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <title>Healthify Lab - Home</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        h1 { text-align: center; color: #333; }
-        .logo { max-width: 150px; height: auto; display: block; margin: 0 auto 20px; }
-        table { width: 100%; font-size: 16px; }
-        th, td { padding: 10px; text-align: left; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        .header { background: #28a745; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header img { max-width: 120px; height: auto; }
+        .header nav a { color: white; margin: 0 15px; text-decoration: none; font-size: 16px; }
+        .hero { background: url('/hero-image.jpg') center/cover no-repeat; color: white; text-align: center; padding: 100px 20px; margin-top: 60px; }
+        .hero h1 { font-size: 36px; margin: 0; }
+        .hero p { font-size: 18px; }
+        .hero a { background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .promo-popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 2000; text-align: center; max-width: 400px; }
+        .promo-popup.active { display: block; }
+        .promo-popup h3 { font-size: 24px; margin: 0 0 10px; }
+        .promo-popup p { font-size: 18px; }
+        .promo-popup button { background: #28a745; color: white; border: none; padding: 10px; cursor: pointer; margin-top: 10px; font-size: 16px; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        .promo-cards { display: flex; justify-content: space-around; flex-wrap: wrap; margin: 20px 0; }
+        .card { background: white; border-radius: 8px; width: 30%; padding: 15px; margin: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .card img { max-width: 100%; height: auto; border-radius: 8px; }
+        .why-choose { background: white; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .testimonials { margin: 20px 0; }
+        .testimonial { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .cart { text-align: center; margin: 20px 0; }
+        .cart a { background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .whatsapp-float img { width: 50px; }
         .social-links { text-align: center; margin-top: 20px; }
         .social-links img { width: 30px; margin: 0 10px; }
-        @media (max-width: 600px) { table, th, td { font-size: 14px; } .logo { max-width: 100px; } }
+        @media (max-width: 600px) {
+            .header img { max-width: 80px; }
+            .header nav a { font-size: 14px; margin: 0 10px; }
+            .hero { padding: 60px 10px; margin-top: 50px; }
+            .hero h1 { font-size: 24px; }
+            .hero p { font-size: 16px; }
+            .card { width: 100%; }
+            .promo-popup { max-width: 90%; }
+            .promo-popup h3 { font-size: 20px; }
+            .promo-popup p { font-size: 16px; }
+            .promo-popup button { font-size: 14px; }
+            .whatsapp-float img { width: 40px; }
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <img src="/logo.png" alt="Healthify Lab Logo">
+        <nav>
+            <a href="/booking.html">Book Test</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+    <div class="hero">
+        <h1>Welcome to Healthify Lab</h1>
+        <p>Your trusted partner for comprehensive health diagnostics</p>
+        <a href="/booking.html">Book Now</a>
+    </div>
+    <div class="promo-popup" id="promoPopup">
+        <h3>Special Offer!</h3>
+        <p>Get Wellness 1.4 (Rs. 4800) at 10% off this week!</p>
+        <a href="/booking.html"><button>Book Now</button></a>
+        <button onclick="closePopup()">Close</button>
+    </div>
     <div class="container">
-        <img src="/logo.png" alt="Healthify Lab Logo" class="logo">
-        <h1>Healthify Lab Test Catalog</h1>
-        <table id="testCatalog" class="display">
-            <thead>
-                <tr>
-                    <th>Test Name</th>
-                    <th>Category</th>
-                    <th>Sample Type</th>
-                    <th>MRP (Rs.)</th>
-                    <th>Description/Parameters</th>
-                </tr>
-            </thead>
-            <tbody id="testTableBody"></tbody>
-        </table>
+        <div class="promo-cards">
+            <div class="card">
+                <img src="/card1.jpg" alt="Wellness 1.4">
+                <h3>Wellness 1.4</h3>
+                <p>Rs. 4800 - Complete health checkup</p>
+            </div>
+            <div class="card">
+                <img src="/card2.jpg" alt="Diabetic Profile">
+                <h3>Diabetic Profile - A</h3>
+                <p>Rs. 1000 - Monitor diabetes</p>
+            </div>
+            <div class="card">
+                <img src="/card3.jpg" alt="PCOD Profile">
+                <h3>PCOD Profile</h3>
+                <p>Rs. 4000 - Hormonal health</p>
+            </div>
+        </div>
+        <div class="why-choose">
+            <h2>Why Choose Healthify?</h2>
+            <p>Accurate diagnostics, affordable pricing, and home sample collection across Mumbai, Navi Mumbai, and Thane.</p>
+        </div>
+        <div class="testimonials">
+            <h2>Testimonials</h2>
+            <div class="testimonial">
+                <p>"Healthify made my health checkup seamless and affordable!" - Priya S.</p>
+            </div>
+            <div class="testimonial">
+                <p>"Fast results and great service. Highly recommend!" - Rohan K.</p>
+            </div>
+        </div>
+        <div class="cart">
+            <a href="/booking.html">View Cart & Book Tests</a>
+        </div>
         <div class="social-links">
             <a href="https://x.com/HealthifyLab"><img src="/x-icon.png" alt="X"></a>
             <a href="https://instagram.com/HealthifyLab"><img src="/instagram-icon.png" alt="Instagram"></a>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
-            authDomain: "https://healthify-lab.firebaseapp.com",
-            projectId: "healthify-lab",
-            storageBucket: "healthify-lab.firebasestorage.app",
-            messagingSenderId: "297003315332",
-            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+    <div class="whatsapp-float">
+        <a href="https://wa.me/1234567890" target="_blank"><img src="/whatsapp-icon.png" alt="WhatsApp"></a>
+    </div>
+    <script>
+        // Promotional popup
+        window.onload = function() {
+            document.getElementById('promoPopup').classList.add('active');
         };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        async function loadTests() {
-            const querySnapshot = await getDocs(collection(db, "tests"));
-            const tableBody = document.getElementById('testTableBody');
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                const description = data.Test_Parameters_Included ? `${data.Test_Description}<br><strong>Included:</strong> ${data.Test_Parameters_Included}` : data.Test_Description;
-                const row = `
-                    <tr>
-                        <td>${data.Test_Name}</td>
-                        <td>${data.Category}</td>
-                        <td>${data.Sample_Type}</td>
-                        <td>${data.MRP}</td>
-                        <td>${description}</td>
-                    </tr>`;
-                tableBody.innerHTML += row;
-            });
-
-            $('#testCatalog').DataTable({
-                responsive: true,
-                paging: true,
-                searching: true,
-                ordering: true
-            });
+        function closePopup() {
+            document.getElementById('promoPopup').classList.remove('active');
         }
-        loadTests();
     </script>
 </body>
 </html>
