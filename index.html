@@ -15,8 +15,6 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="book.html">Book Test</a></li>
             <li><a href="contact.html">Contact Us</a></li>
-        </div>
-    </section>>
         </ul>
     </nav>
 
@@ -42,7 +40,7 @@
 
     <section class="featured-profiles">
         <h2>Featured Profiles</h2>
-        <div class="swiper-container feat-swiper">
+        <div class="swiper feat-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="card">
@@ -72,11 +70,35 @@
 
     <section class="promotional-cards">
         <h2>Promotional Profiles</h2>
-        <div class="swiper-container promo-swiper">
+        <div class="swiper promo-swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><div class="card"><img src="assets/full-body-checkup.jpg" alt="Full Body Checkup"></div></div>
-                <div class="swiper-slide"><div class="card"><img src="assets/diabetes-symptoms.jpg" alt="Diabetes Symptoms"></div></div>
-                <div class="swiper-slide"><div class="card"><img src="assets/vitamin-profile.jpg" alt="Vitamin Profile"></div></div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <video width="100%" height="200" controls>
+                            <source src="assets/healthify-promo-video.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <h4>Why Blood Tests Are Needed & How We Do It</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/full-body-checkup.jpg" alt="Full Body Checkup">
+                        <h4>Full Body Checkup</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/diabetes-symptoms.jpg" alt="Diabetes Symptoms">
+                        <h4>Diabetes Symptoms</h4>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="assets/vitamin-profile.jpg" alt="Vitamin Profile">
+                        <h4>Vitamin Profile</h4>
+                    </div>
+                </div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -108,7 +130,7 @@
 
     <section class="testimonials">
         <h2>Testimonials</h2>
-        <div class="swiper-container testi-swiper">
+        <div class="swiper testi-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="card">
@@ -136,8 +158,6 @@
         </div>
     </section>
 
-    
-
     <footer>
         <p>Healthify © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
         <div class="social-media">
@@ -154,16 +174,18 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const promoSwiper = new Swiper('.promo-swiper', {
+            const featSwiper = new Swiper('.feat-swiper', {
                 slidesPerView: 1,
+                spaceBetween: 10,
                 pagination: { el: '.swiper-pagination', clickable: true },
                 breakpoints: {
                     768: { slidesPerView: 2 },
                     1024: { slidesPerView: 3 }
                 }
             });
-            const featSwiper = new Swiper('.feat-swiper', {
+            const promoSwiper = new Swiper('.promo-swiper', {
                 slidesPerView: 1,
+                spaceBetween: 10,
                 pagination: { el: '.swiper-pagination', clickable: true },
                 breakpoints: {
                     768: { slidesPerView: 2 },
@@ -172,6 +194,7 @@
             });
             const testiSwiper = new Swiper('.testi-swiper', {
                 slidesPerView: 1,
+                spaceBetween: 10,
                 pagination: { el: '.swiper-pagination', clickable: true },
                 breakpoints: {
                     768: { slidesPerView: 2 },
