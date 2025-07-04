@@ -6,10 +6,7 @@
     <title>Healthify Lab Booking</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        .header { background: #28a745; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; }
+    
         .header img { max-width: 120px; height: auto; }
         .header nav a { color: white; margin: 0 15px; text-decoration: none; font-size: 16px; }
        <p>
@@ -46,7 +43,7 @@
         <img src="/logo.png" alt="Healthify Lab Logo">
         <nav>
             <a href="/index.html">Home</a>
-            <a href="#contact">Contact</a>
+            <a href="/contact.html">Contact</a>
         </nav>
     </div>
     <div class="form-container">
@@ -79,10 +76,11 @@
             <label>Appointment Date:</label><input type="date" name="appointment_date" required>
             <label>Appointment Time:</label><input type="time" name="appointment_time" required>
             <label>Tests:</label>
-            <select multiple name="tests" id="test-dropdown"></select>
+            <select multiple name="tests" id="test-dropdown"></public/tests-data.json>>
             <label>Profiles:</label>
-            <select multiple name="profiles" id="profile-dropdown"></select>
+            <select multiple name="profiles" id="profile-dropdown"></public/tests-data.json>
             <button type="submit" onclick="submitBooking()">Book Now</button>
+       fetch_test_data from : public/test-data.json
         </form>
         <div id="confirmation"></div>
     </div>
