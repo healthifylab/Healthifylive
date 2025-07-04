@@ -6,18 +6,18 @@
     <title>Healthify Lab - Home</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        .header { background: #20B2AA; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header { background: #28a745; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; }
         .header img { max-width: 120px; height: auto; }
         .header nav a { color: white; margin: 0 15px; text-decoration: none; font-size: 16px; }
-        .hero { background: url('/hero-image.jpg') center/cover no-repeat; color: light sea green; text-align: center; padding: 100px 20px; margin-top: 60px; }
+        .hero { background: url('/hero-image.jpg') center/cover no-repeat; color: white; text-align: center; padding: 100px 20px; margin-top: 60px; }
         .hero h1 { font-size: 36px; margin: 0; }
         .hero p { font-size: 18px; }
-        .hero a { background: #cc7722; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
-        .promo-popup { display: none; position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%);  
+        .hero a { background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .promo-popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 2000; text-align: center; max-width: 400px; }
         .promo-popup.active { display: block; }
         .promo-popup h3 { font-size: 24px; margin: 0 0 10px; }
         .promo-popup p { font-size: 18px; }
-        .promo-popup button { background: #cc7722; color: white; border: none; padding: 10px; cursor: pointer; margin-top: 10px; font-size: 16px; }
+        .promo-popup button { background: #28a745; color: white; border: none; padding: 10px; cursor: pointer; margin-top: 10px; font-size: 16px; }
         .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
         .promo-cards { display: flex; justify-content: space-around; flex-wrap: wrap; margin: 20px 0; }
         .card { background: white; border-radius: 8px; width: 30%; padding: 15px; margin: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
@@ -26,12 +26,12 @@
         .testimonials { margin: 20px 0; }
         .testimonial { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; }
         .cart { text-align: center; margin: 20px 0; }
-        .cart a { background: #cc7722; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .cart a { background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
         .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
         .whatsapp-float img { width: 50px; }
         .social-links { text-align: center; margin-top: 20px; }
         .social-links img { width: 30px; margin: 0 10px; }
-        @media (max-width: 100%) {
+        @media (max-width: 600px) {
             .header img { max-width: 80px; }
             .header nav a { font-size: 14px; margin: 0 10px; }
             .hero { padding: 60px 10px; margin-top: 50px; }
@@ -39,7 +39,6 @@
             .hero p { font-size: 16px; }
             .card { width: 100%; }
             .promo-popup { max-width: 90%; }
-            .promo-popup img {max-width: 100%; height: auto; border-radius: 100px
             .promo-popup h3 { font-size: 20px; }
             .promo-popup p { font-size: 16px; }
             .promo-popup button { font-size: 14px; }
@@ -52,7 +51,7 @@
         <img src="/logo.png" alt="Healthify Lab Logo">
         <nav>
             <a href="/booking.html">Book Test</a>
-            <a href="contact.html">Contact</a>
+            <a href="#contact">Contact</a>
         </nav>
     </div>
     <div class="hero">
@@ -61,9 +60,8 @@
         <a href="/booking.html">Book Now</a>
     </div>
     <div class="promo-popup" id="promoPopup">
-        <img src="/promo1-popup.jpg
-            </h3>Special Offer!</h3>
-        <p>Get Wellness 1.4 (Rs. 4800) at 10_planeset
+        <h3>Special Offer!</h3>
+        <p>Get Wellness 1.4 (Rs. 4800) at 10% off this week!</p>
         <a href="/booking.html"><button>Book Now</button></a>
         <button onclick="closePopup()">Close</button>
     </div>
@@ -87,28 +85,7 @@
         </div>
         <div class="why-choose">
             <h2>Why Choose Healthify?</h2>
-            <p> 🔬 Healthify Lab</p>
-                
-<p>Your trusted partner in preventive healthcare.</p>
-                
-                
-</p> 💉 Hassle-free sample collection at home </p>
-                
-                
- 
-</p> 🧪 Advanced diagnostics & accurate reports </p>
-                
-                
-</p> 🚚 Fast turnaround | 📍 </p>
-                
-                
-</p> ✅ 💙Happy Customers </p>
-                
-                
-
-</p> 📞 Book your test today — because your health deserves the best. </p>
-                
-</p> home sample collection across Mumbai, Navi Mumbai, and Thane.</p>
+            <p>Accurate diagnostics, affordable pricing, and home sample collection across Mumbai, Navi Mumbai, and Thane.</p>
         </div>
         <div class="testimonials">
             <h2>Testimonials</h2>
@@ -125,11 +102,10 @@
         <div class="social-links">
             <a href="https://x.com/HealthifyLab"><img src="/x-icon.png" alt="X"></a>
             <a href="https://instagram.com/HealthifyLab"><img src="/instagram-icon.png" alt="Instagram"></a>
-            <a href="https://www.facebook.com/profile.php?id=61577867093771"><img src="/facebook-icon.png" alt="X"></a>
         </div>
     </div>
     <div class="whatsapp-float">
-        <a href="https://wa.me/919503832889" target="_blank"><img src="/whatsapp-icon.png" alt="WhatsApp"></a>
+        <a href="https://wa.me/1234567890" target="_blank"><img src="/whatsapp-icon.png" alt="WhatsApp"></a>
     </div>
     <script>
         window.onload = function() {
