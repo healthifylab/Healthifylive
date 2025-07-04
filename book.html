@@ -32,6 +32,21 @@
         </div>
     </section>
 
+    <section class="booking-form" style="padding: 20px; max-width: 500px; margin: 20px auto;">
+        <h2>Book Your Test</h2>
+        <form id="bookingForm">
+            <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <input type="tel" name="phone" placeholder="+91XXXXXXXXXX" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <input type="date" name="date" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <input type="text" name="address" placeholder="Your Address" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <input type="text" name="pincode" placeholder="Pincode" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <input type="text" name="landmark" placeholder="Landmark" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <input type="hidden" name="tests" id="selectedTests">
+            <button type="submit" style="width: 100%; padding: 10px; background-color: #00a884; color: white; border: none; cursor: pointer;">Submit Booking</button>
+        </form>
+    </section>
+
     <footer>
         <p>Healthify © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
         <div class="social-media">
@@ -46,40 +61,17 @@
     </a>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="scripts/fetch-tests.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- EmailJS SDK -->
+    <script type="module" src="scripts/fetch-tests.js"></script>
+    <script type="module" src="scripts/booking.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const bookSwiper = new Swiper('.book-swiper', {
-                slidesPerView: 1,
-                spaceBetween: 10,
-                pagination: { el: '.swiper-pagination', clickable: true },
-                breakpoints: {
-                    768: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 }
-                }
-            });
-
-            // Fetch and display test cards
-            fetch('https://healthifylab-live.netlify.app/.netlify/functions/tests')
-                .then(response => response.json())
-                .then(data => {
-                    const wrapper = document.getElementById('testCards');
-                    data.forEach(test => {
-                        const slide = document.createElement('div');
-                        slide.className = 'swiper-slide';
-                        slide.innerHTML = `
-                            <div class="card">
-                                <img src="${test.image}" alt="${test.name}">
-                                <h4>${test.name}</h4>
-                                <button onclick="window.location.href='book.html?profile=${test.id}'" class="book-now">Book Now</button>
-                            </div>
-                        `;
-                        wrapper.appendChild(slide);
-                    });
-                })
-                .catch(error => console.error('Error fetching tests:', error));
+        document.getElementById("bookingForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const tests = JSON.parse(localStorage.getItem("cartItems") || "[]").map(t => t.TestName);
+            formData.set("tests", JSON.stringify(tests));
+            await submitBooking(Object.fromEntries(formData));
         });
     </script>
-    <script type="module" src="scripts/fetch-tests.js"></script>
 </body>
 </html>
