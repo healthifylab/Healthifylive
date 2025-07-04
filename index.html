@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Healthify</title>
   <link rel="stylesheet" href="/styles/style.css">
-  <!-- Firebase and EmailJS SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -13,10 +12,8 @@
 <body>
   <!-- Header -->
   <header class="header">
-    <img src="/public/healthify-logo.png" alt="Healthify Logo" class="logo">
+    <a href="/"><img src="/public/healthify-logo.png" alt="Healthify Logo" class="logo"></a>
     <nav class="nav">
-      <a href="/">Home</a>
-      <a href="/tests">Tests</a>
       <a href="/booking">Book Now</a>
       <a href="/contact">Contact</a>
     </nav>
@@ -25,67 +22,85 @@
   <!-- Hero Banner -->
   <section class="hero-banner">
     <img src="/public/hero-banner.jpg" alt="Healthify Lab">
-    >
-      <a href="/booking" class="cta-button">Book a Test Now</a>
+  </section>
+
+  <!-- Search Test/Profile -->
+  <section class="search-section">
+    <h2>Search Tests or Profiles</h2>
+    <select id="search-test-profile" multiple>
+      <option value="" disabled>Select Test or Profile</option>
+    </select>
+    <button onclick="redirectToBooking()">Book Selected</button>
+  </section>
+
+  <!-- Promotional Cards (Horizontal Swipable) -->
+  <section class="promo-cards">
+    <h2>Our Health Packages</h2>
+    <div class="cards-container">
+      <div class="card">
+        <img src="/public/card1.jpg" alt="Comprehensive Health Checkup">
+        <h3>Comprehensive Health Checkup</h3>
+        <p>Includes CBC, Thyroid, Lipid Profile, and more.</p>
+        <a href="/booking" class="card-button">Book Now</a>
+      </div>
+      <div class="card">
+        <img src="/public/card2.jpg" alt="Diabetes Care Package">
+        <h3>Diabetes Care Package</h3>
+        <p>Monitor blood sugar, HbA1c, and kidney function.</p>
+        <a href="/booking" class="card-button">Book Now</a>
+      </div>
+      <div class="card">
+        <img src="/public/card3.jpg" alt="Heart Health Profile">
+        <h3>Heart Health Profile</h3>
+        <p>Assess cholesterol, ECG, and cardiac markers.</p>
+        <a href="/booking" class="card-button">Book Now</a>
+      </div>
+      <div class="card">
+        <img src="/public/card4.jpg" alt="Women’s Wellness Package">
+        <h3>Women’s Wellness Package</h3>
+        <p>Comprehensive tests for women’s health.</p>
+        <a href="/booking" class="card-button">Book Now</a>
+      </div>
     </div>
   </section>
 
-  <!-- Booking Form -->
-  <section class="booking-form">
-    <h2>Book Your Test</h2>
-    <form id="booking-form">
-      <input type="text" name="name" placeholder="Full Name" required>
-      <input type="email" name="email" placeholder="Email Address" required>
-      <select name="test" required>
-        <option value="" disabled selected>Select Test</option>
-        <option value="cbc">CBC Test</option>
-        <option value="thyroid">Thyroid Profile</option>
-        <option value="diabetes">Diabetes Screening</option>
-      </select>
-      <button type="submit" onclick="submitBooking()">Submit Booking</button>
-    </form>
+  <!-- Why Choose Healthify -->
+  <section class="why-choose">
+    <h2>Why Choose Healthify</h2>
+    <p>🔬 <strong>Healthify Lab</strong><br>Your trusted partner in preventive healthcare.</p>
+    <p>💉 Hassle-free sample collection at home</p>
+    <p>🧪 Advanced diagnostics & accurate reports</p>
+    <p>🚚 Fast turnaround | 📍</p>
+    <p>✅ 💙 Happy Customers</p>
+    <p>📞 Book your test today — because your health deserves the best.</p>
   </section>
 
-  <!-- Testimonials -->
+  <!-- Testimonials (Horizontal) -->
   <section class="testimonials">
     <h2>What Our Patients Say</h2>
-    <div class="testimonial">
-      <img src="/public/user1.jpg" alt="Old man">
-      <p>"Healthify’s tests in Mumbai were quick and reliable!"</p>
-      <span>– Mr. Sharma, Mumbai</span>
-    </div>
-    <div class="testimonial">
-      <img src="/public/user2.jpg" alt="Neha">
-      <p>"Neha here! Loved the service in Navi Mumbai."</p>
-      <span>– Neha, Navi Mumbai</span>
-    </div>
-    <div class="testimonial">
-      <img src="/public/user3" alt="Woman">
-      <p>"Accurate results and great staff in Thane!"</p>
-      <span>– Priya, Thane</span>
-    </div>
-    <– 
-  </section>
-
-  <!-- WhatsApp Status Section (Vertical View) -->
-  <section class="healthify-status">
-    <h2>Healthify Updates</h2>
-    <div class="status-item">
-      <img src="/public/whatsapp-icon.png" alt="WhatsApp Status">
-      <p>Book your CBC test today! Stay healthy with Healthify.</p>
-    </div>
-    <div class="status-item">
-      <img src="/public/whatsapp-icon.png" alt="WhatsApp Status">
-      <p>Exclusive health packages now available! Contact us.</p>
+    <div class="testimonials-container">
+      <div class="testimonial">
+        <img src="/public/testimonial-old-woman.jpg" alt="Mrs. Sharma">
+        <p>"Healthify’s tests in Mumbai were quick and reliable!"</p>
+        <span>– Mrs. Sharma, Mumbai</span>
+      </div>
+      <div class="testimonial">
+        <img src="/public/testimonial-neha.jpg" alt="Neha">
+        <p>"Neha here! Loved the service in Navi Mumbai."</p>
+        <span>– Neha, Navi Mumbai</span>
+      </div>
+      <div class="testimonial">
+        <img src="/public/testimonial-woman.jpg" alt="Priya">
+        <p>"Accurate results and great staff in Thane!"</p>
+        <span>– Priya, Thane</span>
+      </div>
+      <div class="testimonial">
+        <img src="/public/testimonial-patient.jpg" alt="Raj">
+        <p>"Healthify made my health checkup so easy!"</p>
+        <span>– Raj, Mumbai</span>
+      </div>
     </div>
   </section>
-
-  <!-- Popup -->
-  <div class="popup" id="promo-popup">
-    <img src="/public/popup-image.jpg" alt="Promotion">
-    <p>Special Offer: 20% off on all health packages this week!</p>
-    <button onclick="document.getElementById('promo-popup').style.display='none'">Close</button>
-  </div>
 
   <!-- Footer -->
   <footer class="footer">
@@ -105,7 +120,7 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <script src="/scripts/test-data.js"></script>
   <script src="/scripts/booking.js"></script>
 </body>
 </html>
