@@ -1,5 +1,4 @@
-// booking.js
-
+// scripts/booking.js
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { auth, sendOTP } from "./firebase-auth.js";
 
@@ -22,10 +21,10 @@ export async function submitBooking(data) {
       createdAt: serverTimestamp(),
     };
 
-    // 1. Save to Firestore
+    // Save to Firestore
     await addDoc(collection(db, "bookings"), bookingData);
 
-    // 2. Send email using EmailJS
+    // Send email using EmailJS
     await emailjs.send(
       EMAIL_SERVICE_ID,
       EMAIL_TEMPLATE_ID,
@@ -43,16 +42,18 @@ export async function submitBooking(data) {
     );
 
     alert("✅ Booking submitted & email sent successfully!");
+    // Clear cart after successful booking
+    localStorage.removeItem("cartItems");
   } catch (error) {
     console.error("❌ Booking error:", error);
     alert("Booking failed. Please try again.");
   }
 }
 
-export function startOTPLogin() {
-  const phone = document.getElementById("phoneInput").value.trim();
-  if (!phone.startsWith("+91")) {
-    alert("Please include +91 before mobile number.");
+export function startOTPLogin(phoneInputId = "phoneInput") {
+  const phone = document.getElementById(phoneInputId).value.trim();
+  if (!phone.startsWith("+91") || phone.length !== 13) {
+    alert("Please enter a valid Indian mobile number (e.g., +919876543210).");
     return;
   }
 
@@ -70,32 +71,3 @@ export function startOTPLogin() {
       alert("Failed to verify OTP.");
     });
 }
-
-// Inject footer
-const footer = document.createElement('footer');
-footer.style = "text-align: center; padding: 30px 10px; background-color: #f8f8f8; margin-top: 50px;";
-footer.innerHTML = `
-  <p style="margin-bottom: 10px;">Follow us on</p>
-  <div style="font-size: 24px;">
-    <a href="https://twitter.com/healthify_lab" target="_blank" style="margin: 0 10px; color: #1DA1F2;">
-      <i class="fab fa-x-twitter"></i>
-    </a>
-    <a href="https://instagram.com/healthifylab" target="_blank" style="margin: 0 10px; color: #C13584;">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://facebook.com/healthify" target="_blank" style="margin: 0 10px; color: #4267B2;">
-      <i class="fab fa-facebook"></i>
-    </a>
-  </div>
-  <p style="margin-top: 10px;">&copy; 2025 Healthify Lab. All rights reserved.</p>
-`;
-document.body.appendChild(footer);
-
-// Floating Cart Icon
-const cartBtn = document.createElement("div");
-cartBtn.innerHTML = `
-  <a href="book.html#cart" style="position: fixed; bottom: 90px; right: 20px; background-color: #00a884; padding: 10px 15px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 999;">
-    <i class="fas fa-shopping-cart" style="color:white; font-size: 20px;"></i>
-  </a>
-`;
-document.body.appendChild(cartBtn);
