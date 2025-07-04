@@ -6,22 +6,43 @@
     <title>Healthify Lab Booking</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
-        .form-container { max-width: 600px; margin: 0 auto; padding: 20px; background: white; border-radius: 8px; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        .header { background: #28a745; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header img { max-width: 120px; height: auto; }
+        .header nav a { color: white; margin: 0 15px; text-decoration: none; font-size: 16px; }
+        .form-container { max-width: 600px; margin: 80px auto 20px; padding: 20px; background: white; border-radius: 8px; }
         label, input, select { display: block; width: 100%; margin: 10px 0; }
         input, select { padding: 10px; font-size: 16px; }
         button { padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; font-size: 16px; }
         #confirmation { display: none; color: green; font-weight: bold; margin-top: 10px; }
-        .logo { max-width: 150px; height: auto; display: block; margin: 0 auto 20px; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        table { width: 100%; font-size: 16px; }
+        th, td { padding: 10px; text-align: left; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .whatsapp-float img { width: 50px; }
         .social-links { text-align: center; margin-top: 20px; }
         .social-links img { width: 30px; margin: 0 10px; }
-        @media (max-width: 600px) { .form-container { padding: 10px; } input, select, button { font-size: 14px; } .logo { max-width: 100px; } }
+        @media (max-width: 600px) {
+            .header img { max-width: 80px; }
+            .header nav a { font-size: 14px; margin: 0 10px; }
+            .form-container { padding: 10px; margin-top: 60px; }
+            input, select, button { font-size: 14px; }
+            table, th, td { font-size: 14px; }
+            .whatsapp-float img { width: 40px; }
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <img src="/logo.png" alt="Healthify Lab Logo">
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
     <div class="form-container">
-        <img src="/logo.png" alt="Healthify Lab Logo" class="logo">
         <h2>Book Your Test</h2>
         <form id="booking-form">
             <label>Name:</label><input type="text" name="name" required>
@@ -47,16 +68,35 @@
             <button type="submit" onclick="submitBooking()">Book Now</button>
         </form>
         <div id="confirmation"></div>
+    </div>
+    <div class="container">
+        <h2>Test Catalog</h2>
+        <table id="testCatalog" class="display">
+            <thead>
+                <tr>
+                    <th>Test Name</th>
+                    <th>Category</th>
+                    <th>Sample Type</th>
+                    <th>MRP (Rs.)</th>
+                    <th>Description/Parameters</th>
+                </tr>
+            </thead>
+            <tbody id="testTableBody"></tbody>
+        </table>
         <div class="social-links">
             <a href="https://x.com/HealthifyLab"><img src="/x-icon.png" alt="X"></a>
             <a href="https://instagram.com/HealthifyLab"><img src="/instagram-icon.png" alt="Instagram"></a>
         </div>
     </div>
+    <div class="whatsapp-float">
+        <a href="https://wa.me/1234567890" target="_blank"><img src="/whatsapp-icon.png" alt="WhatsApp"></a>
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
             authDomain: "https://healthify-lab.firebaseapp.com",
@@ -65,16 +105,17 @@
             messagingSenderId: "297003315332",
             appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
         };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
+        // Initialize EmailJS
         emailjs.init("dJE_JHAoNTxxzTxiT");
 
         async function loadTests() {
-            const querySnapshot = await getDocs(collection(db, "tests"));
+            const querySnapshot = await db.collection("tests").get();
             const testDropdown = document.getElementById('test-dropdown');
             const profileDropdown = document.getElementById('profile-dropdown');
+            const tableBody = document.getElementById('testTableBody');
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
                 const option = document.createElement('option');
@@ -85,6 +126,23 @@
                 } else {
                     profileDropdown.appendChild(option.cloneNode(true));
                 }
+                const description = data.Test_Parameters_Included ? `${data.Test_Description}<br><strong>Included:</strong> ${data.Test_Parameters_Included}` : data.Test_Description;
+                const row = `
+                    <tr>
+                        <td>${data.Test_Name}</td>
+                        <td>${data.Category}</td>
+                        <td>${data.Sample_Type}</td>
+                        <td>${data.MRP}</td>
+                        <td>${description}</td>
+                    </tr>`;
+                tableBody.innerHTML += row;
+            });
+
+            $('#testCatalog').DataTable({
+                responsive: true,
+                paging: true,
+                searching: true,
+                ordering: true
             });
         }
         loadTests();
@@ -111,7 +169,7 @@
 
                 const bookingId = `HFL${Date.now()}`;
 
-                firebase.firestore().collection("bookings").doc(bookingId).set(data)
+                db.collection("bookings").doc(bookingId).set(data)
                     .then(() => {
                         emailjs.send("service_z3ac4pk", "template_5v6t6ku", {
                             ...data,
