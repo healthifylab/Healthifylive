@@ -13,6 +13,7 @@
         .header img { max-width: 120px; height: auto; }
         .header nav a { color: white; margin: 0 15px; text-decoration: none; font-size: 16px; }
         .form-container { max-width: 600px; margin: 80px auto 20px; padding: 20px; background: white; border-radius: 8px; }
+        .form-icon { max-width: 50px; height: auto; display: block; margin: 0 auto 10px; }
         label, input, select { display: block; width: 100%; margin: 10px 0; }
         input, select { padding: 10px; font-size: 16px; }
         button { padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; font-size: 16px; }
@@ -31,6 +32,7 @@
             input, select, button { font-size: 14px; }
             table, th, td { font-size: 14px; }
             .whatsapp-float img { width: 40px; }
+            .form-icon { max-width: 40px; }
         }
     </style>
 </head>
@@ -43,6 +45,7 @@
         </nav>
     </div>
     <div class="form-container">
+        <img src="/booking-icon.png" alt="Booking Icon" class="form-icon">
         <h2>Book Your Test</h2>
         <form id="booking-form">
             <label>Name:</label><input type="text" name="name" required>
@@ -53,10 +56,19 @@
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
+            <label>State:</label>
+            <select name="state" id="state" required>
+                <option value="">Select State</option>
+                <!-- Populated dynamically -->
+            </select>
+            <label>City:</label>
+            <select name="city" id="city" required>
+                <option value="">Select City</option>
+                <!-- Populated dynamically -->
+            </select>
+            <label>Pincode:</label><input type="text" name="pincode" id="pincode" required>
             <label>Address:</label><input type="text" name="address" required>
-            <label>Location:</label><input type="text" name="location" required>
             <label>Landmark:</label><input type="text" name="landmark" required>
-            <label>Pincode:</label><input type="text" name="pincode" required>
             <label>Mobile:</label><input type="tel" name="mobile" required>
             <label>Email:</label><input type="email" name="email" required>
             <label>Appointment Date:</label><input type="date" name="appointment_date" required>
@@ -111,14 +123,69 @@
         // Initialize EmailJS
         emailjs.init("dJE_JHAoNTxxzTxiT");
 
+        // State and city data (sample, replace with API data)
+        const states = ["Maharashtra", "Delhi", "Karnataka"];
+        const citiesByState = {
+            Maharashtra: ["Mumbai", "Navi Mumbai", "Thane", "Pune"],
+            Delhi: ["New Delhi", "Noida", "Gurgaon"],
+            Karnataka: ["Bangalore", "Mysore"]
+        };
+
+        // Populate state dropdown
+        const stateDropdown = document.getElementById("state");
+        states.forEach(state => {
+            const option = document.createElement("option");
+            option.value = state;
+            option.text = state;
+            stateDropdown.appendChild(option);
+        });
+
+        // Update city dropdown based on state
+        document.getElementById("state").addEventListener("change", function() {
+            const cityDropdown = document.getElementById("city");
+            cityDropdown.innerHTML = '<option value="">Select City</option>';
+            const selectedState = this.value;
+            if (citiesByState[selectedState]) {
+                citiesByState[selectedState].forEach(city => {
+                    const option = document.createElement("option");
+                    option.value = city;
+                    option.text = city;
+                    cityDropdown.appendChild(option);
+                });
+            }
+        });
+
+        // Auto-fetch state/city from pincode
+        document.getElementById("pincode").addEventListener("input", function() {
+            const pincode = this.value;
+            if (pincode.length === 6) {
+                fetch(`http://api.postalpincode.in/pincode/${pincode}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data[0].Status === "Success") {
+                            const postOffice = data[0].PostOffice[0];
+                            document.getElementById("state").value = postOffice.State;
+                            const cityDropdown = document.getElementById("city");
+                            cityDropdown.innerHTML = '<option value="">Select City</option>';
+                            const option = document.createElement("option");
+                            option.value = postOffice.District;
+                            option.text = postOffice.District;
+                            cityDropdown.appendChild(option);
+                            cityDropdown.value = postOffice.District;
+                        }
+                    })
+                    .catch(error => console.error("Pincode API error:", error));
+            }
+        });
+
         async function loadTests() {
             const querySnapshot = await db.collection("tests").get();
-            const testDropdown = document.getElementById('test-dropdown');
-            const profileDropdown = document.getElementById('profile-dropdown');
-            const tableBody = document.getElementById('testTableBody');
+            const testDropdown = document.getElementById("test-dropdown");
+            const profileDropdown = document.getElementById("profile-dropdown");
+            const tableBody = document.getElementById("testTableBody");
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
-                const option = document.createElement('option');
+                const option = document.createElement("option");
                 option.value = data.Test_Name;
                 option.text = `${data.Test_Name} - Rs. ${data.MRP}`;
                 if (data.Category === "Individual Tests") {
@@ -138,7 +205,7 @@
                 tableBody.innerHTML += row;
             });
 
-            $('#testCatalog').DataTable({
+            $("#testCatalog").DataTable({
                 responsive: true,
                 paging: true,
                 searching: true,
@@ -155,10 +222,11 @@
                     name: formData.get("name"),
                     age: formData.get("age"),
                     sex: formData.get("sex"),
-                    address: formData.get("address"),
-                    location: formData.get("location"),
-                    landmark: formData.get("landmark"),
+                    state: formData.get("state"),
+                    city: formData.get("city"),
                     pincode: formData.get("pincode"),
+                    address: formData.get("address"),
+                    landmark: formData.get("landmark"),
                     mobile: formData.get("mobile"),
                     email: formData.get("email"),
                     appointment_date: formData.get("appointment_date"),
