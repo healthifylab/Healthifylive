@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>🛒 My Cart – Healthify</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="styles/style.css"/>
+  <meta charset="UTF-8">
+  <title>🛒 My Cart – Healthifylive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-  <nav>
-    <img src="assets/logo-healthify.png" alt="Healthify Logo" class="logo">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="book.html">Book Test</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-    </ul>
-  </nav>
-
-  <header>
-    <h1>🧪 My Test Cart</h1>
-  </header>
-
-  <main style="padding: 20px">
-    <div id="cartItems"></div>
-    <h3 id="totalPrice">💰 Total: ₹0</h3>
-    <button onclick="window.location.href='book.html?cart=true'">📋 Proceed to Booking</button>
-  </main>
-
-  <footer>
-    <p>Healthify © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
-    <div class="social-media">
-      <a href="https://twitter.com/healthify_lab" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+  <div class="container">
+    <div class="header">
+      <img src="/public/logo.png" alt="Healthifylive Logo" class="logo">
+      <nav>
+        <a href="/index.html">Home</a>
+        <a href="/booking.html">Book Test</a>
+        <a href="/contact.html">Contact Us</a>
+        <a href="/my-bookings.html">My Bookings</a>
+      </nav>
     </div>
-  </footer>
-
-  <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
-    <img src="assets/whatsapp-icon.png" alt="WhatsApp">
-  </a>
-
-  <script type="module" src="scripts/cart-ui.js"></script>
+    <main>
+      <h1>🧪 My Test Cart</h1>
+      <div id="cartItems"></div>
+      <h3 id="totalPrice">💰 Total: ₹0</h3>
+      <button onclick="window.location.href='/booking.html?cart=true'">📋 Proceed to Booking</button>
+    </main>
+    <footer>
+      <p>Healthifylive © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:support@healthifylive.com">support@healthifylive.com</a></p>
+      <div class="social-media">
+        <a href="https://x.com/healthifylive" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://instagram.com/healthifylive" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com/healthifylive" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </footer>
+    <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
+      <img src="/public/whatsapp-icon.png" alt="WhatsApp">
+    </a>
+  </div>
+  <script type="module" src="/scripts/cart-ui.js"></script>
+  <script src="/scripts/Drawer.js"></script>
 </body>
 </html>
