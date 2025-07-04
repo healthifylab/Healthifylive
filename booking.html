@@ -122,10 +122,10 @@
         // Initialize EmailJS
         emailjs.init("dJE_JHAoNTxxzTxiT");
 
-        // Fetch tests from tests.json
+        // Fetch tests from public/tests.json
         async function fetchTests() {
             try {
-                const response = await fetch('/tests.json');
+                const response = await fetch('public/tests.json');
                 if (!response.ok) throw new Error('Failed to fetch tests');
                 const tests = await response.json();
                 return tests;
@@ -193,7 +193,7 @@
                 const pdfDataUri = generatePDF(name, test, date, time, email, phone);
 
                 // Send email with EmailJS
-                await emailjs.send('healthifylive-emailjs-service-id', 'healthifylive-emailjs-template-id', {
+                await emailjs.send('healthifylive-emailjs-service_z3ac4pk', 'healthifylive-emailjs-template_5v6t6ku', {
                     name,
                     test,
                     date,
