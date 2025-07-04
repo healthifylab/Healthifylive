@@ -10,12 +10,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="/public/logo.png" alt="Healthifylive Lab Logo">
+            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo">
             <nav>
                 <a href="/booking.html">Book Test</a>
                 <a href="/contact.html">Contact</a>
                 <a href="/cart.html">My Cart</a>
                 <a href="/my-bookings.html">My Bookings</a>
+                <a href="/login.html">Login</a>
             </nav>
         </div>
         <div class="hero">
@@ -23,13 +24,21 @@
             <p>Your trusted partner for comprehensive health diagnostics</p>
             <a href="/booking.html">Book Now</a>
         </div>
+        <div class="search-section">
+            <h2>Find Tests & Profiles</h2>
+            <input type="text" id="searchInput" placeholder="Search tests or profiles...">
+            <div id="searchResults"></div>
+        </div>
         <div class="promo-popup" id="promoPopup">
             <h3>Special Offer!</h3>
             <p id="promoText">Loading...</p>
             <a href="/booking.html"><button>Book Now</button></a>
             <button onclick="closePopup()">Close</button>
         </div>
-        <div class="promo-cards" id="promoCards"></div>
+        <div class="promo-cards">
+            <h2>Featured Health Packages</h2>
+            <div class="cards-container" id="promoCards"></div>
+        </div>
         <div class="why-choose">
             <h2>Why Choose Healthifylive?</h2>
             <p>🔬 Healthifylive Lab</p>
@@ -42,11 +51,13 @@
         </div>
         <div class="testimonials">
             <h2>Testimonials</h2>
-            <div class="testimonial">
-                <p>"Healthifylive made my health checkup seamless and affordable!" - Priya S.</p>
-            </div>
-            <div class="testimonial">
-                <p>"Fast results and great service. Highly recommend!" - Rohan K.</p>
+            <div class="testimonials-container">
+                <div class="testimonial">
+                    <p>"Healthifylive made my health checkup seamless and affordable!" - Priya S.</p>
+                </div>
+                <div class="testimonial">
+                    <p>"Fast results and great service. Highly recommend!" - Rohan K.</p>
+                </div>
             </div>
         </div>
         <div class="cart">
@@ -63,6 +74,7 @@
     </div>
     <script type="module" src="/scripts/cart-ui.js"></script>
     <script src="/scripts/Drawer.js"></script>
+    <script src="/scripts/Search.js"></script>
     <script>
         async function loadPromoCards() {
             try {
@@ -74,14 +86,16 @@
                 const promoText = document.getElementById("promoText");
                 promoCards.innerHTML = promoTests.map(t => `
                     <div class="card">
-                        <img src="/public/${t.Test_Name.replace(/\s/g, '-').toLowerCase()}.jpg" alt="${t.Test_Name}">
+                        <img src="/public/${t.Test_Name.replace(/\s/g, '-').toLowerCase()}.jpg" alt="${t.Test_Name}" onerror="this.src='/public/test-placeholder.jpg'">
                         <h3>${t.Test_Name}</h3>
                         <p>Rs. ${t.Healthify_Offer_Price} - ${t.Description}</p>
+                        <a href="/booking.html" class="card-button">Book Now</a>
                     </div>
                 `).join("");
                 promoText.textContent = `Get ${promoTests[0].Test_Name} (Rs. ${promoTests[0].Healthify_Offer_Price}) at 10% off this week!`;
             } catch (error) {
                 console.error("Error loading promo cards:", error);
+                document.getElementById("promoCards").innerHTML = "<p>Error loading featured packages.</p>";
             }
         }
 
