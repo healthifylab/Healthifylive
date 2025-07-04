@@ -1,26 +1,44 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>My Bookings – Healthify</title>
+  <title>📋 My Bookings – Healthify</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="styles/style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
+  <nav>
+    <img src="assets/logo-healthify.png" alt="Healthify Logo" class="logo">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="book.html">Book Test</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
 
-  <!-- 🔝 Sticky Header -->
-  <header class="header">
-    <a href="index.html"><img src="assets/logo.png" class="logo" alt="Logo" /></a>
-    <h2>📋 My Bookings</h2>
+  <header>
+    <h1>📋 My Bookings</h1>
   </header>
 
-  <!-- 🧾 Booking Details + PDF Download -->
   <main style="padding: 20px">
     <div id="bookingInfo"></div>
     <div id="pdfSection" style="margin-top: 20px;"></div>
     <button id="whatsappShareBtn">📲 Share via WhatsApp</button>
   </main>
+
+  <footer>
+    <p>Healthify © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+    <div class="social-media">
+      <a href="https://twitter.com/healthify_lab" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
+    <img src="assets/whatsapp-icon.png" alt="WhatsApp">
+  </a>
 
   <script>
     const bookingData = JSON.parse(localStorage.getItem("lastBooking") || "{}");
@@ -29,12 +47,12 @@
       document.getElementById("bookingInfo").innerHTML = "<p>No recent bookings found.</p>";
     } else {
       const testList = (bookingData.tests || [])
-        .map(t => `<li>${t} – ₹499</li>`)
-        .join(""); // Example price, replace with actual dynamic price
+        .map(t => `<li>${t.TestName || t} – ₹${t.offerPrice || 499}</li>`)
+        .join("");
 
       document.getElementById("bookingInfo").innerHTML = `
         <p><strong>👤 Name:</strong> ${bookingData.name}</p>
-        <p><strong>📱 Mobile:</strong> ${bookingData.mobile}</p>
+        <p><strong>📱 Mobile:</strong> ${bookingData.phone || bookingData.mobile}</p>
         <p><strong>📧 Email:</strong> ${bookingData.email}</p>
         <p><strong>📅 Date:</strong> ${bookingData.date}</p>
         <p><strong>🎂 Age:</strong> ${bookingData.age}, <strong>⚧ Sex:</strong> ${bookingData.sex}</p>
@@ -43,30 +61,26 @@
         <ul>${testList}</ul>
       `;
 
-      // WhatsApp Share Button Logic
       const whatsappMessage = encodeURIComponent(`
         Healthify Booking Confirmation
         🧪 Tests: ${bookingData.tests.join(", ")}
-        📱 Mobile: ${bookingData.mobile}
+        📱 Mobile: ${bookingData.phone || bookingData.mobile}
         🧑‍⚕️ Name: ${bookingData.name}
         📧 Email: ${bookingData.email}
         🏠 Address: ${bookingData.address}, ${bookingData.pincode}, ${bookingData.landmark}
         📅 Preferred Date: ${bookingData.date}
-        ⏰ Preferred Time: ${bookingData.time}
+        ⏰ Preferred Time: ${bookingData.time || "N/A"}
       `);
 
-      const whatsappShareBtn = document.getElementById("whatsappShareBtn");
-      whatsappShareBtn.onclick = function() {
+      document.getElementById("whatsappShareBtn").onclick = function() {
         window.open(`https://wa.me/919503832889?text=${whatsappMessage}`, "_blank");
       };
 
-      // Generate PDF button
       document.getElementById("pdfSection").innerHTML = `
         <button onclick="generateBookingPDF()">📄 Download PDF Report</button>
       `;
     }
   </script>
-
-  <script src="scripts/generate-report.js"></script>
+  <script type="module" src="scripts/generate-report.js"></script>
 </body>
 </html>
