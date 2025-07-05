@@ -29,7 +29,7 @@
   <section class="promo-section">
     <h2 class="promo-title">Explore Our Health Tests</h2>
     <p class="promo-text">Book your home collection in Mumbai, Navi Mumbai, or Thane. Fast and reliable!</p>
-    <div class="swiper-container">
+    <div class="swiper-container promo-swiper">
       <div class="swiper-wrapper">
         <!-- Promo Card 1 -->
         <div class="swiper-slide">
@@ -85,40 +85,57 @@
     </div>
   </section>
 
-  <!-- Featured Health Packages Section -->
+  <!-- Swipeable Featured Health Packages Section -->
   <section class="featured-packages">
     <h2 class="featured-title">Featured Health Packages</h2>
-    <div class="packages-container">
-      <div class="package-card">
-        <img src="public/Diabetic-profile-a.jpg" alt="Diabetic Profile">
-        <h3>Diabetic Profile</h3>
-        <p>₹499 - Comprehensive diabetes screening.</p>
-        <a href="booking.html" class="btn">Book Now</a>
+    <div class="swiper-container featured-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="package-card">
+            <img src="public/Diabetic-profile-a.jpg" alt="Diabetic Profile">
+            <h3>Diabetic Profile</h3>
+            <p>₹499 - Comprehensive diabetes screening.</p>
+            <a href="booking.html" class="btn">Book Now</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="package-card">
+            <img src="public/Full-body-checkup.jpg" alt="Full Body Checkup">
+            <h3>Full Body Checkup</h3>
+            <p>₹999 - Complete health analysis.</p>
+            <a href="booking.html" class="btn">Book Now</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="package-card">
+            <img src="public/Pcod-profile.jpg" alt="PCOD Profile">
+            <h3>PCOD Profile</h3>
+            <p>₹699 - Specialized women’s health test.</p>
+            <a href="booking.html" class="btn">Book Now</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="package-card">
+            <img src="public/Test-placeholder.jpg" alt="Vitamin Profile">
+            <h3>Vitamin Profile</h3>
+            <p>₹599 - Check your vitamin levels.</p>
+            <a href="booking.html" class="btn">Book Now</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="package-card">
+            <img src="public/Welness-1-4.jpg" alt="Wellness Package">
+            <h3>Wellness Package</h3>
+            <p>₹1299 - Holistic health checkup.</p>
+            <a href="booking.html" class="btn">Book Now</a>
+          </div>
+        </div>
       </div>
-      <div class="package-card">
-        <img src="public/Full-body-checkup.jpg" alt="Full Body Checkup">
-        <h3>Full Body Checkup</h3>
-        <p>₹999 - Complete health analysis.</p>
-        <a href="booking.html" class="btn">Book Now</a>
-      </div>
-      <div class="package-card">
-        <img src="public/Pcod-profile.jpg" alt="PCOD Profile">
-        <h3>PCOD Profile</h3>
-        <p>₹699 - Specialized women’s health test.</p>
-        <a href="booking.html" class="btn">Book Now</a>
-      </div>
-      <div class="package-card">
-        <img src="public/Test-placeholder.jpg" alt="Vitamin Profile">
-        <h3>Vitamin Profile</h3>
-        <p>₹599 - Check your vitamin levels.</p>
-        <a href="booking.html" class="btn">Book Now</a>
-      </div>
-      <div class="package-card">
-        <img src="public/Welness-1-4.jpg" alt="Wellness Package">
-        <h3>Wellness Package</h3>
-        <p>₹1299 - Holistic health checkup.</p>
-        <a href="booking.html" class="btn">Book Now</a>
-      </div>
+      <!-- Navigation Buttons -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
     </div>
   </section>
 
@@ -167,16 +184,40 @@
   <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
-    const swiper = new Swiper('.swiper-container', {
+    // Initialize Promo Swiper
+    const promoSwiper = new Swiper('.promo-swiper', {
       slidesPerView: 1,
       spaceBetween: 20,
       direction: 'horizontal',
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.promo-swiper .swiper-button-next',
+        prevEl: '.promo-swiper .swiper-button-prev',
       },
       pagination: {
-        el: '.swiper-pagination',
+        el: '.promo-swiper .swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
+    });
+
+    // Initialize Featured Swiper
+    const featuredSwiper = new Swiper('.featured-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      direction: 'horizontal',
+      navigation: {
+        nextEl: '.featured-swiper .swiper-button-next',
+        prevEl: '.featured-swiper .swiper-button-prev',
+      },
+      pagination: {
+        el: '.featured-swiper .swiper-pagination',
         clickable: true,
       },
       breakpoints: {
