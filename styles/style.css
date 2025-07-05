@@ -466,7 +466,7 @@ footer a:hover {
 
 .call-back-float {
     position: fixed;
-    bottom: 50px;
+    bottom: 300px;
     left: 20px;
     z-index: 1000;
 }
@@ -484,7 +484,7 @@ footer a:hover {
 }
 
 .call-back-float a:hover {
-    background-color: #444444;
+    background-color: #20B2AA;
 }
 
 /* Media Queries */
