@@ -3,40 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Healthifylive Lab</title>
+    <title>Healthifylive Lab - Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo">
+            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
             <nav>
                 <a href="/index.html">Home</a>
                 <a href="/booking.html">Book Test</a>
-                <a href="/cart.html">My Cart</a>
-                <a href="/call-back.html" target="_blank">Call Me Back</a>
+                <a href="/contact.html">Contact</a>
             </nav>
         </div>
         <main>
-            <h1>📞 Contact Us</h1>
-            <p>Reach out to us for any queries!</p>
-            <p><strong>Phone:</strong> +91 9503832889</p>
-            <p><strong>Email:</strong> <a href="mailto:support@healthifylive.com">support@healthifylive.com</a></p>
-            <p><strong>Address:</strong> Healthifylive Lab, Mumbai, India</p>
+            <h1>Contact Us <i class="fas fa-envelope"></i></h1>
+            <p>Get in touch with us for support or inquiries.</p>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name <i class="fas fa-user"></i></label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email <i class="fas fa-at"></i></label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message <i class="fas fa-comment"></i></label>
+                        <textarea id="message" name="message" placeholder="Your message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message <i class="fas fa-check"></i></button>
+                </form>
+                <div id="contactMessage"></div>
+            </div>
+            <div class="contact-info">
+                <p>Contact: +91 9503832889 <i class="fas fa-phone"></i></p>
+                <p>Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a> <i class="fas fa-envelope"></i></p>
+                <p>Address: Mumbai, Navi Mumbai, Thane <i class="fas fa-map-marker-alt"></i></p>
+            </div>
         </main>
         <footer>
-            <p>Healthifylive © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:support@healthifylive.com">support@healthifylive.com</a></p>
-            <div class="social-media">
-                <a href="https://x.com/healthifylive" target="_blank"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://instagram.com/healthifylive" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://facebook.com/healthifylive" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i></p>
+            <div class="social-links">
+                <a href="https://x.com/healthifylive"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://instagram.com/healthifylive"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/healthifylive"><i class="fab fa-facebook-f"></i></a>
             </div>
         </footer>
-        <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
-            <img src="/public/whatsapp-icon.png" alt="WhatsApp">
-        </a>
     </div>
-    <script src="/scripts/Drawer.js"></script>
+    <div class="whatsapp-float">
+        <a href="https://wa.me/919503832889" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                document.getElementById('contactMessage').textContent = `Thank you, ${name}! We received your message and will reply to ${email} soon.`;
+                document.getElementById('contactMessage').className = 'success';
+                document.getElementById('contactForm').reset();
+            } else {
+                document.getElementById('contactMessage').textContent = 'Please fill all fields.';
+                document.getElementById('contactMessage').className = 'error';
+            }
+        });
+    </script>
 </body>
 </html>
