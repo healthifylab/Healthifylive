@@ -35,7 +35,7 @@ body {
 
 .logo-img { /* New class for the logo image */
     height: 50px; /* Ensured 50px height */
-    margin-right: 20px; /* Maintains spacing */
+    margin-right: 80%; /* Maintains spacing */
     object-fit: contain; /* Prevents distortion */
 }
 
@@ -116,7 +116,7 @@ main i {
     font-size: 16px;
 }
 
-.form-group textarea {
+.form-group text area {
     height: 100px;
     resize: vertical;
 }
@@ -127,7 +127,7 @@ main i {
     background-color: #20B2AA;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
@@ -466,7 +466,7 @@ footer a:hover {
 
 .call-back-float {
     position: fixed;
-    bottom: 20px;
+    bottom: 50px;
     left: 20px;
     z-index: 1000;
 }
