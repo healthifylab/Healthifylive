@@ -222,33 +222,327 @@ footer a:hover {
     font-size: 16px;
 }
 
+/* New Styles for Missing Classes (View Fixes Only) */
+.hero {
+    position: relative;
+    text-align: center;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.hero h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero .btn {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.promo-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.promo-popup.active {
+    display: block;
+}
+
+.promo-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #20B2AA;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.promo-btn:hover {
+    background-color: #444444;
+}
+
+.cards-section {
+    padding: 40px 0;
+}
+
+.cards-container {
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.section-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #20B2AA;
+}
+
+.promo-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.promo-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.promo-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.promo-card p {
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+.testimonials-section {
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+.testimonials-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #20B2AA;
+}
+
+.testimonials-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+.testimonial-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.testimonial-card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+.testimonial-card h4 {
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.why-choose {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.why-choose h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #20B2AA;
+}
+
+.why-choose p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+.faq-section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.faq-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #20B2AA;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-question {
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding: 10px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.faq-answer {
+    display: none;
+    font-size: 16px;
+    padding: 10px;
+    text-align: left;
+    background-color: #fff;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.social-links img {
+    width: 30px;
+    height: 30px;
+}
+
+.call-back-float {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.call-back-float a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #20B2AA;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.call-back-float a:hover {
+    background-color: #444444;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
     .header nav a {
         margin: 0 10px;
         font-size: 14px;
     }
-    main h1 {
-        font-size: 28px;
-    }
-    main p {
-        font-size: 16px;
-    }
-    .booking-form, .contact-form {
-        max-width: 100%;
+    .header {
+        flex-direction: column;
         padding: 15px;
     }
-    .form-group input, .form-group select, .form-group textarea {
+    .logo {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .hero-image {
+        max-height: 200px;
+    }
+    .hero h1 {
+        font-size: 24px;
+    }
+    .hero .btn {
+        font-size: 14px;
+        padding: 8px 15px;
+        top: 65%;
+    }
+    .cards-container {
+        padding: 0 10px;
+    }
+    .promo-card img {
+        height: 120px;
+    }
+    .testimonials-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .testimonial-card {
+        width: 100%;
+        max-width: 300px;
+    }
+    .why-choose p {
         font-size: 14px;
     }
-    .btn {
+    .faq-question {
+        font-size: 16px;
+    }
+    .faq-answer {
         font-size: 14px;
-        padding: 10px 20px;
     }
-    footer p {
-        font-size: 12px;
+    .social-links img {
+        width: 25px;
+        height: 25px;
     }
-    .social-media a {
-        font-size: 18px;
+    .call-back-float {
+        bottom: 70px;
+    }
+    .call-back-float a {
+        font-size: 14px;
+        padding: 8px 15px;
     }
 }
