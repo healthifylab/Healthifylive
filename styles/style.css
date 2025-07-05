@@ -443,7 +443,11 @@ body {
 }
 
 .whatsapp-float {
-    right: 20px;
+    .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    z-index: 1000;
+};
 }
 
 .whatsapp-float a {
@@ -517,7 +521,11 @@ body {
         left: 10px;
     }
     .whatsapp-float {
-        right: 10px;
+        .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    z-index: 1000;
+};
     }
     .whatsapp-float a {
         width: 40px;
