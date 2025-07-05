@@ -154,40 +154,64 @@ body {
   margin-bottom: 10px;
 }
 
-/* Testimonials */
-.testimonials {
+.testimonials-section {
   padding: 40px 20px;
+  background-color: #fff;
   text-align: center;
 }
-.testimonials h2 {
-  font-size: 2rem;
+
+.testimonials-title {
+  font-size: 28px;
   margin-bottom: 20px;
+  color: #333;
 }
+
 .testimonials-container {
   display: flex;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
-  padding-bottom: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.testimonial {
-  flex: 0 0 250px;
-  background: #f8f8f8;
+
+.testimonial-card {
+  background: #f9f9f9;
   border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  width: 280px;
+  text-align: center;
 }
-.testimonial img {
-  width: 100px;
-  height: 100px;
+
+.testimonial-card img {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.testimonial-card p {
+  font-size: 14px;
+  color: #666;
   margin-bottom: 10px;
 }
-.testimonial p {
-  font-size: 1rem;
-  margin-bottom: 10px;
+
+.testimonial-card h4 {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
 }
-.testimonial span {
-  font-size: 0.9rem;
-  color: #555;
+
+@media (max-width: 768px) {
+  .testimonials-title {
+    font-size: 24px;
+  }
+  .testimonial-card {
+    width: 100%;
+    max-width: 300px;
+  }
 }
 
 /* Booking Form */
