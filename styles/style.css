@@ -34,7 +34,7 @@ body {
 }
 
 .logo-img {
-    height: 80px; /* Reduced from 100px for better balance */
+    height: 80px; /* Standardized logo height */
     margin-right: 20px;
 }
 
@@ -150,11 +150,17 @@ main i {
 
 /* Contact Info */
 .contact-info {
-    margin: 20px 0;
-    font-size: 16px;
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .contact-info p {
+    font-size: 16px;
     margin-bottom: 10px;
 }
 
@@ -430,12 +436,12 @@ footer a:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 350px; /* Consistent card height */
+    min-height: 350px;
 }
 
 .promo-card img {
     width: 100%;
-    max-height: 180px; /* Reduced from 200px for better fit */
+    max-height: 180px;
     object-fit: cover;
     border-radius: 5px;
 }
@@ -534,13 +540,13 @@ footer a:hover {
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 320px; /* Increased from 300px for better content fit */
+    max-width: 320px;
     text-align: center;
 }
 
 .testimonial-card img {
-    width: 120px; /* Increased from 100px */
-    height: 120px; /* Increased from 100px */
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 10px;
@@ -702,7 +708,7 @@ footer a:hover {
         font-size: 14px;
     }
     .logo-img {
-        height: 60px; /* Reduced for mobile */
+        height: 60px; /* Reduced for mobile consistency */
     }
     main h1 {
         font-size: 28px;
@@ -710,7 +716,7 @@ footer a:hover {
     main p {
         font-size: 16px;
     }
-    .booking-form, .contact-form {
+    .booking-form, .contact-form, .contact-info {
         max-width: 100%;
         padding: 15px;
     }
@@ -745,21 +751,21 @@ footer a:hover {
         max-width: 100%;
     }
     .promo-card {
-        min-height: 300px; /* Adjusted for mobile */
+        min-height: 300px;
     }
     .promo-card img {
-        max-height: 140px; /* Reduced for mobile */
+        max-height: 140px;
     }
     .testimonials-container {
         flex-direction: column;
         align-items: center;
     }
     .testimonial-card {
-        max-width: 280px; /* Reduced for mobile */
+        max-width: 280px;
     }
     .testimonial-card img {
-        width: 100px; /* Reduced for mobile */
-        height: 100px; /* Reduced for mobile */
+        width: 100px;
+        height: 100px;
     }
     .why-choose {
         padding: 15px;
@@ -781,4 +787,4 @@ footer a:hover {
     .whatsapp-float a i {
         font-size: 25px;
     }
-    }
+}
