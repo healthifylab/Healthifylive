@@ -38,8 +38,9 @@
             <a href="/booking.html"><button class="promo-btn">Book Now</button></a>
             <button class="promo-btn" onclick="closePopup()">Close</button>
         </div>
-        <!-- Swipeable Promo Cards Section -->
-        <section class="promo-section">
+        <!-- Swipeable Cards Section (Combined Promo and Featured) -->
+        <section class="cards-section">
+            <h2 class="section-title">Promotional Offers</h2>
             <div class="cards-container">
                 <div class="swiper-container promo-swiper">
                     <div class="swiper-wrapper">
@@ -89,10 +90,7 @@
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
-        </section>
-        <!-- Featured Packages Section -->
-        <section class="featured-packages">
-            <h2 class="featured-title">Featured Health Packages</h2>
+            <h2 class="section-title">Featured Health Packages</h2>
             <div class="cards-container">
                 <div class="swiper-container featured-swiper">
                     <div class="swiper-wrapper">
@@ -245,7 +243,7 @@
 
         // Initialize Promo Swiper
         const promoSwiper = new Swiper('.promo-swiper', {
-            slidesPerView: 1,
+            slidesPerView: 1, // Show one card at a time
             spaceBetween: 20,
             direction: 'horizontal',
             navigation: {
@@ -257,14 +255,14 @@
                 clickable: true,
             },
             breakpoints: {
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 },
+                768: { slidesPerView: 1 }, // Still one card on larger screens
+                1024: { slidesPerView: 1 },
             },
         });
 
         // Initialize Featured Swiper
         const featuredSwiper = new Swiper('.featured-swiper', {
-            slidesPerView: 1,
+            slidesPerView: 1, // Show one card at a time
             spaceBetween: 20,
             direction: 'horizontal',
             navigation: {
@@ -276,8 +274,8 @@
                 clickable: true,
             },
             breakpoints: {
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 },
+                768: { slidesPerView: 1 }, // Still one card on larger screens
+                1024: { slidesPerView: 1 },
             },
         });
 
