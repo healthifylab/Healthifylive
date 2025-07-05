@@ -448,15 +448,15 @@ body {
 
 .whatsapp-float a {
     display: inline-block;
-    padding: 10px; /* Reduced padding to control size */
+    padding: 10px; /* Controlled padding */
     background-color: #25D366;
     color: #fff;
     border-radius: 50%;
-    font-size: 30px; /* Adjusted to a reasonable size */
+    font-size: 30px; /* Consistent size */
     text-align: center;
-    width: 50px;
-    height: 50px;
-    line-height: 30px;
+    width: 50px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    line-height: 30px; /* Vertical centering */
 }
 
 .whatsapp-float a:hover {
@@ -520,9 +520,9 @@ body {
         right: 10px;
     }
     .whatsapp-float a {
-        width: 40px;
-        height: 40px;
-        font-size: 24px;
-        line-height: 24px;
+        width: 40px; /* Reduced on mobile */
+        height: 40px; /* Reduced on mobile */
+        font-size: 24px; /* Adjusted size */
+        line-height: 24px; /* Adjusted centering */
     }
-    }
+}
