@@ -6,14 +6,15 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   line-height: 1.6;
+  color: #333;
 }
 
 /* Header */
 header {
   padding: 20px;
-  background-color: #333;
+  background-color: #004d99; /* Dark blue header */
   color: #fff;
   text-align: center;
 }
@@ -23,6 +24,8 @@ header nav a {
   margin: 0 15px;
   text-decoration: none;
   font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
 }
 
 header nav a:hover {
@@ -33,18 +36,22 @@ header nav a:hover {
 .hero {
   padding: 60px 20px;
   text-align: center;
-  background-color: #007bff;
+  background: linear-gradient(135deg, #007bff, #004d99); /* Gradient blue */
   color: #fff;
 }
 
 .hero h1 {
   font-size: 36px;
   margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 .hero p {
   font-size: 18px;
   margin-bottom: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 .hero .btn {
@@ -55,6 +62,9 @@ header nav a:hover {
   text-decoration: none;
   border-radius: 5px;
   font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
 
 .hero .btn:hover {
@@ -66,19 +76,23 @@ header nav a:hover {
 .promo-section {
   padding: 40px 20px;
   text-align: center;
-  background-color: #f5f5f5;
+  background-color: #f8f9fa; /* Light gray background */
 }
 
 .promo-title {
   font-size: 28px;
   margin-bottom: 10px;
-  color: #333;
+  color: #004d99;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 .promo-text {
   font-size: 16px;
   margin-bottom: 20px;
-  color: #666;
+  color: #555;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 .promo-card {
@@ -101,13 +115,17 @@ header nav a:hover {
 .promo-card h3 {
   font-size: 20px;
   margin-bottom: 10px;
-  color: #333;
+  color: #004d99;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 .promo-card p {
   font-size: 14px;
-  color: #666;
+  color: #555;
   margin-bottom: 15px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 .promo-card .btn {
@@ -118,6 +136,13 @@ header nav a:hover {
   text-decoration: none;
   border-radius: 5px;
   font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.promo-card .btn:hover {
+  background-color: #0056b3;
 }
 
 .promo-card:hover {
@@ -139,17 +164,19 @@ header nav a:hover {
 .featured-packages {
   padding: 40px 20px;
   text-align: center;
-  background-color: #fff;
+  background-color: #f8f9fa; /* Light gray background */
 }
 
 .featured-title {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #333;
+  color: #004d99;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 .package-card {
-  background: #f9f9f9;
+  background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -168,13 +195,17 @@ header nav a:hover {
 .package-card h3 {
   font-size: 20px;
   margin-bottom: 10px;
-  color: #333;
+  color: #004d99;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 .package-card p {
   font-size: 14px;
-  color: #666;
+  color: #555;
   margin-bottom: 15px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 .package-card .btn {
@@ -185,6 +216,13 @@ header nav a:hover {
   text-decoration: none;
   border-radius: 5px;
   font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.package-card .btn:hover {
+  background-color: #0056b3;
 }
 
 .package-card:hover {
@@ -206,7 +244,9 @@ header nav a:hover {
 .testimonials-title {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #333;
+  color: #004d99;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 .testimonials-container {
@@ -219,7 +259,7 @@ header nav a:hover {
 }
 
 .testimonial-card {
-  background: #f9f9f9;
+  background: #f8f9fa;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -237,20 +277,23 @@ header nav a:hover {
 
 .testimonial-card p {
   font-size: 14px;
-  color: #666;
+  color: #555;
   margin-bottom: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 .testimonial-card h4 {
   font-size: 16px;
-  color: #333;
-  font-weight: bold;
+  color: #004d99;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 /* Footer */
 .footer {
   padding: 20px;
-  background-color: #333;
+  background-color: #004d99; /* Dark blue footer */
   color: #fff;
   text-align: center;
 }
@@ -262,6 +305,8 @@ header nav a:hover {
 .social-links p {
   font-size: 16px;
   margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
 }
 
 .social-icon {
