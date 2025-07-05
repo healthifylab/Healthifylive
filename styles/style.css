@@ -34,8 +34,8 @@ body {
 }
 
 .logo {
-    height: 50px; /* Decreased from 100px */
-    margin-right: 20px;
+    height: 100px;
+    margin-right: 85%;
     position: fixed;
     top: 10px;
     left: 10px; /* Floating at top-left with margin */
