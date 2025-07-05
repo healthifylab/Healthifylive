@@ -83,8 +83,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    <!-- Removed navigation icons -->
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
@@ -133,8 +132,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    <!-- Removed navigation icons -->
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
@@ -239,36 +237,32 @@
             document.getElementById('promoPopup').classList.remove('active');
         }
 
-        // Initialize Promo Swiper (One card at a time)
+        // Initialize Promo Swiper (One card at a time, no navigation)
         const promoSwiper = new Swiper('.promo-swiper', {
-            slidesPerView: 1, /* Force one card at a time */
+            slidesPerView: 1,
             spaceBetween: 0,
             direction: 'horizontal',
-            navigation: {
-                nextEl: '.promo-swiper .swiper-button-next',
-                prevEl: '.promo-swiper .swiper-button-prev',
-            },
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
                 clickable: true,
             },
-            /* Removed breakpoints to enforce single slide */
+            navigation: { /* Removed navigation icons */
+                enabled: false,
+            },
         });
 
-        // Initialize Featured Swiper (One card at a time)
+        // Initialize Featured Swiper (One card at a time, no navigation)
         const featuredSwiper = new Swiper('.featured-swiper', {
-            slidesPerView: 1, /* Force one card at a time */
+            slidesPerView: 1,
             spaceBetween: 0,
             direction: 'horizontal',
-            navigation: {
-                nextEl: '.featured-swiper .swiper-button-next',
-                prevEl: '.featured-swiper .swiper-button-prev',
-            },
             pagination: {
                 el: '.featured-swiper .swiper-pagination',
                 clickable: true,
             },
-            /* Removed breakpoints to enforce single slide */
+            navigation: { /* Removed navigation icons */
+                enabled: false,
+            },
         });
 
         // FAQ Toggle
