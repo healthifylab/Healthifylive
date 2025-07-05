@@ -33,9 +33,10 @@ body {
     z-index: 1000;
 }
 
-.logo {
-    height: 50px; /* Decreased from 100px as requested */
-    margin-right: 20px; /* Maintains spacing with nav */
+.logo-img { /* New class for the logo image */
+    height: 50px; /* Ensured 50px height */
+    margin-right: 20px; /* Maintains spacing */
+    object-fit: contain; /* Prevents distortion */
 }
 
 .header nav a {
@@ -496,7 +497,7 @@ footer a:hover {
         flex-direction: column;
         padding: 15px;
     }
-    .logo {
+    .logo-img {
         margin-right: 0;
         margin-bottom: 10px;
     }
