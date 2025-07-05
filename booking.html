@@ -23,15 +23,10 @@
                 <a href="/contact.html">Contact</a>
             </nav>
         </div>
-        <div class="hero">
-            <img src="/public/hero-banner.jpg" alt="Hero Banner" class="hero-image">
-            <h1>📋 Book Your Test 😊 <i class="fas fa-stethoscope"></i></h1>
-            <a href="#booking-form" class="btn">Book Now <i class="fas fa-check"></i></a>
-        </div>
         <main>
             <h1>📋 Book Your Test 😊</h1>
             <p>Select a test or profile to book your appointment. <i class="fas fa-syringe"></i></p>
-            <div class="booking-form" id="booking-form">
+            <div class="booking-form">
                 <form id="bookingForm">
                     <div class="form-group">
                         <label for="name">Full Name <i class="fas fa-user"></i></label>
@@ -40,6 +35,27 @@
                     <div class="form-group">
                         <label for="phone">Phone Number <i class="fas fa-phone"></i></label>
                         <input type="tel" id="phone" placeholder="Enter your phone (XXXXXXXXXX)" value="+91" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age <i class="fas fa-birthday-cake"></i></label>
+                        <input type="number" id="age" placeholder="Enter your age" min="1" max="120" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sex">Sex <i class="fas fa-venus-mars"></i></label>
+                        <select id="sex" required>
+                            <option value="" disabled selected>Select sex</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address with Landmark <i class="fas fa-map-marker-alt"></i></label>
+                        <textarea id="address" placeholder="Enter your address with landmark" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode <i class="fas fa-mail-bulk"></i></label>
+                        <input type="text" id="pincode" placeholder="Enter your pincode (e.g., 400001)" pattern="[0-9]{6}" required>
                     </div>
                     <div class="form-group">
                         <label for="test">Select Test(s) <i class="fas fa-vial"></i></label>
@@ -103,7 +119,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // EmailJS Initialization with provided User ID
+        // EmailJS Initialization
         emailjs.init('dJE_JHAoNTxxzTxiT');
 
         // Store selected items
@@ -201,13 +217,17 @@
             event.preventDefault();
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
+            const age = document.getElementById('age').value;
+            const sex = document.getElementById('sex').value;
+            const address = document.getElementById('address').value;
+            const pincode = document.getElementById('pincode').value;
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
             const submissionStatus = document.getElementById('bookingMessage');
 
-            if (!name || !phone.match(/^\+91[0-9]{10}$/) || (selectedTests.size === 0 && selectedProfiles.size === 0)) {
+            if (!name || !phone.match(/^\+91[0-9]{10}$/) || !age || !sex || !address || !pincode.match(/[0-9]{6}/) || (selectedTests.size === 0 && selectedProfiles.size === 0)) {
                 submissionStatus.className = "error";
-                submissionStatus.textContent = "❌ Please enter a valid name, mobile number (+91 followed by 10 digits), and select at least one test or profile.";
+                submissionStatus.textContent = "❌ Please enter a valid name, mobile number (+91 followed by 10 digits), age, sex, address, pincode, and select at least one test or profile.";
                 return;
             }
 
@@ -216,6 +236,10 @@
                 await addDoc(collection(db, "bookings"), {
                     name: name,
                     phone: phone,
+                    age: age,
+                    sex: sex,
+                    address: address,
+                    pincode: pincode,
                     tests: selectedTests.size > 0 ? Array.from(selectedTests) : null,
                     profiles: selectedProfiles.size > 0 ? Array.from(selectedProfiles) : null,
                     date: date,
@@ -224,7 +248,7 @@
                     status: "New Booking"
                 });
                 // Send email via EmailJS
-                const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone})`;
+                const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone}, Age: ${age}, Sex: ${sex}, Address: ${address}, Pincode: ${pincode})`;
                 emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_name: name,
                     to_email: 'report@healthifylab.com',
