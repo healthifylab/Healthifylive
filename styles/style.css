@@ -38,7 +38,7 @@ body {
     margin-right: 85%;
     position: fixed;
     top: 10px;
-    left: 10px; /* Floating at top-left with margin */
+    left: 10px; /* fixed at top-left with margin */
     z-index: 1001;
 }
 
