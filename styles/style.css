@@ -51,7 +51,7 @@ body {
     text-decoration: underline;
 }
 
-/* Hero Section */
+/* Hero Section (for index.html only) */
 .hero {
     position: relative;
     text-align: center;
@@ -61,7 +61,7 @@ body {
 
 .hero-image {
     width: 100%;
-    height: 400px; /* Fixed height for consistency */
+    height: 400px;
     object-fit: cover;
 }
 
@@ -93,7 +93,7 @@ body {
     z-index: 10;
 }
 
-/* Search Section */
+/* Search Section (for index.html) */
 .search-section {
     padding: 20px 0;
     text-align: center;
@@ -115,7 +115,7 @@ body {
     font-size: 16px;
 }
 
-/* Promo Popup */
+/* Promo Popup (for index.html) */
 .promo-popup {
     display: none;
     position: fixed;
@@ -149,7 +149,7 @@ body {
     background-color: #444444;
 }
 
-/* Cards Section */
+/* Cards Section (for index.html) */
 .cards-section {
     padding: 30px 0;
 }
@@ -180,7 +180,7 @@ body {
 
 .promo-card img {
     width: 100%;
-    height: 180px; /* Increased for better visibility */
+    height: 180px;
     object-fit: cover;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -200,7 +200,7 @@ body {
 }
 
 .swiper-slide {
-    width: 250px !important; /* Ensure consistent slide width */
+    width: 250px !important;
 }
 
 .swiper-button-next, .swiper-button-prev {
@@ -211,7 +211,7 @@ body {
     background: #20B2AA;
 }
 
-/* Testimonials Section */
+/* Testimonials Section (for index.html) */
 .testimonials-section {
     padding: 30px 0;
     background: #f9f9f9;
@@ -263,7 +263,7 @@ body {
     font-weight: 600;
 }
 
-/* Why Choose Section */
+/* Why Choose Section (for index.html) */
 .why-choose {
     padding: 30px 0;
     text-align: center;
@@ -282,7 +282,7 @@ body {
     color: #333;
 }
 
-/* FAQ Section */
+/* FAQ Section (for index.html) */
 .faq-section {
     padding: 30px 0;
 }
@@ -322,7 +322,84 @@ body {
     font-size: 16px;
 }
 
-/* Social Links */
+/* Form Styles (for booking.html and contact.html) */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #20B2AA;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #444444;
+}
+
+.contact-form,
+.booking-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.contact-info,
+#testList {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.contact-info p,
+#testList p {
+    margin: 5px 0;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
+/* Social Links (for index.html) */
 .social-links {
     text-align: center;
     padding: 20px 0;
@@ -339,7 +416,8 @@ body {
 }
 
 /* Floating Buttons */
-.call-back-float, .whatsapp-float {
+.call-back-float,
+.whatsapp-float {
     position: fixed;
     bottom: 20px;
     z-index: 1000;
@@ -370,11 +448,15 @@ body {
 
 .whatsapp-float a {
     display: inline-block;
-    padding: 10px;
+    padding: 10px; /* Reduced padding to control size */
     background-color: #25D366;
     color: #fff;
     border-radius: 50%;
-    font-size: 24px;
+    font-size: 30px; /* Adjusted to a reasonable size */
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    line-height: 30px;
 }
 
 .whatsapp-float a:hover {
@@ -422,10 +504,25 @@ body {
     .faq-question {
         font-size: 16px;
     }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 14px;
+    }
+    .contact-form,
+    .booking-form {
+        padding: 15px;
+    }
     .call-back-float {
         left: 10px;
     }
     .whatsapp-float {
         right: 10px;
+    }
+    .whatsapp-float a {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        line-height: 24px;
     }
 }
