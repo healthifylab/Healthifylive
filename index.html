@@ -83,7 +83,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Removed navigation icons -->
+                    <!-- Removed navigation icons, keeping pagination -->
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Removed navigation icons -->
+                    <!-- Removed navigation icons, keeping pagination -->
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
@@ -237,31 +237,33 @@
             document.getElementById('promoPopup').classList.remove('active');
         }
 
-        // Initialize Promo Swiper (One card at a time, no navigation)
+        // Initialize Promo Swiper (One card at a time, continuous loop)
         const promoSwiper = new Swiper('.promo-swiper', {
             slidesPerView: 1,
             spaceBetween: 0,
             direction: 'horizontal',
+            loop: true, /* Enable continuous swiping */
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
                 clickable: true,
             },
-            navigation: { /* Removed navigation icons */
-                enabled: false,
+            navigation: {
+                enabled: false, /* Navigation icons remain disabled */
             },
         });
 
-        // Initialize Featured Swiper (One card at a time, no navigation)
+        // Initialize Featured Swiper (One card at a time, continuous loop)
         const featuredSwiper = new Swiper('.featured-swiper', {
             slidesPerView: 1,
             spaceBetween: 0,
             direction: 'horizontal',
+            loop: true, /* Enable continuous swiping */
             pagination: {
                 el: '.featured-swiper .swiper-pagination',
                 clickable: true,
             },
-            navigation: { /* Removed navigation icons */
-                enabled: false,
+            navigation: {
+                enabled: false, /* Navigation icons remain disabled */
             },
         });
 
