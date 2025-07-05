@@ -90,6 +90,59 @@
                 </div>
             </div>
         </section>
+        <!-- Featured Packages Section -->
+        <section class="featured-packages">
+            <h2 class="featured-title">Featured Health Packages</h2>
+            <div class="cards-container">
+                <div class="swiper-container featured-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/diabetic-profile-a.jpg" alt="Diabetic Profile" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Diabetic Profile</h3>
+                                <p>₹499 - Comprehensive diabetes screening.</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/full-body-checkup.jpg" alt="Full Body Checkup" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Full Body Checkup</h3>
+                                <p>₹999 - Complete health analysis.</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/pcod-profile.jpg" alt="PCOD Profile" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>PCOD Profile</h3>
+                                <p>₹699 - Specialized women’s health test.</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/test-placeholder.jpg" alt="Vitamin Profile">
+                                <h3>Vitamin Profile</h3>
+                                <p>₹599 - Check your vitamin levels.</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/wellness-1-4.jpg" alt="Wellness Package" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Wellness Package</h3>
+                                <p>₹1299 - Holistic health checkup.</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
         <!-- Testimonials Section -->
         <section class="testimonials-section">
             <h2 class="testimonials-title">What Our Patients Say</h2>
@@ -201,6 +254,25 @@
             },
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+            },
+        });
+
+        // Initialize Featured Swiper
+        const featuredSwiper = new Swiper('.featured-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            direction: 'horizontal',
+            navigation: {
+                nextEl: '.featured-swiper .swiper-button-next',
+                prevEl: '.featured-swiper .swiper-button-prev',
+            },
+            pagination: {
+                el: '.featured-swiper .swiper-pagination',
                 clickable: true,
             },
             breakpoints: {
