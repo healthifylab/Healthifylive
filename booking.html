@@ -37,16 +37,16 @@
                         <input type="tel" id="phone" placeholder="Enter your phone (XXXXXXXXXX)" value="+91" required>
                     </div>
                     <div class="form-group">
-                        <label for="test">Select Test <i class="fas fa-vial"></i></label>
-                        <select id="test" required>
-                            <option value="" disabled selected>Loading tests...</option>
-                        </select>
+                        <label for="testInput">Select Test(s) <i class="fas fa-vial"></i></label>
+                        <input type="text" id="testInput" placeholder="Search and select test(s)...">
+                        <div id="selectedTests" class="selected-items"></div>
+                        <datalist id="testOptions"></datalist>
                     </div>
                     <div class="form-group">
-                        <label for="profile">Select a Profile <i class="fas fa-file-alt"></i></label>
-                        <select id="profile" required>
-                            <option value="" disabled selected>Loading profiles...</option>
-                        </select>
+                        <label for="profileInput">Select Profile(s) <i class="fas fa-file-alt"></i></label>
+                        <input type="text" id="profileInput" placeholder="Search and select profile(s)...">
+                        <div id="selectedProfiles" class="selected-items"></div>
+                        <datalist id="profileOptions"></datalist>
                     </div>
                     <div class="form-group">
                         <label for="date">Appointment Date <i class="fas fa-calendar"></i></label>
@@ -97,44 +97,93 @@
         // EmailJS Initialization with provided User ID
         emailjs.init('dJE_JHAoNTxxzTxiT');
 
-        // Fetch and populate tests from /public/tests.json
+        // Store selected items
+        let selectedTests = new Set();
+        let selectedProfiles = new Set();
+
+        // Fetch and populate tests for datalist
         async function loadTests() {
             try {
                 const response = await fetch('/public/tests.json');
                 if (!response.ok) throw new Error('Failed to fetch tests');
                 const tests = await response.json();
-                const select = document.getElementById('test');
-                select.innerHTML = '<option value="" disabled selected>Select a test</option>';
+                const datalist = document.getElementById('testOptions');
+                datalist.innerHTML = '';
                 tests.forEach(test => {
                     const option = document.createElement('option');
                     option.value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
                     option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
-                    select.appendChild(option);
+                    datalist.appendChild(option);
                 });
+                setupSearch('testInput', 'testOptions', selectedTests);
             } catch (error) {
                 console.error('Error loading tests:', error);
-                document.getElementById('test').innerHTML = '<option value="" disabled selected>Error loading tests</option>';
+                document.getElementById('testOptions').innerHTML = '<option value="Error loading tests"></option>';
             }
         }
 
-        // Fetch and populate profiles from /public/profile.json
+        // Fetch and populate profiles for datalist
         async function loadProfiles() {
             try {
                 const response = await fetch('/public/profile.json');
                 if (!response.ok) throw new Error('Failed to fetch profiles');
                 const profiles = await response.json();
-                const select = document.getElementById('profile');
-                select.innerHTML = '<option value="" disabled selected>Select a profile</option>';
+                const datalist = document.getElementById('profileOptions');
+                datalist.innerHTML = '';
                 profiles.forEach(profile => {
                     const option = document.createElement('option');
                     option.value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
-                    select.appendChild(option);
+                    datalist.appendChild(option);
                 });
+                setupSearch('profileInput', 'profileOptions', selectedProfiles);
             } catch (error) {
                 console.error('Error loading profiles:', error);
-                document.getElementById('profile').innerHTML = '<option value="" disabled selected>Error loading profiles</option>';
+                document.getElementById('profileOptions').innerHTML = '<option value="Error loading profiles"></option>';
             }
+        }
+
+        // Setup search and selection functionality
+        function setupSearch(inputId, datalistId, selectedSet) {
+            const input = document.getElementById(inputId);
+            const datalist = document.getElementById(datalistId);
+            const selectedDiv = document.getElementById(inputId === 'testInput' ? 'selectedTests' : 'selectedProfiles');
+
+            input.addEventListener('input', () => {
+                const value = input.value.toLowerCase();
+                let matches = Array.from(datalist.options).filter(option =>
+                    !selectedSet.has(option.value) && option.value.includes(value)
+                );
+                datalist.innerHTML = matches.map(option => `<option value="${option.value}">${option.textContent}</option>`).join('');
+            });
+
+            input.addEventListener('change', () => {
+                const value = input.value.trim();
+                if (value && !selectedSet.has(value) && datalist.querySelector(`option[value="${value}"]`)) {
+                    selectedSet.add(value);
+                    updateSelectedItems();
+                    input.value = '';
+                    datalist.innerHTML = Array.from(datalist.options)
+                        .filter(option => !selectedSet.has(option.value))
+                        .map(option => `<option value="${option.value}">${option.textContent}</option>`).join('');
+                }
+            });
+
+            function updateSelectedItems() {
+                selectedDiv.innerHTML = Array.from(selectedSet).map(item => `
+                    <span class="selected-tag">${item.replace('-', ' ')}
+                        <button type="button" onclick="removeSelection('${inputId}', '${item}')">×</button>
+                    </span>
+                `).join('');
+            }
+
+            window.removeSelection = (inputId, item) => {
+                const set = inputId === 'testInput' ? selectedTests : selectedProfiles;
+                set.delete(item);
+                updateSelectedItems();
+                const datalist = document.getElementById(inputId === 'testInput' ? 'testOptions' : 'profileOptions');
+                datalist.innerHTML += `<option value="${item}">${Array.from(datalist.options).find(o => o.value === item)?.textContent || item}</option>`;
+            };
         }
 
         // Handle booking form submission
@@ -142,15 +191,13 @@
             event.preventDefault();
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
-            const test = document.getElementById('test').value;
-            const profile = document.getElementById('profile').value;
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
             const submissionStatus = document.getElementById('bookingMessage');
 
-            if (!name || !phone.match(/^\+91[0-9]{10}$/)) {
+            if (!name || !phone.match(/^\+91[0-9]{10}$/) || (selectedTests.size === 0 && selectedProfiles.size === 0)) {
                 submissionStatus.className = "error";
-                submissionStatus.textContent = "❌ Please enter a valid name and mobile number (+91 followed by 10 digits).";
+                submissionStatus.textContent = "❌ Please enter a valid name, mobile number (+91 followed by 10 digits), and select at least one test or profile.";
                 return;
             }
 
@@ -159,22 +206,27 @@
                 await addDoc(collection(db, "bookings"), {
                     name: name,
                     phone: phone,
-                    test: test ? test.replace('-', ' ') : null,
-                    profile: profile ? profile.replace('-', ' ') : null,
+                    tests: selectedTests.size > 0 ? Array.from(selectedTests) : null,
+                    profiles: selectedProfiles.size > 0 ? Array.from(selectedProfiles) : null,
                     date: date,
                     time: time,
                     timestamp: new Date().toISOString(),
                     status: "New Booking"
                 });
                 // Send email via EmailJS
+                const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone})`;
                 emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_name: name,
                     to_email: 'report@healthifylab.com',
-                    message: `New booking: ${test ? test.replace('-', ' ') : profile.replace('-', ' ')} on ${date} at ${time} by ${name} (Phone: ${phone})`
+                    message: message
                 }).then(() => {
                     console.log('Email sent successfully');
                     submissionStatus.className = "success";
                     submissionStatus.textContent = "✅ Request submitted! We’ll call you soon.";
+                    selectedTests.clear();
+                    selectedProfiles.clear();
+                    document.getElementById('selectedTests').innerHTML = '';
+                    document.getElementById('selectedProfiles').innerHTML = '';
                     document.getElementById('bookingForm').reset();
                 }).catch((error) => {
                     console.error('EmailJS error:', error);
