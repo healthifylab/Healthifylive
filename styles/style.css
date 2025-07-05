@@ -34,8 +34,12 @@ body {
 }
 
 .logo {
-    height: 100px;
+    height: 50px; /* Decreased from 100px */
     margin-right: 20px;
+    position: fixed;
+    top: 10px;
+    left: 10px; /* Floating at top-left with margin */
+    z-index: 1001;
 }
 
 .header nav a {
@@ -264,7 +268,7 @@ footer a:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1001;
     text-align: center;
-    max-width: 400px;
+    max-width: 75%; /* Decreased to 75% */
     width: 90%;
 }
 
@@ -465,8 +469,8 @@ footer a:hover {
 
 .call-back-float {
     position: fixed;
-    bottom: 80px;
-    right: 20px;
+    bottom: 20px; /* Adjusted to bottom-left with margin */
+    left: 20px;
     z-index: 1000;
 }
 
@@ -539,7 +543,7 @@ footer a:hover {
         height: 25px;
     }
     .call-back-float {
-        bottom: 70px;
+        bottom: 20px; /* Maintain bottom margin on mobile */
     }
     .call-back-float a {
         font-size: 14px;
