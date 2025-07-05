@@ -16,6 +16,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
+    overflow: hidden; /* Prevents overflow from child elements */
 }
 
 /* Header */
@@ -178,7 +179,8 @@ body {
 
 .cards-container {
     max-width: 1200px;
-    margin: 0 auto 40px auto; /* Added margin-bottom for spacing between sections */
+    margin: 0 auto 40px auto;
+    overflow: hidden; /* Ensures cards stay within bounds */
 }
 
 .promo-card {
@@ -188,6 +190,7 @@ body {
     padding: 20px;
     text-align: center;
     transition: transform 0.3s ease;
+    width: 100%; /* Ensures card fits container */
 }
 
 .promo-card img {
@@ -236,14 +239,14 @@ body {
 }
 
 .swiper-container.promo-swiper, .swiper-container.featured-swiper {
-    width: 100%;
-    margin: 0 auto;
+    width: 100%; /* Ensures swiper fits container */
+    overflow: hidden; /* Prevents cards from spilling out */
 }
 
 .swiper-slide {
     display: flex;
     justify-content: center;
-    width: auto;
+    width: 100%; /* Matches card width to container */
 }
 
 /* Testimonials Section */
