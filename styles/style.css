@@ -466,7 +466,7 @@ footer a:hover {
 
 .call-back-float {
     position: fixed;
-    bottom: 300px;
+    bottom: 20%;
     left: 20px;
     z-index: 1000;
 }
