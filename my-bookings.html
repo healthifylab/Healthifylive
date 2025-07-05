@@ -1,127 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>📋 My Bookings – Healthifylive</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
-        authDomain: "healthify-lab.firebaseapp.com",
-        projectId: "healthify-lab",
-        storageBucket: "healthify-lab.firebasestorage.app",
-        messagingSenderId: "297003315332",
-        appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
-
-    onAuthStateChanged(auth, user => {
-        const main = document.querySelector("main");
-        const loginStatus = document.getElementById("loginStatus");
-        if (user) {
-            main.style.display = "block";
-            loginStatus.style.display = "none";
-            loadBookings(user.uid);
-        } else {
-            main.style.display = "none";
-            loginStatus.style.display = "block";
-            loginStatus.className = "error";
-            loginStatus.textContent = "Please log in to view bookings.";
-        }
-    });
-
-    async function loadBookings(userId) {
-        try {
-            const q = query(collection(db, "bookings"), where("userId", "==", userId));
-            const querySnapshot = await getDocs(q);
-            const bookingInfo = document.getElementById("bookingInfo");
-            if (querySnapshot.empty) {
-                bookingInfo.innerHTML = "<p>No bookings found.</p>";
-                return;
-            }
-            let html = "";
-            querySnapshot.forEach(doc => {
-                const data = doc.data();
-                const testList = (data.tests || []).concat(data.profiles || []).map(t => `<li>${t} – ₹${data.testsData?.find(test => test.Test_Name === t)?.Healthify_Offer_Price || "N/A"}</li>`).join("");
-                html += `
-                    <div>
-                        <p><strong>Booking ID:</strong> ${doc.id}</p>
-                        <p><strong>👤 Name:</strong> ${data.name}</p>
-                        <p><strong>📱 Mobile:</strong> ${data.mobile}</p>
-                        <p><strong>📧 Email:</strong> ${data.email}</p>
-                        <p><strong>📅 Date:</strong> ${data.appointment_date}</p>
-                        <p><strong>⏰ Time:</strong> ${data.appointment_time}</p>
-                        <p><strong>🎂 Age:</strong> ${data.age}, <strong>⚧ Sex:</strong> ${data.sex}</p>
-                        <p><strong>🏠 Address:</strong> ${data.address}, ${data.pincode}, Landmark: ${data.landmark}</p>
-                        <p><strong>🧪 Tests Booked:</strong></p>
-                        <ul>${testList}</ul>
-                        <p><strong>💰 Total:</strong> ₹${data.totalOfferPrice.toFixed(2)}</p>
-                        <p><strong>🕒 Results in:</strong> ${data.tats}</p>
-                        <button onclick="generateBookingPDF('${doc.id}', ${JSON.stringify(data)})">📄 Download PDF</button>
-                    </div>
-                    <hr>
-                `;
-            });
-            bookingInfo.innerHTML = html;
-        } catch (error) {
-            console.error("Error loading bookings:", error);
-            document.getElementById("bookingInfo").innerHTML = `<p>Error loading bookings: ${error.message}</p>`;
-        }
-    }
-
-    window.generateBookingPDF = function(bookingId, data) {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        doc.text("Healthifylive Booking Receipt", 10, 10);
-        doc.text(`Booking ID: ${bookingId}`, 10, 20);
-        doc.text(`Name: ${data.name}`, 10, 30);
-        doc.text(`Mobile: ${data.mobile}`, 10, 40);
-        doc.text(`Tests: ${(data.tests || []).join(", ") || "None"}`, 10, 50);
-        doc.text(`Profiles: ${(data.profiles || []).join(", ") || "None"}`, 10, 60);
-        doc.text(`Total Offer Price: Rs. ${data.totalOfferPrice.toFixed(2)}`, 10, 70);
-        doc.text(`Results in: ${data.tats}`, 10, 80);
-        doc.text(`Date: ${data.appointment_date}`, 10, 90);
-        doc.text(`Time: ${data.appointment_time}`, 10, 100);
-        doc.save(`Healthify_Booking_${bookingId}.pdf`);
-    };
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings - Healthifylive Lab</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <img src="/public/logo.png" alt="Healthifylive Logo" class="logo">
-      <nav>
-        <a href="/index.html">Home</a>
-        <a href="/booking.html">Book Test</a>
-        <a href="/contact.html">Contact Us</a>
-      </nav>
+    <div class="container">
+        <div class="header">
+            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo">
+            <nav>
+                <a href="/index.html">Home</a>
+                <a href="/booking.html">Book Test</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/call-back.html" target="_blank">Call Me Back</a>
+            </nav>
+        </div>
+        <main>
+            <h1>📋 My Bookings</h1>
+            <p>Bookings are managed via "Call Me Back" for now. Contact us for details!</p>
+        </main>
+        <footer>
+            <p>Healthifylive © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:support@healthifylive.com">support@healthifylive.com</a></p>
+            <div class="social-media">
+                <a href="https://x.com/healthifylive" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://instagram.com/healthifylive" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/healthifylive" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </footer>
+        <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
+            <img src="/public/whatsapp-icon.png" alt="WhatsApp">
+        </a>
     </div>
-    <main style="display: none;">
-      <h1>📋 My Bookings</h1>
-      <div id="loginStatus"></div>
-      <div id="bookingInfo"></div>
-    </main>
-    <footer>
-      <p>Healthifylive © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:support@healthifylive.com">support@healthifylive.com</a></p>
-      <div class="social-media">
-        <a href="https://x.com/healthifylive" target="_blank"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://instagram.com/healthifylive" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://facebook.com/healthifylive" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      </div>
-    </footer>
-    <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
-      <img src="/public/whatsapp-icon.png" alt="WhatsApp">
-    </a>
-  </div>
-  <script src="/scripts/Drawer.js"></script>
+    <script src="/scripts/Drawer.js"></script>
 </body>
 </html>
