@@ -1,7 +1,7 @@
 // scripts/Search.js
 async function fetchTests() {
   try {
-    const response = await fetch('/tests.json');
+    const response = await fetch('/public/tests.json');
     if (!response.ok) throw new Error('Failed to fetch tests');
     return await response.json();
   } catch (error) {
