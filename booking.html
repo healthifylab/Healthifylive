@@ -6,6 +6,11 @@
     <title>Book Test - Healthifylive Lab</title>
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Firebase SDK v10.14.1 -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -29,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number <i class="fas fa-phone"></i></label>
-                        <input type="tel" id="phone" placeholder="Enter your phone" required>
+                        <input type="tel" id="phone" placeholder="Enter your phone (+91XXXXXXXXXX)" required>
                     </div>
                     <div class="form-group">
                         <label for="test">Select Test <i class="fas fa-vial"></i></label>
@@ -59,9 +64,29 @@
             <img src="/public/whatsapp-icon.png" alt="WhatsApp">
         </a>
     </div>
-    <script type="module" src="/scripts/booking.js"></script>
-    <script src="/scripts/Drawer.js"></script>
-    <script>
+    <script type="module" src="/scripts/lead-submission.js"></script>
+    <script type="module" src="/scripts/Drawer.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+            authDomain: "healthify-lab.firebaseapp.com",
+            projectId: "healthify-lab",
+            storageBucket: "healthify-lab.firebasestorage.app",
+            messagingSenderId: "297003315332",
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // EmailJS Initialization with provided User ID
+        emailjs.init('dJE_JHAoNTxxzTxiT');
+
         // Fetch and populate tests from /public/tests.json
         async function loadTests() {
             try {
@@ -82,18 +107,50 @@
             }
         }
 
-        // Form submission
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Handle booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const test = document.getElementById('test').value;
             const date = document.getElementById('date').value;
-            if (name && phone && test && date) {
-                document.getElementById('bookingMessage').textContent = `Thank you, ${name}! Your ${test.replace('-', ' ')} is booked for ${date}. 😊`;
-                document.getElementById('bookingForm').reset();
-            } else {
-                document.getElementById('bookingMessage').textContent = 'Please fill all fields! 🙁';
+            const submissionStatus = document.getElementById('bookingMessage');
+
+            if (!name || !phone.match(/^\+91[0-9]{10}$/)) {
+                submissionStatus.className = "error";
+                submissionStatus.textContent = "❌ Please enter a valid name and mobile number (+91 followed by 10 digits).";
+                return;
+            }
+
+            submissionStatus.textContent = "📞 Submitting your request...";
+            try {
+                await addDoc(collection(db, "bookings"), {
+                    name: name,
+                    phone: phone,
+                    test: test.replace('-', ' '),
+                    date: date,
+                    timestamp: new Date().toISOString(),
+                    status: "New Booking"
+                });
+                // Send email via EmailJS
+                emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                    to_name: name,
+                    to_email: 'support@healthifylive.com',
+                    message: `New booking: ${test.replace('-', ' ')} on ${date} by ${name} (Phone: ${phone})`
+                }).then(() => {
+                    console.log('Email sent successfully');
+                    submissionStatus.className = "success";
+                    submissionStatus.textContent = "✅ Request submitted! We’ll call you soon.";
+                    document.getElementById('bookingForm').reset();
+                }).catch((error) => {
+                    console.error('EmailJS error:', error);
+                    submissionStatus.className = "error";
+                    submissionStatus.textContent = "❌ Booking saved, but email failed to send.";
+                });
+            } catch (error) {
+                console.error('Error submitting booking:', error);
+                submissionStatus.className = "error";
+                submissionStatus.textContent = `❌ Failed to submit: ${error.message}. Try again or contact support.`;
             }
         });
 
