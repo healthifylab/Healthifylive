@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthifylive Lab - Book Test</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -20,31 +23,34 @@
         </div>
         <main>
             <h1>Book Your Test <i class="fas fa-book-medical"></i></h1>
-            <p>Select your test and schedule a convenient time for home collection.</p>
+            <p>Schedule your health test with ease using our searchable options.</p>
             <div class="booking-form">
                 <form id="bookingForm">
                     <div class="form-group">
                         <label for="test">Select Test <i class="fas fa-vial"></i></label>
-                        <select id="test" name="test" required>
-                            <option value="">Choose a test</option>
-                            <option value="diabetic">Diabetic Profile - ₹499</option>
-                            <option value="full-body">Full Body Checkup - ₹999</option>
-                            <option value="pcod">PCOD Profile - ₹699</option>
-                            <option value="vitamin">Vitamin Profile - ₹599</option>
-                            <option value="wellness">Wellness Package - ₹1299</option>
-                        </select>
+                        <input type="text" id="test" name="test" list="testOptions" placeholder="Search for a test..." required>
+                        <datalist id="testOptions">
+                            <!-- Populated by JavaScript from tests-data.js -->
+                        </datalist>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile">Select Profile <i class="fas fa-user-md"></i></label>
+                        <input type="text" id="profile" name="profile" list="profileOptions" placeholder="Search for a profile..." required>
+                        <datalist id="profileOptions">
+                            <!-- Populated by JavaScript from tests-data.js -->
+                        </datalist>
                     </div>
                     <div class="form-group">
                         <label for="date">Date <i class="fas fa-calendar"></i></label>
                         <input type="date" id="date" name="date" min="2025-07-06" required>
                     </div>
                     <div class="form-group">
-                        <label for="name">Name <i class="fas fa-user"></i></label>
-                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        <label for="time">Time <i class="fas fa-clock"></i></label>
+                        <input type="time" id="time" name="time" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone <i class="fas fa-phone"></i></label>
-                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+                        <label for="name">Name <i class="fas fa-user"></i></label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
                     </div>
                     <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
                 </form>
@@ -64,19 +70,82 @@
         <a href="https://wa.me/919503832889" target="_blank"><i class="fab fa-whatsapp"></i></a>
     </div>
     <script>
+        // Firebase configuration (replace with your actual config)
+        const firebaseConfig = {
+            apiKey: "your-api-key",
+            authDomain: "your-auth-domain",
+            projectId: "your-project-id",
+            storageBucket: "your-storage-bucket",
+            messagingSenderId: "your-messaging-sender-id",
+            appId: "your-app-id"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // EmailJS configuration (replace with your actual user ID and template ID)
+        emailjs.init("your-emailjs-user-id");
+
+        // Load tests and profiles from tests-data.js
+        const testsData = [
+            { test: "Diabetic Profile", profile: "Basic" },
+            { test: "Full Body Checkup", profile: "Comprehensive" },
+            { test: "PCOD Profile", profile: "Women’s Health" },
+            { test: "Vitamin Profile", profile: "Nutritional" }
+        ];
+
+        // Populate datalists
+        const testDatalist = document.getElementById("testOptions");
+        const profileDatalist = document.getElementById("profileOptions");
+        testsData.forEach(item => {
+            const testOption = document.createElement("option");
+            testOption.value = item.test;
+            testDatalist.appendChild(testOption);
+            const profileOption = document.createElement("option");
+            profileOption.value = item.profile;
+            profileDatalist.appendChild(profileOption);
+        });
+
+        // Form submission handler
         document.getElementById('bookingForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const test = document.getElementById('test').value;
+            const profile = document.getElementById('profile').value;
             const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
             const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
 
-            if (test && date && name && phone) {
-                document.getElementById('bookingMessage').textContent = `Booking confirmed for ${test} on ${date}! We will contact you at ${phone}.`;
-                document.getElementById('bookingMessage').className = 'success';
-                document.getElementById('bookingForm').reset();
+            if (test && profile && date && time && name) {
+                // Save to Firebase
+                db.collection("bookings").add({
+                    test: test,
+                    profile: profile,
+                    date: date,
+                    time: time,
+                    name: name,
+                    timestamp: new Date()
+                }).then(() => {
+                    // Send email via EmailJS
+                    emailjs.send("your-service-id", "your-template-id", {
+                        to_name: name,
+                        test: test,
+                        profile: profile,
+                        date: date,
+                        time: time,
+                        to_email: "report@healthifylab.com" // Replace with dynamic email if needed
+                    }).then(() => {
+                        document.getElementById('bookingMessage').textContent = `Booking confirmed for ${test} on ${date} at ${time}!`;
+                        document.getElementById('bookingMessage').className = 'success';
+                        document.getElementById('bookingForm').reset();
+                    }).catch(error => {
+                        document.getElementById('bookingMessage').textContent = 'Error sending confirmation.';
+                        document.getElementById('bookingMessage').className = 'error';
+                    });
+                }).catch(error => {
+                    document.getElementById('bookingMessage').textContent = 'Error saving booking.';
+                    document.getElementById('bookingMessage').className = 'error';
+                });
             } else {
-                document.getElementById('bookingMessage').textContent = 'Please fill all fields correctly.';
+                document.getElementById('bookingMessage').textContent = 'Please fill all fields.';
                 document.getElementById('bookingMessage').className = 'error';
             }
         });
