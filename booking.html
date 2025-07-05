@@ -15,17 +15,40 @@
                 <a href="/index.html">Home</a>
                 <a href="/contact.html">Contact</a>
                 <a href="/cart.html">My Cart</a>
-                <a href="/call-back.html" target="_blank">Call Me Back</a>
+                <a href="/call-back.html" target="_blank">Call Me Back <i class="fas fa-phone"></i></a>
             </nav>
         </div>
         <main>
-            <h1>📋 Book Your Test</h1>
-            <p>Select a test to book your appointment.</p>
+            <h1>📋 Book Your Test 😊</h1>
+            <p>Select a test to book your appointment. <i class="fas fa-stethoscope"></i></p>
+            <div class="booking-form">
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="name">Full Name <i class="fas fa-user"></i></label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number <i class="fas fa-phone"></i></label>
+                        <input type="tel" id="phone" placeholder="Enter your phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="test">Select Test <i class="fas fa-vial"></i></label>
+                        <select id="test" required>
+                            <option value="" disabled selected>Loading tests...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date <i class="fas fa-calendar"></i></label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
+                </form>
+                <p id="bookingMessage"></p>
+            </div>
             <div id="testList"></div>
-            <button onclick="addToCart()">Add to Cart</button>
         </main>
         <footer>
-            <p>Healthifylive © 2025 | Contact: +91 9503832889 | Email: <a href="mailto:support@healthifylive.com">support@healthifylive.com</a></p>
+            <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i> | Email: <a href="mailto:support@healthifylive.com">support@healthifylive.com</a></p>
             <div class="social-media">
                 <a href="https://x.com/healthifylive" target="_blank"><i class="fab fa-x-twitter"></i></a>
                 <a href="https://instagram.com/healthifylive" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -38,5 +61,44 @@
     </div>
     <script type="module" src="/scripts/booking.js"></script>
     <script src="/scripts/Drawer.js"></script>
+    <script>
+        // Fetch and populate tests from /public/tests.json
+        async function loadTests() {
+            try {
+                const response = await fetch('/public/tests.json');
+                if (!response.ok) throw new Error('Failed to fetch tests');
+                const tests = await response.json();
+                const select = document.getElementById('test');
+                select.innerHTML = '<option value="" disabled selected>Select a test</option>';
+                tests.forEach(test => {
+                    const option = document.createElement('option');
+                    option.value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading tests:', error);
+                document.getElementById('test').innerHTML = '<option value="" disabled selected>Error loading tests</option>';
+            }
+        }
+
+        // Form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const test = document.getElementById('test').value;
+            const date = document.getElementById('date').value;
+            if (name && phone && test && date) {
+                document.getElementById('bookingMessage').textContent = `Thank you, ${name}! Your ${test.replace('-', ' ')} is booked for ${date}. 😊`;
+                document.getElementById('bookingForm').reset();
+            } else {
+                document.getElementById('bookingMessage').textContent = 'Please fill all fields! 🙁';
+            }
+        });
+
+        // Load tests on page load
+        window.onload = loadTests;
+    </script>
 </body>
 </html>
