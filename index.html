@@ -9,6 +9,7 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -21,6 +22,7 @@
             </nav>
         </div>
         <div class="hero">
+            <img src="/public/hero-banner.jpg" alt="Hero Banner" class="hero-image">
             <h1>Welcome to Healthifylive Lab</h1>
             <p>Home blood sample collection in Mumbai, Navi Mumbai, and Thane.</p>
             <a href="/booking.html" class="btn">Book Now</a>
@@ -33,57 +35,59 @@
         <div class="promo-popup" id="promoPopup">
             <h3>Special Offer!</h3>
             <p id="promoText">Loading...</p>
-            <a href="/booking.html"><button>Book Now</button></a>
-            <button onclick="closePopup()">Close</button>
+            <a href="/booking.html"><button class="promo-btn">Book Now</button></a>
+            <button class="promo-btn" onclick="closePopup()">Close</button>
         </div>
         <!-- Swipeable Promo Cards Section -->
         <section class="promo-section">
-            <div class="swiper-container promo-swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="promo-card">
-                            <img src="/public/diabetic-profile-a.jpg" alt="Diabetic Profile" onerror="this.src='/public/test-placeholder.jpg'">
-                            <h3>Diabetic Profile</h3>
-                            <p>Comprehensive diabetes screening. Starting at ₹499!</p>
-                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+            <div class="cards-container">
+                <div class="swiper-container promo-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/diabetic-profile-a.jpg" alt="Diabetic Profile" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Diabetic Profile</h3>
+                                <p>Comprehensive diabetes screening. Starting at ₹499!</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/full-body-checkup.jpg" alt="Full Body Checkup" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Full Body Checkup</h3>
+                                <p>Complete health analysis. Only ₹999!</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/pcod-profile.jpg" alt="PCOD Profile" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>PCOD Profile</h3>
+                                <p>Specialized women’s health test. Starting at ₹699!</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/test-placeholder.jpg" alt="Vitamin Profile">
+                                <h3>Vitamin Profile</h3>
+                                <p>Check your vitamin levels. Only ₹599!</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/wellness-1-4.jpg" alt="Wellness Package" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Wellness Package</h3>
+                                <p>Holistic health checkup. Starting at ₹1299!</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="promo-card">
-                            <img src="/public/full-body-checkup.jpg" alt="Full Body Checkup" onerror="this.src='/public/test-placeholder.jpg'">
-                            <h3>Full Body Checkup</h3>
-                            <p>Complete health analysis. Only ₹999!</p>
-                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="promo-card">
-                            <img src="/public/pcod-profile.jpg" alt="PCOD Profile" onerror="this.src='/public/test-placeholder.jpg'">
-                            <h3>PCOD Profile</h3>
-                            <p>Specialized women’s health test. Starting at ₹699!</p>
-                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="promo-card">
-                            <img src="/public/test-placeholder.jpg" alt="Vitamin Profile">
-                            <h3>Vitamin Profile</h3>
-                            <p>Check your vitamin levels. Only ₹599!</p>
-                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="promo-card">
-                            <img src="/public/wellness-1-4.jpg" alt="Wellness Package" onerror="this.src='/public/test-placeholder.jpg'">
-                            <h3>Wellness Package</h3>
-                            <p>Holistic health checkup. Starting at ₹1299!</p>
-                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
-                        </div>
-                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
             </div>
         </section>
         <!-- Testimonials Section -->
@@ -117,6 +121,24 @@
             <p>✅ Happy Customers</p>
             <p>📞 Book your test today — because your health deserves the best.</p>
         </div>
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3 class="faq-question">What areas do you serve? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">We serve Mumbai, Navi Mumbai, and Thane for home sample collection.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How long does it take to get results? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">Results are typically delivered within 24-48 hours.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Do I need to fast before a test? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">It depends on the test; instructions will be provided during booking.</p>
+                </div>
+            </div>
+        </section>
         <div class="social-links">
             <a href="https://x.com/healthifylive"><img src="/public/x-icon.png" alt="X"></a>
             <a href="https://instagram.com/healthifylive"><img src="/public/instagram-icon.png" alt="Instagram"></a>
@@ -185,6 +207,17 @@
                 768: { slidesPerView: 2 },
                 1024: { slidesPerView: 3 },
             },
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.nextElementSibling;
+                const icon = item.querySelector('i');
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
         });
     </script>
 </body>
