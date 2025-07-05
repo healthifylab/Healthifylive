@@ -83,7 +83,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Removed navigation icons, keeping pagination -->
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
@@ -132,7 +131,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Removed navigation icons, keeping pagination -->
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
@@ -242,13 +240,14 @@
             slidesPerView: 1,
             spaceBetween: 0,
             direction: 'horizontal',
-            loop: true, /* Enable continuous swiping */
+            loop: true,
+            loopedSlides: 5, /* Match the number of slides */
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
                 clickable: true,
             },
             navigation: {
-                enabled: false, /* Navigation icons remain disabled */
+                enabled: false,
             },
         });
 
@@ -257,13 +256,14 @@
             slidesPerView: 1,
             spaceBetween: 0,
             direction: 'horizontal',
-            loop: true, /* Enable continuous swiping */
+            loop: true,
+            loopedSlides: 5, /* Match the number of slides */
             pagination: {
                 el: '.featured-swiper .swiper-pagination',
                 clickable: true,
             },
             navigation: {
-                enabled: false, /* Navigation icons remain disabled */
+                enabled: false,
             },
         });
 
