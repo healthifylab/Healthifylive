@@ -23,15 +23,10 @@
                 <a href="/contact.html">Contact</a>
             </nav>
         </div>
-        <div class="hero">
-            <img src="/public/hero-banner.jpg" alt="Hero Banner" class="hero-image">
-            <h1>📞 Get in Touch 😊 <i class="fas fa-envelope"></i></h1>
-            <a href="#contact-form" class="btn">Contact Us <i class="fas fa-check"></i></a>
-        </div>
         <main>
             <h1>📞 Get in Touch 😊</h1>
             <p>Reach out to us for support or inquiries. <i class="fas fa-headset"></i></p>
-            <div class="contact-form" id="contact-form">
+            <div class="contact-form">
                 <form id="contactForm">
                     <div class="form-group">
                         <label for="name">Full Name <i class="fas fa-user"></i></label>
@@ -40,10 +35,6 @@
                     <div class="form-group">
                         <label for="email">Email <i class="fas fa-at"></i></label>
                         <input type="email" id="email" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Mobile Number (Optional) <i class="fas fa-phone"></i></label>
-                        <input type="tel" id="phone" placeholder="Enter your phone (e.g., +919876543210)" value="+91" pattern="^\+91[0-9]{10}$">
                     </div>
                     <div class="form-group">
                         <label for="message">Message <i class="fas fa-comment"></i></label>
@@ -97,21 +88,12 @@
             event.preventDefault();
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
             const message = document.getElementById('message').value;
             const contactMessage = document.getElementById('contactMessage');
 
-            // Validate at least one contact method (email or phone)
-            if (!name || !message || (!email && !phone)) {
+            if (!name || !email || !message) {
                 contactMessage.className = "error";
-                contactMessage.textContent = "❌ Please enter a name, message, and at least one contact method (email or mobile).";
-                return;
-            }
-
-            // Validate phone if provided
-            if (phone && !phone.match(/^\+91[0-9]{10}$/)) {
-                contactMessage.className = "error";
-                contactMessage.textContent = "❌ Please enter a valid mobile number (e.g., +919876543210).";
+                contactMessage.textContent = "❌ Please fill all fields.";
                 return;
             }
 
@@ -119,18 +101,16 @@
             try {
                 await addDoc(collection(db, "contacts"), {
                     name: name,
-                    email: email || null,
-                    phone: phone || null,
+                    email: email,
                     message: message,
                     timestamp: new Date().toISOString(),
                     status: "New Inquiry"
                 });
                 // Send email via EmailJS
-                const contactInfo = email ? `Email: ${email}` : `Phone: ${phone || 'Not provided'}`;
                 emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_name: name,
                     to_email: 'report@healthifylab.com',
-                    message: `New inquiry from ${name}: ${message}\n${contactInfo}`
+                    message: `New inquiry from ${name}: ${message}\nEmail: ${email}`
                 }).then(() => {
                     contactMessage.className = "success";
                     contactMessage.textContent = "✅ Message sent! We’ll get back to you soon.";
