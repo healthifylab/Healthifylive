@@ -25,7 +25,7 @@
         </div>
         <main>
             <h1>📋 Book Your Test 😊</h1>
-            <p>Select a test to book your appointment. <i class="fas fa-stethoscope"></i></p>
+            <p>Select a test or profile to book your appointment. <i class="fas fa-syringe"></i></p>
             <div class="booking-form">
                 <form id="bookingForm">
                     <div class="form-group">
@@ -43,8 +43,18 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="date">Date <i class="fas fa-calendar"></i></label>
+                        <label for="profile">Select a Profile <i class="fas fa-file-alt"></i></label>
+                        <select id="profile" required>
+                            <option value="" disabled selected>Loading profiles...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Appointment Date <i class="fas fa-calendar"></i></label>
                         <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Appointment Time <i class="fas fa-clock"></i></label>
+                        <input type="time" id="time" required>
                     </div>
                     <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
                 </form>
@@ -107,13 +117,35 @@
             }
         }
 
+        // Fetch and populate profiles from /public/profile.json
+        async function loadProfiles() {
+            try {
+                const response = await fetch('/public/profile.json');
+                if (!response.ok) throw new Error('Failed to fetch profiles');
+                const profiles = await response.json();
+                const select = document.getElementById('profile');
+                select.innerHTML = '<option value="" disabled selected>Select a profile</option>';
+                profiles.forEach(profile => {
+                    const option = document.createElement('option');
+                    option.value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading profiles:', error);
+                document.getElementById('profile').innerHTML = '<option value="" disabled selected>Error loading profiles</option>';
+            }
+        }
+
         // Handle booking form submission
         document.getElementById('bookingForm').addEventListener('submit', async (event) => {
             event.preventDefault();
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const test = document.getElementById('test').value;
+            const profile = document.getElementById('profile').value;
             const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
             const submissionStatus = document.getElementById('bookingMessage');
 
             if (!name || !phone.match(/^\+91[0-9]{10}$/)) {
@@ -127,8 +159,10 @@
                 await addDoc(collection(db, "bookings"), {
                     name: name,
                     phone: phone,
-                    test: test.replace('-', ' '),
+                    test: test ? test.replace('-', ' ') : null,
+                    profile: profile ? profile.replace('-', ' ') : null,
                     date: date,
+                    time: time,
                     timestamp: new Date().toISOString(),
                     status: "New Booking"
                 });
@@ -136,7 +170,7 @@
                 emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_name: name,
                     to_email: 'report@healthifylab.com',
-                    message: `New booking: ${test.replace('-', ' ')} on ${date} by ${name} (Phone: ${phone})`
+                    message: `New booking: ${test ? test.replace('-', ' ') : profile.replace('-', ' ')} on ${date} at ${time} by ${name} (Phone: ${phone})`
                 }).then(() => {
                     console.log('Email sent successfully');
                     submissionStatus.className = "success";
@@ -154,8 +188,11 @@
             }
         });
 
-        // Load tests on page load
-        window.onload = loadTests;
+        // Load tests and profiles on page load
+        window.onload = () => {
+            loadTests();
+            loadProfiles();
+        };
     </script>
 </body>
 </html>
