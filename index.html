@@ -243,8 +243,8 @@
 
         // Initialize Promo Swiper
         const promoSwiper = new Swiper('.promo-swiper', {
-            slidesPerView: 1, // Show one card at a time
-            spaceBetween: 20,
+            slidesPerView: 1,
+            spaceBetween: 0, // Removed extra space to prevent overflow
             direction: 'horizontal',
             navigation: {
                 nextEl: '.promo-swiper .swiper-button-next',
@@ -255,15 +255,15 @@
                 clickable: true,
             },
             breakpoints: {
-                768: { slidesPerView: 1 }, // Still one card on larger screens
+                768: { slidesPerView: 1 },
                 1024: { slidesPerView: 1 },
             },
         });
 
         // Initialize Featured Swiper
         const featuredSwiper = new Swiper('.featured-swiper', {
-            slidesPerView: 1, // Show one card at a time
-            spaceBetween: 20,
+            slidesPerView: 1,
+            spaceBetween: 0, // Removed extra space to prevent overflow
             direction: 'horizontal',
             navigation: {
                 nextEl: '.featured-swiper .swiper-button-next',
@@ -274,7 +274,7 @@
                 clickable: true,
             },
             breakpoints: {
-                768: { slidesPerView: 1 }, // Still one card on larger screens
+                768: { slidesPerView: 1 },
                 1024: { slidesPerView: 1 },
             },
         });
