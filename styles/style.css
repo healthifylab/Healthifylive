@@ -124,7 +124,7 @@ header nav a:hover {
   transform: translateY(-5px);
 }
 
-.swiper-container {
+.swiper-container.promo-swiper {
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -148,22 +148,13 @@ header nav a:hover {
   color: #333;
 }
 
-.packages-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 .package-card {
   background: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 280px;
   text-align: center;
+  transition: transform 0.3s ease;
 }
 
 .package-card img {
@@ -194,6 +185,15 @@ header nav a:hover {
   text-decoration: none;
   border-radius: 5px;
   font-size: 16px;
+}
+
+.package-card:hover {
+  transform: translateY(-5px);
+}
+
+.swiper-container.featured-swiper {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Testimonials Section */
