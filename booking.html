@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number <i class="fas fa-phone"></i></label>
-                        <input type="tel" id="phone" placeholder="Enter your phone (+91XXXXXXXXXX)" required>
+                        <input type="tel" id="phone" placeholder="Enter your phone (XXXXXXXXXX)" value="+91" required>
                     </div>
                     <div class="form-group">
                         <label for="test">Select Test <i class="fas fa-vial"></i></label>
@@ -53,7 +53,7 @@
             <div id="testList"></div>
         </main>
         <footer>
-            <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i> | Email: <a href="mailto:support@healthifylive.com">support@healthifylive.com</a></p>
+            <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i> | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
             <div class="social-media">
                 <a href="https://x.com/healthifylive" target="_blank"><i class="fab fa-x-twitter"></i></a>
                 <a href="https://instagram.com/healthifylive" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -135,7 +135,7 @@
                 // Send email via EmailJS
                 emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_name: name,
-                    to_email: 'support@healthifylive.com',
+                    to_email: 'report@healthifylab.com',
                     message: `New booking: ${test.replace('-', ' ')} on ${date} by ${name} (Phone: ${phone})`
                 }).then(() => {
                     console.log('Email sent successfully');
