@@ -37,16 +37,20 @@
                         <input type="tel" id="phone" placeholder="Enter your phone (XXXXXXXXXX)" value="+91" required>
                     </div>
                     <div class="form-group">
-                        <label for="testInput">Select Test(s) <i class="fas fa-vial"></i></label>
-                        <input type="text" id="testInput" placeholder="Search and select test(s)...">
+                        <label for="test">Select Test(s) <i class="fas fa-vial"></i></label>
+                        <input type="text" id="testSearch" placeholder="Search tests..." class="search-input">
+                        <select id="test" multiple>
+                            <option value="" disabled>Select test(s)</option>
+                        </select>
                         <div id="selectedTests" class="selected-items"></div>
-                        <datalist id="testOptions"></datalist>
                     </div>
                     <div class="form-group">
-                        <label for="profileInput">Select Profile(s) <i class="fas fa-file-alt"></i></label>
-                        <input type="text" id="profileInput" placeholder="Search and select profile(s)...">
+                        <label for="profile">Select Profile(s) <i class="fas fa-file-alt"></i></label>
+                        <input type="text" id="profileSearch" placeholder="Search profiles..." class="search-input">
+                        <select id="profile" multiple>
+                            <option value="" disabled>Select profile(s)</option>
+                        </select>
                         <div id="selectedProfiles" class="selected-items"></div>
-                        <datalist id="profileOptions"></datalist>
                     </div>
                     <div class="form-group">
                         <label for="date">Appointment Date <i class="fas fa-calendar"></i></label>
@@ -101,88 +105,89 @@
         let selectedTests = new Set();
         let selectedProfiles = new Set();
 
-        // Fetch and populate tests for datalist
+        // Fetch and populate tests
         async function loadTests() {
             try {
                 const response = await fetch('/public/tests.json');
                 if (!response.ok) throw new Error('Failed to fetch tests');
                 const tests = await response.json();
-                const datalist = document.getElementById('testOptions');
-                datalist.innerHTML = '';
+                const select = document.getElementById('test');
+                select.innerHTML = '<option value="" disabled>Select test(s)</option>';
                 tests.forEach(test => {
                     const option = document.createElement('option');
                     option.value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
                     option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
-                    datalist.appendChild(option);
+                    select.appendChild(option);
                 });
-                setupSearch('testInput', 'testOptions', selectedTests);
+                setupSearch('test', 'testSearch', selectedTests);
             } catch (error) {
                 console.error('Error loading tests:', error);
-                document.getElementById('testOptions').innerHTML = '<option value="Error loading tests"></option>';
+                document.getElementById('test').innerHTML = '<option value="" disabled>Error loading tests</option>';
             }
         }
 
-        // Fetch and populate profiles for datalist
+        // Fetch and populate profiles
         async function loadProfiles() {
             try {
                 const response = await fetch('/public/profile.json');
                 if (!response.ok) throw new Error('Failed to fetch profiles');
                 const profiles = await response.json();
-                const datalist = document.getElementById('profileOptions');
-                datalist.innerHTML = '';
+                const select = document.getElementById('profile');
+                select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
                 profiles.forEach(profile => {
                     const option = document.createElement('option');
                     option.value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
-                    datalist.appendChild(option);
+                    select.appendChild(option);
                 });
-                setupSearch('profileInput', 'profileOptions', selectedProfiles);
+                setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
                 console.error('Error loading profiles:', error);
-                document.getElementById('profileOptions').innerHTML = '<option value="Error loading profiles"></option>';
+                document.getElementById('profile').innerHTML = '<option value="" disabled>Error loading profiles</option>';
             }
         }
 
         // Setup search and selection functionality
-        function setupSearch(inputId, datalistId, selectedSet) {
-            const input = document.getElementById(inputId);
-            const datalist = document.getElementById(datalistId);
-            const selectedDiv = document.getElementById(inputId === 'testInput' ? 'selectedTests' : 'selectedProfiles');
+        function setupSearch(selectId, searchId, selectedSet) {
+            const select = document.getElementById(selectId);
+            const searchInput = document.getElementById(searchId);
+            const selectedDiv = document.getElementById(selectId === 'test' ? 'selectedTests' : 'selectedProfiles');
 
-            input.addEventListener('input', () => {
-                const value = input.value.toLowerCase();
-                let matches = Array.from(datalist.options).filter(option =>
-                    !selectedSet.has(option.value) && option.value.includes(value)
-                );
-                datalist.innerHTML = matches.map(option => `<option value="${option.value}">${option.textContent}</option>`).join('');
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                Array.from(select.options).forEach(option => {
+                    if (option.value === '' || option.value === 'disabled') return;
+                    option.style.display = option.textContent.toLowerCase().includes(searchTerm) && !selectedSet.has(option.value) ? 'block' : 'none';
+                });
             });
 
-            input.addEventListener('change', () => {
-                const value = input.value.trim();
-                if (value && !selectedSet.has(value) && datalist.querySelector(`option[value="${value}"]`)) {
-                    selectedSet.add(value);
-                    updateSelectedItems();
-                    input.value = '';
-                    datalist.innerHTML = Array.from(datalist.options)
-                        .filter(option => !selectedSet.has(option.value))
-                        .map(option => `<option value="${option.value}">${option.textContent}</option>`).join('');
-                }
+            select.addEventListener('change', () => {
+                const selectedOptions = Array.from(select.selectedOptions).filter(option => option.value && !selectedSet.has(option.value));
+                selectedOptions.forEach(option => {
+                    selectedSet.add(option.value);
+                    option.style.display = 'none'; // Hide after selection
+                });
+                updateSelectedItems();
+                searchInput.value = ''; // Clear search after selection
             });
 
             function updateSelectedItems() {
                 selectedDiv.innerHTML = Array.from(selectedSet).map(item => `
                     <span class="selected-tag">${item.replace('-', ' ')}
-                        <button type="button" onclick="removeSelection('${inputId}', '${item}')">×</button>
+                        <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                     </span>
                 `).join('');
+                // Reset select to default
+                select.value = '';
             }
 
-            window.removeSelection = (inputId, item) => {
-                const set = inputId === 'testInput' ? selectedTests : selectedProfiles;
+            window.removeSelection = (selectId, item) => {
+                const select = document.getElementById(selectId);
+                const set = selectId === 'test' ? selectedTests : selectedProfiles;
                 set.delete(item);
+                const option = Array.from(select.options).find(o => o.value === item);
+                if (option) option.style.display = 'block';
                 updateSelectedItems();
-                const datalist = document.getElementById(inputId === 'testInput' ? 'testOptions' : 'profileOptions');
-                datalist.innerHTML += `<option value="${item}">${Array.from(datalist.options).find(o => o.value === item)?.textContent || item}</option>`;
             };
         }
 
@@ -227,6 +232,8 @@
                     selectedProfiles.clear();
                     document.getElementById('selectedTests').innerHTML = '';
                     document.getElementById('selectedProfiles').innerHTML = '';
+                    document.getElementById('test').innerHTML = '<option value="" disabled>Select test(s)</option>' + Array.from(document.getElementById('test').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
+                    document.getElementById('profile').innerHTML = '<option value="" disabled>Select profile(s)</option>' + Array.from(document.getElementById('profile').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
                     document.getElementById('bookingForm').reset();
                 }).catch((error) => {
                     console.error('EmailJS error:', error);
