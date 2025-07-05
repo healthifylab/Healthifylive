@@ -239,9 +239,9 @@
             document.getElementById('promoPopup').classList.remove('active');
         }
 
-        // Initialize Promo Swiper
+        // Initialize Promo Swiper (One card at a time)
         const promoSwiper = new Swiper('.promo-swiper', {
-            slidesPerView: 1,
+            slidesPerView: 1, /* Force one card at a time */
             spaceBetween: 0,
             direction: 'horizontal',
             navigation: {
@@ -252,15 +252,12 @@
                 el: '.promo-swiper .swiper-pagination',
                 clickable: true,
             },
-            breakpoints: {
-                768: { slidesPerView: 1 },
-                1024: { slidesPerView: 1 },
-            },
+            /* Removed breakpoints to enforce single slide */
         });
 
-        // Initialize Featured Swiper
+        // Initialize Featured Swiper (One card at a time)
         const featuredSwiper = new Swiper('.featured-swiper', {
-            slidesPerView: 1,
+            slidesPerView: 1, /* Force one card at a time */
             spaceBetween: 0,
             direction: 'horizontal',
             navigation: {
@@ -271,10 +268,7 @@
                 el: '.featured-swiper .swiper-pagination',
                 clickable: true,
             },
-            breakpoints: {
-                768: { slidesPerView: 1 },
-                1024: { slidesPerView: 1 },
-            },
+            /* Removed breakpoints to enforce single slide */
         });
 
         // FAQ Toggle
