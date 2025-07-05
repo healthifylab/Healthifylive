@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthifylive Lab - Home</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo">
+            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
             <nav>
+                <a href="/index.html">Home</a>
                 <a href="/booking.html">Book Test</a>
                 <a href="/contact.html">Contact</a>
-                <a href="/cart.html">My Cart</a>
-                <a href="/call-back.html" target="_blank">Call Me Back</a>
             </nav>
         </div>
         <div class="hero">
             <h1>Welcome to Healthifylive Lab</h1>
-            <p>Your trusted partner for comprehensive health diagnostics</p>
-            <a href="/booking.html">Book Now</a>
+            <p>Home blood sample collection in Mumbai, Navi Mumbai, and Thane.</p>
+            <a href="/booking.html" class="btn">Book Now</a>
         </div>
         <div class="search-section">
             <h2>Find Tests & Profiles</h2>
@@ -34,12 +36,77 @@
             <a href="/booking.html"><button>Book Now</button></a>
             <button onclick="closePopup()">Close</button>
         </div>
-        <div class="promo-cards">
-            <h2>Featured Health Packages</h2>
-            <div class="cards-container">
-                <div class="card" id="promoCards"></div> <!-- Single container for dynamic cards -->
+        <!-- Swipeable Promo Cards Section -->
+        <section class="promo-section">
+            <div class="swiper-container promo-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="promo-card">
+                            <img src="/public/diabetic-profile-a.jpg" alt="Diabetic Profile" onerror="this.src='/public/test-placeholder.jpg'">
+                            <h3>Diabetic Profile</h3>
+                            <p>Comprehensive diabetes screening. Starting at ₹499!</p>
+                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="promo-card">
+                            <img src="/public/full-body-checkup.jpg" alt="Full Body Checkup" onerror="this.src='/public/test-placeholder.jpg'">
+                            <h3>Full Body Checkup</h3>
+                            <p>Complete health analysis. Only ₹999!</p>
+                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="promo-card">
+                            <img src="/public/pcod-profile.jpg" alt="PCOD Profile" onerror="this.src='/public/test-placeholder.jpg'">
+                            <h3>PCOD Profile</h3>
+                            <p>Specialized women’s health test. Starting at ₹699!</p>
+                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="promo-card">
+                            <img src="/public/test-placeholder.jpg" alt="Vitamin Profile">
+                            <h3>Vitamin Profile</h3>
+                            <p>Check your vitamin levels. Only ₹599!</p>
+                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="promo-card">
+                            <img src="/public/wellness-1-4.jpg" alt="Wellness Package" onerror="this.src='/public/test-placeholder.jpg'">
+                            <h3>Wellness Package</h3>
+                            <p>Holistic health checkup. Starting at ₹1299!</p>
+                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
             </div>
-        </div>
+        </section>
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <h2 class="testimonials-title">What Our Patients Say</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-card">
+                    <img src="/public/testimonial1.jpg" alt="Patient Testimonial" onerror="this.src='/public/test-placeholder.jpg'">
+                    <p>"Healthify Lab made my health checkup so convenient at home. Highly satisfied!"</p>
+                    <h4>– Ramesh, 60, Mumbai</h4>
+                </div>
+                <div class="testimonial-card">
+                    <img src="/public/testimonial2.jpg" alt="Patient Testimonial" onerror="this.src='/public/test-placeholder.jpg'">
+                    <p>"The team was professional, and the results were delivered quickly in Navi Mumbai!"</p>
+                    <h4>– Priya, 35, Navi Mumbai</h4>
+                </div>
+                <div class="testimonial-card">
+                    <img src="/public/testimonial3.jpg" alt="Patient Testimonial" onerror="this.src='/public/test-placeholder.jpg'">
+                    <p>"Great service in Thane. Made managing my health so much easier!"</p>
+                    <h4>– Anil, 45, Thane</h4>
+                </div>
+            </div>
+        </section>
         <div class="why-choose">
             <h2>Why Choose Healthifylive?</h2>
             <p>🔬 Healthifylive Lab</p>
@@ -50,29 +117,20 @@
             <p>✅ Happy Customers</p>
             <p>📞 Book your test today — because your health deserves the best.</p>
         </div>
-        <div class="testimonials">
-            <h2>Testimonials</h2>
-            <div class="testimonials-container">
-                <div class="testimonial">
-                    <p>"Healthifylive made my health checkup seamless and affordable!" - Priya S.</p>
-                </div>
-                <div class="testimonial">
-                    <p>"Fast results and great service. Highly recommend!" - Rohan K.</p>
-                </div>
-            </div>
-        </div>
-        <div class="cart">
-            <a href="/cart.html">View Cart & Book Tests</a>
-        </div>
         <div class="social-links">
             <a href="https://x.com/healthifylive"><img src="/public/x-icon.png" alt="X"></a>
             <a href="https://instagram.com/healthifylive"><img src="/public/instagram-icon.png" alt="Instagram"></a>
             <a href="https://facebook.com/healthifylive"><img src="/public/facebook-icon.png" alt="Facebook"></a>
         </div>
     </div>
+    <!-- Floating Call Me Back Button -->
+    <div class="call-back-float">
+        <a href="/call-back.html" target="_blank">Call Me Back</a>
+    </div>
     <div class="whatsapp-float">
         <a href="https://wa.me/919503832889" target="_blank"><img src="/public/whatsapp-icon.png" alt="WhatsApp"></a>
     </div>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script type="module" src="/scripts/cart-ui.js"></script>
     <script src="/scripts/Drawer.js"></script>
     <script src="/scripts/Search.js"></script>
@@ -83,20 +141,21 @@
                 if (!response.ok) throw new Error('Failed to fetch tests');
                 const tests = await response.json();
                 const promoTests = tests.filter(t => ["Wellness 1.4", "Diabetic Profile - A", "PCOD Profile"].includes(t.Test_Name));
-                const promoCards = document.getElementById("promoCards");
-                const promoText = document.getElementById("promoText");
+                const promoCards = document.querySelector('.promo-swiper .swiper-wrapper');
                 promoCards.innerHTML = promoTests.map(t => `
-                    <div class="card-item">
-                        <img src="/public/${t.Test_Name.replace(/\s/g, '-').toLowerCase()}.jpg" alt="${t.Test_Name}" onerror="this.src='/public/test-placeholder.jpg'">
-                        <h3>${t.Test_Name}</h3>
-                        <p>Rs. ${t.Healthify_Offer_Price} - ${t.Description}</p>
-                        <a href="/booking.html" class="card-button">Book Now</a>
+                    <div class="swiper-slide">
+                        <div class="promo-card">
+                            <img src="/public/${t.Test_Name.replace(/\s/g, '-').toLowerCase()}.jpg" alt="${t.Test_Name}" onerror="this.src='/public/test-placeholder.jpg'">
+                            <h3>${t.Test_Name}</h3>
+                            <p>Rs. ${t.Healthify_Offer_Price} - ${t.Description}</p>
+                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now</a>
+                        </div>
                     </div>
                 `).join("");
-                promoText.textContent = `Get ${promoTests[0].Test_Name} (Rs. ${promoTests[0].Healthify_Offer_Price}) at 10% off this week!`;
+                document.getElementById('promoText').textContent = `Get ${promoTests[0].Test_Name} (Rs. ${promoTests[0].Healthify_Offer_Price}) at 10% off this week!`;
             } catch (error) {
                 console.error("Error loading promo cards:", error);
-                document.getElementById("promoCards").innerHTML = "<p>Error loading featured packages.</p>";
+                document.querySelector('.promo-swiper .swiper-wrapper').innerHTML = "<div class='swiper-slide'><p>Error loading featured packages.</p></div>";
             }
         }
 
@@ -104,9 +163,29 @@
             loadPromoCards();
             document.getElementById('promoPopup').classList.add('active');
         };
+
         function closePopup() {
             document.getElementById('promoPopup').classList.remove('active');
         }
+
+        // Initialize Promo Swiper
+        const promoSwiper = new Swiper('.promo-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            direction: 'horizontal',
+            navigation: {
+                nextEl: '.promo-swiper .swiper-button-next',
+                prevEl: '.promo-swiper .swiper-button-prev',
+            },
+            pagination: {
+                el: '.promo-swiper .swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+            },
+        });
     </script>
 </body>
 </html>
