@@ -149,12 +149,22 @@ body {
     background-color: #444444;
 }
 
-.promo-popup .promo-btn:last-child {
+.close-btn {
     position: absolute;
     top: 10px;
     right: 15px;
-    padding: 1px 4px; /* Even smaller size */
-    font-size: 10px; /* Even smaller size */
+    padding: 1px 4px; /* Small size for Close button */
+    font-size: 10px; /* Small size for Close button */
+}
+
+.book-now-btn {
+    padding: 10px 20px; /* Original big size for Book Now */
+    margin-top: 20px; /* Ensure it stays at bottom */
+    display: block; /* Force it to take full width and stay below */
+    width: 100%;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Cards Section (for index.html) */
@@ -535,4 +545,4 @@ body {
         line-height: 24px !important; /* Adjusted centering */
         padding: 8px !important; /* Adjusted padding */
     }
-    }
+}
