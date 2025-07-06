@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
     <ul>
       <li><a href="/index.html">🏠 Home</a></li>
       <li><a href="/contact.html">📞 Contact</a></li>
-      <li><a href="/index.html#about">ℹ️ About</a></li>
+      <li><a href="/login.html">ℹ️ login</a></li>
       <li><a href="/booking.html">🧪 Book a Test</a></li>
       <li><a href="/cart.html">🛒 My Cart</a></li>
-      <li><a href="/mybookings.html">📋 My Bookings</a></li>
+        
     </ul>
   `;
   drawer.classList.add("drawer");
