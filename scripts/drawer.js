@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <li><a href="/booking.html">🧪 Book a Test</a></li>
       <li><a href="/cart.html">🛒 My Cart</a></li>
       <li><a href="/login.html">ℹ️ login</a></li>
-        
+      <li><a Healthify 2025 All rights reserved</a></li>
     </ul>
   `;
   drawer.classList.add("drawer");
