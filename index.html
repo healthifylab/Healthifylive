@@ -42,7 +42,46 @@
             <div class="cards-container">
                 <div class="swiper-container promo-swiper">
                     <div class="swiper-wrapper" id="promoSwiperWrapper">
-                        <!-- Dynamic content loaded by loadPromoCards -->
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/diabetic-profile-a.jpg" alt="Diabetic Profile" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Diabetic Profile <i class="fas fa-shield-virus"></i></h3>
+                                <p>Comprehensive diabetes screening. Starting at ₹499!</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/full-body-checkup.jpg" alt="Full Body Checkup" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Full Body Checkup <i class="fas fa-user-md"></i></h3>
+                                <p>Complete health analysis. Only ₹999!</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/pcod-profile.jpg" alt="PCOD Profile" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>PCOD Profile <i class="fas fa-female"></i></h3>
+                                <p>Specialized women’s health test. Starting at ₹699!</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/test-placeholder.jpg" alt="Vitamin Profile">
+                                <h3>Vitamin Profile <i class="fas fa-vial"></i></h3>
+                                <p>Check your vitamin levels. Only ₹599!</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/wellness-1-4.jpg" alt="Wellness Package" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Wellness Package <i class="fas fa-heart"></i></h3>
+                                <p>Holistic health checkup. Starting at ₹1299!</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -51,7 +90,46 @@
             <div class="cards-container">
                 <div class="swiper-container featured-swiper">
                     <div class="swiper-wrapper" id="featuredSwiperWrapper">
-                        <!-- Dynamic content loaded by loadPromoCards -->
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/diabetic-profile-a.jpg" alt="Diabetic Profile" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Diabetic Profile <i class="fas fa-shield-virus"></i></h3>
+                                <p>₹499 - Comprehensive diabetes screening.</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/full-body-checkup.jpg" alt="Full Body Checkup" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Full Body Checkup <i class="fas fa-user-md"></i></h3>
+                                <p>₹999 - Complete health analysis.</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/pcod-profile.jpg" alt="PCOD Profile" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>PCOD Profile <i class="fas fa-female"></i></h3>
+                                <p>₹699 - Specialized women’s health test.</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/test-placeholder.jpg" alt="Vitamin Profile">
+                                <h3>Vitamin Profile <i class="fas fa-vial"></i></h3>
+                                <p>₹599 - Check your vitamin levels.</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/wellness-1-4.jpg" alt="Wellness Package" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Wellness Package <i class="fas fa-heart"></i></h3>
+                                <p>₹1299 - Holistic health checkup.</p>
+                                <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -129,7 +207,7 @@
                 const response = await fetch('/public/tests.json');
                 if (!response.ok) throw new Error('Failed to fetch tests');
                 const tests = await response.json();
-                const promoTests = tests.filter(t => ["Wellness 1.4", "Diabetic Profile - A", "PCOD Profile", "Vitamin Profile", "Full Body Checkup"].includes(t.Test_Name)); // Ensure all 5
+                const promoTests = tests.filter(t => ["Wellness 1.4", "Diabetic Profile - A", "PCOD Profile", "Vitamin Profile", "Full Body Checkup"].includes(t.Test_Name));
                 const promoCards = document.getElementById('promoSwiperWrapper');
                 promoCards.innerHTML = promoTests.map(t => `
                     <div class="swiper-slide">
@@ -157,8 +235,21 @@
                 `).join("");
             } catch (error) {
                 console.error("Error loading promo cards:", error);
-                document.getElementById('promoSwiperWrapper').innerHTML = "<div class='swiper-slide'><p>Error loading promo packages.</p></div>";
-                document.getElementById('featuredSwiperWrapper').innerHTML = "<div class='swiper-slide'><p>Error loading featured packages.</p></div>";
+                // Fallback to static content if JSON fails
+                document.getElementById('promoSwiperWrapper').innerHTML = `
+                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load promo packages.</p></div></div>
+                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load promo packages.</p></div></div>
+                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load promo packages.</p></div></div>
+                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load promo packages.</p></div></div>
+                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load promo packages.</p></div></div>
+                `;
+                document.getElementById('featuredSwiperWrapper').innerHTML = `
+                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load featured packages.</p></div></div>
+                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load featured packages.</p></div></div>
+                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load featured packages.</p></div></div>
+                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load featured packages.</p></div></div>
+                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load featured packages.</p></div></div>
+                `;
             }
         }
 
