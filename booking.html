@@ -125,7 +125,7 @@
         // Store selected items and profile details
         let selectedTests = new Set();
         let selectedProfiles = new Set();
-        let profileDetails = {}; // To store profile name and included tests
+        let profileDetails = {}; // To store profile details
 
         // Fetch and populate tests
         async function loadTests() {
@@ -159,15 +159,18 @@
                 const select = document.getElementById('profile');
                 select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
                 profiles.forEach(profile => {
+                    const value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
-                    option.value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    option.value = value;
                     option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
                     select.appendChild(option);
-                    // Store profile details (assuming a 'Tests_Included' field or similar)
-                    profileDetails[profile.Test_Name.toLowerCase().replace(/\s/g, '-')] = {
+                    // Store profile details
+                    profileDetails[value] = {
                         name: profile.Test_Name,
-                        mrp: profile.Healthify_Offer_Price,
-                        tests: profile.Tests_Included || [] // Adjust based on actual field name
+                        mrp: profile.MRP,
+                        offerPrice: profile.Healthify_Offer_Price,
+                        description: profile.Description,
+                        tests: profile.Tests_Included.split(', ')
                     };
                 });
                 setupSearch('profile', 'profileSearch', selectedProfiles);
@@ -213,12 +216,16 @@
                     } else if (selectId === 'profile') {
                         const profile = profileDetails[item];
                         selectedDiv.innerHTML += `
-                            <span class="selected-tag">${profile.name} (₹${profile.mrp})
+                            <span class="selected-tag">${profile.name} (MRP: ₹${profile.mrp}, Offer: ₹${profile.offerPrice})
                                 <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                             </span>
-                            <ul class="included-tests">
-                                ${profile.tests.map(test => `<li>${test}</li>`).join('')}
-                            </ul>
+                            <div class="profile-details">
+                                <p><strong>Description:</strong> ${profile.description}</p>
+                                <ul class="included-tests">
+                                    <strong>Tests Included:</strong>
+                                    ${profile.tests.map(test => `<li>${test}</li>`).join('')}
+                                </ul>
+                            </div>
                         `;
                     }
                 });
@@ -323,11 +330,14 @@
             background: none;
             cursor: pointer;
         }
-        .included-tests {
+        .profile-details {
             margin-left: 20px;
-            list-style-type: disc;
             font-size: 0.9em;
             color: #555;
+        }
+        .included-tests {
+            list-style-type: disc;
+            margin-top: 5px;
         }
     </style>
 </body>
