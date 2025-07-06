@@ -241,7 +241,7 @@
             spaceBetween: 0,
             direction: 'horizontal',
             loop: true,
-            loopedSlides: 5, /* Match the number of slides */
+            loopedSlides: 5,
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
                 clickable: true,
@@ -249,6 +249,9 @@
             navigation: {
                 enabled: false,
             },
+            // Ensure continuous swipe in both directions
+            loopAdditionalSlides: 1,
+            allowTouchMove: true,
         });
 
         // Initialize Featured Swiper (One card at a time, continuous loop)
@@ -257,7 +260,7 @@
             spaceBetween: 0,
             direction: 'horizontal',
             loop: true,
-            loopedSlides: 5, /* Match the number of slides */
+            loopedSlides: 5,
             pagination: {
                 el: '.featured-swiper .swiper-pagination',
                 clickable: true,
@@ -265,6 +268,9 @@
             navigation: {
                 enabled: false,
             },
+            // Ensure continuous swipe in both directions
+            loopAdditionalSlides: 1,
+            allowTouchMove: true,
         });
 
         // FAQ Toggle
