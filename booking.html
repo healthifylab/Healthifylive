@@ -95,16 +95,8 @@
                 <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
             </div>
         </footer>
-        
-
-            
-        <a href="https://wa.me/919503832889" class="whatsapp-float"
-            <div style="display: inline-block !important; padding: 8px !important; a>
-                <a background-color: #25D366 !important; color: #fff !important; a>
-                <a border-radius: 50% !important; font-size: 24px !important; text-align: center !important; width: 40px !important; height: 40px !important; right-margin: 20px; line-height: 24px !important; transition: none !important;"><i class="fab fa-whatsapp"></i></a>
-
-
-            
+        <a href="https://wa.me/919503832889" class="whatsapp-float">
+            <div style="display: inline-block !important; padding: 8px !important; background-color: #25D366 !important; color: #fff !important; border-radius: 50% !important; font-size: 24px !important; text-align: center !important; width: 40px !important; height: 40px !important; right-margin: 20px; line-height: 24px !important; transition: none !important;"><i class="fab fa-whatsapp"></i></div>
         </a>
     </div>
     <script type="module" src="/scripts/lead-submission.js"></script>
@@ -158,7 +150,7 @@
         // Fetch and populate profiles
         async function loadProfiles() {
             try {
-                const response = await fetch('/public/profile.json');
+                const response = await fetch('/public/profiles.json'); // Corrected from profile.json to profiles.json
                 if (!response.ok) throw new Error('Failed to fetch profiles');
                 const profiles = await response.json();
                 const select = document.getElementById('profile');
