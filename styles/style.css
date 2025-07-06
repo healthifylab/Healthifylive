@@ -153,8 +153,8 @@ body {
     position: absolute;
     top: 10px;
     right: 15px;
-    padding: 5px 10px;
-    font-size: 16px;
+    padding: 3px 8px; /* Reduced size */
+    font-size: 14px; /* Reduced size */
 }
 
 /* Cards Section (for index.html) */
