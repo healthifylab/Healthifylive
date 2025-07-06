@@ -122,9 +122,10 @@
         // EmailJS Initialization
         emailjs.init('dJE_JHAoNTxxzTxiT');
 
-        // Store selected items
+        // Store selected items and profile details
         let selectedTests = new Set();
         let selectedProfiles = new Set();
+        let profileDetails = {}; // To store profile name and included tests
 
         // Fetch and populate tests
         async function loadTests() {
@@ -132,7 +133,7 @@
                 const response = await fetch('/public/tests.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const tests = await response.json();
-                console.log('Tests data:', tests); // Debug: Log the fetched data
+                console.log('Tests data:', tests);
                 const select = document.getElementById('test');
                 select.innerHTML = '<option value="" disabled>Select test(s)</option>';
                 tests.forEach(test => {
@@ -154,7 +155,7 @@
                 const response = await fetch('/public/profiles.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const profiles = await response.json();
-                console.log('Profiles data:', profiles); // Debug: Log the fetched data
+                console.log('Profiles data:', profiles);
                 const select = document.getElementById('profile');
                 select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
                 profiles.forEach(profile => {
@@ -162,6 +163,12 @@
                     option.value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
                     select.appendChild(option);
+                    // Store profile details (assuming a 'Tests_Included' field or similar)
+                    profileDetails[profile.Test_Name.toLowerCase().replace(/\s/g, '-')] = {
+                        name: profile.Test_Name,
+                        mrp: profile.Healthify_Offer_Price,
+                        tests: profile.Tests_Included || [] // Adjust based on actual field name
+                    };
                 });
                 setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
@@ -195,11 +202,26 @@
             });
 
             function updateSelectedItems() {
-                selectedDiv.innerHTML = Array.from(selectedSet).map(item => `
-                    <span class="selected-tag">${item.replace('-', ' ')}
-                        <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
-                    </span>
-                `).join('');
+                selectedDiv.innerHTML = '';
+                selectedSet.forEach(item => {
+                    if (selectId === 'test') {
+                        selectedDiv.innerHTML += `
+                            <span class="selected-tag">${item.replace('-', ' ')}
+                                <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
+                            </span>
+                        `;
+                    } else if (selectId === 'profile') {
+                        const profile = profileDetails[item];
+                        selectedDiv.innerHTML += `
+                            <span class="selected-tag">${profile.name} (₹${profile.mrp})
+                                <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
+                            </span>
+                            <ul class="included-tests">
+                                ${profile.tests.map(test => `<li>${test}</li>`).join('')}
+                            </ul>
+                        `;
+                    }
+                });
                 // Reset select to default
                 select.value = '';
             }
@@ -284,5 +306,29 @@
             loadProfiles();
         };
     </script>
+    <style>
+        .selected-items {
+            margin-top: 10px;
+        }
+        .selected-tag {
+            display: inline-block;
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .selected-tag button {
+            margin-left: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .included-tests {
+            margin-left: 20px;
+            list-style-type: disc;
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
 </body>
 </html>
