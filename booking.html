@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Test - Healthifylive Lab</title>
+    <title>Book Test - Healthify</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
+            <img src="/public/logo.png" alt="Healthify Logo" class="logo-img">
             <nav>
                 <a href="/index.html">Home</a>
                 <a href="/booking.html">Book Test</a>
@@ -127,6 +127,7 @@
         let selectedProfiles = new Set();
 
         // Fetch and populate tests
+        // Fetch and populate tests
         async function loadTests() {
             try {
                 const response = await fetch('/public/tests.json');
@@ -150,7 +151,7 @@
         // Fetch and populate profiles
         async function loadProfiles() {
             try {
-                const response = await fetch('/public/profiles.json'); // Corrected from profile.json to profiles.json
+                const response = await fetch('/public/profiles.json');
                 if (!response.ok) throw new Error('Failed to fetch profiles');
                 const profiles = await response.json();
                 const select = document.getElementById('profile');
@@ -160,6 +161,13 @@
                     option.value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
                     select.appendChild(option);
+                });
+                setupSearch('profile', 'profileSearch', selectedProfiles);
+            } catch (error) {
+                console.error('Error loading profiles:', error);
+                document.getElementById('profile').innerHTML = '<option value="" disabled>Error loading profiles</option>';
+            }
+        };
                 });
                 setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
