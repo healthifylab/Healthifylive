@@ -122,9 +122,10 @@
         // EmailJS Initialization
         emailjs.init('dJE_JHAoNTxxzTxiT');
 
-        // Store selected items and profile details
+        // Store selected items and item details
         let selectedTests = new Set();
         let selectedProfiles = new Set();
+        let testDetails = {}; // To store test details
         let profileDetails = {}; // To store profile details
 
         // Fetch and populate tests
@@ -137,10 +138,17 @@
                 const select = document.getElementById('test');
                 select.innerHTML = '<option value="" disabled>Select test(s)</option>';
                 tests.forEach(test => {
+                    const value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
-                    option.value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    option.value = value;
                     option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
                     select.appendChild(option);
+                    // Store test details
+                    testDetails[value] = {
+                        name: test.Test_Name,
+                        offerPrice: test.Healthify_Offer_Price,
+                        description: test.Description || 'No description available'
+                    };
                 });
                 setupSearch('test', 'testSearch', selectedTests);
             } catch (error) {
@@ -208,10 +216,14 @@
                 selectedDiv.innerHTML = '';
                 selectedSet.forEach(item => {
                     if (selectId === 'test') {
+                        const test = testDetails[item];
                         selectedDiv.innerHTML += `
-                            <span class="selected-tag">${item.replace('-', ' ')}
+                            <span class="selected-tag">${test.name} (₹${test.offerPrice})
                                 <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                             </span>
+                            <div class="item-details">
+                                <p><strong>Description:</strong> ${test.description}</p>
+                            </div>
                         `;
                     } else if (selectId === 'profile') {
                         const profile = profileDetails[item];
@@ -330,7 +342,7 @@
             background: none;
             cursor: pointer;
         }
-        .profile-details {
+        .item-details, .profile-details {
             margin-left: 20px;
             font-size: 0.9em;
             color: #555;
