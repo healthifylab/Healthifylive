@@ -132,6 +132,7 @@
                 const response = await fetch('/public/tests.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const tests = await response.json();
+                console.log('Tests data:', tests); // Debug: Log the fetched data
                 const select = document.getElementById('test');
                 select.innerHTML = '<option value="" disabled>Select test(s)</option>';
                 tests.forEach(test => {
@@ -153,6 +154,7 @@
                 const response = await fetch('/public/profiles.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const profiles = await response.json();
+                console.log('Profiles data:', profiles); // Debug: Log the fetched data
                 const select = document.getElementById('profile');
                 select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
                 profiles.forEach(profile => {
