@@ -33,7 +33,7 @@
         </div>
         <div class="promo-popup" id="promoPopup">
             <h3>Home blood sample collection in Mumbai, Navi Mumbai, and Thane <i class="fas fa-map-marker-alt"></i></h3>
-            <p id="promoText">Loading...</p>
+            <p id="promoText">Get 10% off on Diabetic Profile - A (Rs. 499) this week!</p>
             <button class="promo-btn close-btn" onclick="closePopup()">Close <i class="fas fa-times"></i></button>
             <a href="/booking.html"><button class="promo-btn book-now-btn">Book Now <i class="fas fa-check"></i></button></a>
         </div>
@@ -41,7 +41,7 @@
         <section class="cards-section">
             <div class="cards-container">
                 <div class="swiper-container promo-swiper">
-                    <div class="swiper-wrapper" id="promoSwiperWrapper">
+                    <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="promo-card">
                                 <img src="/public/diabetic-profile-a.jpg" alt="Diabetic Profile" onerror="this.src='/public/test-placeholder.jpg'">
@@ -89,7 +89,7 @@
             <h2 class="section-title">Featured Health Packages <i class="fas fa-star"></i></h2>
             <div class="cards-container">
                 <div class="swiper-container featured-swiper">
-                    <div class="swiper-wrapper" id="featuredSwiperWrapper">
+                    <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="promo-card">
                                 <img src="/public/diabetic-profile-a.jpg" alt="Diabetic Profile" onerror="this.src='/public/test-placeholder.jpg'">
@@ -198,63 +198,10 @@
         <a href="https://wa.me/919503832889" target="_blank"><i class="fab fa-whatsapp"></i></a>
     </div>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script type="module" src="/scripts/cart-ui.js"></script>
     <script src="/scripts/drawer.js"></script>
     <script src="/scripts/search.js"></script>
     <script>
-        async function loadPromoCards() {
-            try {
-                const response = await fetch('/public/tests.json');
-                if (!response.ok) throw new Error('Failed to fetch tests');
-                const tests = await response.json();
-                const promoTests = tests.filter(t => ["Wellness 1.4", "Diabetic Profile - A", "PCOD Profile", "Vitamin Profile", "Full Body Checkup"].includes(t.Test_Name));
-                const promoCards = document.getElementById('promoSwiperWrapper');
-                promoCards.innerHTML = promoTests.map(t => `
-                    <div class="swiper-slide">
-                        <div class="promo-card">
-                            <img src="/public/${t.Test_Name.replace(/\s/g, '-').toLowerCase()}.jpg" alt="${t.Test_Name}" onerror="this.src='/public/test-placeholder.jpg'">
-                            <h3>${t.Test_Name} <i class="fas fa-${t.Test_Name.includes('Diabetic') ? 'shield-virus' : t.Test_Name.includes('PCOD') ? 'female' : t.Test_Name.includes('Vitamin') ? 'vial' : t.Test_Name.includes('Full') ? 'user-md' : 'heart'}"></i></h3>
-                            <p>Rs. ${t.Healthify_Offer_Price} - ${t.Description}</p>
-                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                        </div>
-                    </div>
-                `).join("");
-                document.getElementById('promoText').textContent = `Get ${promoTests[0].Test_Name} (Rs. ${promoTests[0].Healthify_Offer_Price}) at 10% off this week!`;
-
-                // Featured Swiper
-                const featuredCards = document.getElementById('featuredSwiperWrapper');
-                featuredCards.innerHTML = promoTests.map(t => `
-                    <div class="swiper-slide">
-                        <div class="promo-card">
-                            <img src="/public/${t.Test_Name.replace(/\s/g, '-').toLowerCase()}.jpg" alt="${t.Test_Name}" onerror="this.src='/public/test-placeholder.jpg'">
-                            <h3>${t.Test_Name} <i class="fas fa-${t.Test_Name.includes('Diabetic') ? 'shield-virus' : t.Test_Name.includes('PCOD') ? 'female' : t.Test_Name.includes('Vitamin') ? 'vial' : t.Test_Name.includes('Full') ? 'user-md' : 'heart'}"></i></h3>
-                            <p>Rs. ${t.Healthify_Offer_Price} - ${t.Description}</p>
-                            <a href="/booking.html" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
-                        </div>
-                    </div>
-                `).join("");
-            } catch (error) {
-                console.error("Error loading promo cards:", error);
-                // Fallback to static content if JSON fails
-                document.getElementById('promoSwiperWrapper').innerHTML = `
-                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load promo packages.</p></div></div>
-                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load promo packages.</p></div></div>
-                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load promo packages.</p></div></div>
-                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load promo packages.</p></div></div>
-                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load promo packages.</p></div></div>
-                `;
-                document.getElementById('featuredSwiperWrapper').innerHTML = `
-                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load featured packages.</p></div></div>
-                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load featured packages.</p></div></div>
-                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load featured packages.</p></div></div>
-                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load featured packages.</p></div></div>
-                    <div class="swiper-slide"><div class="promo-card"><p>Failed to load featured packages.</p></div></div>
-                `;
-            }
-        }
-
         window.onload = function() {
-            loadPromoCards();
             document.getElementById('promoPopup').classList.add('active');
         };
 
@@ -268,7 +215,7 @@
             spaceBetween: 0,
             direction: 'horizontal',
             loop: true,
-            loopedSlides: 10, // Increased to handle all slides
+            loopedSlides: 5, // Match the number of slides
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
                 clickable: true,
@@ -277,7 +224,7 @@
                 enabled: false,
             },
             // Enhanced settings for continuous swipe
-            loopAdditionalSlides: 5, // Increased for better looping
+            loopAdditionalSlides: 2, // Adjusted for 5 slides
             allowTouchMove: true,
             simulateTouch: true,
             touchRatio: 1.5,
@@ -298,7 +245,7 @@
             spaceBetween: 0,
             direction: 'horizontal',
             loop: true,
-            loopedSlides: 10, // Increased to handle all slides
+            loopedSlides: 5, // Match the number of slides
             pagination: {
                 el: '.featured-swiper .swiper-pagination',
                 clickable: true,
@@ -307,7 +254,7 @@
                 enabled: false,
             },
             // Enhanced settings for continuous swipe
-            loopAdditionalSlides: 5, // Increased for better looping
+            loopAdditionalSlides: 2, // Adjusted for 5 slides
             allowTouchMove: true,
             simulateTouch: true,
             touchRatio: 1.5,
