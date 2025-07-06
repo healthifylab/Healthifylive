@@ -4,15 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
   drawer.id = "swipeDrawer";
   drawer.innerHTML = `
     <div class="drawer-header">
-      <span>☰ Menu</span>
+      <span>☰ HEALTHIFY</span>
       <button id="closeDrawer">✖️</button>
     </div>
     <ul>
       <li><a href="/index.html">🏠 Home</a></li>
       <li><a href="/contact.html">📞 Contact</a></li>
-      <li><a href="/login.html">ℹ️ login</a></li>
       <li><a href="/booking.html">🧪 Book a Test</a></li>
       <li><a href="/cart.html">🛒 My Cart</a></li>
+      <li><a href="/login.html">ℹ️ login</a></li>
         
     </ul>
   `;
