@@ -1,4 +1,6 @@
-/* Reset and Base Styles */
+/* styles/style.css */
+
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,106 +8,80 @@
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f5;
     color: #333;
+    line-height: 1.6;
 }
 
-/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
-    overflow: hidden;
 }
 
 /* Header */
 .header {
-    padding: 15px 20px;
-    background-color: #ffffff;
-    color: #20B2AA;
-    text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    padding: 15px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo-img {
-    height: 80px;
-    margin-right: 20px;
+    height: 50px;
 }
 
-.header nav a {
-    color: #20B2AA;
-    margin: 0 15px;
+nav a {
+    margin-left: 20px;
     text-decoration: none;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
+    color: #333;
+    font-weight: 600;
 }
 
-.header nav a:hover {
-    text-decoration: underline;
-}
-
-/* Hero Section (for index.html only) */
+/* Hero Section */
 .hero {
-    position: relative;
     text-align: center;
-    margin-bottom: 30px;
-    overflow: hidden;
-    border-radius: 20px;
+    padding: 20px 0;
 }
 
 .hero-image {
     width: 100%;
-    height: 400px;
+    max-height: 300px;
     object-fit: cover;
-    border-radius: 20px;
 }
 
 .hero h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 36px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-    border-radius: 5px;
+    font-size: 2rem;
+    margin: 20px 0;
+    color: #2c3e50;
 }
 
-.hero .btn {
+.btn {
     display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background-color: #20B2AA;
-    color: white;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    z-index: 10;
 }
 
-/* Search Section (for index.html) */
+.btn:hover {
+    background-color: #218838;
+}
+
+/* Search Section */
 .search-section {
     padding: 20px 0;
     text-align: center;
 }
 
 .search-section h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
 
 .search-input {
@@ -114,213 +90,176 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
-/* Promo Popup (for index.html) */
+/* Promo Popup */
 .promo-popup {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #d9e2ef;
+    background-color: #fff;
     padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
-    text-align: center;.promo-btn.book-now-btn {
-    max-width: 400px;
+    max-width: 90%;
 }
 
 .promo-popup.active {
     display: block;
 }
 
+.promo-popup h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
 .promo-btn {
     padding: 10px 20px;
-    margin: 5px;
-    background-color: #20B2AA;
-    color: #fff;
+    margin: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none;
-}
-
-.promo-btn:hover {
-    background-color: #444444;
-}
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    padding: 1px 4px;
-    font-size: 10px;
-}
-    
-.book-now-btn {
-    padding: 10px 20px;
-    margin-top: 20px;
-    display: block;
-    width: 100%;
-    max-width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    text-decoration: none;
-
-}
-
-/* Cards Section (for index.html) */
-.cards-section {
-    padding: 30px 0;
-}
-
-.section-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
     font-weight: 600;
 }
 
+.promo-btn.close-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.promo-btn.book-now-btn {
+    background-color: #28a745;
+    color: #fff;
+    text-decoration: none; /* Fix: Removes underline from Book Now button text */
+}
+
+.promo-btn:hover {
+    opacity: 0.9;
+}
+
+/* Cards Section */
+.cards-section {
+    padding: 20px 0;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .cards-container {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 30px;
+    padding: 0 10px;
 }
 
 .promo-card {
-    background: #f5f5f5;
-    padding: 15px;
+    background-color: #fff;
     border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 100%;
-    max-width: 250px;
-    margin: 0 auto;
+    padding: 15px;
 }
 
 .promo-card img {
     width: 100%;
-    height: 180px;
+    height: 150px;
     object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    border-radius: 10px;
 }
 
 .promo-card h3 {
-    font-size: 18px;
+    font-size: 1.2rem;
     margin: 10px 0;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
 }
 
 .promo-card p {
-    font-size: 14px;
+    font-size: 0.9rem;
     color: #666;
-    margin-bottom: 10px;
 }
 
-.swiper-slide {
-    width: 250px !important;
+.swiper-container {
+    padding-bottom: 30px;
 }
 
-.swiper-button-next, .swiper-button-prev {
-    color: #20B2AA;
+.swiper-pagination-bullet-active {
+    background-color: #28a745;
 }
 
-.swiper-pagination-bullet {
-    background: #20B2AA;
-}
-
-/* Testimonials Section (for index.html) */
+/* Testimonials Section */
 .testimonials-section {
-    padding: 30px 0;
-    background: #f9f9f9;
+    padding: 20px 0;
+    background-color: #fff;
 }
 
 .testimonials-title {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    margin-bottom: 20px;
 }
 
 .testimonials-container {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 0 15px;
+    justify-content: center;
 }
 
 .testimonial-card {
-    background: #fff;
-    padding: 15px;
+    background-color: #f9f9f9;
     border-radius: 10px;
-    text-align: center;
+    padding: 15px;
     width: 100%;
     max-width: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .testimonial-card img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    object-fit: cover;
     margin-bottom: 10px;
 }
 
 .testimonial-card p {
-    font-size: 14px;
+    font-size: 0.9rem;
     color: #666;
-    margin-bottom: 10px;
 }
 
 .testimonial-card h4 {
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 10px;
 }
 
-/* Why Choose Section (for index.html) */
+/* Why Choose Section */
 .why-choose {
-    padding: 30px 0;
+    padding: 20px 0;
     text-align: center;
 }
 
 .why-choose h2 {
-    font-size: 24px;
+    font-size: 1.5rem;
     margin-bottom: 20px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
 }
 
 .why-choose p {
-    font-size: 16px;
+    font-size: 1rem;
     margin: 10px 0;
-    color: #333;
 }
 
-/* FAQ Section (for index.html) */
+/* FAQ Section */
 .faq-section {
-    padding: 30px 0;
+    padding: 20px 0;
 }
 
 .faq-title {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-}
-
-.faq-container {
-    max-width: 800px;
-    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
 .faq-item {
@@ -328,245 +267,122 @@ body {
 }
 
 .faq-question {
-    font-size: 18px;
+    font-size: 1.1rem;
     padding: 10px;
-    background: #f5f5f5;
+    background-color: #fff;
+    border-radius: 5px;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .faq-answer {
     display: none;
     padding: 10px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-top: none;
-    font-size: 16px;
-}
-
-/* Form Styles (for booking.html and contact.html) */
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 16px;
-    margin-bottom: 5px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+    background-color: #f9f9f9;
     border-radius: 5px;
-    font-size: 14px;
-    box-sizing: border-box;
 }
 
-.form-group textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-.btn {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: #20B2AA;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #444444;
-}
-
-.contact-form,
-.booking-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    margin-top: 20px;
-}
-
-.contact-info,
-#testList {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 16px;
-}
-
-.contact-info p,
-#testList p {
-    margin: 5px 0;
-}
-
-.success {
-    color: green;
-}
-
-.error {
-    color: red;
-}
-
-/* Social Links (for index.html) */
+/* Social Links */
 .social-links {
     text-align: center;
     padding: 20px 0;
 }
 
 .social-links a {
-    color: #20B2AA;
     margin: 0 10px;
-    font-size: 24px;
-}
-
-.social-links a:hover {
-    color: #444444;
+    font-size: 1.5rem;
+    color: #333;
+    text-decoration: none;
 }
 
 /* Floating Buttons */
-.call-back-float,
-.whatsapp-float {
+.call-back-float, .whatsapp-float {
     position: fixed;
     bottom: 20px;
     z-index: 1000;
 }
 
 .call-back-float {
-    left: 20px;
-}
-
-.call-back-float a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #20B2AA;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-}
-
-.call-back-float a:hover {
-    background-color: #444444;
-}
-
-.whatsapp-float {
     right: 20px;
 }
 
-.whatsapp-float a {
-    display: inline-block !important;
-    padding: 10px !important;
-    background-color: #25D366 !important;
-    color: #fff !important;
-    border-radius: 50% !important;
-    font-size: 30px !important;
-    text-align: center !important;
-    width: 50px !important;
-    height: 50px !important;
-    line-height: 30px !important;
-    transition: none !important;
+.call-back-float a {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 1rem;
 }
 
-.whatsapp-float a:hover {
-    background-color: #1DA851 !important;
+.whatsapp-float {
+    right: 80px;
+}
+
+.whatsapp-float a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1.5rem;
 }
 
 /* Footer */
 .footer {
-    padding: 20px 15px;
-    background-color: #f9f9f9;
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 20px 0;
     text-align: center;
-    font-size: 14px;
-    color: #333;
-    margin-top: 30px;
+}
+
+.footer-content p {
+    font-size: 0.9rem;
+    margin: 5px 0;
 }
 
 .footer-content a {
-    color: #20B2AA;
+    color: #28a745;
     text-decoration: none;
 }
 
-.footer-content a:hover {
-    text-decoration: underline;
-}
-
-/* Media Queries */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .header nav a {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        margin-top: 10px;
+    }
+
+    nav a {
         margin: 0 10px;
-        font-size: 14px;
     }
-    .logo-img {
-        height: 60px;
-    }
-    .hero-image {
-        height: 200px;
-    }
+
     .hero h1 {
-        font-size: 24px;
-        padding: 8px 15px;
+        font-size: 1.5rem;
     }
-    .promo-card {
-        max-width: 200px;
-    }
-    .promo-card img {
-        height: 140px;
-    }
-    .swiper-slide {
-        width: 200px !important;
-    }
-    .testimonials-container {
-        justify-content: center;
-    }
-    .testimonial-card {
-        max-width: 250px;
-    }
-    .testimonial-card img {
-        width: 80px;
-        height: 80px;
-    }
-    .why-choose p {
-        font-size: 14px;
-    }
-    .faq-question {
-        font-size: 16px;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        font-size: 14px;
-    }
-    .contact-form,
-    .booking-form {
+
+    .promo-popup {
+        width: 90%;
         padding: 15px;
     }
-    .call-back-float {
-        left: 10px;
+
+    .promo-card img {
+        height: 120px;
     }
-    .whatsapp-float {
-        right: 10px;
-    }
-    .whatsapp-float a {
-        width: 40px !important;
-        height: 40px !important;
-        font-size: 24px !important;
-        line-height: 24px !important;
-        padding: 8px !important;
+
+    .testimonials-container {
+        flex-direction: column;
+        align-items: center;
     }
 }
