@@ -35,7 +35,7 @@ body {
 .logo-img {
     height: 40px;
     width: auto;
-    left-margin: 40px;
+    left-margin: 10%;
 }
 
 nav a {
