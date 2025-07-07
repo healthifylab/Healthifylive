@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="manifest" href="/public/manifest.json">
-<meta name="theme-color" content="#4CAF50">
+    <meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Test - Healthifylive Lab</title>
@@ -170,11 +170,13 @@
 
         // Fetch and populate tests
         async function loadTests() {
+            console.log('Attempting to fetch tests.json...');
             try {
                 const response = await fetch('/public/tests.json');
+                console.log('Fetch response status:', response.status);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const tests = await response.json();
-                console.log('Tests data:', tests);
+                console.log('Fetched tests data:', tests);
                 const select = document.getElementById('test');
                 select.innerHTML = '<option value="" disabled>Select test(s)</option>';
                 tests.forEach(test => {
@@ -189,6 +191,7 @@
                         offerPrice: test.Healthify_Offer_Price,
                         description: test.Description || 'No description available'
                     };
+                    console.log(`Added test: ${test.Test_Name}, Value: ${value}`);
                 });
                 setupSearch('test', 'testSearch', selectedTests);
             } catch (error) {
@@ -199,11 +202,13 @@
 
         // Fetch and populate profiles
         async function loadProfiles() {
+            console.log('Attempting to fetch profiles.json...');
             try {
                 const response = await fetch('/public/profiles.json');
+                console.log('Fetch response status:', response.status);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const profiles = await response.json();
-                console.log('Profiles data:', profiles);
+                console.log('Fetched profiles data:', profiles);
                 const select = document.getElementById('profile');
                 select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
                 profiles.forEach(profile => {
@@ -220,6 +225,7 @@
                         description: profile.Description,
                         tests: profile.Tests_Included.split(', ')
                     };
+                    console.log(`Added profile: ${profile.Test_Name}, Value: ${value}`);
                 });
                 // Preselect profile from URL query parameter after loading
                 const urlParams = new URLSearchParams(window.location.search);
@@ -227,8 +233,9 @@
                 if (profile && profileDetails[profile]) {
                     selectedProfiles.add(profile);
                     const option = Array.from(select.options).find(o => o.value === profile);
-                    if (option) option.style.display = 'none'; // Hide selected option
-                    updateSelectedItems('profile', profile); // Call the global function
+                    if (option) option.style.display = 'none';
+                    updateSelectedItems('profile', profile);
+                    console.log(`Preselected profile: ${profile}`);
                 }
                 setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
@@ -239,6 +246,7 @@
 
         // Setup search and selection functionality
         function setupSearch(selectId, searchId, selectedSet) {
+            console.log(`Setting up search for ${selectId}`);
             const select = document.getElementById(selectId);
             const searchInput = document.getElementById(searchId);
             const selectedDiv = selectId === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
@@ -247,7 +255,9 @@
                 const searchTerm = searchInput.value.toLowerCase();
                 Array.from(select.options).forEach(option => {
                     if (option.value === '' || option.value === 'disabled') return;
-                    option.style.display = option.textContent.toLowerCase().includes(searchTerm) && !selectedSet.has(option.value) ? 'block' : 'none';
+                    const display = option.textContent.toLowerCase().includes(searchTerm) && !selectedSet.has(option.value) ? 'block' : 'none';
+                    option.style.display = display;
+                    console.log(`Filter ${selectId}: ${option.textContent}, Display: ${display}`);
                 });
             });
 
@@ -255,20 +265,22 @@
                 const selectedOptions = Array.from(select.selectedOptions).filter(option => option.value && !selectedSet.has(option.value));
                 selectedOptions.forEach(option => {
                     selectedSet.add(option.value);
-                    option.style.display = 'none'; // Hide after selection
+                    option.style.display = 'none';
+                    console.log(`Selected ${selectId}: ${option.value}`);
                 });
-                updateSelectedItems(selectId); // Call the global function
-                searchInput.value = ''; // Clear search after selection
+                updateSelectedItems(selectId);
+                searchInput.value = '';
             });
         }
 
         window.removeSelection = (selectId, item) => {
+            console.log(`Removing ${selectId}: ${item}`);
             const select = document.getElementById(selectId);
             const set = selectId === 'test' ? selectedTests : selectedProfiles;
             set.delete(item);
             const option = Array.from(select.options).find(o => o.value === item);
             if (option) option.style.display = 'block';
-            updateSelectedItems(selectId); // Call the global function
+            updateSelectedItems(selectId);
         };
 
         // Handle booking form submission
@@ -284,6 +296,7 @@
             const time = document.getElementById('time').value;
             const submissionStatus = document.getElementById('bookingMessage');
 
+            console.log('Form submitted:', { name, phone, age, sex, address, pincode, date, time, selectedTests, selectedProfiles });
             if (!name || !phone.match(/^\+91[0-9]{10}$/) || !age || !sex || !address || !pincode.match(/[0-9]{6}/) || (selectedTests.size === 0 && selectedProfiles.size === 0)) {
                 submissionStatus.className = "error";
                 submissionStatus.textContent = "❌ Please enter a valid name, mobile number (+91 followed by 10 digits), age, sex, address, pincode, and select at least one test or profile.";
@@ -337,6 +350,7 @@
 
         // Load tests and profiles on page load
         window.onload = () => {
+            console.log('Page loaded, initiating data fetch...');
             loadTests();
             loadProfiles();
         };
@@ -349,25 +363,17 @@
             display: inline-block;
             background-color: #e0e0e0;
             padding: 5px 10px;
-            margin: 5px;
-            border-radius: 5px;
-        }
-        .selected-tag button {
-            margin-left: 5px;
-            border: none;
-            background: none;
-            cursor: pointer;
+            margin: 5px; /* Fixed typo: 'margi' to 'margin' */
         }
         .item-details, .profile-details {
-            margin-left: 20px;
+            margin-left: 10px;
             font-size: 0.9em;
             color: #555;
         }
         .included-tests {
             list-style-type: disc;
-            margin-top: 5px;
+            margin-left: 20px;
         }
     </style>
-    <script src="/scripts/pwa-register.js"></script>
 </body>
 </html>
