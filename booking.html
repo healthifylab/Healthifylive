@@ -1,4 +1,4 @@
-<!-- Your existing booking.html content remains unchanged -->
+<!-- Your original booking.html content -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,16 +29,14 @@
             <h1>Book Your Test <i class="fas fa-stethoscope"></i></h1>
         </div>
         <div class="booking-section">
-            <!-- Your original form data -->
             <h2>Select Your Test</h2>
             <select id="testSelect">
-                <!-- Data will be populated dynamically -->
+                <!-- Tests and profiles will populate here -->
             </select>
             <input type="text" id="name" placeholder="Full Name" required>
             <input type="tel" id="phone" placeholder="Phone Number" required>
             <input type="email" id="email" placeholder="Email" required>
             <button id="bookBtn">Book Now</button>
-            <!-- End of your original form -->
         </div>
     </div>
     <!-- Floating Call Me Back Button -->
@@ -154,8 +152,8 @@
                     const testSelect = document.getElementById('testSelect');
                     data.forEach(test => {
                         const option = document.createElement('option');
-                        option.value = test.id;
-                        option.textContent = `${test.name} - ₹${test.price}`;
+                        option.value = test.id || test.name; // Fallback to name if id missing
+                        option.textContent = `${test.name} - ₹${test.price || 0}`;
                         testSelect.appendChild(option);
                     });
                 })
@@ -167,8 +165,8 @@
                     const testSelect = document.getElementById('testSelect');
                     data.forEach(profile => {
                         const option = document.createElement('option');
-                        option.value = profile.id;
-                        option.textContent = `${profile.name} - ₹${profile.price}`;
+                        option.value = profile.id || profile.name; // Fallback to name if id missing
+                        option.textContent = `${profile.name} - ₹${profile.price || 0}`;
                         testSelect.appendChild(option);
                     });
                 })
