@@ -1,5 +1,4 @@
-<!-- Your existing booking.html content remains unchanged up to this point -->
-<!-- Example assumed structure (replace with your actual content if different) -->
+<!-- Your existing booking.html content remains unchanged -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,9 +28,8 @@
         <div class="hero">
             <h1>Book Your Test <i class="fas fa-stethoscope"></i></h1>
         </div>
-        <!-- Your existing booking section (e.g., form, content) goes here -->
         <div class="booking-section">
-            <!-- Example placeholder for your existing data -->
+            <!-- Your original form data (example placeholder, replace with your actual form) -->
             <h2>Select Your Test</h2>
             <select id="testSelect">
                 <option value="healthify-vital-check">Healthify Vital Check - ₹480</option>
@@ -42,7 +40,7 @@
             <input type="tel" id="phone" placeholder="Phone Number" required>
             <input type="email" id="email" placeholder="Email" required>
             <button id="bookBtn">Book Now</button>
-            <!-- End of example placeholder -->
+            <!-- End of your original form -->
         </div>
     </div>
     <!-- Floating Call Me Back Button -->
@@ -63,20 +61,14 @@
         </div>
     </footer>
 
-    <!-- Added Drawer and Firebase Authentication (no existing data changed) -->
-    <!-- Drawer -->
+    <!-- Drawer moved back to its original position (not under footer) -->
     <div class="drawer" id="drawer">
         <div class="drawer-content">
             <div class="drawer-header">
                 <h2>Menu</h2>
                 <span class="close-drawer">×</span>
             </div>
-            <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/booking.html">Book Test</a></li>
-                <li><a href="/contact.html">Contact</a></li>
-                <li><a href="#" onclick="showLoginForm()">Login</a></li>
-            </ul>
+            <!-- Login moved to the top of the drawer -->
             <div id="loginForm" style="display: none; padding: 20px;">
                 <h3>Login</h3>
                 <input type="text" id="loginInput" placeholder="Email or Phone" style="width: 100%; padding: 10px; margin: 10px 0;">
@@ -85,6 +77,12 @@
                 <button onclick="loginWithPhone()" style="padding: 10px 20px; background: #28a745; color: #fff; border: none; border-radius: 5px; margin-left: 10px;">Login with Phone</button>
                 <p id="loginMessage" style="margin-top: 10px;"></p>
             </div>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/booking.html">Book Test</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="#" onclick="showLoginForm()">Login</a></li>
+            </ul>
         </div>
     </div>
 
@@ -110,7 +108,7 @@
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     document.getElementById('loginMessage').textContent = 'Logged in as ' + userCredential.user.email;
-                    closeDrawer(); // Assumes closeDrawer() is in drawer.js
+                    closeDrawer();
                 })
                 .catch((error) => {
                     document.getElementById('loginMessage').textContent = 'Error: ' + error.message;
@@ -127,7 +125,7 @@
                 })
                 .then((userCredential) => {
                     document.getElementById('loginMessage').textContent = 'Logged in with ' + phone;
-                    closeDrawer(); // Assumes closeDrawer() is in drawer.js
+                    closeDrawer();
                 })
                 .catch((error) => {
                     document.getElementById('loginMessage').textContent = 'Error: ' + error.message;
@@ -157,7 +155,7 @@
     <script src="/scripts/drawer.js"></script>
     <!-- Your existing scripts (e.g., booking logic) remain unchanged -->
     <script>
-        // Example: Your existing booking.js content here (if any)
+        // Your original booking.js content here (if any)
         document.getElementById('bookBtn').addEventListener('click', () => {
             // Your existing booking logic
             alert('Booking initiated!');
