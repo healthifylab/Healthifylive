@@ -35,13 +35,13 @@ body {
 .logo-img {
     height: 40px;
     width: auto;
-    left-margin: 10%;
+    margin-left: 40px;
 }
 
 nav a {
     color: #333;
     text-decoration: none;
-    margin-left: 40px;
+    margin-left: 15px;
     font-weight: 600;
 }
 
