@@ -64,7 +64,7 @@ body {
     width: 100%;
     height: 400px;
     object-fit: cover;
-    border-corner-radius: 50px;
+    borde-radius: 50px;
 }
 
 .hero h1 {
