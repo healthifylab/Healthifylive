@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="manifest" href="/public/manifest.json">
-<meta name="theme-color" content="#4CAF50">
+    <meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Test - Healthifylive Lab</title>
@@ -107,30 +107,27 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
         import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
             authDomain: "healthify-lab.firebaseapp.com",
+            databaseURL: "https://healthify-lab-default-rtdb.firebaseio.com",
             projectId: "healthify-lab",
             storageBucket: "healthify-lab.firebasestorage.app",
             messagingSenderId: "297003315332",
-            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
+            measurementId: "G-R0R3RYERZW"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // EmailJS Initialization
         emailjs.init('dJE_JHAoNTxxzTxiT');
 
-        // Store selected items and item details
         let selectedTests = new Set();
         let selectedProfiles = new Set();
-        let testDetails = {}; // To store test details
-        let profileDetails = {}; // To store profile details
+        let testDetails = {};
+        let profileDetails = {};
 
-        // Update selected items function (moved to global scope)
         function updateSelectedItems(selectId, item) {
             const select = document.getElementById(selectId);
             const selectedDiv = selectId === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
@@ -164,11 +161,9 @@
                     `;
                 }
             });
-            // Reset select to default
             select.value = '';
         }
 
-        // Fetch and populate tests
         async function loadTests() {
             try {
                 const response = await fetch('/public/tests.json');
@@ -183,7 +178,6 @@
                     option.value = value;
                     option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
                     select.appendChild(option);
-                    // Store test details
                     testDetails[value] = {
                         name: test.Test_Name,
                         offerPrice: test.Healthify_Offer_Price,
@@ -197,7 +191,6 @@
             }
         }
 
-        // Fetch and populate profiles
         async function loadProfiles() {
             try {
                 const response = await fetch('/public/profiles.json');
@@ -212,7 +205,6 @@
                     option.value = value;
                     option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
                     select.appendChild(option);
-                    // Store profile details
                     profileDetails[value] = {
                         name: profile.Test_Name,
                         mrp: profile.MRP,
@@ -221,14 +213,13 @@
                         tests: profile.Tests_Included.split(', ')
                     };
                 });
-                // Preselect profile from URL query parameter after loading
                 const urlParams = new URLSearchParams(window.location.search);
                 const profile = urlParams.get('profile');
                 if (profile && profileDetails[profile]) {
                     selectedProfiles.add(profile);
                     const option = Array.from(select.options).find(o => o.value === profile);
-                    if (option) option.style.display = 'none'; // Hide selected option
-                    updateSelectedItems('profile', profile); // Call the global function
+                    if (option) option.style.display = 'none';
+                    updateSelectedItems('profile', profile);
                 }
                 setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
@@ -237,7 +228,6 @@
             }
         }
 
-        // Setup search and selection functionality
         function setupSearch(selectId, searchId, selectedSet) {
             const select = document.getElementById(selectId);
             const searchInput = document.getElementById(searchId);
@@ -255,10 +245,10 @@
                 const selectedOptions = Array.from(select.selectedOptions).filter(option => option.value && !selectedSet.has(option.value));
                 selectedOptions.forEach(option => {
                     selectedSet.add(option.value);
-                    option.style.display = 'none'; // Hide after selection
+                    option.style.display = 'none';
                 });
-                updateSelectedItems(selectId); // Call the global function
-                searchInput.value = ''; // Clear search after selection
+                updateSelectedItems(selectId);
+                searchInput.value = '';
             });
         }
 
@@ -268,10 +258,9 @@
             set.delete(item);
             const option = Array.from(select.options).find(o => o.value === item);
             if (option) option.style.display = 'block';
-            updateSelectedItems(selectId); // Call the global function
+            updateSelectedItems(selectId);
         };
 
-        // Handle booking form submission
         document.getElementById('bookingForm').addEventListener('submit', async (event) => {
             event.preventDefault();
             const name = document.getElementById('name').value;
@@ -306,7 +295,6 @@
                     timestamp: new Date().toISOString(),
                     status: "New Booking"
                 });
-                // Send email via EmailJS
                 const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone}, Age: ${age}, Sex: ${sex}, Address: ${address}, Pincode: ${pincode})`;
                 emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_name: name,
@@ -335,7 +323,6 @@
             }
         });
 
-        // Load tests and profiles on page load
         window.onload = () => {
             loadTests();
             loadProfiles();
