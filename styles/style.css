@@ -119,12 +119,13 @@ nav a {
 }
 
 .promo-btn {
-    padding: 10px 20px;
+    padding: 12px 24px; /* Adjusted for consistent and slightly larger button size */
     margin: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
+    font-size: 1rem; /* Consistent font size for buttons */
 }
 
 .promo-btn.close-btn {
@@ -135,7 +136,8 @@ nav a {
 .promo-btn.book-now-btn {
     background-color: #28a745;
     color: #fff;
-    text-decoration: none; /* Fix: Removes underline from Book Now button text */
+    text-decoration: none; /* Previous fix: Removes underline from Book Now button text */
+    padding: 12px 24px; /* Specific size for Book Now button to match Close button */
 }
 
 .promo-btn:hover {
