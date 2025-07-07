@@ -137,16 +137,6 @@ body {
     display: block;
 }
 
-.promo-btn {
-    padding: 10px 20px;
-    margin: 5px;
-    background-color: #20B2AA;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-}
 
 .promo-btn:hover {
     background-color: #444444;
@@ -159,6 +149,16 @@ body {
     padding: 1px 4px;
     font-size: 10px;
 }
+    
+.book-now-btn {
+    padding: 10px 20px;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
 
 }
 
