@@ -137,6 +137,16 @@ body {
     display: block;
 }
 
+.promo-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #20B2AA;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
 
 .promo-btn:hover {
     background-color: #444444;
