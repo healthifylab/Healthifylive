@@ -181,6 +181,15 @@
                         tests: profile.Tests_Included.split(', ')
                     };
                 });
+                // Preselect profile from URL query parameter after loading
+                const urlParams = new URLSearchParams(window.location.search);
+                const profile = urlParams.get('profile');
+                if (profile && profileDetails[profile]) {
+                    selectedProfiles.add(profile);
+                    const option = Array.from(select.options).find(o => o.value === profile);
+                    if (option) option.style.display = 'none'; // Hide selected option
+                    updateSelectedItems('profile', profile);
+                }
                 setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
                 console.error('Error loading profiles:', error);
@@ -212,7 +221,7 @@
                 searchInput.value = ''; // Clear search after selection
             });
 
-            function updateSelectedItems() {
+            function updateSelectedItems(selectIdParam, item) {
                 selectedDiv.innerHTML = '';
                 selectedSet.forEach(item => {
                     if (selectId === 'test') {
