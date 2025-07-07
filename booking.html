@@ -5,77 +5,185 @@
     <meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Bookings - Healthify Lab</title>
+    <title>Book Test - Healthifylive Lab</title>
+    <link href="[invalid url, do not cite] rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script type="module" src="/scripts/Firebase-config.js"></script> <!-- New script -->
+    <link rel="stylesheet" href="[invalid url, do not cite]
+    <!-- Firebase SDK v10.14.1 -->
+    <script type="module" src="[invalid url, do not cite]
+    <script type="module" src="[invalid url, do not cite]
+    <!-- EmailJS SDK -->
+    <script src="[invalid url, do not cite]
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="/public/logo.png" alt="Healthify Lab Logo" class="logo">
+            <img src="/logo.png" alt="Healthifylive Lab Logo" class="logo-img"> <!-- Updated path -->
             <nav>
                 <a href="/index.html">Home</a>
                 <a href="/booking.html">Book Test</a>
                 <a href="/contact.html">Contact</a>
-                <a href="/call-back.html" target="_blank">Call Me Back</a>
             </nav>
         </div>
         <main>
-            <h1>📋 My Bookings</h1>
-            <div id="bookingList"></div>
-            <p id="noBookings" style="display: none;">No bookings found. <a href="/booking.html">Book a test now!</a></p>
+            <h1>📋 Book Your Test 😊</h1>
+            <p>Select a test or profile to book your appointment. <i class="fas fa-syringe"></i></p>
+            <div class="booking-form">
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="name">Full Name <i class="fas fa-user"></i></label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number <i class="fas fa-phone"></i></label>
+                        <input type="tel" id="phone" placeholder="Enter your phone (XXXXXXXXXX)" value="+91" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age <i class="fas fa-birthday-cake"></i></label>
+                        <input type="number" id="age" placeholder="Enter your age" min="1" max="120" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sex">Sex <i class="fas fa-venus-mars"></i></label>
+                        <select id="sex" required>
+                            <option value="" disabled selected>Select sex</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address with Landmark <i class="fas fa-map-marker-alt"></i></label>
+                        <textarea id="address" placeholder="Enter your address with landmark" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode <i class="fas fa-mail-bulk"></i></label>
+                        <input type="text" id="pincode" placeholder="Enter your pincode (e.g., 400001)" pattern="[0-9]{6}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="test">Select Test(s) <i class="fas fa-vial"></i></label>
+                        <input type="text" id="testSearch" placeholder="Search tests..." class="search-input">
+                        <select id="test" multiple>
+                            <option value="" disabled>Select test(s)</option>
+                        </select>
+                        <div id="selectedTests" class="selected-items"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile">Select Profile(s) <i class="fas fa-file-alt"></i></label>
+                        <input type="text" id="profileSearch" placeholder="Search profiles..." class="search-input">
+                        <select id="profile" multiple>
+                            <option value="" disabled>Select profile(s)</option>
+                        </select>
+                        <div id="selectedProfiles" class="selected-items"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Appointment Date <i class="fas fa-calendar"></i></label>
+                        <input type="date" id="date" min="2025-07-06" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Appointment Time <i class="fas fa-clock"></i></label>
+                        <input type="time" id="time" required>
+                    </div>
+                    <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
+                </form>
+                <p id="bookingMessage"></p>
+            </div>
+            <div id="testList"></div>
         </main>
         <footer>
-            <p>Healthifylive © 2025 | Contact: +91 950383832889 | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
+            <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i> | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
             <div class="social-media">
-                <a href="https://x.com/healthify_lab" target="_blank"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="[invalid url, do not cite] target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="[invalid url, do not cite] target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="[invalid url, do not cite] target="_blank"><i class="fab fa-facebook-f"></i></a>
             </div>
         </footer>
-        <a href="https://wa.me/919503832889" class="whatsapp-float" target="_blank">
-            <img src="/public/whatsapp-icon.png" alt="WhatsApp">
+        <a href="[invalid url, do not cite] class="whatsapp-float">
+            <div style="display: inline-block !important; padding: 8px !important; background-color: #25D366 !important; color: #fff !important; border-radius: 50% !important; font-size: 24px !important; text-align: center !important; width: 40px !important; height: 40px !important; right-margin: 20px; line-height: 24px !important; transition: none !important;"><i class="fab fa-whatsapp"></i></div>
         </a>
     </div>
-    <script type="module" src="/scripts/Drawer.js"></script> <!-- Ensure module type -->
+    <script type="module" src="/scripts/lead-submission.js"></script>
+    <script type="module" src="/scripts/Firebase-config.js"></script>
+    <script type="module" src="/scripts/Drawer.js"></script>
     <script type="module">
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+        import { initializeApp } from '[invalid url, do not cite]
+        import { getFirestore, collection, addDoc } from '[invalid url, do not cite]
 
-        const auth = getAuth();
-        const db = getFirestore();
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+            authDomain: "healthify-lab.firebaseapp.com",
+            databaseURL: "[invalid url, do not cite]
+            projectId: "healthify-lab",
+            storageBucket: "healthify-lab.firebasestorage.app",
+            messagingSenderId: "297003315332",
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
+            measurementId: "G-R0R3RYERZW"
+        };
 
-        onAuthStateChanged(auth, async (user) => {
-            const bookingList = document.getElementById("bookingList");
-            const noBookings = document.getElementById("noBookings");
-            if (user) {
-                try {
-                    const q = query(collection(db, "bookings"), where("mobile", "==", user.phoneNumber || "+91" + user.email.split("@")[0].replace(/[^0-9]/g, "").slice(-10)));
-                    const querySnapshot = await getDocs(q);
-                    if (!querySnapshot.empty) {
-                        let html = "<ul>";
-                        querySnapshot.forEach((doc) => {
-                            const data = doc.data();
-                            html += `<li>${data.date} at ${data.time} - ${data.tests ? data.tests.join(", ") : data.profiles ? data.profiles.join(", ") : "No tests"} <a href="/booking.html?edit=${doc.id}">Edit</a></li>`;
-                        });
-                        html += "</ul>";
-                        bookingList.innerHTML = html;
-                        noBookings.style.display = "none";
-                    } else {
-                        noBookings.style.display = "block";
-                        bookingList.innerHTML = "";
-                    }
-                } catch (error) {
-                    console.error("Error fetching bookings:", error);
-                    bookingList.innerHTML = `<p class="error">❌ Failed to load bookings: ${error.message}</p>`;
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        emailjs.init('dJE_JHAoNTxxzTxiT');
+
+        let selectedTests = new Set();
+        let selectedProfiles = new Set();
+        let testDetails = {};
+        let profileDetails = {};
+
+        function updateSelectedItems(selectId, item) {
+            const select = document.getElementById(selectId);
+            const selectedDiv = selectId === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
+            selectedDiv.innerHTML = '';
+            const selectedSet = selectId === 'test' ? selectedTests : selectedProfiles;
+
+            selectedSet.forEach(item => {
+                if (selectId === 'test') {
+                    const test = testDetails[item];
+                    selectedDiv.innerHTML += `
+                        <span class="selected-tag">${test.name} (₹${test.offerPrice})
+                            <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
+                        </span>
+                        <div class="item-details">
+                            <p><strong>Description:</strong> ${test.description}</p>
+                        </div>
+                    `;
+                } else if (selectId === 'profile') {
+                    const profile = profileDetails[item];
+                    selectedDiv.innerHTML += `
+                        <span class="selected-tag">${profile.name} (MRP: ₹${profile.mrp}, Offer: ₹${profile.offerPrice})
+                            <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
+                        </span>
+                        <div class="profile-details">
+                            <p><strong>Description:</strong> ${profile.description}</p>
+                            <ul class="included-tests">
+                                <strong>Tests Included:</strong>
+                                ${profile.tests.map(test => `<li>${test}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
                 }
-            } else {
-                bookingList.innerHTML = "<p>Please <a href='#' onclick='document.getElementById(\"loginBtn\").click();'>log in</a> to view your bookings.</p>";
-                noBookings.style.display = "none";
+            });
+            select.value = '';
+        }
+
+        async function loadTests() {
+            try {
+                const response = await fetch('/public/tests.json');
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const tests = await response.json();
+                console.log('Tests data:', tests);
+                const select = document.getElementById('test');
+                select.innerHTML = '<option value="" disabled>Select test(s)</option>';
+                tests.forEach(test => {
+                    const value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    const option = document.createElement('option');
+                    option.value = value;
+                    option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
+                    select.appendChild(option);
+                    testDetails[value] = {
+                        name: test.Test_Name,
+                        offerPrice: test.Healthify_Offer_Price,
+                        description: test.Description || 'No description available'
+                    };
+                });
+                setupSearch('test', 'testSearch', selectedTests);
             }
-        });
-    </script>
-    <script src="/scripts/pwa-register.js"></script>
-</body>
-</html>
