@@ -21,7 +21,7 @@
         </div>
         <div class="booking-form">
             <h2>Book Your Test <i class="fas fa-stethoscope"></i></h2>
-            <form>
+            <form id="bookingForm">
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required>
@@ -79,7 +79,7 @@
     <footer class="footer">
         <div class="footer-content">
             <p>Contact Us: <br>
-               +91 9593832889 / +91 99676 40104 <br>
+               +91 9503832889 / +91 99676 40104 <br>
                <a href="https://wa.me/919503832889" target="_blank">WhatsApp: 9503832889</a> <br>
                Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a>
             </p>
@@ -87,5 +87,16 @@
         </div>
     </footer>
     <script src="/scripts/booking.js"></script>
+    <script>
+        // Preselect profile from URL query parameter
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const profile = urlParams.get('profile');
+            if (profile) {
+                const select = document.getElementById('test');
+                select.value = profile;
+            }
+        };
+    </script>
 </body>
 </html>
