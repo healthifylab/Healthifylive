@@ -46,7 +46,7 @@
         "Description": "Evaluates thyroid function for hormonal balance and metabolism.",
         "Tests_Included": "T3, T4, TSH",
         "MRP": 800,
-        "Healthify_Offer_Price": 640,
+        "Healthify_Offer_Price": 400,
         "TAT": "24 hours"
     },
     {
@@ -116,7 +116,8 @@
         "Description": "Assesses essential vitamin levels for overall health and immunity.",
         "Tests_Included": "Vitamin D, Vitamin B12",
         "MRP": 2000,
-        "Healthify_Offer_Price": 1600,
+        "Healthify_Offer_Price": 14
+        00,
         "TAT": "48 hours"
     },
     {
@@ -126,7 +127,7 @@
         "Description": "Entry-level screening for general health monitoring.",
         "Tests_Included": "CBC, Blood Sugar, Lipid Profile, Kidney Profile",
         "MRP": 999,
-        "Healthify_Offer_Price": 799.2,
+        "Healthify_Offer_Price": 699,
         "TAT": "24 hours"
     },
     {
@@ -170,7 +171,7 @@
         "TAT": "24–48 hours"
     },
     {
-        "Test_Name": "Healthify Kidney Care",
+        "Test_Name": "Healthify Kidney Care Maximum",
         "Category": "Health Checkup Profiles",
         "Sample_Type": "Blood, Serum, Urine",
         "Description": "Comprehensive screening for kidney function and urinary health.",
@@ -234,9 +235,9 @@
         "Category": "Health Checkup Profiles",
         "Sample_Type": "Blood, Serum, Urine",
         "Description": "Premium screening for professionals to monitor overall health.",
-        "Tests_Included": "CBC, Lipid Profile, KFT, LFT, Thyroid Profile, Vitamin D, CUE",
+        "Tests_Included": "CBC, Lipid Profile, KFT, LFT, Thyroid Profile, Vitamin D, CUE- COMPLETE urine Examination",
         "MRP": 5000,
-        "Healthify_Offer_Price": 4000,
+        "Healthify_Offer_Price": 1799,
         "TAT": "24–48 hours"
     },
     {
@@ -246,7 +247,7 @@
         "Description": "Assesses immune system health and nutritional status.",
         "Tests_Included": "Vitamin D, Vitamin B12, Iron Studies, CBC",
         "MRP": 2500,
-        "Healthify_Offer_Price": 2000,
+        "Healthify_Offer_Price": 1600,
         "TAT": "24–48 hours"
     }
 ]
