@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   drawer.id = "swipeDrawer";
   drawer.innerHTML = `
     <div class="drawer-header">
-      <span>☰ HEALTHIFY</span>
+      <span>☰  .  HEALTHIFY</span>
       <button id="closeDrawer">✖️</button>
     </div>
     <ul>
