@@ -124,7 +124,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fff;
+    background: #748b97;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -515,7 +515,7 @@ body {
         height: 60px;
     }
     .hero-image {
-        height: 250px;
+        height: 200px;
     }
     .hero h1 {
         font-size: 24px;
