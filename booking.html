@@ -128,6 +128,44 @@
         let testDetails = {}; // To store test details
         let profileDetails = {}; // To store profile details
 
+        // Update selected items function (moved to global scope)
+        function updateSelectedItems(selectId, item) {
+            const select = document.getElementById(selectId);
+            const selectedDiv = selectId === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
+            selectedDiv.innerHTML = '';
+            const selectedSet = selectId === 'test' ? selectedTests : selectedProfiles;
+
+            selectedSet.forEach(item => {
+                if (selectId === 'test') {
+                    const test = testDetails[item];
+                    selectedDiv.innerHTML += `
+                        <span class="selected-tag">${test.name} (₹${test.offerPrice})
+                            <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
+                        </span>
+                        <div class="item-details">
+                            <p><strong>Description:</strong> ${test.description}</p>
+                        </div>
+                    `;
+                } else if (selectId === 'profile') {
+                    const profile = profileDetails[item];
+                    selectedDiv.innerHTML += `
+                        <span class="selected-tag">${profile.name} (MRP: ₹${profile.mrp}, Offer: ₹${profile.offerPrice})
+                            <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
+                        </span>
+                        <div class="profile-details">
+                            <p><strong>Description:</strong> ${profile.description}</p>
+                            <ul class="included-tests">
+                                <strong>Tests Included:</strong>
+                                ${profile.tests.map(test => `<li>${test}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+            });
+            // Reset select to default
+            select.value = '';
+        }
+
         // Fetch and populate tests
         async function loadTests() {
             try {
@@ -188,7 +226,7 @@
                     selectedProfiles.add(profile);
                     const option = Array.from(select.options).find(o => o.value === profile);
                     if (option) option.style.display = 'none'; // Hide selected option
-                    updateSelectedItems('profile', profile);
+                    updateSelectedItems('profile', profile); // Call the global function
                 }
                 setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
@@ -201,7 +239,7 @@
         function setupSearch(selectId, searchId, selectedSet) {
             const select = document.getElementById(selectId);
             const searchInput = document.getElementById(searchId);
-            const selectedDiv = document.getElementById(selectId === 'test' ? 'selectedTests' : 'selectedProfiles');
+            const selectedDiv = selectId === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
 
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.toLowerCase();
@@ -217,52 +255,19 @@
                     selectedSet.add(option.value);
                     option.style.display = 'none'; // Hide after selection
                 });
-                updateSelectedItems();
+                updateSelectedItems(selectId); // Call the global function
                 searchInput.value = ''; // Clear search after selection
             });
-
-            function updateSelectedItems(selectIdParam, item) {
-                selectedDiv.innerHTML = '';
-                selectedSet.forEach(item => {
-                    if (selectId === 'test') {
-                        const test = testDetails[item];
-                        selectedDiv.innerHTML += `
-                            <span class="selected-tag">${test.name} (₹${test.offerPrice})
-                                <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
-                            </span>
-                            <div class="item-details">
-                                <p><strong>Description:</strong> ${test.description}</p>
-                            </div>
-                        `;
-                    } else if (selectId === 'profile') {
-                        const profile = profileDetails[item];
-                        selectedDiv.innerHTML += `
-                            <span class="selected-tag">${profile.name} (MRP: ₹${profile.mrp}, Offer: ₹${profile.offerPrice})
-                                <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
-                            </span>
-                            <div class="profile-details">
-                                <p><strong>Description:</strong> ${profile.description}</p>
-                                <ul class="included-tests">
-                                    <strong>Tests Included:</strong>
-                                    ${profile.tests.map(test => `<li>${test}</li>`).join('')}
-                                </ul>
-                            </div>
-                        `;
-                    }
-                });
-                // Reset select to default
-                select.value = '';
-            }
-
-            window.removeSelection = (selectId, item) => {
-                const select = document.getElementById(selectId);
-                const set = selectId === 'test' ? selectedTests : selectedProfiles;
-                set.delete(item);
-                const option = Array.from(select.options).find(o => o.value === item);
-                if (option) option.style.display = 'block';
-                updateSelectedItems();
-            };
         }
+
+        window.removeSelection = (selectId, item) => {
+            const select = document.getElementById(selectId);
+            const set = selectId === 'test' ? selectedTests : selectedProfiles;
+            set.delete(item);
+            const option = Array.from(select.options).find(o => o.value === item);
+            if (option) option.style.display = 'block';
+            updateSelectedItems(selectId); // Call the global function
+        };
 
         // Handle booking form submission
         document.getElementById('bookingForm').addEventListener('submit', async (event) => {
