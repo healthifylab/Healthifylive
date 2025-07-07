@@ -197,6 +197,16 @@
     <div class="whatsapp-float">
         <a href="https://wa.me/919503832889" target="_blank"><i class="fab fa-whatsapp"></i></a>
     </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Contact Us: <br>
+               +91 9593832889 / +91 99676 40104 <br>
+               <a href="https://wa.me/919503832889" target="_blank">WhatsApp: 9503832889</a> <br>
+               Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a>
+            </p>
+            <p>All rights reserved @healthify 2025</p>
+        </div>
+    </footer>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="/scripts/drawer.js"></script>
     <script src="/scripts/search.js"></script>
@@ -209,13 +219,13 @@
             document.getElementById('promoPopup').classList.remove('active');
         }
 
-        // Initialize Promo Swiper (One card at a time, continuous loop)
+        // Initialize Promo Swiper (One card at a time, stops after 5 slides)
         const promoSwiper = new Swiper('.promo-swiper', {
             slidesPerView: 1,
             spaceBetween: 0,
             direction: 'horizontal',
-            loop: true,
-            loopedSlides: 5, // Match the number of slides
+            loop: false, // Disable looping
+            loopedSlides: 5,
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
                 clickable: true,
@@ -223,29 +233,20 @@
             navigation: {
                 enabled: false,
             },
-            // Enhanced settings for continuous swipe
-            loopAdditionalSlides: 2, // Adjusted for 5 slides
             allowTouchMove: true,
             simulateTouch: true,
             touchRatio: 1.5,
             touchAngle: 45,
-            freeMode: true,
-            on: {
-                slideChange: function () {
-                    if (!this.slides.length) {
-                        this.appendSlide('<div class="swiper-slide"><div class="promo-card"><p>No more slides available.</p></div></div>');
-                    }
-                }
-            }
+            freeMode: false,
         });
 
-        // Initialize Featured Swiper (One card at a time, continuous loop)
+        // Initialize Featured Swiper (One card at a time, stops after 5 slides)
         const featuredSwiper = new Swiper('.featured-swiper', {
             slidesPerView: 1,
             spaceBetween: 0,
             direction: 'horizontal',
-            loop: true,
-            loopedSlides: 5, // Match the number of slides
+            loop: false, // Disable looping
+            loopedSlides: 5,
             pagination: {
                 el: '.featured-swiper .swiper-pagination',
                 clickable: true,
@@ -253,20 +254,11 @@
             navigation: {
                 enabled: false,
             },
-            // Enhanced settings for continuous swipe
-            loopAdditionalSlides: 2, // Adjusted for 5 slides
             allowTouchMove: true,
             simulateTouch: true,
             touchRatio: 1.5,
             touchAngle: 45,
-            freeMode: true,
-            on: {
-                slideChange: function () {
-                    if (!this.slides.length) {
-                        this.appendSlide('<div class="swiper-slide"><div class="promo-card"><p>No more slides available.</p></div></div>');
-                    }
-                }
-            }
+            freeMode: false,
         });
 
         // FAQ Toggle
