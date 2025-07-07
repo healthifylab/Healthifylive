@@ -341,7 +341,7 @@
         <div class="drawer-content">
             <div class="drawer-header">
                 <h2>Menu</h2>
-                <span class="close-drawer">&times;</span>
+                <span class="close-drawer">×</span>
             </div>
             <ul>
                 <li><a href="/index.html">Home</a></li>
@@ -382,7 +382,7 @@
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     document.getElementById('loginMessage').textContent = 'Logged in as ' + userCredential.user.email;
-                    closeDrawer();
+                    closeDrawer(); // Assumes closeDrawer() is in drawer.js
                 })
                 .catch((error) => {
                     document.getElementById('loginMessage').textContent = 'Error: ' + error.message;
@@ -399,7 +399,7 @@
                 })
                 .then((userCredential) => {
                     document.getElementById('loginMessage').textContent = 'Logged in with ' + phone;
-                    closeDrawer();
+                    closeDrawer(); // Assumes closeDrawer() is in drawer.js
                 })
                 .catch((error) => {
                     document.getElementById('loginMessage').textContent = 'Error: ' + error.message;
@@ -414,20 +414,16 @@
             document.getElementById('loginForm').style.display = 'block';
         }
 
-        // Ensure drawer functionality works with login
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.getElementById('drawer').style.width = '250px';
+        // Ensure compatibility with drawer.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginLink = document.querySelector('.drawer ul li a[onclick="showLoginForm()"]');
+            if (loginLink) {
+                loginLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showLoginForm();
+                });
+            }
         });
-
-        document.querySelector('.close-drawer').addEventListener('click', function() {
-            document.getElementById('drawer').style.width = '0';
-            document.getElementById('loginForm').style.display = 'none';
-        });
-
-        function closeDrawer() {
-            document.getElementById('drawer').style.width = '0';
-            document.getElementById('loginForm').style.display = 'none';
-        }
     </script>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
