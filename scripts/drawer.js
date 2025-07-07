@@ -12,8 +12,25 @@ document.addEventListener("DOMContentLoaded", () => {
       <li><a href="/contact.html">📞 Contact</a></li>
       <li><a href="/booking.html">🧪 Book a Test</a></li>
       <li><a href="/cart.html">🛒 My Cart</a></li>
-      <li><a href="/login.html">ℹ️ login</a></li>
-      <li><a Healthify 2025 All rights reserved</a></li>
+      <li>
+        <button id="loginBtn" style="background: none; border: none; color: #2E2E2E; font-size: 16px; text-align: left; width: 100%; padding: 10px; cursor: pointer;">ℹ️ Login</button>
+        <div id="loginForm" style="display: none; padding: 10px;">
+          <input type="email" id="emailInput" placeholder="Enter email" style="width: 100%; padding: 5px; margin-bottom: 5px;">
+          <input type="password" id="passwordInput" placeholder="Enter password" style="width: 100%; padding: 5px; margin-bottom: 5px;">
+          <button id="signInBtn" style="background: #28a745; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; width: 100%; margin-bottom: 5px;">Sign In</button>
+          <button id="signUpBtn" style="background: #17a2b8; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; width: 100%; margin-bottom: 5px;">Sign Up</button>
+          <button id="phoneSignInBtn" style="background: #ffc107; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; width: 100%;">Phone Sign In</button>
+        </div>
+        <div id="phoneForm" style="display: none; padding: 10px;">
+          <input type="tel" id="phoneInput" placeholder="Enter phone (e.g., +919503832889)" style="width: 100%; padding: 5px; margin-bottom: 5px;">
+          <div id="recaptcha-container"></div>
+          <button id="sendCodeBtn" style="background: #007bff; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; width: 100%; margin-bottom: 5px;">Send Code</button>
+          <input type="text" id="verificationCode" placeholder="Enter code" style="width: 100%; padding: 5px; margin-bottom: 5px;">
+          <button id="verifyCodeBtn" style="background: #28a745; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; width: 100%;">Verify</button>
+        </div>
+        <div id="userInfo" style="padding: 10px; color: #28a745;"></div>
+      </li>
+      <li><a>Healthify 2025 All rights reserved</a></li>
     </ul>
   `;
   drawer.classList.add("drawer");
@@ -39,4 +56,108 @@ document.addEventListener("DOMContentLoaded", () => {
     #openDrawer { position: fixed; top: 10px; left: 10px; font-size: 24px; background: #00a884; color: white; border: none; cursor: pointer; z-index: 1001; }
   `;
   document.head.appendChild(style);
+
+  // Login Functionality
+  const loginBtn = document.getElementById("loginBtn");
+  const loginForm = document.getElementById("loginForm");
+  const phoneForm = document.getElementById("phoneForm");
+  const userInfo = document.getElementById("userInfo");
+  const emailInput = document.getElementById("emailInput");
+  const passwordInput = document.getElementById("passwordInput");
+  const signInBtn = document.getElementById("signInBtn");
+  const signUpBtn = document.getElementById("signUpBtn");
+  const phoneSignInBtn = document.getElementById("phoneSignInBtn");
+  const phoneInput = document.getElementById("phoneInput");
+  const sendCodeBtn = document.getElementById("sendCodeBtn");
+  const verificationCode = document.getElementById("verificationCode");
+  const verifyCodeBtn = document.getElementById("verifyCodeBtn");
+  let verificationId;
+
+  loginBtn.addEventListener("click", () => {
+    loginForm.style.display = loginForm.style.display === "none" ? "block" : "none";
+    phoneForm.style.display = "none";
+    userInfo.innerHTML = "";
+  });
+
+  signInBtn.addEventListener("click", () => {
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        alert("Signed in successfully!");
+        updateUserInfo(userCredential.user);
+      })
+      .catch((error) => {
+        alert("Error: " + error.message);
+      });
+  });
+
+  signUpBtn.addEventListener("click", () => {
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        alert("Account created successfully! Please verify your email.");
+        updateUserInfo(userCredential.user);
+      })
+      .catch((error) => {
+        alert("Error: " + error.message);
+      });
+  });
+
+  phoneSignInBtn.addEventListener("click", () => {
+    loginForm.style.display = "none";
+    phoneForm.style.display = "block";
+  });
+
+  sendCodeBtn.addEventListener("click", () => {
+    const phoneNumber = phoneInput.value;
+    sendOTP(phoneNumber)
+      .then((confirmationResult) => {
+        verificationId = confirmationResult.verificationId;
+        alert("Code sent! Please check your phone.");
+      })
+      .catch((error) => {
+        alert("Error: " + error.message);
+        window.recaptchaVerifier.render().then((widgetId) => {
+          window.recaptchaVerifier.reset(widgetId);
+        });
+      });
+  });
+
+  verifyCodeBtn.addEventListener("click", () => {
+    const code = verificationCode.value;
+    const credential = firebase.auth.PhoneAuthProvider.credential(verificationId, code);
+    auth.signInWithCredential(credential)
+      .then((userCredential) => {
+        alert("Phone number verified and signed in!");
+        updateUserInfo(userCredential.user);
+      })
+      .catch((error) => {
+        alert("Error: " + error.message);
+      });
+  });
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      loginForm.style.display = "none";
+      phoneForm.style.display = "none";
+      updateUserInfo(user);
+    } else {
+      userInfo.innerHTML = "";
+    }
+  });
+
+  function updateUserInfo(user) {
+    userInfo.innerHTML = `Welcome, ${user.email || user.phoneNumber}! <button id="signOutBtn" style="background: #dc3545; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; margin-left: 10px;">Sign Out</button>`;
+    document.getElementById("signOutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        alert("Signed out successfully!");
+        userInfo.innerHTML = "";
+        loginForm.style.display = "block";
+      }).catch((error) => {
+        alert("Error: " + error.message);
+      });
+    });
+  }
 });
