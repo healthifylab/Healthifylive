@@ -58,6 +58,29 @@ document.addEventListener("DOMContentLoaded", () => {
   document.head.appendChild(style);
 
   // Login Functionality
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPhoneNumber, RecaptchaVerifier, sendSignInLinkToEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
+
+  const firebaseConfig = {
+      apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+      authDomain: "healthify-lab.firebaseapp.com",
+      databaseURL: "https://healthify-lab-default-rtdb.firebaseio.com",
+      projectId: "healthify-lab",
+      storageBucket: "healthify-lab.firebasestorage.app",
+      messagingSenderId: "297003315332",
+      appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
+      measurementId: "G-R0R3RYERZW"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+
+  window.recaptchaVerifier = new RecaptchaVerifier("recaptcha-container", {
+      size: "invisible"
+  }, auth);
+
   const loginBtn = document.getElementById("loginBtn");
   const loginForm = document.getElementById("loginForm");
   const phoneForm = document.getElementById("phoneForm");
@@ -112,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   sendCodeBtn.addEventListener("click", () => {
     const phoneNumber = phoneInput.value;
-    sendOTP(phoneNumber)
+    signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
       .then((confirmationResult) => {
         verificationId = confirmationResult.verificationId;
         alert("Code sent! Please check your phone.");
