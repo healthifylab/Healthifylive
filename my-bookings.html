@@ -8,6 +8,7 @@
     <title>My Bookings - Healthify Lab</title>
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script type="module" src="/scripts/Firebase-config.js"></script> <!-- New script -->
 </head>
 <body>
     <div class="container">
@@ -37,7 +38,7 @@
             <img src="/public/whatsapp-icon.png" alt="WhatsApp">
         </a>
     </div>
-    <script src="/scripts/Drawer.js"></script>
+    <script type="module" src="/scripts/Drawer.js"></script> <!-- Ensure module type -->
     <script type="module">
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
         import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
@@ -50,7 +51,7 @@
             const noBookings = document.getElementById("noBookings");
             if (user) {
                 try {
-                    const q = query(collection(db, "bookings"), where("mobile", "==", user.phoneNumber || "+91" + user.email.split("@")[0].replace(/[^0-9]/g, "").slice(-10))); // Adjust based on your data structure
+                    const q = query(collection(db, "bookings"), where("mobile", "==", user.phoneNumber || "+91" + user.email.split("@")[0].replace(/[^0-9]/g, "").slice(-10)));
                     const querySnapshot = await getDocs(q);
                     if (!querySnapshot.empty) {
                         let html = "<ul>";
