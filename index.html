@@ -438,7 +438,7 @@
             document.getElementById('promoPopup').classList.remove('active');
         }
 
-        // Initialize Promo Swiper (One card at a time, disable pagination)
+        // Initialize Promo Swiper (One card at a time, disable pagination, add auto-swipe)
         const promoSwiper = new Swiper('.promo-swiper', {
             slidesPerView: 1,
             spaceBetween: 0,
@@ -448,7 +448,7 @@
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
                 clickable: false,
-                enabled: false // Disable pagination to remove blue dots
+                enabled: false
             },
             navigation: {
                 enabled: false,
@@ -458,9 +458,13 @@
             touchRatio: 1.5,
             touchAngle: 45,
             freeMode: false,
+            autoplay: {
+                delay: 3000, // Auto-swipe every 3 seconds
+                disableOnInteraction: false // Continue autoplay even after user interaction
+            }
         });
 
-        // Initialize Featured Swiper (One card at a time, disable pagination)
+        // Initialize Featured Swiper (One card at a time, disable pagination, add auto-swipe)
         const featuredSwiper = new Swiper('.featured-swiper', {
             slidesPerView: 1,
             spaceBetween: 0,
@@ -470,7 +474,7 @@
             pagination: {
                 el: '.featured-swiper .swiper-pagination',
                 clickable: false,
-                enabled: false // Disable pagination to remove blue dots
+                enabled: false
             },
             navigation: {
                 enabled: false,
@@ -480,6 +484,10 @@
             touchRatio: 1.5,
             touchAngle: 45,
             freeMode: false,
+            autoplay: {
+                delay: 3000, // Auto-swipe every 3 seconds
+                disableOnInteraction: false // Continue autoplay even after user interaction
+            }
         });
 
         // FAQ Toggle
