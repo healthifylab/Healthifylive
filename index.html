@@ -26,20 +26,11 @@
                 </div>
             </nav>
         </div>
-        <!-- Adjusted Hero Section (Single Banner) -->
         <div class="hero">
             <img src="/public/hero-banner.jpg" alt="Hero Banner" class="hero-image">
-            <div class="hero-content">
-                <h1>Welcome to Health<span style="color: #ff4444;">♥</span>fy</h1>
-                <a href="/booking.html" class="btn">Book Now <i class="fas fa-check"></i></a>
-            </div>
-        </div>
-        <!-- Welcome Section (Not a Banner) -->
-        <div class="welcome-section">
-            <h2>Welcome to Health<span style="color: #ff4444;">♥</span>fy</h2>
+            <h1>Welcome to Healthify <i class="fas fa-heartbeat"></i></h1>
             <a href="/booking.html" class="btn">Book Now <i class="fas fa-check"></i></a>
         </div>
-        <!-- Search Section (Unchanged) -->
         <div class="search-section">
             <h2>Find Tests & Profiles <i class="fas fa-search"></i></h2>
             <input type="text" id="searchInput" placeholder="Search tests or profiles..." class="search-input">
@@ -57,7 +48,7 @@
                 <h2 class="section-title">Promo Health Packages <i class="fas fa-gift"></i></h2>
                 <div class="swiper-container promo-swiper">
                     <div class="swiper-wrapper">
-                        <!-- 13 Promo Profiles -->
+                        <!-- First 13 profiles in promo swiper -->
                         <div class="swiper-slide">
                             <div class="promo-card">
                                 <img src="/public/healthify-vital-check.jpg" alt="Healthify Vital Check" onerror="this.src='/public/test-placeholder.jpg'">
@@ -170,7 +161,7 @@
             <div class="cards-container">
                 <div class="swiper-container featured-swiper">
                     <div class="swiper-wrapper">
-                        <!-- 12 Featured Profiles -->
+                        <!-- Next 12 profiles in featured swiper -->
                         <div class="swiper-slide">
                             <div class="promo-card">
                                 <img src="/public/healthify-active-lifestyle.jpg" alt="Healthify Active Lifestyle" onerror="this.src='/public/test-placeholder.jpg'">
@@ -423,6 +414,22 @@
             document.getElementById('loginForm').style.display = 'block';
         }
 
+        // Ensure compatibility with drawer.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginLink = document.querySelector('.drawer ul li a[onclick="showLoginForm()"]');
+            if (loginLink) {
+                loginLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showLoginForm();
+                });
+            }
+        });
+    </script>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="/scripts/drawer.js"></script>
+    <script src="/scripts/search.js"></script>
+    <script>
         window.onload = function() {
             document.getElementById('promoPopup').classList.add('active');
         };
@@ -431,32 +438,17 @@
             document.getElementById('promoPopup').classList.remove('active');
         }
 
-        // Drawer toggle and close functionality
-        const drawer = document.getElementById('drawer');
-        const menuToggle = document.querySelector('.menu-toggle');
-        const closeDrawerBtn = document.querySelector('.close-drawer');
-
-        function toggleDrawer() {
-            drawer.classList.toggle('active');
-        }
-
-        function closeDrawer() {
-            drawer.classList.remove('active');
-        }
-
-        menuToggle.addEventListener('click', toggleDrawer);
-        closeDrawerBtn.addEventListener('click', closeDrawer);
-
-        // Initialize Promo Swiper
+        // Initialize Promo Swiper (One card at a time, disable pagination, add auto-swipe)
         const promoSwiper = new Swiper('.promo-swiper', {
             slidesPerView: 1,
-            spaceBetween: 10,
+            spaceBetween: 0,
             direction: 'horizontal',
             loop: false,
             loopedSlides: 13,
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
-                clickable: true,
+                clickable: false,
+                enabled: false
             },
             navigation: {
                 enabled: false,
@@ -467,21 +459,22 @@
             touchAngle: 45,
             freeMode: false,
             autoplay: {
-                delay: 1500,
-                disableOnInteraction: false
+                delay: 1500, // Auto-swipe every 1.5 seconds
+                disableOnInteraction: false // Continue autoplay even after user interaction
             }
         });
 
-        // Initialize Featured Swiper
+        // Initialize Featured Swiper (One card at a time, disable pagination, add auto-swipe)
         const featuredSwiper = new Swiper('.featured-swiper', {
             slidesPerView: 1,
-            spaceBetween: 10,
+            spaceBetween: 0,
             direction: 'horizontal',
             loop: false,
             loopedSlides: 12,
             pagination: {
                 el: '.featured-swiper .swiper-pagination',
-                clickable: true,
+                clickable: false,
+                enabled: false
             },
             navigation: {
                 enabled: false,
@@ -492,8 +485,8 @@
             touchAngle: 45,
             freeMode: false,
             autoplay: {
-                delay: 1500,
-                disableOnInteraction: false
+                delay: 1500, // Auto-swipe every 1.5 seconds
+                disableOnInteraction: false // Continue autoplay even after user interaction
             }
         });
 
@@ -508,7 +501,5 @@
             });
         });
     </script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="/scripts/search.js"></script>
 </body>
 </html>
