@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.js" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
@@ -19,23 +19,20 @@
                 <a href="/index.html">Home</a>
                 <a href="/booking.html">Book Test</a>
                 <a href="/contact.html">Contact</a>
-                <div class="menu-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
             </nav>
         </div>
-        <!-- Adjusted Hero Section -->
+        <!-- Adjusted Hero Section (Single Banner) -->
         <div class="hero">
             <img src="/public/hero-banner.jpg" alt="Hero Banner" class="hero-image">
-            <h1 style="font-size: 2.5em; margin-bottom: 20px;">Welcome to Health<span style="color: #ff4444;">♥</span>fy</h1>
-            <a href="/booking.html" class="btn">Book Now <i class="fas fa-check"></i></a>
+            <div class="hero-content">
+                <h1>Welcome to Health<span style="color: #ff4444;">♥</span>fy</h1>
+                <a href="/booking.html" class="btn">Book Now <i class="fas fa-check"></i></a>
+            </div>
         </div>
-        <!-- New Section Under Hero -->
+        <!-- Welcome Section (Not a Banner) -->
         <div class="welcome-section">
-            <h2 style="font-size: 2em; text-align: center; margin: 20px 0;">Welcome to Health<span style="color: #ff4444;">♥</span>fy</h2>
-            <a href="/booking.html" class="btn" style="display: block; margin: 0 auto;">Book Now <i class="fas fa-check"></i></a>
+            <h2>Welcome to Health<span style="color: #ff4444;">♥</span>fy</h2>
+            <a href="/booking.html" class="btn">Book Now <i class="fas fa-check"></i></a>
         </div>
         <!-- Search Section (Unchanged) -->
         <div class="search-section">
@@ -269,6 +266,111 @@
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
+            <h2 class="section-title">Featured Health Packages <i class="fas fa-star"></i></h2>
+            <div class="cards-container">
+                <div class="swiper-container featured-swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Next 12 profiles in featured swiper -->
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-active-lifestyle.jpg" alt="Healthify Active Lifestyle" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Active Lifestyle <i class="fas fa-running"></i></h3>
+                                <p>Fitness health check. Starting at ₹1440!</p>
+                                <a href="/booking.html?profile=healthify-active-lifestyle" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-prenatal-care.jpg" alt="Healthify Prenatal Care" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Prenatal Care <i class="fas fa-baby"></i></h3>
+                                <p>Pregnancy health. Only ₹8000!</p>
+                                <a href="/booking.html?profile=healthify-prenatal-care" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-cardiac-advance.jpg" alt="Healthify Cardiac Advance" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Cardiac Advance <i class="fas fa-heartbeat"></i></h3>
+                                <p>Advanced heart check. Starting at ₹2800!</p>
+                                <a href="/booking.html?profile=healthify-cardiac-advance" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-liver-health.jpg" alt="Healthify Liver Health" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Liver Health <i class="fas fa-lungs"></i></h3>
+                                <p>Liver function. Only ₹1600!</p>
+                                <a href="/booking.html?profile=healthify-liver-health" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-kidney-care.jpg" alt="Healthify Kidney Care" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Kidney Care <i class="fas fa-kidneys"></i></h3>
+                                <p>Kidney health. Starting at ₹1200!</p>
+                                <a href="/booking.html?profile=healthify-kidney-care" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-allergy-screen.jpg" alt="Healthify Allergy Screen" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Allergy Screen <i class="fas fa-allergies"></i></h3>
+                                <p>Allergy test. Only ₹1200!</p>
+                                <a href="/booking.html?profile=healthify-allergy-screen" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-cancer-screen.jpg" alt="Healthify Cancer Screen" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Cancer Screen <i class="fas fa-shield-alt"></i></h3>
+                                <p>Cancer screening. Starting at ₹3200!</p>
+                                <a href="/booking.html?profile=healthify-cancer-screen" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-metabolic-balance.jpg" alt="Healthify Metabolic Balance" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Metabolic Balance <i class="fas fa-weight"></i></h3>
+                                <p>Metabolic health. Only ₹1600!</p>
+                                <a href="/booking.html?profile=healthify-metabolic-balance" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-bone-health.jpg" alt="Healthify Bone Health" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Bone Health <i class="fas fa-bone"></i></h3>
+                                <p>Bone health check. Starting at ₹1440!</p>
+                                <a href="/booking.html?profile=healthify-bone-health" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-fertility-check.jpg" alt="Healthify Fertility Check" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Fertility Check <i class="fas fa-child"></i></h3>
+                                <p>Fertility evaluation. Only ₹2400!</p>
+                                <a href="/booking.html?profile=healthify-fertility-check" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-executive-wellness.jpg" alt="Healthify Executive Wellness" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Executive Wellness <i class="fas fa-briefcase"></i></h3>
+                                <p>Premium health check. Starting at ₹4000!</p>
+                                <a href="/booking.html?profile=healthify-executive-wellness" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="promo-card">
+                                <img src="/public/healthify-immunity-boost.jpg" alt="Healthify Immunity Boost" onerror="this.src='/public/test-placeholder.jpg'">
+                                <h3>Healthify Immunity Boost <i class="fas fa-shield-virus"></i></h3>
+                                <p>Immune health. Only ₹2000!</p>
+                                <a href="/booking.html?profile=healthify-immunity-boost" class="btn" onclick="openPopup()">Book Now <i class="fas fa-check"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
         </section>
         <!-- Testimonials Section -->
         <section class="testimonials-section">
@@ -343,30 +445,6 @@
         </div>
     </footer>
 
-    <!-- Drawer -->
-    <div class="drawer" id="drawer">
-        <div class="drawer-content">
-            <div class="drawer-header">
-                <h2>Menu</h2>
-                <span class="close-drawer">×</span>
-            </div>
-            <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/booking.html">Book Test</a></li>
-                <li><a href="/contact.html">Contact</a></li>
-                <li><a href="#" onclick="showLoginForm()">Login</a></li>
-            </ul>
-            <div id="loginForm" style="display: none; padding: 20px;">
-                <h3>Login</h3>
-                <input type="text" id="loginInput" placeholder="Email or Phone" style="width: 100%; padding: 10px; margin: 10px 0;">
-                <input type="password" id="password" placeholder="Password (for email)" style="width: 100%; padding: 10px; margin: 10px 0;" disabled>
-                <button onclick="loginWithEmail()" style="padding: 10px 20px; background: #007bff; color: #fff; border: none; border-radius: 5px;">Login with Email</button>
-                <button onclick="loginWithPhone()" style="padding: 10px 20px; background: #28a745; color: #fff; border: none; border-radius: 5px; margin-left: 10px;">Login with Phone</button>
-                <p id="loginMessage" style="margin-top: 10px;"></p>
-            </div>
-        </div>
-    </div>
-
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
@@ -389,7 +467,6 @@
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     document.getElementById('loginMessage').textContent = 'Logged in as ' + userCredential.user.email;
-                    closeDrawer();
                 })
                 .catch((error) => {
                     document.getElementById('loginMessage').textContent = 'Error: ' + error.message;
@@ -406,7 +483,6 @@
                 })
                 .then((userCredential) => {
                     document.getElementById('loginMessage').textContent = 'Logged in with ' + phone;
-                    closeDrawer();
                 })
                 .catch((error) => {
                     document.getElementById('loginMessage').textContent = 'Error: ' + error.message;
@@ -421,37 +497,6 @@
             document.getElementById('loginForm').style.display = 'block';
         }
 
-        // Drawer toggle and close functionality
-        const drawer = document.getElementById('drawer');
-        const menuToggle = document.querySelector('.menu-toggle');
-        const closeDrawerBtn = document.querySelector('.close-drawer');
-
-        function toggleDrawer() {
-            drawer.classList.toggle('active');
-        }
-
-        function closeDrawer() {
-            drawer.classList.remove('active');
-        }
-
-        menuToggle.addEventListener('click', toggleDrawer);
-        closeDrawerBtn.addEventListener('click', closeDrawer);
-
-        // Ensure compatibility with drawer.js (disabled on PC, enabled on mobile)
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginLink = document.querySelector('.drawer ul li a[onclick="showLoginForm()"]');
-            if (loginLink) {
-                loginLink.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent action on PC
-                });
-            }
-        });
-    </script>
-
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="/scripts/drawer.js"></script>
-    <script src="/scripts/search.js"></script>
-    <script>
         window.onload = function() {
             document.getElementById('promoPopup').classList.add('active');
         };
@@ -463,14 +508,13 @@
         // Initialize Promo Swiper
         const promoSwiper = new Swiper('.promo-swiper', {
             slidesPerView: 1,
-            spaceBetween: 0,
+            spaceBetween: 10,
             direction: 'horizontal',
             loop: false,
             loopedSlides: 13,
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
-                clickable: false,
-                enabled: false
+                clickable: true,
             },
             navigation: {
                 enabled: false,
@@ -489,14 +533,13 @@
         // Initialize Featured Swiper
         const featuredSwiper = new Swiper('.featured-swiper', {
             slidesPerView: 1,
-            spaceBetween: 0,
+            spaceBetween: 10,
             direction: 'horizontal',
             loop: false,
             loopedSlides: 12,
             pagination: {
                 el: '.featured-swiper .swiper-pagination',
-                clickable: false,
-                enabled: false
+                clickable: true,
             },
             navigation: {
                 enabled: false,
@@ -523,5 +566,7 @@
             });
         });
     </script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="/scripts/search.js"></script>
 </body>
 </html>
