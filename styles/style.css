@@ -66,26 +66,50 @@ nav a:hover {
     transition: 0.3s;
 }
 
-/* Hero section */
+/* Adjusted Hero Section */
 .hero {
     text-align: center;
-    padding: 50px 20px;
+    padding: 0 20px; /* Remove top/bottom padding to match banner height */
     background-color: #4CAF50;
     color: #fff;
+    position: relative; /* Ensure content aligns with banner */
 }
 
 .hero-image {
     width: 100%;
-    max-height: 300px;
+    max-height: 300px; /* Match current banner height */
     object-fit: cover;
-    margin-bottom: 20px;
+    margin-bottom: 0; /* Remove margin to fit content */
 }
 
 .hero h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    color: #fff; /* Ensure text is visible over banner */
 }
 
+.hero .btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* New Welcome Section */
+.welcome-section {
+    padding: 20px;
+    text-align: center;
+    background-color: #f1f1f1;
+    margin-bottom: 20px;
+}
+
+/* Btn styles */
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -361,9 +385,11 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* Drawer */
+/* Drawer (Visible but not accessible) */
 .drawer {
-    display: none;
+    display: block; /* Ensure visibility */
+    pointer-events: none; /* Disable interaction */
+    opacity: 0.5; /* Indicate it's not active */
     position: fixed;
     top: 0;
     right: 0;
@@ -372,12 +398,8 @@ nav a:hover {
     background-color: #fff;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 1002;
-    transform: translateX(100%);
+    transform: translateX(100%); /* Keep off-screen but visible */
     transition: transform 0.3s ease;
-}
-
-.drawer.active {
-    transform: translateX(0);
 }
 
 .drawer-content {
@@ -414,18 +436,31 @@ nav a:hover {
     color: #4CAF50;
 }
 
+/* Ensure menu-toggle doesn't trigger drawer */
+.menu-toggle {
+    display: none !important; /* Disable toggle on PC */
+}
+
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
     .menu-toggle {
-        display: flex;
-    }
-
-    nav {
-        display: none;
+        display: flex !important; /* Re-enable toggle on mobile */
     }
 
     .hero h1 {
-        font-size: 1.8em;
+        position: static;
+        transform: none;
+        margin-top: 10px;
+    }
+
+    .hero .btn {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+    }
+
+    .welcome-section h2 {
+        font-size: 1.5em;
     }
 
     .cards-container, .swiper-container {
