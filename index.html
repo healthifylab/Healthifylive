@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="manifest" href="/public/manifest.json">
-<meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthifylive Lab - Home</title>
@@ -21,6 +19,11 @@
                 <a href="/index.html">Home</a>
                 <a href="/booking.html">Book Test</a>
                 <a href="/contact.html">Contact</a>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </nav>
         </div>
         <div class="hero">
@@ -332,6 +335,97 @@
             <p>All rights reserved @healthify 2025</p>
         </div>
     </footer>
+
+    <!-- Drawer -->
+    <div class="drawer" id="drawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h2>Menu</h2>
+                <span class="close-drawer">×</span>
+            </div>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/booking.html">Book Test</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="#" onclick="showLoginForm()">Login</a></li>
+            </ul>
+            <div id="loginForm" style="display: none; padding: 20px;">
+                <h3>Login</h3>
+                <input type="text" id="loginInput" placeholder="Email or Phone" style="width: 100%; padding: 10px; margin: 10px 0;">
+                <input type="password" id="password" placeholder="Password (for email)" style="width: 100%; padding: 10px; margin: 10px 0;" disabled>
+                <button onclick="loginWithEmail()" style="padding: 10px 20px; background: #007bff; color: #fff; border: none; border-radius: 5px;">Login with Email</button>
+                <button onclick="loginWithPhone()" style="padding: 10px 20px; background: #28a745; color: #fff; border: none; border-radius: 5px; margin-left: 10px;">Login with Phone</button>
+                <p id="loginMessage" style="margin-top: 10px;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
+    <script>
+        // Existing healthify-lab Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
+            authDomain: "healthify-lab.firebaseapp.com",
+            projectId: "healthify-lab",
+            storageBucket: "healthify-lab.firebasestorage.app",
+            messagingSenderId: "297003315332",
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        function loginWithEmail() {
+            const email = document.getElementById('loginInput').value;
+            const password = document.getElementById('password').value;
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    document.getElementById('loginMessage').textContent = 'Logged in as ' + userCredential.user.email;
+                    closeDrawer();
+                })
+                .catch((error) => {
+                    document.getElementById('loginMessage').textContent = 'Error: ' + error.message;
+                });
+        }
+
+        function loginWithPhone() {
+            const phone = document.getElementById('loginInput').value;
+            const appVerifier = new firebase.auth.RecaptchaVerifier('loginMessage', { size: 'invisible' });
+            auth.signInWithPhoneNumber(phone, appVerifier)
+                .then((confirmationResult) => {
+                    const code = prompt('Enter the OTP sent to ' + phone);
+                    return confirmationResult.confirm(code);
+                })
+                .then((userCredential) => {
+                    document.getElementById('loginMessage').textContent = 'Logged in with ' + phone;
+                    closeDrawer();
+                })
+                .catch((error) => {
+                    document.getElementById('loginMessage').textContent = 'Error: ' + error.message;
+                });
+        }
+
+        auth.onAuthStateChanged((user) => {
+            if (!user) window.location.href = '/index.html#login';
+        });
+
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+        }
+
+        // Ensure compatibility with drawer.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginLink = document.querySelector('.drawer ul li a[onclick="showLoginForm()"]');
+            if (loginLink) {
+                loginLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showLoginForm();
+                });
+            }
+        });
+    </script>
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="/scripts/drawer.js"></script>
     <script src="/scripts/search.js"></script>
@@ -344,16 +438,17 @@
             document.getElementById('promoPopup').classList.remove('active');
         }
 
-        // Initialize Promo Swiper (One card at a time, stops after 13 slides)
+        // Initialize Promo Swiper (One card at a time, disable pagination, add auto-swipe)
         const promoSwiper = new Swiper('.promo-swiper', {
             slidesPerView: 1,
             spaceBetween: 0,
             direction: 'horizontal',
             loop: false,
-            loopedSlides: 13, // Adjusted for 13 slides
+            loopedSlides: 13,
             pagination: {
                 el: '.promo-swiper .swiper-pagination',
-                clickable: true,
+                clickable: false,
+                enabled: false
             },
             navigation: {
                 enabled: false,
@@ -363,18 +458,23 @@
             touchRatio: 1.5,
             touchAngle: 45,
             freeMode: false,
+            autoplay: {
+                delay: 1500, // Auto-swipe every 1.5 seconds
+                disableOnInteraction: false // Continue autoplay even after user interaction
+            }
         });
 
-        // Initialize Featured Swiper (One card at a time, stops after 12 slides)
+        // Initialize Featured Swiper (One card at a time, disable pagination, add auto-swipe)
         const featuredSwiper = new Swiper('.featured-swiper', {
             slidesPerView: 1,
             spaceBetween: 0,
             direction: 'horizontal',
             loop: false,
-            loopedSlides: 12, // Adjusted for 12 slides
+            loopedSlides: 12,
             pagination: {
                 el: '.featured-swiper .swiper-pagination',
-                clickable: true,
+                clickable: false,
+                enabled: false
             },
             navigation: {
                 enabled: false,
@@ -384,6 +484,10 @@
             touchRatio: 1.5,
             touchAngle: 45,
             freeMode: false,
+            autoplay: {
+                delay: 1500, // Auto-swipe every 1.5 seconds
+                disableOnInteraction: false // Continue autoplay even after user interaction
+            }
         });
 
         // FAQ Toggle
@@ -397,6 +501,5 @@
             });
         });
     </script>
-    <script src="/scripts/pwa-register.js"></script>
 </body>
 </html>
