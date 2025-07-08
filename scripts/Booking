@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="manifest" href="/public/manifest.json">
+<meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Test - Healthifylive Lab</title>
@@ -122,9 +124,49 @@
         // EmailJS Initialization
         emailjs.init('dJE_JHAoNTxxzTxiT');
 
-        // Store selected items
+        // Store selected items and item details
         let selectedTests = new Set();
         let selectedProfiles = new Set();
+        let testDetails = {}; // To store test details
+        let profileDetails = {}; // To store profile details
+
+        // Update selected items function (moved to global scope)
+        function updateSelectedItems(selectId, item) {
+            const select = document.getElementById(selectId);
+            const selectedDiv = selectId === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
+            selectedDiv.innerHTML = '';
+            const selectedSet = selectId === 'test' ? selectedTests : selectedProfiles;
+
+            selectedSet.forEach(item => {
+                if (selectId === 'test') {
+                    const test = testDetails[item];
+                    selectedDiv.innerHTML += `
+                        <span class="selected-tag">${test.name} (₹${test.offerPrice})
+                            <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
+                        </span>
+                        <div class="item-details">
+                            <p><strong>Description:</strong> ${test.description}</p>
+                        </div>
+                    `;
+                } else if (selectId === 'profile') {
+                    const profile = profileDetails[item];
+                    selectedDiv.innerHTML += `
+                        <span class="selected-tag">${profile.name} (MRP: ₹${profile.mrp}, Offer: ₹${profile.offerPrice})
+                            <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
+                        </span>
+                        <div class="profile-details">
+                            <p><strong>Description:</strong> ${profile.description}</p>
+                            <ul class="included-tests">
+                                <strong>Tests Included:</strong>
+                                ${profile.tests.map(test => `<li>${test}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+            });
+            // Reset select to default
+            select.value = '';
+        }
 
         // Fetch and populate tests
         async function loadTests() {
@@ -132,14 +174,21 @@
                 const response = await fetch('/public/tests.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const tests = await response.json();
-                console.log('Tests data:', tests); // Debug: Log the fetched data
+                console.log('Tests data:', tests);
                 const select = document.getElementById('test');
                 select.innerHTML = '<option value="" disabled>Select test(s)</option>';
                 tests.forEach(test => {
+                    const value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
-                    option.value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    option.value = value;
                     option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
                     select.appendChild(option);
+                    // Store test details
+                    testDetails[value] = {
+                        name: test.Test_Name,
+                        offerPrice: test.Healthify_Offer_Price,
+                        description: test.Description || 'No description available'
+                    };
                 });
                 setupSearch('test', 'testSearch', selectedTests);
             } catch (error) {
@@ -154,15 +203,33 @@
                 const response = await fetch('/public/profiles.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const profiles = await response.json();
-                console.log('Profiles data:', profiles); // Debug: Log the fetched data
+                console.log('Profiles data:', profiles);
                 const select = document.getElementById('profile');
                 select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
                 profiles.forEach(profile => {
+                    const value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
-                    option.value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
+                    option.value = value;
                     option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
                     select.appendChild(option);
+                    // Store profile details
+                    profileDetails[value] = {
+                        name: profile.Test_Name,
+                        mrp: profile.MRP,
+                        offerPrice: profile.Healthify_Offer_Price,
+                        description: profile.Description,
+                        tests: profile.Tests_Included.split(', ')
+                    };
                 });
+                // Preselect profile from URL query parameter after loading
+                const urlParams = new URLSearchParams(window.location.search);
+                const profile = urlParams.get('profile');
+                if (profile && profileDetails[profile]) {
+                    selectedProfiles.add(profile);
+                    const option = Array.from(select.options).find(o => o.value === profile);
+                    if (option) option.style.display = 'none'; // Hide selected option
+                    updateSelectedItems('profile', profile); // Call the global function
+                }
                 setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
                 console.error('Error loading profiles:', error);
@@ -174,7 +241,7 @@
         function setupSearch(selectId, searchId, selectedSet) {
             const select = document.getElementById(selectId);
             const searchInput = document.getElementById(searchId);
-            const selectedDiv = document.getElementById(selectId === 'test' ? 'selectedTests' : 'selectedProfiles');
+            const selectedDiv = selectId === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
 
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.toLowerCase();
@@ -190,29 +257,19 @@
                     selectedSet.add(option.value);
                     option.style.display = 'none'; // Hide after selection
                 });
-                updateSelectedItems();
+                updateSelectedItems(selectId); // Call the global function
                 searchInput.value = ''; // Clear search after selection
             });
-
-            function updateSelectedItems() {
-                selectedDiv.innerHTML = Array.from(selectedSet).map(item => `
-                    <span class="selected-tag">${item.replace('-', ' ')}
-                        <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
-                    </span>
-                `).join('');
-                // Reset select to default
-                select.value = '';
-            }
-
-            window.removeSelection = (selectId, item) => {
-                const select = document.getElementById(selectId);
-                const set = selectId === 'test' ? selectedTests : selectedProfiles;
-                set.delete(item);
-                const option = Array.from(select.options).find(o => o.value === item);
-                if (option) option.style.display = 'block';
-                updateSelectedItems();
-            };
         }
+
+        window.removeSelection = (selectId, item) => {
+            const select = document.getElementById(selectId);
+            const set = selectId === 'test' ? selectedTests : selectedProfiles;
+            set.delete(item);
+            const option = Array.from(select.options).find(o => o.value === item);
+            if (option) option.style.display = 'block';
+            updateSelectedItems(selectId); // Call the global function
+        };
 
         // Handle booking form submission
         document.getElementById('bookingForm').addEventListener('submit', async (event) => {
@@ -284,5 +341,33 @@
             loadProfiles();
         };
     </script>
+    <style>
+        .selected-items {
+            margin-top: 10px;
+        }
+        .selected-tag {
+            display: inline-block;
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .selected-tag button {
+            margin-left: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .item-details, .profile-details {
+            margin-left: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .included-tests {
+            list-style-type: disc;
+            margin-top: 5px;
+        }
+    </style>
+    <script src="/scripts/pwa-register.js"></script>
 </body>
 </html>
