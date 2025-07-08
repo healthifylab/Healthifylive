@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="manifest" href="/public/manifest.json">
-<meta name="theme-color" content="#4CAF50">
+    <meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Test - Healthifylive Lab</title>
@@ -75,6 +75,11 @@
                         </select>
                         <div id="selectedProfiles" class="selected-items"></div>
                     </div>
+                    <!-- Prescription Upload -->
+                    <div class="form-group">
+                        <label for="prescription">Upload Prescription (optional) <i class="fas fa-upload"></i></label>
+                        <input type="file" id="prescription" name="prescription" accept="image/*,application/pdf">
+                    </div>
                     <div class="form-group">
                         <label for="date">Appointment Date <i class="fas fa-calendar"></i></label>
                         <input type="date" id="date" min="2025-07-06" required>
@@ -85,6 +90,12 @@
                     </div>
                     <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
                 </form>
+                <!-- Summary Section -->
+                <div id="summary" style="display:none; margin-top:10px; text-align:center; background:#f9f9f9; padding:10px; border-radius:5px;">
+                    <p><strong>Total Amount:</strong> <span id="totalAmount">₹0</span></p>
+                    <p><strong>Offer Amount:</strong> <span id="offerAmount">₹0</span> (10% off)</p>
+                    <p><strong>Amount Saved:</strong> <span id="savedAmount">₹0</span></p>
+                </div>
                 <p id="bookingMessage"></p>
             </div>
             <div id="testList"></div>
@@ -166,6 +177,28 @@
             });
             // Reset select to default
             select.value = '';
+            // Update summary
+            updateSummary();
+        }
+
+        // Update summary function
+        function updateSummary() {
+            const summary = document.getElementById('summary');
+            const totalAmount = document.getElementById('totalAmount');
+            const offerAmount = document.getElementById('offerAmount');
+            const savedAmount = document.getElementById('savedAmount');
+
+            let total = 0;
+            selectedTests.forEach(test => total += testDetails[test]?.offerPrice || 0);
+            selectedProfiles.forEach(profile => total += profileDetails[profile]?.offerPrice || 0);
+
+            const offer = total * 0.9; // 10% off
+            const saved = total - offer;
+
+            totalAmount.textContent = `₹${total.toFixed(2)}`;
+            offerAmount.textContent = `₹${offer.toFixed(2)}`;
+            savedAmount.textContent = `₹${saved.toFixed(2)}`;
+            summary.style.display = total > 0 ? 'block' : 'none';
         }
 
         // Fetch and populate tests
@@ -282,6 +315,7 @@
             const pincode = document.getElementById('pincode').value;
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
+            const prescription = document.getElementById('prescription').files[0]; // Get the uploaded file
             const submissionStatus = document.getElementById('bookingMessage');
 
             if (!name || !phone.match(/^\+91[0-9]{10}$/) || !age || !sex || !address || !pincode.match(/[0-9]{6}/) || (selectedTests.size === 0 && selectedProfiles.size === 0)) {
@@ -292,7 +326,8 @@
 
             submissionStatus.textContent = "📞 Submitting your request...";
             try {
-                await addDoc(collection(db, "bookings"), {
+                // Prepare data for Firestore
+                const bookingData = {
                     name: name,
                     phone: phone,
                     age: age,
@@ -305,9 +340,17 @@
                     time: time,
                     timestamp: new Date().toISOString(),
                     status: "New Booking"
-                });
+                };
+                // Add prescription file info if uploaded
+                if (prescription) {
+                    bookingData.prescriptionFileName = prescription.name;
+                    // Note: For actual file upload, you'd need Firebase Storage integration
+                }
+
+                await addDoc(collection(db, "bookings"), bookingData);
+
                 // Send email via EmailJS
-                const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone}, Age: ${age}, Sex: ${sex}, Address: ${address}, Pincode: ${pincode})`;
+                const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).map(t => testDetails[t].name).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).map(p => profileDetails[p].name).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone}, Age: ${age}, Sex: ${sex}, Address: ${address}, Pincode: ${pincode})${prescription ? `, Prescription: ${prescription.name}` : ''}`;
                 emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_name: name,
                     to_email: 'report@healthifylab.com',
@@ -323,6 +366,7 @@
                     document.getElementById('test').innerHTML = '<option value="" disabled>Select test(s)</option>' + Array.from(document.getElementById('test').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
                     document.getElementById('profile').innerHTML = '<option value="" disabled>Select profile(s)</option>' + Array.from(document.getElementById('profile').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
                     document.getElementById('bookingForm').reset();
+                    document.getElementById('summary').style.display = 'none'; // Hide summary after reset
                 }).catch((error) => {
                     console.error('EmailJS error:', error);
                     submissionStatus.className = "error";
