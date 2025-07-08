@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.js" />
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
@@ -29,12 +29,12 @@
         <!-- Adjusted Hero Section -->
         <div class="hero">
             <img src="/public/hero-banner.jpg" alt="Hero Banner" class="hero-image">
-            <h1 style="font-size: 2.5em; margin-bottom: 20px;">Welcome to Health<span style="color: #ff4444;">&hearts;</span>fy</h1>
+            <h1 style="font-size: 2.5em; margin-bottom: 20px;">Welcome to Health<span style="color: #ff4444;">♥</span>fy</h1>
             <a href="/booking.html" class="btn">Book Now <i class="fas fa-check"></i></a>
         </div>
         <!-- New Section Under Hero -->
         <div class="welcome-section">
-            <h2 style="font-size: 2em; text-align: center; margin: 20px 0;">Welcome to Health<span style="color: #ff4444;">&hearts;</span>fy</h2>
+            <h2 style="font-size: 2em; text-align: center; margin: 20px 0;">Welcome to Health<span style="color: #ff4444;">♥</span>fy</h2>
             <a href="/booking.html" class="btn" style="display: block; margin: 0 auto;">Book Now <i class="fas fa-check"></i></a>
         </div>
         <!-- Search Section (Unchanged) -->
@@ -343,8 +343,8 @@
         </div>
     </footer>
 
-    <!-- Drawer (Visible but not accessible) -->
-    <div class="drawer" id="drawer" style="display: block; pointer-events: none; opacity: 0.5;">
+    <!-- Drawer -->
+    <div class="drawer" id="drawer">
         <div class="drawer-content">
             <div class="drawer-header">
                 <h2>Menu</h2>
@@ -421,18 +421,28 @@
             document.getElementById('loginForm').style.display = 'block';
         }
 
-        // Ensure compatibility with drawer.js (disabled interaction)
+        // Drawer toggle and close functionality
+        const drawer = document.getElementById('drawer');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const closeDrawerBtn = document.querySelector('.close-drawer');
+
+        function toggleDrawer() {
+            drawer.classList.toggle('active');
+        }
+
+        function closeDrawer() {
+            drawer.classList.remove('active');
+        }
+
+        menuToggle.addEventListener('click', toggleDrawer);
+        closeDrawerBtn.addEventListener('click', closeDrawer);
+
+        // Ensure compatibility with drawer.js (disabled on PC, enabled on mobile)
         document.addEventListener('DOMContentLoaded', () => {
             const loginLink = document.querySelector('.drawer ul li a[onclick="showLoginForm()"]');
             if (loginLink) {
                 loginLink.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent any action
-                });
-            }
-            const closeDrawer = document.querySelector('.close-drawer');
-            if (closeDrawer) {
-                closeDrawer.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent closing
+                    e.preventDefault(); // Prevent action on PC
                 });
             }
         });
