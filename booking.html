@@ -56,8 +56,14 @@
                     <label for="address">Address:</label>
                     <textarea id="address" name="address" placeholder="Mumbai, Navi Mumbai, Thane" required></textarea>
                 </div>
+                <!-- Prescription Form Section -->
+                <div class="form-group">
+                    <label for="prescription">Upload Prescription (optional):</label>
+                    <input type="file" id="prescription" name="prescription" accept="image/*,application/pdf">
+                </div>
                 <button type="submit" class="btn submit-btn">Submit <i class="fas fa-check"></i></button>
             </form>
+            <!-- Summary Section -->
             <div id="summary" style="display:none; margin-top:10px; text-align:center; background:#f9f9f9; padding:10px; border-radius:5px;">
                 <p><strong>Total Amount:</strong> <span id="totalAmount">₹0</span></p>
                 <p><strong>Offer Amount:</strong> <span id="offerAmount">₹0</span> (10% off)</p>
@@ -125,7 +131,43 @@
 
         menuToggle.addEventListener('click',toggleDrawer);closeDrawerBtn.addEventListener('click',closeDrawer);
 
-        document.getElementById('bookingForm').addEventListener('submit',e=>{e.preventDefault();const t=document.getElementById('test').value,n={ "healthify-vital-check":480,"healthify-core-wellness":959.2,"healthify-diabetes-care":800,"healthify-heart-guard":1200}[t],o=n*.9,a=n-o;document.getElementById('totalAmount').textContent=`₹${n.toFixed(2)}`,document.getElementById('offerAmount').textContent=`₹${o.toFixed(2)}`,document.getElementById('savedAmount').textContent=`₹${a.toFixed(2)}`,document.getElementById('summary').style.display='block';const i=document.getElementById('bookingMessage');i.textContent='Submitted! We’ll contact you.',i.style.color='#28a745',setTimeout(()=>{i.textContent=''},5e3)});
+        // Calculate and display summary on test selection
+        const testSelect = document.getElementById('test');
+        const summary = document.getElementById('summary');
+        const totalAmount = document.getElementById('totalAmount');
+        const offerAmount = document.getElementById('offerAmount');
+        const savedAmount = document.getElementById('savedAmount');
+
+        const prices = {
+            "healthify-vital-check": 480,
+            "healthify-core-wellness": 959.2,
+            "healthify-diabetes-care": 800,
+            "healthify-heart-guard": 1200
+        };
+
+        testSelect.addEventListener('change', () => {
+            const selectedTest = testSelect.value;
+            if (selectedTest) {
+                const originalPrice = prices[selectedTest];
+                const offerPrice = originalPrice * 0.9; // 10% off
+                const saved = originalPrice - offerPrice;
+
+                totalAmount.textContent = `₹${originalPrice.toFixed(2)}`;
+                offerAmount.textContent = `₹${offerPrice.toFixed(2)}`;
+                savedAmount.textContent = `₹${saved.toFixed(2)}`;
+                summary.style.display = 'block';
+            } else {
+                summary.style.display = 'none';
+            }
+        });
+
+        document.getElementById('bookingForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const message = document.getElementById('bookingMessage');
+            message.textContent = 'Booking submitted! We’ll contact you.';
+            message.style.color = '#28a745';
+            setTimeout(() => { message.textContent = ''; }, 5000);
+        });
     </script>
 </body>
 </html>
