@@ -52,65 +52,39 @@ nav a:hover {
     color: #4CAF50;
 }
 
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.menu-toggle span {
-    width: 25px;
-    height: 3px;
-    background-color: #333;
-    margin: 2px 0;
-    transition: 0.3s;
-}
-
-/* Adjusted Hero Section */
+/* Adjusted Hero Section (Single Banner) */
 .hero {
     text-align: center;
-    padding: 0 20px; /* Remove top/bottom padding to match banner height */
+    padding: 0;
     background-color: #4CAF50;
-    color: #fff;
-    position: relative; /* Ensure content aligns with banner */
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-image {
     width: 100%;
     max-height: 300px; /* Match current banner height */
     object-fit: cover;
-    margin-bottom: 0; /* Remove margin to fit content */
+    display: block;
 }
 
-.hero h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
+.hero-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+    color: #fff;
     text-align: center;
-    color: #fff; /* Ensure text is visible over banner */
+    padding: 0 20px;
 }
 
-.hero .btn {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* New Welcome Section */
-.welcome-section {
-    padding: 20px;
-    text-align: center;
-    background-color: #f1f1f1;
+.hero-content h1 {
+    font-size: 2.5em;
     margin-bottom: 20px;
 }
 
-/* Btn styles */
-.btn {
+.hero-content .btn {
     display: inline-block;
     padding: 10px 20px;
     background-color: #fff;
@@ -120,7 +94,35 @@ nav a:hover {
     font-weight: 600;
 }
 
-.btn:hover {
+.hero-content .btn:hover {
+    background-color: #45a049;
+    color: #fff;
+}
+
+/* Welcome Section (Not a Banner) */
+.welcome-section {
+    padding: 20px;
+    text-align: center;
+    background-color: #f1f1f1;
+    margin-bottom: 20px;
+}
+
+.welcome-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.welcome-section .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #4CAF50;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.welcome-section .btn:hover {
     background-color: #45a049;
     color: #fff;
 }
@@ -191,7 +193,7 @@ nav a:hover {
 }
 
 .cards-container {
-    width: 100%; /* Ensure full width */
+    width: 100%;
     overflow: hidden;
 }
 
@@ -202,7 +204,7 @@ nav a:hover {
 }
 
 .swiper-container {
-    width: 100%; /* Ensure swiper takes full container width */
+    width: 100%;
     padding: 0;
 }
 
@@ -385,81 +387,19 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* Drawer */
-.drawer {
-    display: none; /* Start hidden */
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 1002;
-    transform: translateX(100%); /* Off-screen by default */
-    transition: transform 0.3s ease;
-}
-
-.drawer.active {
-    display: block; /* Show when active */
-    transform: translateX(0); /* Slide in */
-}
-
-.drawer-content {
-    padding: 20px;
-}
-
-.drawer-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.close-drawer {
-    font-size: 1.5em;
-    cursor: pointer;
-}
-
-.drawer ul {
-    list-style: none;
-}
-
-.drawer ul li {
-    margin: 15px 0;
-}
-
-.drawer ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 600;
-}
-
-.drawer ul li a:hover {
-    color: #4CAF50;
-}
-
-/* Ensure menu-toggle behavior */
-.menu-toggle {
-    display: none !important; /* Disable on PC by default */
-}
-
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
-    .menu-toggle {
-        display: flex !important; /* Enable toggle on mobile */
+    .header nav {
+        display: none; /* Hide nav on mobile, use toggle if needed later */
     }
 
-    .hero h1 {
-        position: static;
-        transform: none;
-        margin-top: 10px;
+    .hero-content h1 {
+        font-size: 1.8em;
     }
 
-    .hero .btn {
-        position: static;
-        transform: none;
-        margin-top: 10px;
+    .hero-content .btn {
+        font-size: 0.9em;
+        padding: 8px 16px;
     }
 
     .welcome-section h2 {
@@ -467,7 +407,7 @@ nav a:hover {
     }
 
     .cards-container, .swiper-container {
-        width: 100% !important; /* Ensure full width on mobile */
+        width: 100% !important;
     }
 
     .testimonial-card {
