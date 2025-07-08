@@ -52,6 +52,20 @@ nav a:hover {
     color: #4CAF50;
 }
 
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 2px 0;
+    transition: 0.3s;
+}
+
 /* Adjusted Hero Section (Single Banner) */
 .hero {
     text-align: center;
@@ -387,10 +401,68 @@ nav a:hover {
     text-decoration: underline;
 }
 
+/* Drawer */
+.drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0; /* Moved to left side */
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    transform: translateX(-100%); /* Off-screen by default */
+    transition: transform 0.3s ease;
+}
+
+.drawer.active {
+    display: block;
+    transform: translateX(0); /* Slide in from left */
+}
+
+.drawer-content {
+    padding: 20px;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-drawer {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.drawer ul {
+    list-style: none;
+}
+
+.drawer ul li {
+    margin: 15px 0;
+}
+
+.drawer ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+.drawer ul li a:hover {
+    color: #4CAF50;
+}
+
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
     .header nav {
-        display: none; /* Hide nav on mobile, use toggle if needed later */
+        display: none;
     }
 
     .hero-content h1 {
