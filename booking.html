@@ -165,7 +165,7 @@
                 } else if (selectId === 'profile') {
                     const profile = profileDetails[item];
                     selectedDiv.innerHTML += `
-                        <span class="selected-tag">${profile.name} (MRP: ₹${profile.mrp}, Offer: ₹${profile.offerPrice})
+                        <span class="selected-tag"><s>MRP: ₹${profile.mrp}</s> Offer: ₹${profile.offerPrice}
                             <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                         </span>
                         <div class="profile-details">
