@@ -23,10 +23,15 @@
             color: white;
             font-family: Arial, sans-serif;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #20B2AA; /* Light Sea Green */
         }
         .summary-item {
             margin: 10px 0;
             font-size: clamp(1.5rem, 5vw, 2.5rem);
+        }
+        .summary-item .discounted {
+            color: #FF4500; /* OrangeRed for discounted price */
+            font-weight: bold;
         }
         .selected-items {
             margin-top: 10px;
@@ -59,18 +64,17 @@
             right: 20px;
         }
         .whatsapp-float div {
-            display: inline-block !important;
-            padding: 8px !important;
-            background-color: #25D366 !important;
-            color: #fff !important;
-            border-radius: 50% !important;
-            font-size: 24px !important;
-            text-align: center !important;
-            width: 40px !important;
-            height: 40px !important;
+            display: inline-block;
+            padding: 8px;
+            background-color: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 24px;
+            text-align: center;
+            width: 40px;
+            height: 40px;
             margin-right: 20px;
-            line-height: 24px !important;
-            transition: none !important;
+            line-height: 24px;
         }
         .success {
             color: green;
@@ -78,51 +82,101 @@
         .error {
             color: red;
         }
-        <!-- Drawer -->
-    <div class="drawer" id="drawer">
-        <div class="drawer-content">
-            <div class="drawer-header">
-                <h2>Menu</h2>
-                <span class="close-drawer">×</span>
-            </div>
-            <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/booking.html">Book Test</a></li>
-                <li><a href="/contact.html">Contact</a></li>
-                <li><a href="#" onclick="showLoginForm()">Login</a></li>
-            </ul>
+        /* Drawer Styles */
+        .drawer {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .drawer.active {
+            transform: translateX(0);
+        }
+        .drawer-content {
+            padding: 20px;
+        }
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .close-drawer {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .drawer ul {
+            list-style: none;
+            padding: 0;
+        }
+        .drawer ul li {
+            margin: 15px 0;
+        }
+        .drawer ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+        }
+        .drawer ul li a:hover {
+            color: #007bff;
+        }
+        @media (max-width: 768px) {
+            nav a {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+            }
+            .menu-toggle span {
+                width: 25px;
+                height: 3px;
+                background-color: #333;
+                display: block;
+                margin: 5px 0;
+            }
+        }
     </style>
-    
 </head>
 <body>
     <div class="container">
         <div class="header">
             <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
             <nav>
-                <a href="/index.html">Home</a>
-                <a href="/booking.html">Book Test</a>
-                <a href="/contact.html">Contact</a>
+                <div class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </nav>
         </div>
         <main>
             <h1>📋 Book Your Test 😊</h1>
             <p>Select a test or profile to book your appointment. <i class="fas fa-syringe"></i></p>
-            <div class="booking-form">
+            <div class="booking-form" role="form" aria-label="Booking Form">
                 <form id="bookingForm">
                     <div class="form-group">
-                        <label for="name">Full Name <i class="fas fa-user"></i></label>
+                        <label for="name" aria-required="true">Full Name <i class="fas fa-user"></i></label>
                         <input type="text" id="name" placeholder="Enter your name" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number <i class="fas fa-phone"></i></label>
-                        <input type="tel" id="phone" placeholder="Enter your phone (XXXXXXXXXX)" value="+91" required>
+                        <label for="phone" aria-required="true">Phone Number <i class="fas fa-phone"></i></label>
+                        <input type="tel" id="phone" placeholder="Enter your phone (e.g., 9876543210)" pattern="^\+91[0-9]{10}$" value="+91" required>
                     </div>
                     <div class="form-group">
-                        <label for="age">Age <i class="fas fa-birthday-cake"></i></label>
+                        <label for="age" aria-required="true">Age <i class="fas fa-birthday-cake"></i></label>
                         <input type="number" id="age" placeholder="Enter your age" min="1" max="120" required>
                     </div>
                     <div class="form-group">
-                        <label for="sex">Sex <i class="fas fa-venus-mars"></i></label>
+                        <label for="sex" aria-required="true">Sex <i class="fas fa-venus-mars"></i></label>
                         <select id="sex" required>
                             <option value="" disabled selected>Select sex</option>
                             <option value="male">Male</option>
@@ -131,15 +185,15 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="address">Address with Landmark <i class="fas fa-map-marker-alt"></i></label>
+                        <label for="address" aria-required="true">Address with Landmark <i class="fas fa-map-marker-alt"></i></label>
                         <textarea id="address" placeholder="Enter your address with landmark" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="pincode">Pincode <i class="fas fa-mail-bulk"></i></label>
+                        <label for="pincode" aria-required="true">Pincode <i class="fas fa-mail-bulk"></i></label>
                         <input type="text" id="pincode" placeholder="Enter your pincode (e.g., 400001)" pattern="[0-9]{6}" required>
                     </div>
                     <div class="form-group">
-                        <label for="test">Select Test(s) <i class="fas fa-vial"></i></label>
+                        <label for="test" aria-required="true">Select Test(s) <i class="fas fa-vial"></i></label>
                         <input type="text" id="testSearch" placeholder="Search tests..." class="search-input">
                         <select id="test" multiple>
                             <option value="" disabled>Select test(s)</option>
@@ -147,7 +201,7 @@
                         <div id="selectedTests" class="selected-items"></div>
                     </div>
                     <div class="form-group">
-                        <label for="profile">Select Profile(s) <i class="fas fa-file-alt"></i></label>
+                        <label for="profile" aria-required="true">Select Profile(s) <i class="fas fa-file-alt"></i></label>
                         <input type="text" id="profileSearch" placeholder="Search profiles..." class="search-input">
                         <select id="profile" multiple>
                             <option value="" disabled>Select profile(s)</option>
@@ -155,11 +209,11 @@
                         <div id="selectedProfiles" class="selected-items"></div>
                     </div>
                     <div class="form-group">
-                        <label for="date">Appointment Date <i class="fas fa-calendar"></i></label>
-                        <input type="date" id="date" min="2025-07-06" required>
+                        <label for="date" aria-required="true">Appointment Date <i class="fas fa-calendar"></i></label>
+                        <input type="date" id="date" min="2025-07-10" required>
                     </div>
                     <div class="form-group">
-                        <label for="time">Appointment Time <i class="fas fa-clock"></i></label>
+                        <label for="time" aria-required="true">Appointment Time <i class="fas fa-clock"></i></label>
                         <input type="time" id="time" required>
                     </div>
                     <div id="summaryCard"></div>
@@ -180,6 +234,21 @@
         <a href="https://wa.me/919503832889" class="whatsapp-float">
             <div><i class="fab fa-whatsapp"></i></div>
         </a>
+        <!-- Drawer -->
+        <div class="drawer" id="drawer">
+            <div class="drawer-content">
+                <div class="drawer-header">
+                    <h2>Menu</h2>
+                    <span class="close-drawer" aria-label="Close menu">×</span>
+                </div>
+                <ul>
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/booking.html">Book Test</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="#" onclick="showLoginForm()">Login</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script type="module" src="/scripts/lead-submission.js"></script>
     <script type="module" src="/scripts/Drawer.js"></script>
@@ -187,7 +256,7 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
         import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
-        // Firebase Configuration
+        // Firebase Configuration (Move to environment variables in production)
         const firebaseConfig = {
             apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
             authDomain: "healthify-lab.firebaseapp.com",
@@ -227,13 +296,13 @@
             const savingsPercentage = totalMRP > 0 ? ((savings / totalMRP) * 100).toFixed(2) : 0;
 
             summaryCard.style.display = 'block';
-            summaryCard.style.backgroundColor = colorToggle ? '#ff69b4' : '#90ee90';
+            summaryCard.style.backgroundColor = colorToggle ? '#20B2AA' : '#90ee90'; // Light Sea Green toggle
             colorToggle = !colorToggle;
 
             summaryCard.innerHTML = `
                 <div class="summary-item"><strong>Total Amount:</strong> ₹${totalMRP.toFixed(2)}</div>
-                <div class="summary-item"><strong>Discounted Amount:</strong> ₹${totalOffer.toFixed(2)}</div>
-                <div class="summary-item"><strong>Saved with Healthify:</strong> ₹${savings.toFixed(2)} (${savingsPercentage}%)</div>
+                <div class="summary-item"><strong>Discounted Amount:</strong> <span class="discounted">₹${totalOffer.toFixed(2)}</span></div>
+                <div class="summary-item"><strong>Saved with Healthify:</strong> ₹${savings.toFixed(2)} (<span class="discounted">${savingsPercentage}% off</span>)</div>
             `;
         }
 
@@ -279,17 +348,12 @@
         async function loadTests() {
             try {
                 console.log('Fetching tests.json...');
-                const fetchUrl = '/public/tests.json';
-                console.log('Fetch URL:', fetchUrl);
-                const response = await fetch(fetchUrl);
-                console.log('Fetch response:', response);
+                const response = await fetch('/public/tests.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const tests = await response.json();
-                console.log('Parsed tests data:', tests);
                 const select = document.getElementById('test');
                 select.innerHTML = '<option value="" disabled>Select test(s)</option>';
                 tests.forEach(test => {
-                    console.log('Processing test:', test);
                     const value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
                     option.value = value;
@@ -302,11 +366,10 @@
                         description: test.Description || 'No description available'
                     };
                 });
-                console.log('Test dropdown populated with options:', select.options);
                 setupSearch('test', 'testSearch', selectedTests);
             } catch (error) {
                 console.error('Error loading tests:', error);
-                document.getElementById('test').innerHTML = '<option value="" disabled>Error loading tests. Check console (Status: ' + (error.message || 'Unknown') + ').</option>';
+                document.getElementById('test').innerHTML = '<option value="" disabled>Error loading tests. Check console.</option>';
             }
         }
 
@@ -314,17 +377,12 @@
         async function loadProfiles() {
             try {
                 console.log('Fetching profiles.json...');
-                const fetchUrl = '/public/profiles.json';
-                console.log('Fetch URL:', fetchUrl);
-                const response = await fetch(fetchUrl);
-                console.log('Fetch response:', response);
+                const response = await fetch('/public/profiles.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const profiles = await response.json();
-                console.log('Parsed profiles data:', profiles);
                 const select = document.getElementById('profile');
                 select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
                 profiles.forEach(profile => {
-                    console.log('Processing profile:', profile);
                     const value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
                     option.value = value;
@@ -338,8 +396,6 @@
                         tests: profile.Tests_Included.split(', ')
                     };
                 });
-                console.log('Profile dropdown populated with options:', select.options);
-                // Preselect profile from URL query parameter
                 const urlParams = new URLSearchParams(window.location.search);
                 const profile = urlParams.get('profile');
                 if (profile && profileDetails[profile]) {
@@ -351,7 +407,7 @@
                 setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
                 console.error('Error loading profiles:', error);
-                document.getElementById('profile').innerHTML = '<option value="" disabled>Error loading profiles. Check console (Status: ' + (error.message || 'Unknown') + ').</option>';
+                document.getElementById('profile').innerHTML = '<option value="" disabled>Error loading profiles. Check console.</option>';
             }
         }
 
@@ -392,11 +448,11 @@
         // Handle booking form submission
         document.getElementById('bookingForm').addEventListener('submit', async (event) => {
             event.preventDefault();
-            const name = document.getElementById('name').value;
+            const name = document.getElementById('name').value.trim();
             const phone = document.getElementById('phone').value;
             const age = document.getElementById('age').value;
             const sex = document.getElementById('sex').value;
-            const address = document.getElementById('address').value;
+            const address = document.getElementById('address').value.trim();
             const pincode = document.getElementById('pincode').value;
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
@@ -404,7 +460,7 @@
 
             if (!name || !phone.match(/^\+91[0-9]{10}$/) || !age || !sex || !address || !pincode.match(/[0-9]{6}/) || (selectedTests.size === 0 && selectedProfiles.size === 0)) {
                 submissionStatus.className = "error";
-                submissionStatus.textContent = "❌ Please enter a valid name, mobile number (+91 followed by 10 digits), age, sex, address, pincode, and select at least one test or profile.";
+                submissionStatus.textContent = "❌ Please fill all fields correctly: name, +91 phone (10 digits), age, sex, address, pincode, and select at least one test/profile.";
                 return;
             }
 
@@ -413,7 +469,7 @@
                 await addDoc(collection(db, "bookings"), {
                     name: name,
                     phone: phone,
-                    age: age,
+                    age: parseInt(age),
                     sex: sex,
                     address: address,
                     pincode: pincode,
@@ -424,33 +480,26 @@
                     timestamp: new Date().toISOString(),
                     status: "New Booking"
                 });
-                // Send email via EmailJS
                 const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).map(test => testDetails[test].name).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).map(profile => profileDetails[profile].name).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone}, Age: ${age}, Sex: ${sex}, Address: ${address}, Pincode: ${pincode})`;
-                emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_name: name,
                     to_email: 'report@healthifylab.com',
                     message: message
-                }).then(() => {
-                    console.log('Email sent successfully');
-                    submissionStatus.className = "success";
-                    submissionStatus.textContent = "✅ Request submitted! We’ll call you soon.";
-                    selectedTests.clear();
-                    selectedProfiles.clear();
-                    document.getElementById('selectedTests').innerHTML = '';
-                    document.getElementById('selectedProfiles').innerHTML = '';
-                    document.getElementById('test').innerHTML = '<option value="" disabled>Select test(s)</option>' + Array.from(document.getElementById('test').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
-                    document.getElementById('profile').innerHTML = '<option value="" disabled>Select profile(s)</option>' + Array.from(document.getElementById('profile').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
-                    document.getElementById('bookingForm').reset();
-                    updateSummaryCard(); // Reset summary card
-                }).catch((error) => {
-                    console.error('EmailJS error:', error);
-                    submissionStatus.className = "error";
-                    submissionStatus.textContent = "❌ Booking saved, but email failed to send.";
                 });
+                submissionStatus.className = "success";
+                submissionStatus.textContent = "✅ Request submitted! We’ll call you soon.";
+                selectedTests.clear();
+                selectedProfiles.clear();
+                document.getElementById('selectedTests').innerHTML = '';
+                document.getElementById('selectedProfiles').innerHTML = '';
+                document.getElementById('test').innerHTML = '<option value="" disabled>Select test(s)</option>' + Array.from(document.getElementById('test').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
+                document.getElementById('profile').innerHTML = '<option value="" disabled>Select profile(s)</option>' + Array.from(document.getElementById('profile').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
+                document.getElementById('bookingForm').reset();
+                updateSummaryCard();
             } catch (error) {
-                console.error('Error submitting booking:', error);
+                console.error('Error:', error);
                 submissionStatus.className = "error";
-                submissionStatus.textContent = `❌ Failed to submit: ${error.message}. Try again or contact support.`;
+                submissionStatus.textContent = `❌ Failed to submit: ${error.message}. Try again or contact support at +91 9503832889.`;
             }
         });
 
@@ -458,6 +507,32 @@
         window.onload = () => {
             loadTests();
             loadProfiles();
+            // Drawer toggle (fallback if Drawer.js is missing or incomplete)
+            const menuToggle = document.querySelector('.menu-toggle');
+            const drawer = document.getElementById('drawer');
+            const closeDrawer = document.querySelector('.close-drawer');
+            if (menuToggle && drawer && closeDrawer) {
+                menuToggle.addEventListener('click', () => {
+                    drawer.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                });
+                closeDrawer.addEventListener('click', () => {
+                    drawer.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                });
+                // Close drawer when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!drawer.contains(e.target) && !menuToggle.contains(e.target)) {
+                        drawer.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        };
+
+        // Placeholder for showLoginForm (implement in Drawer.js or separate script)
+        window.showLoginForm = () => {
+            alert('Login functionality not implemented yet.');
         };
     </script>
     <script src="/scripts/pwa-register.js"></script>
