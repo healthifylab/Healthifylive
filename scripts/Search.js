@@ -4,7 +4,7 @@ async function fetchTests() {
         const response = await fetch('/public/tests.json');
         if (!response.ok) throw new Error('Failed to fetch tests: ' + response.statusText);
         const data = await response.json();
-        console.log('Tests loaded successfully:', data); // Debug log
+        console.log('Tests data loaded:', data); // Debug log
         return data;
     } catch (error) {
         console.error('Error fetching tests:', error);
@@ -16,34 +16,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     const input = document.getElementById('searchInput');
     const results = document.getElementById('searchResults');
     if (!input || !results) {
-        console.error('Search input or results element not found');
+        console.error('Search input or results element not found in HTML');
         return;
     }
 
     const allTests = await fetchTests();
-    let displayedTests = new Set();
 
     input.addEventListener('input', () => {
         const query = input.value.toLowerCase();
-        if (query.length < 2 && query.length > 0) return;
+        results.innerHTML = ''; // Clear previous results
 
-        if (query.length === 0) {
-            results.innerHTML = '';
-            displayedTests.clear();
-            return;
-        }
+        if (!query || query.length < 2) return;
 
-        const filtered = allTests.filter(t =>
-            t.Test_Name.toLowerCase().includes(query) ||
-            (t.Description && t.Description.toLowerCase().includes(query))
-        ).filter(t => !displayedTests.has(t.Test_Name));
+        const filtered = allTests.filter(test =>
+            test.Test_Name.toLowerCase().includes(query) ||
+            (test.Description && test.Description.toLowerCase().includes(query))
+        ).slice(0, 10); // Limit to 10 results
 
         if (filtered.length === 0) {
-            results.innerHTML += '<p>No new results found.</p>';
+            results.innerHTML = '<p>No results found.</p>';
             return;
         }
 
-        results.innerHTML = ''; // Clear for new search
         filtered.forEach(test => {
             const item = document.createElement('div');
             item.className = 'result-item';
@@ -55,7 +49,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <a href="/booking.html?test=${test.Test_Name.toLowerCase().replace(/\s/g, '-')}" class="btn">Book Now <i class="fas fa-check"></i></a>
             `;
             results.appendChild(item);
-            displayedTests.add(test.Test_Name);
         });
     });
 });
