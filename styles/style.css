@@ -481,11 +481,11 @@ nav a:hover {
     }
 }
 
-/* New Desktop Optimization (Above 1024px for Full-Screen) */
+/* Updated Desktop Optimization (Above 1024px for Full-Screen) */
 @media (min-width: 1024px) {
     .container {
-        max-width: 1400px; /* Full-screen desktop width */
-        padding: 20px;
+        max-width: 100%; /* Remove fixed width to use full screen */
+        padding: 20px 0; /* Adjust padding to minimize white space */
     }
 
     .hero h1 {
