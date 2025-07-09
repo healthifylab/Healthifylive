@@ -211,7 +211,8 @@ nav a:hover {
 }
 
 .promo-card a {
-    margin-top: auto; /* Push button to bottom */
+    margin-top: auto; 
+    margin-bottom: 30px;
     padding: 8px 16px; /* Slightly reduce padding to fit */
     font-size: 0.9rem; /* Reduce font size to fit */
     flex-shrink: 0; /* Prevent button from shrinking */
