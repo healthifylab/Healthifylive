@@ -230,7 +230,9 @@
         async function loadTests() {
             try {
                 console.log('Fetching tests.json...');
-                const response = await fetch('/public/tests.json');
+                const fetchUrl = '/public/tests.json';
+                console.log('Fetch URL:', fetchUrl);
+                const response = await fetch(fetchUrl);
                 console.log('Fetch response:', response);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const tests = await response.json();
@@ -261,7 +263,9 @@
         async function loadProfiles() {
             try {
                 console.log('Fetching profiles.json...');
-                const response = await fetch('/public/profiles.json');
+                const fetchUrl = '/public/profiles.json';
+                console.log('Fetch URL:', fetchUrl);
+                const response = await fetch(fetchUrl);
                 console.log('Fetch response:', response);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const profiles = await response.json();
