@@ -3,7 +3,9 @@ async function fetchTests() {
     try {
         const response = await fetch('/public/tests.json');
         if (!response.ok) throw new Error('Failed to fetch tests');
-        return await response.json();
+        const data = await response.json();
+        console.log('Tests loaded:', data); // Debug log
+        return data;
     } catch (error) {
         console.error('Error fetching tests:', error);
         return [];
@@ -19,19 +21,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const allTests = await fetchTests();
-    let displayedTests = new Set(); // Track displayed test names to avoid duplicates
+    let displayedTests = new Set();
 
     input.addEventListener("input", () => {
         const query = input.value.toLowerCase();
+        if (query.length < 2 && query.length > 0) return;
 
-        // Clear results only if query is empty, otherwise append
         if (query.length === 0) {
             results.innerHTML = "";
             displayedTests.clear();
             return;
         }
-
-        if (query.length < 2) return;
 
         const filtered = allTests.filter(t =>
             t.Test_Name.toLowerCase().includes(query) ||
@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
+        results.innerHTML = ''; // Clear before new search to avoid duplication on same query
         filtered.forEach(test => {
             const item = document.createElement("div");
             item.className = "result-item";
