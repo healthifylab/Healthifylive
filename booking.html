@@ -23,7 +23,7 @@
             color: white;
             font-family: Arial, sans-serif;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #20B2AA; /* Light Sea Green */
+            background-color: #20B2AA; /* Static Light Sea Green */
         }
         .summary-item {
             margin: 10px 0;
@@ -192,7 +192,6 @@
         </a>
     </div>
     <script type="module" src="/scripts/lead-submission.js"></script>
-    <script type="module" src="/scripts/drawer.js"></script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
         import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
@@ -219,7 +218,6 @@
         let selectedProfiles = new Set();
         let testDetails = {};
         let profileDetails = {};
-        let colorToggle = false;
 
         // Update summary card
         function updateSummaryCard() {
@@ -237,9 +235,6 @@
             const savingsPercentage = totalMRP > 0 ? ((savings / totalMRP) * 100).toFixed(2) : 0;
 
             summaryCard.style.display = 'block';
-            summaryCard.style.backgroundColor = colorToggle ? '#20B2AA' : '#90ee90'; // Light Sea Green toggle
-            colorToggle = !colorToggle;
-
             summaryCard.innerHTML = `
                 <div class="summary-item"><strong>Total Amount:</strong> ₹${totalMRP.toFixed(2)}</div>
                 <div class="summary-item"><strong>Discounted Amount:</strong> <span class="discounted">₹${totalOffer.toFixed(2)}</span></div>
