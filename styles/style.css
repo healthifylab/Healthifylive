@@ -159,7 +159,7 @@ nav a:hover {
 
 .cards-container {
     overflow: hidden;
-    height: 600px; /* Fixed height for containers */
+    height: 440px; /* Fixed height for containers */
 }
 
 .swiper-container {
