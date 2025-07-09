@@ -148,7 +148,7 @@ nav a:hover {
 
 /* Cards Section */
 .cards-section {
-    padding: 40px 0;
+    padding: 8px 0;
 }
 
 .section-title {
@@ -159,7 +159,7 @@ nav a:hover {
 
 .cards-container {
     overflow: hidden;
-    height: 500px; /* Fixed height for containers */
+    height: 400px; /* Fixed height for containers */
 }
 
 .swiper-container {
@@ -211,8 +211,8 @@ nav a:hover {
 }
 
 .promo-card a {
-    margin-top: 90%; /* Push button to bottom */
-    padding: 8px 16px; /* Slightly reduce padding to fit */
+    margin-top: auto; /* Push button to bottom */
+    padding: 4px 8px; /* Slightly reduce padding to fit */
     font-size: 0.9rem; /* Reduce font size to fit */
     flex-shrink: 0; /* Prevent button from shrinking */
     width: 100%; /* Ensure button takes full width */
