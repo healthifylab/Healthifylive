@@ -23,6 +23,7 @@
             color: white;
             font-family: Arial, sans-serif;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #20B2AA; /* Light Sea Green */
         }
         .summary-item {
             margin: 10px 0;
@@ -146,7 +147,7 @@
         <div class="header">
             <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
             <nav>
-                <div class="menu-toggle">
+                <div class="menu-toggle" aria-label="Toggle menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -234,7 +235,7 @@
             <div class="drawer-content">
                 <div class="drawer-header">
                     <h2>Menu</h2>
-                    <span class="close-drawer">×</span>
+                    <span class="close-drawer" aria-label="Close menu">×</span>
                 </div>
                 <ul>
                     <li><a href="/index.html">Home</a></li>
@@ -291,7 +292,7 @@
             const savingsPercentage = totalMRP > 0 ? ((savings / totalMRP) * 100).toFixed(2) : 0;
 
             summaryCard.style.display = 'block';
-            summaryCard.style.backgroundColor = colorToggle ? '#ff69b4' : '#90ee90';
+            summaryCard.style.backgroundColor = colorToggle ? '#20B2AA' : '#90ee90'; // Light Sea Green toggle
             colorToggle = !colorToggle;
 
             summaryCard.innerHTML = `
@@ -502,13 +503,26 @@
         window.onload = () => {
             loadTests();
             loadProfiles();
-            // Drawer toggle (assuming Drawer.js handles this, add fallback)
+            // Drawer toggle (fallback if Drawer.js is missing or incomplete)
             const menuToggle = document.querySelector('.menu-toggle');
             const drawer = document.getElementById('drawer');
             const closeDrawer = document.querySelector('.close-drawer');
-            if (menuToggle && drawer) {
-                menuToggle.addEventListener('click', () => drawer.classList.add('active'));
-                closeDrawer.addEventListener('click', () => drawer.classList.remove('active'));
+            if (menuToggle && drawer && closeDrawer) {
+                menuToggle.addEventListener('click', () => {
+                    drawer.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                });
+                closeDrawer.addEventListener('click', () => {
+                    drawer.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                });
+                // Close drawer when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!drawer.contains(e.target) && !menuToggle.contains(e.target)) {
+                        drawer.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
             }
         };
 
