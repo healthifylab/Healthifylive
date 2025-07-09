@@ -29,6 +29,10 @@
             margin: 10px 0;
             font-size: clamp(1.5rem, 5vw, 2.5rem);
         }
+        .summary-item .amount {
+            color: #FFD700; /* Gold for amounts */
+            font-weight: bold;
+        }
         .summary-item .discounted {
             color: #FF4500; /* OrangeRed for discounted price */
             font-weight: bold;
@@ -53,6 +57,12 @@
             margin-left: 20px;
             font-size: 0.9em;
             color: #555;
+        }
+        .item-details p {
+            color: #4682B4; /* SteelBlue for Description */
+        }
+        .profile-details .included-tests {
+            color: #6A5ACD; /* SlateBlue for Tests Included */
         }
         .included-tests {
             list-style-type: disc;
@@ -85,7 +95,19 @@
         @media (max-width: 768px) {
             nav a {
                 display: none;
-            }l
+            }
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+            }
+            .menu-toggle span {
+                width: 25px;
+                height: 3px;
+                background-color: #333;
+                display: block;
+                margin: 5px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -224,9 +246,9 @@
 
             summaryCard.style.display = 'block';
             summaryCard.innerHTML = `
-                <div class="summary-item"><strong>Total Amount:</strong> ₹${totalMRP.toFixed(2)}</div>
+                <div class="summary-item"><strong>Total Amount:</strong> <span class="amount">₹${totalMRP.toFixed(2)}</span></div>
                 <div class="summary-item"><strong>Discounted Amount:</strong> <span class="discounted">₹${totalOffer.toFixed(2)}</span></div>
-                <div class="summary-item"><strong>Saved with Healthify:</strong> ₹${savings.toFixed(2)} (<span class="discounted">${savingsPercentage}% off</span>)</div>
+                <div class="summary-item"><strong>Saved with Healthify:</strong> <span class="amount">₹${savings.toFixed(2)}</span> (<span class="discounted">${savingsPercentage}% off</span>)</div>
             `;
         }
 
@@ -241,7 +263,7 @@
                 if (selectId === 'test') {
                     const test = testDetails[item];
                     selectedDiv.innerHTML += `
-                        <span class="selected-tag">${test.name} (MRP: <s>₹${test.mrp || test.offerPrice * 1.5}</s>, Offer: ₹${test.offerPrice})
+                        <span class="selected-tag">${test.name} (MRP: <s><span class="amount">₹${test.mrp || test.offerPrice * 1.5}</span></s>, Offer: <span class="amount">₹${test.offerPrice}</span>)
                             <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                         </span>
                         <div class="item-details">
@@ -251,7 +273,7 @@
                 } else if (selectId === 'profile') {
                     const profile = profileDetails[item];
                     selectedDiv.innerHTML += `
-                        <span class="selected-tag">${profile.name} (MRP: <s>₹${profile.mrp}</s>, Offer: ₹${profile.offerPrice})
+                        <span class="selected-tag">${profile.name} (MRP: <s><span class="amount">₹${profile.mrp}</span></s>, Offer: <span class="amount">₹${profile.offerPrice}</span>)
                             <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                         </span>
                         <div class="profile-details">
@@ -281,7 +303,7 @@
                     const value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
                     option.value = value;
-                    option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
+                    option.textContent = `${test.Test_Name} (<span class="amount">₹${test.Healthify_Offer_Price}</span>)`;
                     select.appendChild(option);
                     testDetails[value] = {
                         name: test.Test_Name,
@@ -310,7 +332,7 @@
                     const value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
                     option.value = value;
-                    option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
+                    option.textContent = `${profile.Test_Name} (<span class="amount">₹${profile.Healthify_Offer_Price}</span>)`;
                     select.appendChild(option);
                     profileDetails[value] = {
                         name: profile.Test_Name,
