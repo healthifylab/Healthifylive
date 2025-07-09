@@ -6,30 +6,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Test - Healthifylive Lab</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Firebase SDK v10.14.1 -->
     <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js"></script>
     <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <div class="header" style="background-color: #4CAF50; color: #FFFFFF;">
-            <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
+        <div class="header">
+            <img src="/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
             <nav>
-                <a href="/index.html" style="color: #FFFFFF;">Home</a>
-                <a href="/booking.html" style="color: #FFFFFF;">Book Test</a>
-                <a href="/contact.html" style="color: #FFFFFF;">Contact</a>
+                <a href="/index.html">Home</a>
+                <a href="/booking.html">Book Test</a>
+                <a href="/contact.html">Contact</a>
             </nav>
         </div>
-        <main style="background-color: #f9f9f9; color: #333333;">
+        <main>
             <h1>📋 Book Your Test 😊</h1>
             <p>Select a test or profile to book your appointment. <i class="fas fa-syringe"></i></p>
-            <div class="booking-form" style="background-color: #ffffff; border: 1px solid #ddd; border-radius: 5px; padding: 15px; color: #444444;">
+            <div class="booking-form">
                 <form id="bookingForm">
                     <div class="form-group">
                         <label for="name">Full Name <i class="fas fa-user"></i></label>
@@ -76,11 +75,6 @@
                         </select>
                         <div id="selectedProfiles" class="selected-items"></div>
                     </div>
-                    <!-- Prescription Upload -->
-                    <div class="form-group">
-                        <label for="prescription">Upload Prescription (optional) <i class="fas fa-upload"></i></label>
-                        <input type="file" id="prescription" name="prescription" accept="image/*,application/pdf">
-                    </div>
                     <div class="form-group">
                         <label for="date">Appointment Date <i class="fas fa-calendar"></i></label>
                         <input type="date" id="date" min="2025-07-06" required>
@@ -91,60 +85,50 @@
                     </div>
                     <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
                 </form>
-                <!-- Summary Section -->
-                <div id="summary" style="display:none; margin-top:10px; text-align:center; background:#f9f9f9; padding:10px; border-radius:5px; color: #333333;">
-                    <p><strong>Total Amount:</strong> <span id="totalAmount">₹0</span></p>
-                    <p><strong>Offer Amount:</strong> <span id="offerAmount">₹0</span> (10% off)</p>
-                    <p><strong>Amount Saved:</strong> <span id="savedAmount">₹0</span></p>
-                </div>
                 <p id="bookingMessage"></p>
             </div>
             <div id="testList"></div>
         </main>
-        <footer style="background-color: #333; color: #FFFFFF; padding: 10px; text-align: center;">
-            <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i> | Email: <a href="mailto:report@healthifylab.com" style="color: #4CAF50;">report@healthifylab.com</a></p>
+        <footer>
+            <p>Healthifylive © 2025 | Contact: +91 9503832889 <i class="fas fa-phone"></i> | Email: <a href="mailto:report@healthifylab.com">report@healthifylab.com</a></p>
             <div class="social-media">
-                <a href="https://x.com/healthify_lab" target="_blank"><i class="fab fa-x-twitter" style="color: #FFFFFF;"></i></a>
-                <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram" style="color: #FFFFFF;"></i></a>
-                <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f" style="color: #FFFFFF;"></i></a>
+                <a href="https://x.com/healthify_lab" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://instagram.com/healthifylab" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/healthify" target="_blank"><i class="fab fa-facebook-f"></i></a>
             </div>
         </footer>
         <a href="https://wa.me/919503832889" class="whatsapp-float">
-            <div style="display: inline-block !important; padding: 8px !important; background-color: #25D366 !important; color: #fff !important; border-radius: 50% !important; font-size: 24px !important; text-align: center !important; width: 40px !important; height: 40px !important; right-margin: 20px; line-height: 24px !important; transition: none !important;"><i class="fab fa-whatsapp"></i></div>
+            <div style="display: inline-block !important; padding: 8px !important; background-color: #25D366 !important; color: #fff !important; border-radius: 50% !important; font-size: 24px !important; text-align: center !important; width: 40px !important; height: 40px !important; margin-right: 20px; line-height: 24px !important; transition: none !important;"><i class="fab fa-whatsapp"></i></div>
         </a>
     </div>
     <script type="module" src="/scripts/lead-submission.js"></script>
+    <script type="module" src="/scripts/Firebase-config.js"></script>
     <script type="module" src="/scripts/Drawer.js"></script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
         import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
-        import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js';
 
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
             authDomain: "healthify-lab.firebaseapp.com",
+            databaseURL: "https://healthify-lab-default-rtdb.firebaseio.com",
             projectId: "healthify-lab",
             storageBucket: "healthify-lab.firebasestorage.app",
             messagingSenderId: "297003315332",
-            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1"
+            appId: "1:297003315332:web:49f6ed6fc61cce4a74d2d1",
+            measurementId: "G-R0R3RYERZW"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const storage = getStorage(app);
 
-        // EmailJS Initialization
         emailjs.init('dJE_JHAoNTxxzTxiT');
 
-        // Store selected items and item details
         let selectedTests = new Set();
         let selectedProfiles = new Set();
-        let testDetails = {}; // To store test details
-        let profileDetails = {}; // To store profile details
+        let testDetails = {};
+        let profileDetails = {};
 
-        // Update selected items function (moved to global scope)
         function updateSelectedItems(selectId, item) {
             const select = document.getElementById(selectId);
             const selectedDiv = selectId === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
@@ -155,7 +139,7 @@
                 if (selectId === 'test') {
                     const test = testDetails[item];
                     selectedDiv.innerHTML += `
-                        <span class="selected-tag">${test.name} (₹${test.offerPrice})
+                        <span class="selected-tag">${test.name} (<s>₹${test.offerPrice}</s>) <!-- Strikethrough on offer price as MRP -->
                             <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                         </span>
                         <div class="item-details">
@@ -165,7 +149,7 @@
                 } else if (selectId === 'profile') {
                     const profile = profileDetails[item];
                     selectedDiv.innerHTML += `
-                        <span class="selected-tag"><s>MRP: ₹${profile.mrp}</s> Offer: ₹${profile.offerPrice}
+                        <span class="selected-tag">${profile.name} (MRP: <s>₹${profile.mrp}</s>, Offer: ₹${profile.offerPrice})
                             <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                         </span>
                         <div class="profile-details">
@@ -178,33 +162,28 @@
                     `;
                 }
             });
-            // Reset select to default
             select.value = '';
-            // Update summary
-            updateSummary();
         }
 
-        // Update summary function
-        function updateSummary() {
-            const summary = document.getElementById('summary');
-            const totalAmount = document.getElementById('totalAmount');
-            const offerAmount = document.getElementById('offerAmount');
-            const savedAmount = document.getElementById('savedAmount');
-
-            let total = 0;
-            selectedTests.forEach(test => total += testDetails[test]?.offerPrice || 0);
-            selectedProfiles.forEach(profile => total += profileDetails[profile]?.offerPrice || 0);
-
-            const offer = total * 0.9; // 10% off
-            const saved = total - offer;
-
-            totalAmount.textContent = `₹${total.toFixed(2)}`;
-            offerAmount.textContent = `₹${offer.toFixed(2)}`;
-            savedAmount.textContent = `₹${saved.toFixed(2)}`;
-            summary.style.display = total > 0 ? 'block' : 'none';
+        function removeSelection(selectId, item) {
+            const selectedSet = selectId === 'test' ? selectedTests : selectedProfiles;
+            selectedSet.delete(item);
+            updateSelectedItems(selectId, item);
         }
 
-        // Fetch and populate tests
+        function setupSearch(selectId, searchId, selectedSet) {
+            const searchInput = document.getElementById(searchId);
+            const select = document.getElementById(selectId);
+
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                Array.from(select.options).forEach(option => {
+                    const text = option.textContent.toLowerCase();
+                    option.style.display = text.includes(searchTerm) && !selectedSet.has(option.value) ? '' : 'none';
+                });
+            });
+        }
+
         async function loadTests() {
             try {
                 const response = await fetch('/public/tests.json');
@@ -219,21 +198,26 @@
                     option.value = value;
                     option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
                     select.appendChild(option);
-                    // Store test details
                     testDetails[value] = {
                         name: test.Test_Name,
-                        offerPrice: test.Healthify_Offer_Price,
+                        offerPrice: test.Healthify_Offer_Price, // Using offerPrice as MRP for tests, adjust if actual MRP exists
                         description: test.Description || 'No description available'
                     };
                 });
                 setupSearch('test', 'testSearch', selectedTests);
+
+                select.addEventListener('change', (e) => {
+                    if (e.target.value && !selectedTests.has(e.target.value)) {
+                        selectedTests.add(e.target.value);
+                        updateSelectedItems('test', e.target.value);
+                    }
+                });
             } catch (error) {
                 console.error('Error loading tests:', error);
                 document.getElementById('test').innerHTML = '<option value="" disabled>Error loading tests. Check console (Status: ' + (error.message || 'Unknown') + ').</option>';
             }
         }
 
-        // Fetch and populate profiles
         async function loadProfiles() {
             try {
                 const response = await fetch('/public/profiles.json');
@@ -248,7 +232,6 @@
                     option.value = value;
                     option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
                     select.appendChild(option);
-                    // Store profile details
                     profileDetails[value] = {
                         name: profile.Test_Name,
                         mrp: profile.MRP,
@@ -257,59 +240,22 @@
                         tests: profile.Tests_Included.split(', ')
                     };
                 });
-                // Preselect profile from URL query parameter after loading
-                const urlParams = new URLSearchParams(window.location.search);
-                const profile = urlParams.get('profile');
-                if (profile && profileDetails[profile]) {
-                    selectedProfiles.add(profile);
-                    const option = Array.from(select.options).find(o => o.value === profile);
-                    if (option) option.style.display = 'none'; // Hide selected option
-                    updateSelectedItems('profile', profile); // Call the global function
-                }
                 setupSearch('profile', 'profileSearch', selectedProfiles);
+
+                select.addEventListener('change', (e) => {
+                    if (e.target.value && !selectedProfiles.has(e.target.value)) {
+                        selectedProfiles.add(e.target.value);
+                        updateSelectedItems('profile', e.target.value);
+                    }
+                });
             } catch (error) {
                 console.error('Error loading profiles:', error);
                 document.getElementById('profile').innerHTML = '<option value="" disabled>Error loading profiles. Check console (Status: ' + (error.message || 'Unknown') + ').</option>';
             }
         }
 
-        // Setup search and selection functionality
-        function setupSearch(selectId, searchId, selectedSet) {
-            const select = document.getElementById(selectId);
-            const searchInput = document.getElementById(searchId);
-            const selectedDiv = selectId === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
-
-            searchInput.addEventListener('input', () => {
-                const searchTerm = searchInput.value.toLowerCase();
-                Array.from(select.options).forEach(option => {
-                    if (option.value === '' || option.value === 'disabled') return;
-                    option.style.display = option.textContent.toLowerCase().includes(searchTerm) && !selectedSet.has(option.value) ? 'block' : 'none';
-                });
-            });
-
-            select.addEventListener('change', () => {
-                const selectedOptions = Array.from(select.selectedOptions).filter(option => option.value && !selectedSet.has(option.value));
-                selectedOptions.forEach(option => {
-                    selectedSet.add(option.value);
-                    option.style.display = 'none'; // Hide after selection
-                });
-                updateSelectedItems(selectId); // Call the global function
-                searchInput.value = ''; // Clear search after selection
-            });
-        }
-
-        window.removeSelection = (selectId, item) => {
-            const select = document.getElementById(selectId);
-            const set = selectId === 'test' ? selectedTests : selectedProfiles;
-            set.delete(item);
-            const option = Array.from(select.options).find(o => o.value === item);
-            if (option) option.style.display = 'block';
-            updateSelectedItems(selectId); // Call the global function
-        };
-
-        // Handle booking form submission
-        document.getElementById('bookingForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const age = document.getElementById('age').value;
@@ -318,106 +264,58 @@
             const pincode = document.getElementById('pincode').value;
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
-            const prescription = document.getElementById('prescription').files[0]; // Get the uploaded file
-            const submissionStatus = document.getElementById('bookingMessage');
+            const bookingMessage = document.getElementById('bookingMessage');
 
-            if (!name || !phone.match(/^\+91[0-9]{10}$/) || !age || !sex || !address || !pincode.match(/[0-9]{6}/) || (selectedTests.size === 0 && selectedProfiles.size === 0)) {
-                submissionStatus.className = "error";
-                submissionStatus.textContent = "❌ Please enter a valid name, mobile number (+91 followed by 10 digits), age, sex, address, pincode, and select at least one test or profile.";
+            if (!name || !phone || !age || !sex || !address || !pincode || !date || !time || selectedTests.size === 0 && selectedProfiles.size === 0) {
+                bookingMessage.textContent = 'Please fill all fields and select at least one test or profile.';
+                bookingMessage.style.color = 'red';
                 return;
             }
 
-            submissionStatus.textContent = "📞 Submitting your request...";
-            try {
-                let prescriptionUrl = null;
-                if (prescription) {
-                    const storageRef = ref(storage, `prescriptions/${name}_${Date.now()}_${prescription.name}`);
-                    await uploadBytes(storageRef, prescription);
-                    prescriptionUrl = await getDownloadURL(storageRef);
-                }
+            bookingMessage.textContent = 'Processing your booking...';
+            bookingMessage.style.color = 'black';
 
-                // Prepare data for Firestore
+            try {
                 const bookingData = {
-                    name: name,
-                    phone: phone,
-                    age: age,
-                    sex: sex,
-                    address: address,
-                    pincode: pincode,
-                    tests: selectedTests.size > 0 ? Array.from(selectedTests) : null,
-                    profiles: selectedProfiles.size > 0 ? Array.from(selectedProfiles) : null,
-                    date: date,
-                    time: time,
+                    name,
+                    phone,
+                    age,
+                    sex,
+                    address,
+                    pincode,
+                    date,
+                    time,
+                    tests: Array.from(selectedTests).map(test => testDetails[test].name),
+                    profiles: Array.from(selectedProfiles).map(profile => profileDetails[profile].name),
                     timestamp: new Date().toISOString(),
-                    status: "New Booking",
-                    prescriptionUrl: prescriptionUrl // Store the download URL
+                    status: 'Pending'
                 };
 
-                const docRef = await addDoc(collection(db, "bookings"), bookingData);
+                await addDoc(collection(db, 'bookings'), bookingData);
 
-                // Send email via EmailJS
-                const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).map(t => testDetails[t].name).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).map(p => profileDetails[p].name).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone}, Age: ${age}, Sex: ${sex}, Address: ${address}, Pincode: ${pincode})${prescription ? `, Prescription: ${prescriptionUrl}` : ''}`;
-                emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                const templateParams = {
                     to_name: name,
-                    to_email: 'report@healthifylab.com',
-                    message: message
-                }).then(() => {
-                    console.log('Email sent successfully');
-                    submissionStatus.className = "success";
-                    submissionStatus.textContent = "✅ Request submitted! We’ll call you soon.";
-                    selectedTests.clear();
-                    selectedProfiles.clear();
-                    document.getElementById('selectedTests').innerHTML = '';
-                    document.getElementById('selectedProfiles').innerHTML = '';
-                    document.getElementById('test').innerHTML = '<option value="" disabled>Select test(s)</option>' + Array.from(document.getElementById('test').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
-                    document.getElementById('profile').innerHTML = '<option value="" disabled>Select profile(s)</option>' + Array.from(document.getElementById('profile').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
-                    document.getElementById('bookingForm').reset();
-                    document.getElementById('summary').style.display = 'none'; // Hide summary after reset
-                }).catch((error) => {
-                    console.error('EmailJS error:', error);
-                    submissionStatus.className = "error";
-                    submissionStatus.textContent = "❌ Booking saved, but email failed to send.";
-                });
+                    to_email: 'report@healthifylab.com', // Replace with dynamic email if available
+                    message: `New Booking:\n${JSON.stringify(bookingData, null, 2)}`
+                };
+
+                await emailjs.send('service_5o9j8kn', 'template_3l8zq8k', templateParams);
+                bookingMessage.textContent = 'Booking successful! Confirmation sent to support.';
+                bookingMessage.style.color = 'green';
+                document.getElementById('bookingForm').reset();
+                selectedTests.clear();
+                selectedProfiles.clear();
+                updateSelectedItems('test', '');
+                updateSelectedItems('profile', '');
             } catch (error) {
                 console.error('Error submitting booking:', error);
-                submissionStatus.className = "error";
-                submissionStatus.textContent = `❌ Failed to submit: ${error.message}. Try again or contact support.`;
+                bookingMessage.textContent = `Error: ${error.message}. Please try again or contact support.`;
+                bookingMessage.style.color = 'red';
             }
         });
 
-        // Load tests and profiles on page load
-        window.onload = () => {
-            loadTests();
-            loadProfiles();
-        };
+        loadTests();
+        loadProfiles();
     </script>
-    <style>
-        .selected-items {
-            margin-top: 10px;
-        }
-        .selected-tag {
-            display: inline-block;
-            background-color: #e0e0e0;
-            padding: 5px 10px;
-            margin: 5px;
-            border-radius: 5px;
-        }
-        .selected-tag button {
-            margin-left: 5px;
-            border: none;
-            background: none;
-            cursor: pointer;
-        }
-        .item-details, .profile-details {
-            margin-left: 20px;
-            font-size: 0.9em;
-            color: #555;
-        }
-        .included-tests {
-            list-style-type: disc;
-            margin-top: 5px;
-        }
-    </style>
-    <script src="/scripts/pwa-register.js"></script>
 </body>
 </html>
