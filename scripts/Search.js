@@ -3,13 +3,16 @@ async function fetchTests() {
     try {
         const response = await fetch('/public/tests.json');
         if (!response.ok) {
-            throw new Error(`Failed to fetch tests: ${response.status} - ${response.statusText}`);
+            throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
         }
         const data = await response.json();
-        console.log('Fetched tests data:', data); // Debug log
+        if (!Array.isArray(data) || data.length === 0) {
+            throw new Error('Invalid or empty test data');
+        }
+        console.log('Successfully fetched tests:', data.slice(0, 5)); // Log first 5 items for debug
         return data;
     } catch (error) {
-        console.error('Error fetching tests:', error);
+        console.error('Fetch error:', error.message);
         return []; // Return empty array on failure
     }
 }
@@ -17,23 +20,23 @@ async function fetchTests() {
 document.addEventListener('DOMContentLoaded', async () => {
     const input = document.getElementById('searchInput');
     const results = document.getElementById('searchResults');
-    
+
     if (!input || !results) {
-        console.error('Search input or results element not found. Check HTML IDs: searchInput, searchResults');
+        console.error('DOM Error: Could not find #searchInput or #searchResults. Check HTML structure.');
         return;
     }
 
-    console.log('Search elements found:', { input, results }); // Debug log
+    console.log('DOM elements loaded:', { input, results }); // Debug log
 
     const allTests = await fetchTests();
 
     if (allTests.length === 0) {
-        console.warn('No test data available. Check /public/tests.json');
-        results.innerHTML = '<p>No test data available. Contact support.</p>';
+        console.warn('No test data available. Ensure /public/tests.json exists and is valid.');
+        results.innerHTML = '<p>No test data available. Please contact support.</p>';
         return;
     }
 
-    let selectedTests = new Set(); // Store selected test names
+    let selectedTests = new Set(); // Track selected tests
 
     input.addEventListener('input', () => {
         const query = input.value.toLowerCase().trim();
@@ -41,20 +44,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (!query || query.length < 2) {
             if (selectedTests.size > 0) {
-                displaySelectedTests(); // Show selected tests if any
+                displaySelectedTests();
             }
             return;
         }
 
-        console.log('Search query:', query); // Debug log
+        console.log('Searching for:', query); // Debug log
 
         const filtered = allTests.filter(test =>
-            test.Test_Name && test.Test_Name.toLowerCase().includes(query) ||
+            (test.Test_Name && test.Test_Name.toLowerCase().includes(query)) ||
             (test.Description && test.Description.toLowerCase().includes(query))
         ).slice(0, 10); // Limit to 10 results
 
         if (filtered.length === 0) {
-            results.innerHTML = '<p>No results found for your query.</p>';
+            results.innerHTML = '<p>No tests found matching your query.</p>';
             return;
         }
 
@@ -76,19 +79,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Add click event for select buttons
         document.querySelectorAll('.select-btn').forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
                 const testName = button.getAttribute('data-test');
                 if (selectedTests.has(testName)) {
                     selectedTests.delete(testName);
                 } else {
                     selectedTests.add(testName);
                 }
-                input.dispatchEvent(new Event('input')); // Refresh results
+                input.dispatchEvent(new Event('input')); // Refresh display
             });
         });
     });
 
-    // Display selected tests below results
+    // Display selected tests and proceed button
     function displaySelectedTests() {
         results.innerHTML = ''; // Clear results
         selectedTests.forEach(testName => {
@@ -107,21 +111,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Add remove button functionality
         document.querySelectorAll('.remove-btn').forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
                 const testName = button.getAttribute('data-test');
                 selectedTests.delete(testName);
-                input.dispatchEvent(new Event('input')); // Refresh results
+                input.dispatchEvent(new Event('input')); // Refresh display
             });
         });
 
-        // Add Proceed to Booking button if items are selected
+        // Add Proceed to Booking button
         if (selectedTests.size > 0) {
             const proceedButton = document.createElement('button');
             proceedButton.className = 'proceed-btn';
             proceedButton.innerHTML = `Proceed to Booking (${selectedTests.size} selected) <i class="fas fa-arrow-right"></i>`;
-            proceedButton.addEventListener('click', () => {
+            proceedButton.addEventListener('click', (e) => {
+                e.preventDefault();
                 const testParams = Array.from(selectedTests).join(',');
-                window.location.href = `/booking.html?tests=${testParams}`;
+                window.location.href = `/booking.html?tests=${encodeURIComponent(testParams)}`;
             });
             results.appendChild(proceedButton);
         }
