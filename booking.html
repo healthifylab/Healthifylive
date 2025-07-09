@@ -82,52 +82,6 @@
         .error {
             color: red;
         }
-        /* Drawer Styles */
-        .drawer {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 250px;
-            height: 100%;
-            background-color: #fff;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-        .drawer.active {
-            transform: translateX(0);
-        }
-        .drawer-content {
-            padding: 20px;
-        }
-        .drawer-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-        }
-        .close-drawer {
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        .drawer ul {
-            list-style: none;
-            padding: 0;
-        }
-        .drawer ul li {
-            margin: 15px 0;
-        }
-        .drawer ul li a {
-            text-decoration: none;
-            color: #333;
-            font-size: 1rem;
-        }
-        .drawer ul li a:hover {
-            color: #007bff;
-        }
         @media (max-width: 768px) {
             nav a {
                 display: none;
@@ -151,6 +105,8 @@
         <div class="header">
             <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
             <nav>
+                <a href="/index.html">Home</a>
+                <a href="/contact.html">Contact</a>
                 <div class="menu-toggle" aria-label="Toggle menu">
                     <span></span>
                     <span></span>
@@ -234,21 +190,6 @@
         <a href="https://wa.me/919503832889" class="whatsapp-float">
             <div><i class="fab fa-whatsapp"></i></div>
         </a>
-        <!-- Drawer -->
-        <div class="drawer" id="drawer">
-            <div class="drawer-content">
-                <div class="drawer-header">
-                    <h2>Menu</h2>
-                    <span class="close-drawer" aria-label="Close menu">×</span>
-                </div>
-                <ul>
-                    <li><a href="/index.html">Home</a></li>
-                    <li><a href="/booking.html">Book Test</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <li><a href="#" onclick="showLoginForm()">Login</a></li>
-                </ul>
-            </div>
-        </div>
     </div>
     <script type="module" src="/scripts/lead-submission.js"></script>
     <script type="module" src="/scripts/drawer.js"></script>
@@ -507,36 +448,9 @@
         window.onload = () => {
             loadTests();
             loadProfiles();
-            // Enhanced drawer toggle (fallback if drawer.js is missing)
-            const menuToggle = document.querySelector('.menu-toggle');
-            const drawer = document.getElementById('drawer');
-            const closeDrawer = document.querySelector('.close-drawer');
-            if (menuToggle && drawer && closeDrawer) {
-                console.log('Attaching drawer events...');
-                menuToggle.addEventListener('click', () => {
-                    console.log('Toggle clicked');
-                    drawer.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling
-                });
-                closeDrawer.addEventListener('click', () => {
-                    console.log('Close clicked');
-                    drawer.classList.remove('active');
-                    document.body.style.overflow = ''; // Restore scrolling
-                });
-                // Close drawer when clicking outside
-                document.addEventListener('click', (e) => {
-                    if (!drawer.contains(e.target) && !menuToggle.contains(e.target)) {
-                        console.log('Outside click');
-                        drawer.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
-                });
-            } else {
-                console.error('Drawer elements not found:', { menuToggle, drawer, closeDrawer });
-            }
         };
 
-        // Placeholder for showLoginForm (implement in drawer.js or separate script)
+        // Placeholder for showLoginForm (implement if needed)
         window.showLoginForm = () => {
             alert('Login functionality not implemented yet.');
         };
