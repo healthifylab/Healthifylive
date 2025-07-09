@@ -3,13 +3,13 @@ async function fetchTests() {
     try {
         const response = await fetch('/public/tests.json');
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+            throw new Error(`Failed to fetch tests: ${response.status} - ${response.statusText}`);
         }
         const data = await response.json();
         if (!Array.isArray(data) || data.length === 0) {
-            throw new Error('Invalid or empty test data');
+            throw new Error('Invalid or empty test data in /public/tests.json');
         }
-        console.log('Successfully fetched tests:', data.slice(0, 5)); // Log first 5 items for debug
+        console.log('Fetched tests data (first 5):', data.slice(0, 5)); // Debug log
         return data;
     } catch (error) {
         console.error('Fetch error:', error.message);
@@ -22,16 +22,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     const results = document.getElementById('searchResults');
 
     if (!input || !results) {
-        console.error('DOM Error: Could not find #searchInput or #searchResults. Check HTML structure.');
+        console.error('DOM Error: #searchInput or #searchResults not found. Verify HTML IDs.');
         return;
     }
 
-    console.log('DOM elements loaded:', { input, results }); // Debug log
+    console.log('DOM elements found:', { input, results }); // Debug log
 
     const allTests = await fetchTests();
 
     if (allTests.length === 0) {
-        console.warn('No test data available. Ensure /public/tests.json exists and is valid.');
+        console.warn('No test data available. Check /public/tests.json.');
         results.innerHTML = '<p>No test data available. Please contact support.</p>';
         return;
     }
@@ -52,12 +52,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log('Searching for:', query); // Debug log
 
         const filtered = allTests.filter(test =>
-            (test.Test_Name && test.Test_Name.toLowerCase().includes(query)) ||
-            (test.Description && test.Description.toLowerCase().includes(query))
+            test.Test_Name && test.Test_Name.toLowerCase().includes(query)
         ).slice(0, 10); // Limit to 10 results
 
         if (filtered.length === 0) {
-            results.innerHTML = '<p>No tests found matching your query.</p>';
+            results.innerHTML = '<p>No tests found for "${query}".</p>';
             return;
         }
 
@@ -68,8 +67,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             item.innerHTML = `
                 <strong>${test.Category === 'Health Checkup Profiles' ? '📁' : '🧪'} ${test.Test_Name || 'Unnamed Test'}</strong><br/>
                 <span class="strike"><s>₹${test.MRP || 'N/A'}</s></span> <strong>₹${test.Healthify_Offer_Price || 'N/A'}</strong><br/>
-                <small>🧬 ${test.Tests_Included || 'N/A'} | 🕒 ${test.TAT || 'N/A'}</small><br/>
-                <em>${test.Description || 'No description available'}</em><br/>
                 <button class="select-btn ${isSelected ? 'selected' : ''}" data-test="${test.Test_Name}">
                     ${isSelected ? '✓ Selected' : 'Select'} <i class="fas fa-check"></i>
                 </button>
