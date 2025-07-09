@@ -149,6 +149,9 @@ nav a:hover {
 /* Cards Section */
 .cards-section {
     padding: 20px 0;
+    display: flex; /* Add Flexbox for side-by-side */
+    justify-content: space-between; /* Space between containers */
+    gap: 20px; /* Space between the two sections */
 }
 
 .section-title {
@@ -158,6 +161,8 @@ nav a:hover {
 }
 
 .cards-container {
+    flex: 1; /* Each container takes equal space */
+    min-width: 0; /* Prevent overflow */
     overflow: hidden;
 }
 
@@ -564,5 +569,19 @@ nav a:hover {
 
     .faq-answer {
         font-size: 1rem;
+    }
+}
+
+/* New styles for side-by-side layout (added to enable side-by-side containers) */
+@media (min-width: 768px) {
+    .cards-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px; /* Space between the two sections */
+    }
+
+    .cards-container {
+        flex: 1; /* Each container takes equal space */
+        min-width: 0; /* Prevent overflow */
     }
 }
