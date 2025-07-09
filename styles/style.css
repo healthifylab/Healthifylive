@@ -1,18 +1,346 @@
-.result-item {
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.strike s {
-  text-decoration: line-through;
-  color: #888;
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
 }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-img {
+    height: 50px;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #007bff;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 2px 0;
+    transition: 0.3s;
+}
+
+.hero {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #f1f1f1;
+}
+
+.hero-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
 .btn {
-  display: inline-block;
-  padding: 5px 10px;
-  background-color: #4CAF50;
-  color: white;
-  text-decoration: none;
-  border-radius: 3px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.search-section {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#searchResults {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.result-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cards-section {
+    padding: 40px 0;
+    background-color: #fff;
+}
+
+.cards-container {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.promo-card {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.promo-card img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.promo-card h3 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.promo-card p {
+    margin-bottom: 10px;
+}
+
+.swiper-container {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonials-section {
+    padding: 40px 0;
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+.testimonials-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.testimonial-card {
+    width: 30%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.why-choose {
+    padding: 40px 0;
+    text-align: center;
+    background-color: #fff;
+}
+
+.faq-section {
+    padding: 40px 0;
+    background-color: #f1f1f1;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-question {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.social-links {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.social-links a {
+    margin: 0 10px;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.social-links a:hover {
+    color: #007bff;
+}
+
+.call-back-float, .whatsapp-float {
+    position: fixed;
+    padding: 10px;
+    border-radius: 50%;
+    z-index: 1000;
+}
+
+.call-back-float a, .whatsapp-float a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.call-back-float {
+    background-color: #dc3545;
+}
+
+.whatsapp-float {
+    background-color: #25D366;
+    bottom: 20px;
+    right: 20px;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.footer-content a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+.drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.drawer.active {
+    transform: translateX(0);
+}
+
+.drawer-content {
+    padding: 20px;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-drawer {
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.drawer ul {
+    list-style: none;
+}
+
+.drawer ul li {
+    margin-bottom: 10px;
+}
+
+.drawer ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.drawer ul li a:hover {
+    color: #007bff;
+}
+
+/* New style for strikethrough on MRP */
+.strike {
+    text-decoration: line-through;
 }
