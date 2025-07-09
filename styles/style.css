@@ -15,14 +15,14 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px; /* Reduced padding for better mobile fit */
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 15px 0; /* Reduced padding for compactness */
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
@@ -35,7 +35,7 @@ body {
 }
 
 nav a {
-    margin-left: 20px;
+    margin-left: 15px; /* Reduced margin for better alignment */
     text-decoration: none;
     color: #333;
     font-weight: 600;
@@ -61,20 +61,20 @@ nav a:hover {
 
 .hero {
     text-align: center;
-    padding: 50px 20px; /* Increased padding for better spacing */
+    padding: 40px 15px; /* Adjusted padding for better spacing */
     background-color: #f1f1f1;
 }
 
 .hero-image {
     width: 100%;
-    max-height: 400px;
+    max-height: 350px; /* Reduced height for better fit */
     object-fit: cover;
     margin-bottom: 20px;
 }
 
 .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-size: 2.2rem; /* Slightly reduced for mobile readability */
+    margin-bottom: 15px;
 }
 
 .btn {
@@ -92,14 +92,14 @@ nav a:hover {
 }
 
 .search-section {
-    padding: 40px 20px; /* Increased padding for better spacing */
+    padding: 30px 15px; /* Adjusted padding */
     text-align: center;
 }
 
 .search-input {
     width: 100%;
-    max-width: 500px;
-    padding: 12px; /* Slightly increased padding for usability */
+    max-width: 450px; /* Reduced max-width for better mobile fit */
+    padding: 10px;
     font-size: 1rem;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -107,33 +107,33 @@ nav a:hover {
 }
 
 #searchResults {
-    margin-top: 20px;
+    margin-top: 15px; /* Adjusted margin */
     text-align: left;
 }
 
 .result-item {
-    padding: 15px; /* Increased padding for better readability */
+    padding: 12px; /* Adjusted padding */
     border-bottom: 1px solid #ddd;
 }
 
 .cards-section {
-    padding: 40px 20px; /* Increased padding for better spacing */
+    padding: 30px 15px; /* Adjusted padding */
     background-color: #fff;
 }
 
 .cards-container {
-    margin-bottom: 40px;
+    margin-bottom: 30px; /* Adjusted margin */
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
+    margin-bottom: 15px; /* Adjusted margin */
+    font-size: 1.4rem; /* Slightly reduced for balance */
 }
 
 .promo-card {
     text-align: center;
-    padding: 20px;
+    padding: 15px; /* Adjusted padding */
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f9f9;
@@ -141,23 +141,23 @@ nav a:hover {
 
 .promo-card img {
     width: 100%;
-    max-height: 200px;
+    max-height: 180px; /* Reduced height */
     object-fit: cover;
     border-radius: 5px;
 }
 
 .promo-card h3 {
-    margin: 10px 0;
-    font-size: 1.2rem;
+    margin: 8px 0; /* Adjusted margin */
+    font-size: 1.1rem; /* Slightly reduced */
 }
 
 .promo-card p {
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Adjusted margin */
 }
 
 .swiper-container {
     width: 100%;
-    padding: 20px 0;
+    padding: 15px 0; /* Adjusted padding */
 }
 
 .swiper-slide {
@@ -167,7 +167,7 @@ nav a:hover {
 }
 
 .testimonials-section {
-    padding: 40px 20px; /* Increased padding for better spacing */
+    padding: 30px 15px; /* Adjusted padding */
     background-color: #f1f1f1;
     text-align: center;
 }
@@ -179,8 +179,8 @@ nav a:hover {
 }
 
 .testimonial-card {
-    width: 30%;
-    padding: 20px;
+    width: 28%; /* Slightly reduced for better fit */
+    padding: 15px; /* Adjusted padding */
     background-color: #fff;
     border-radius: 5px;
     margin: 10px;
@@ -188,31 +188,31 @@ nav a:hover {
 }
 
 .testimonial-card img {
-    width: 100px;
-    height: 100px;
+    width: 90px; /* Reduced size */
+    height: 90px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 10px;
 }
 
 .why-choose {
-    padding: 40px 20px; /* Increased padding for better spacing */
+    padding: 30px 15px; /* Adjusted padding */
     text-align: center;
     background-color: #fff;
 }
 
 .faq-section {
-    padding: 40px 20px; /* Increased padding for better spacing */
+    padding: 30px 15px; /* Adjusted padding */
     background-color: #f1f1f1;
 }
 
 .faq-container {
-    max-width: 800px;
+    max-width: 750px; /* Slightly reduced */
     margin: 0 auto;
 }
 
 .faq-item {
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Adjusted margin */
 }
 
 .faq-question {
@@ -236,13 +236,13 @@ nav a:hover {
 
 .social-links {
     text-align: center;
-    padding: 20px 0;
+    padding: 15px 0; /* Adjusted padding */
 }
 
 .social-links a {
-    margin: 0 10px;
+    margin: 0 8px; /* Reduced margin */
     color: #333;
-    font-size: 1.5rem;
+    font-size: 1.4rem; /* Slightly reduced */
 }
 
 .social-links a:hover {
@@ -267,16 +267,16 @@ nav a:hover {
 
 .whatsapp-float {
     background-color: #25D366;
-    bottom: 20px;
-    right: 20px;
+    bottom: 15px; /* Adjusted position */
+    right: 15px; /* Adjusted position */
 }
 
 .footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 20px 0;
-    margin-top: 40px;
+    padding: 15px 0; /* Adjusted padding */
+    margin-top: 30px; /* Adjusted margin */
 }
 
 .footer-content a {
@@ -307,19 +307,19 @@ nav a:hover {
 }
 
 .drawer-content {
-    padding: 20px;
+    padding: 15px; /* Adjusted padding */
 }
 
 .drawer-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Adjusted margin */
 }
 
 .close-drawer {
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.4rem; /* Slightly reduced */
 }
 
 .drawer ul {
@@ -333,7 +333,7 @@ nav a:hover {
 .drawer ul li a {
     text-decoration: none;
     color: #333;
-    font-size: 1.1rem;
+    font-size: 1rem; /* Slightly reduced */
 }
 
 .drawer ul li a:hover {
@@ -346,13 +346,13 @@ nav a:hover {
 
 /* Booking page adjustments */
 .booking-form {
-    max-width: 800px;
+    max-width: 750px; /* Slightly reduced */
     margin: 0 auto;
-    padding: 20px;
+    padding: 15px; /* Adjusted padding */
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Adjusted margin */
 }
 
 .form-group label {
@@ -372,8 +372,8 @@ nav a:hover {
 }
 
 #summaryCard {
-    margin: 20px 0;
-    padding: 20px;
+    margin: 15px 0; /* Adjusted margin */
+    padding: 15px; /* Adjusted padding */
     border-radius: 10px;
     color: white;
     font-family: Arial, sans-serif;
@@ -381,8 +381,8 @@ nav a:hover {
 }
 
 .summary-item {
-    margin: 10px 0;
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin: 8px 0; /* Adjusted margin */
+    font-size: clamp(1.2rem, 5vw, 2rem); /* Reduced clamp range */
 }
 
 .selected-items {
@@ -406,8 +406,8 @@ nav a:hover {
 
 .item-details,
 .profile-details {
-    margin-left: 20px;
-    font-size: 0.9em;
+    margin-left: 15px; /* Adjusted margin */
+    font-size: 0.85em; /* Slightly reduced */
     color: #555;
 }
 
@@ -418,8 +418,8 @@ nav a:hover {
 
 .whatsapp-float {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 15px; /* Adjusted position */
+    right: 15px; /* Adjusted position */
 }
 
 .whatsapp-float div {
@@ -428,12 +428,12 @@ nav a:hover {
     background-color: #25D366 !important;
     color: #fff !important;
     border-radius: 50% !important;
-    font-size: 24px !important;
+    font-size: 22px !important; /* Slightly reduced */
     text-align: center !important;
-    width: 40px !important;
-    height: 40px !important;
-    margin-right: 20px;
-    line-height: 24px !important;
+    width: 38px !important; /* Slightly reduced */
+    height: 38px !important; /* Slightly reduced */
+    margin-right: 15px; /* Adjusted margin */
+    line-height: 22px !important; /* Adjusted line-height */
     transition: none !important;
 }
 
