@@ -61,7 +61,7 @@ nav a:hover {
 
 .hero {
     text-align: center;
-    padding: 50px 0;
+    padding: 50px 20px; /* Increased padding for better spacing */
     background-color: #f1f1f1;
 }
 
@@ -92,14 +92,14 @@ nav a:hover {
 }
 
 .search-section {
-    padding: 40px 0;
+    padding: 40px 20px; /* Increased padding for better spacing */
     text-align: center;
 }
 
 .search-input {
     width: 100%;
     max-width: 500px;
-    padding: 10px;
+    padding: 12px; /* Slightly increased padding for usability */
     font-size: 1rem;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -112,12 +112,12 @@ nav a:hover {
 }
 
 .result-item {
-    padding: 10px;
+    padding: 15px; /* Increased padding for better readability */
     border-bottom: 1px solid #ddd;
 }
 
 .cards-section {
-    padding: 40px 0;
+    padding: 40px 20px; /* Increased padding for better spacing */
     background-color: #fff;
 }
 
@@ -167,7 +167,7 @@ nav a:hover {
 }
 
 .testimonials-section {
-    padding: 40px 0;
+    padding: 40px 20px; /* Increased padding for better spacing */
     background-color: #f1f1f1;
     text-align: center;
 }
@@ -196,13 +196,13 @@ nav a:hover {
 }
 
 .why-choose {
-    padding: 40px 0;
+    padding: 40px 20px; /* Increased padding for better spacing */
     text-align: center;
     background-color: #fff;
 }
 
 .faq-section {
-    padding: 40px 0;
+    padding: 40px 20px; /* Increased padding for better spacing */
     background-color: #f1f1f1;
 }
 
@@ -340,7 +340,107 @@ nav a:hover {
     color: #007bff;
 }
 
-/* New style for strikethrough on MRP */
 .strike {
     text-decoration: line-through;
+}
+
+/* Booking page adjustments */
+.booking-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#summaryCard {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.summary-item {
+    margin: 10px 0;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.selected-items {
+    margin-top: 10px;
+}
+
+.selected-tag {
+    display: inline-block;
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.selected-tag button {
+    margin-left: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.item-details,
+.profile-details {
+    margin-left: 20px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.included-tests {
+    list-style-type: disc;
+    margin-top: 5px;
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.whatsapp-float div {
+    display: inline-block !important;
+    padding: 8px !important;
+    background-color: #25D366 !important;
+    color: #fff !important;
+    border-radius: 50% !important;
+    font-size: 24px !important;
+    text-align: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin-right: 20px;
+    line-height: 24px !important;
+    transition: none !important;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
 }
