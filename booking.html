@@ -98,7 +98,7 @@
                         <label for="time">Appointment Time <i class="fas fa-clock"></i></label>
                         <input type="time" id="time" required>
                     </div>
-                    <div id="summaryCard"></div> <!-- Moved here before submit button -->
+                    <div id="summaryCard"></div>
                     <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
                 </form>
                 <p id="bookingMessage"></p>
@@ -229,13 +229,16 @@
 
         async function loadTests() {
             try {
+                console.log('Fetching tests.json...');
                 const response = await fetch('/public/tests.json');
+                console.log('Fetch response:', response);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const tests = await response.json();
-                console.log('Tests data:', tests);
+                console.log('Parsed tests data:', tests);
                 const select = document.getElementById('test');
                 select.innerHTML = '<option value="" disabled>Select test(s)</option>';
                 tests.forEach(test => {
+                    console.log('Processing test:', test);
                     const value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
                     option.value = value;
@@ -248,14 +251,7 @@
                         description: test.Description || 'No description available'
                     };
                 });
-                setupSearch('test', 'testSearch', selectedTests);
-
-                select.addEventListener('change', (e) => {
-                    if (e.target.value && !selectedTests.has(e.target.value)) {
-                        selectedTests.add(e.target.value);
-                        updateSelectedItems('test', e.target.value);
-                    }
-                });
+                console.log('Test dropdown populated with options:', select.options);
             } catch (error) {
                 console.error('Error loading tests:', error);
                 document.getElementById('test').innerHTML = '<option value="" disabled>Error loading tests. Check console (Status: ' + (error.message || 'Unknown') + ').</option>';
@@ -264,13 +260,16 @@
 
         async function loadProfiles() {
             try {
+                console.log('Fetching profiles.json...');
                 const response = await fetch('/public/profiles.json');
+                console.log('Fetch response:', response);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const profiles = await response.json();
-                console.log('Profiles data:', profiles);
+                console.log('Parsed profiles data:', profiles);
                 const select = document.getElementById('profile');
                 select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
                 profiles.forEach(profile => {
+                    console.log('Processing profile:', profile);
                     const value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
                     option.value = value;
@@ -284,14 +283,7 @@
                         tests: profile.Tests_Included.split(', ')
                     };
                 });
-                setupSearch('profile', 'profileSearch', selectedProfiles);
-
-                select.addEventListener('change', (e) => {
-                    if (e.target.value && !selectedProfiles.has(e.target.value)) {
-                        selectedProfiles.add(e.target.value);
-                        updateSelectedItems('profile', e.target.value);
-                    }
-                });
+                console.log('Profile dropdown populated with options:', select.options);
             } catch (error) {
                 console.error('Error loading profiles:', error);
                 document.getElementById('profile').innerHTML = '<option value="" disabled>Error loading profiles. Check console (Status: ' + (error.message || 'Unknown') + ').</option>';
