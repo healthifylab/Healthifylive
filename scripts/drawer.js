@@ -6,18 +6,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (menuToggle && drawer && closeDrawer) {
         menuToggle.addEventListener('click', () => {
-            drawer.classList.add('active');
+            drawer.classList.toggle('active');
         });
 
         closeDrawer.addEventListener('click', () => {
             drawer.classList.remove('active');
         });
 
-        // Close drawer when clicking outside
+        // Close on outside click
         document.addEventListener('click', (event) => {
             if (!drawer.contains(event.target) && !menuToggle.contains(event.target)) {
                 drawer.classList.remove('active');
             }
         });
+    } else {
+        console.log('Drawer elements not found. Check HTML structure.');
     }
 });
