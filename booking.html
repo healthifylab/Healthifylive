@@ -18,6 +18,7 @@
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
+            background-color: #FFF; /* Default body background to avoid conflicts */
         }
         .container {
             width: 100%;
@@ -25,7 +26,7 @@
             margin: 0 auto;
         }
         .header {
-            background-color: #87CEEB; /* SkyBlue */
+            background-color: #87CEEB !important; /* SkyBlue */
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -44,7 +45,7 @@
             color: #FFF;
         }
         main {
-            background-color: #F0FFF0; /* Honeydew */
+            background-color: #F0FFF0 !important; /* Honeydew */
             padding: 20px;
         }
         h1 {
@@ -60,7 +61,7 @@
             margin: 0 auto;
         }
         .form-group {
-            background-color: #F5F5DC; /* Beige */
+            background-color: #F5F5DC !important; /* Beige */
             padding: 15px;
             margin-bottom: 10px;
             border-radius: 5px;
@@ -83,7 +84,7 @@
             resize: vertical;
         }
         .btn {
-            background-color: #20B2AA; /* LightSeaGreen */
+            background-color: #20B2AA !important; /* LightSeaGreen */
             color: white;
             padding: 10px 20px;
             border: none;
@@ -103,27 +104,27 @@
             color: white;
             font-family: Arial, sans-serif;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #20B2AA; /* LightSeaGreen */
+            background-color: #20B2AA !important; /* LightSeaGreen */
         }
         .summary-item {
             margin: 10px 0;
             font-size: clamp(1.5rem, 5vw, 2.5rem);
         }
         .summary-item .total-amount {
-            color: #FFD700; /* Gold for Total Amount */
+            color: #FFD700 !important; /* Gold for Total Amount */
             font-weight: bold;
         }
         .summary-item .discounted-amount {
-            color: #FFA500; /* Orange for Discounted Amount */
+            color: #FFA500 !important; /* Orange for Discounted Amount */
             font-weight: bold;
         }
         .summary-item .saved-amount {
-            color: #ADFF2F; /* GreenYellow for Saved Amount */
+            color: #ADFF2F !important; /* GreenYellow for Saved Amount */
             font-weight: bold;
         }
         .selected-items {
             margin-top: 10px;
-            background-color: #F5F5DC; /* Beige for Selected Tests */
+            background-color: #F5F5DC !important; /* Beige for Selected Tests */
             padding: 10px;
             border-radius: 5px;
         }
@@ -147,13 +148,13 @@
         }
         .item-details p {
             color: #4682B4; /* SteelBlue for Description */
-            background-color: #F0FFF0; /* Honeydew for Description background */
+            background-color: #F0FFF0 !important; /* Honeydew for Description background */
             padding: 5px;
             border-radius: 3px;
         }
         .profile-details .included-tests {
             color: #6A5ACD; /* SlateBlue for Tests Included */
-            background-color: #E6E6FA; /* Lavender for Tests Included background */
+            background-color: #E6E6FA !important; /* Lavender for Tests Included background */
             padding: 5px;
             border-radius: 3px;
         }
@@ -162,7 +163,7 @@
             margin-top: 5px;
         }
         footer {
-            background-color: #D3D3D3; /* LightGray */
+            background-color: #D3D3D3 !important; /* LightGray */
             padding: 10px 20px;
             text-align: center;
             color: #333;
