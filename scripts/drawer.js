@@ -20,6 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     } else {
-        console.log('Drawer elements not found. Check HTML structure.');
+        console.error('Drawer elements not found. Check HTML structure.');
     }
 });
