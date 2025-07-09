@@ -485,3 +485,22 @@ nav a:hover {
 .strike {
     text-decoration: line-through;
 }
+
+/* Drawer Styles - Adjusted to top left corner */
+.drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    transform: translateX(-100%); /* Start hidden off-screen */
+}
+
+.drawer.active {
+    display: block; /* Show when active */
+    transform: translateX(0); /* Slide to top left corner */
+}
