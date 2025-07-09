@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="manifest" href="/public/manifest.json">
-<meta name="theme-color" content="#4CAF50">
+    <meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Test - Healthifylive Lab</title>
@@ -14,6 +14,85 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        #summaryCard {
+            display: none;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .summary-item {
+            margin: 10px 0;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+        }
+        .selected-items {
+            margin-top: 10px;
+        }
+        .selected-tag {
+            display: inline-block;
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .selected-tag button {
+            margin-left: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .item-details, .profile-details {
+            margin-left: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .included-tests {
+            list-style-type: disc;
+            margin-top: 5px;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        .whatsapp-float div {
+            display: inline-block !important;
+            padding: 8px !important;
+            background-color: #25D366 !important;
+            color: #fff !important;
+            border-radius: 50% !important;
+            font-size: 24px !important;
+            text-align: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            margin-right: 20px;
+            line-height: 24px !important;
+            transition: none !important;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+        <!-- Drawer -->
+    <div class="drawer" id="drawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h2>Menu</h2>
+                <span class="close-drawer">×</span>
+            </div>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/booking.html">Book Test</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="#" onclick="showLoginForm()">Login</a></li>
+            </ul>
+    </style>
+    
 </head>
 <body>
     <div class="container">
@@ -83,6 +162,7 @@
                         <label for="time">Appointment Time <i class="fas fa-clock"></i></label>
                         <input type="time" id="time" required>
                     </div>
+                    <div id="summaryCard"></div>
                     <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
                 </form>
                 <p id="bookingMessage"></p>
@@ -98,7 +178,7 @@
             </div>
         </footer>
         <a href="https://wa.me/919503832889" class="whatsapp-float">
-            <div style="display: inline-block !important; padding: 8px !important; background-color: #25D366 !important; color: #fff !important; border-radius: 50% !important; font-size: 24px !important; text-align: center !important; width: 40px !important; height: 40px !important; right-margin: 20px; line-height: 24px !important; transition: none !important;"><i class="fab fa-whatsapp"></i></div>
+            <div><i class="fab fa-whatsapp"></i></div>
         </a>
     </div>
     <script type="module" src="/scripts/lead-submission.js"></script>
@@ -127,11 +207,38 @@
         // Store selected items and item details
         let selectedTests = new Set();
         let selectedProfiles = new Set();
-        let testDetails = {}; // To store test details
-        let profileDetails = {}; // To store profile details
+        let testDetails = {};
+        let profileDetails = {};
+        let colorToggle = false;
 
-        // Update selected items function (moved to global scope)
-        function updateSelectedItems(selectId, item) {
+        // Update summary card
+        function updateSummaryCard() {
+            const summaryCard = document.getElementById('summaryCard');
+            if (selectedTests.size === 0 && selectedProfiles.size === 0) {
+                summaryCard.style.display = 'none';
+                return;
+            }
+
+            const totalMRP = Array.from(selectedTests).reduce((sum, test) => sum + (testDetails[test].mrp || testDetails[test].offerPrice * 1.5), 0) +
+                           Array.from(selectedProfiles).reduce((sum, profile) => sum + (profileDetails[profile].mrp || 0), 0);
+            const totalOffer = Array.from(selectedTests).reduce((sum, test) => sum + (testDetails[test].offerPrice || 0), 0) +
+                             Array.from(selectedProfiles).reduce((sum, profile) => sum + (profileDetails[profile].offerPrice || 0), 0);
+            const savings = totalMRP - totalOffer;
+            const savingsPercentage = totalMRP > 0 ? ((savings / totalMRP) * 100).toFixed(2) : 0;
+
+            summaryCard.style.display = 'block';
+            summaryCard.style.backgroundColor = colorToggle ? '#ff69b4' : '#90ee90';
+            colorToggle = !colorToggle;
+
+            summaryCard.innerHTML = `
+                <div class="summary-item"><strong>Total Amount:</strong> ₹${totalMRP.toFixed(2)}</div>
+                <div class="summary-item"><strong>Discounted Amount:</strong> ₹${totalOffer.toFixed(2)}</div>
+                <div class="summary-item"><strong>Saved with Healthify:</strong> ₹${savings.toFixed(2)} (${savingsPercentage}%)</div>
+            `;
+        }
+
+        // Update selected items function
+        function updateSelectedItems(selectId) {
             const select = document.getElementById(selectId);
             const selectedDiv = selectId === 'test' ? document.getElementById('selectedTests') : document.getElementById('selectedProfiles');
             selectedDiv.innerHTML = '';
@@ -141,7 +248,7 @@
                 if (selectId === 'test') {
                     const test = testDetails[item];
                     selectedDiv.innerHTML += `
-                        <span class="selected-tag">${test.name} (₹${test.offerPrice})
+                        <span class="selected-tag">${test.name} (MRP: <s>₹${test.mrp || test.offerPrice * 1.5}</s>, Offer: ₹${test.offerPrice})
                             <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                         </span>
                         <div class="item-details">
@@ -151,7 +258,7 @@
                 } else if (selectId === 'profile') {
                     const profile = profileDetails[item];
                     selectedDiv.innerHTML += `
-                        <span class="selected-tag">${profile.name} (MRP: ₹${profile.mrp}, Offer: ₹${profile.offerPrice})
+                        <span class="selected-tag">${profile.name} (MRP: <s>₹${profile.mrp}</s>, Offer: ₹${profile.offerPrice})
                             <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                         </span>
                         <div class="profile-details">
@@ -164,32 +271,38 @@
                     `;
                 }
             });
-            // Reset select to default
             select.value = '';
+            updateSummaryCard();
         }
 
         // Fetch and populate tests
         async function loadTests() {
             try {
-                const response = await fetch('/public/tests.json');
+                console.log('Fetching tests.json...');
+                const fetchUrl = '/public/tests.json';
+                console.log('Fetch URL:', fetchUrl);
+                const response = await fetch(fetchUrl);
+                console.log('Fetch response:', response);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const tests = await response.json();
-                console.log('Tests data:', tests);
+                console.log('Parsed tests data:', tests);
                 const select = document.getElementById('test');
                 select.innerHTML = '<option value="" disabled>Select test(s)</option>';
                 tests.forEach(test => {
+                    console.log('Processing test:', test);
                     const value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
                     option.value = value;
                     option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
                     select.appendChild(option);
-                    // Store test details
                     testDetails[value] = {
                         name: test.Test_Name,
+                        mrp: test.MRP || test.Healthify_Offer_Price * 1.5,
                         offerPrice: test.Healthify_Offer_Price,
                         description: test.Description || 'No description available'
                     };
                 });
+                console.log('Test dropdown populated with options:', select.options);
                 setupSearch('test', 'testSearch', selectedTests);
             } catch (error) {
                 console.error('Error loading tests:', error);
@@ -200,19 +313,23 @@
         // Fetch and populate profiles
         async function loadProfiles() {
             try {
-                const response = await fetch('/public/profiles.json');
+                console.log('Fetching profiles.json...');
+                const fetchUrl = '/public/profiles.json';
+                console.log('Fetch URL:', fetchUrl);
+                const response = await fetch(fetchUrl);
+                console.log('Fetch response:', response);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const profiles = await response.json();
-                console.log('Profiles data:', profiles);
+                console.log('Parsed profiles data:', profiles);
                 const select = document.getElementById('profile');
                 select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
                 profiles.forEach(profile => {
+                    console.log('Processing profile:', profile);
                     const value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
                     option.value = value;
                     option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
                     select.appendChild(option);
-                    // Store profile details
                     profileDetails[value] = {
                         name: profile.Test_Name,
                         mrp: profile.MRP,
@@ -221,14 +338,15 @@
                         tests: profile.Tests_Included.split(', ')
                     };
                 });
-                // Preselect profile from URL query parameter after loading
+                console.log('Profile dropdown populated with options:', select.options);
+                // Preselect profile from URL query parameter
                 const urlParams = new URLSearchParams(window.location.search);
                 const profile = urlParams.get('profile');
                 if (profile && profileDetails[profile]) {
                     selectedProfiles.add(profile);
                     const option = Array.from(select.options).find(o => o.value === profile);
-                    if (option) option.style.display = 'none'; // Hide selected option
-                    updateSelectedItems('profile', profile); // Call the global function
+                    if (option) option.style.display = 'none';
+                    updateSelectedItems('profile');
                 }
                 setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
@@ -255,10 +373,10 @@
                 const selectedOptions = Array.from(select.selectedOptions).filter(option => option.value && !selectedSet.has(option.value));
                 selectedOptions.forEach(option => {
                     selectedSet.add(option.value);
-                    option.style.display = 'none'; // Hide after selection
+                    option.style.display = 'none';
                 });
-                updateSelectedItems(selectId); // Call the global function
-                searchInput.value = ''; // Clear search after selection
+                updateSelectedItems(selectId);
+                searchInput.value = '';
             });
         }
 
@@ -268,7 +386,7 @@
             set.delete(item);
             const option = Array.from(select.options).find(o => o.value === item);
             if (option) option.style.display = 'block';
-            updateSelectedItems(selectId); // Call the global function
+            updateSelectedItems(selectId);
         };
 
         // Handle booking form submission
@@ -299,15 +417,15 @@
                     sex: sex,
                     address: address,
                     pincode: pincode,
-                    tests: selectedTests.size > 0 ? Array.from(selectedTests) : null,
-                    profiles: selectedProfiles.size > 0 ? Array.from(selectedProfiles) : null,
+                    tests: selectedTests.size > 0 ? Array.from(selectedTests).map(test => testDetails[test].name) : null,
+                    profiles: selectedProfiles.size > 0 ? Array.from(selectedProfiles).map(profile => profileDetails[profile].name) : null,
                     date: date,
                     time: time,
                     timestamp: new Date().toISOString(),
                     status: "New Booking"
                 });
                 // Send email via EmailJS
-                const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone}, Age: ${age}, Sex: ${sex}, Address: ${address}, Pincode: ${pincode})`;
+                const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).map(test => testDetails[test].name).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).map(profile => profileDetails[profile].name).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone}, Age: ${age}, Sex: ${sex}, Address: ${address}, Pincode: ${pincode})`;
                 emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_name: name,
                     to_email: 'report@healthifylab.com',
@@ -323,6 +441,7 @@
                     document.getElementById('test').innerHTML = '<option value="" disabled>Select test(s)</option>' + Array.from(document.getElementById('test').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
                     document.getElementById('profile').innerHTML = '<option value="" disabled>Select profile(s)</option>' + Array.from(document.getElementById('profile').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
                     document.getElementById('bookingForm').reset();
+                    updateSummaryCard(); // Reset summary card
                 }).catch((error) => {
                     console.error('EmailJS error:', error);
                     submissionStatus.className = "error";
@@ -341,33 +460,6 @@
             loadProfiles();
         };
     </script>
-    <style>
-        .selected-items {
-            margin-top: 10px;
-        }
-        .selected-tag {
-            display: inline-block;
-            background-color: #e0e0e0;
-            padding: 5px 10px;
-            margin: 5px;
-            border-radius: 5px;
-        }
-        .selected-tag button {
-            margin-left: 5px;
-            border: none;
-            background: none;
-            cursor: pointer;
-        }
-        .item-details, .profile-details {
-            margin-left: 20px;
-            font-size: 0.9em;
-            color: #555;
-        }
-        .included-tests {
-            list-style-type: disc;
-            margin-top: 5px;
-        }
-    </style>
     <script src="/scripts/pwa-register.js"></script>
 </body>
 </html>
