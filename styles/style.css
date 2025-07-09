@@ -479,26 +479,6 @@ nav a:hover {
     .form-group select {
         flex: 1;
     }
-
-    /* New layout for side-by-side containers with reduced size */
-    .cards-section {
-        display: flex;
-        width: 100%; /* Full width of container */
-    }
-
-    .cards-container {
-        flex: 0 0 30%; /* Reduced to 30% width each */
-        border: 2px solid #007bff; /* Blue border */
-        border-radius: 10px; /* Rounded corners */
-    }
-
-    .cards-container:first-child {
-        margin-left: 50%; /* 50% left margin for first container */
-    }
-
-    .cards-container:last-child {
-        margin-right: 50%; /* 50% right margin for second container */
-    }
 }
 
 /* Updated Desktop Optimization (Above 1024px for Full-Screen) */
@@ -585,4 +565,4 @@ nav a:hover {
     .faq-answer {
         font-size: 1rem;
     }
-}
+        }
