@@ -16,7 +16,7 @@ body {
 .container {
     max-width: 100%;
     margin: 0 auto;
-    padding: 15px; /* Increased for better spacing */
+    padding: 10px;
 }
 
 /* Header Styles */
@@ -24,7 +24,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0; /* Increased for better layout */
+    padding: 10px 0;
     background-color: #fff;
     position: sticky;
     top: 0;
@@ -52,20 +52,20 @@ nav a:hover {
 /* Hero Section */
 .hero {
     text-align: center;
-    padding: 30px 0; /* Increased for better spacing */
+    padding: 20px 0;
     background-color: #e9ecef;
 }
 
 .hero-image {
     width: 100%;
     height: auto;
-    max-height: 250px; /* Increased for better visibility */
+    max-height: 200px;
     object-fit: cover;
 }
 
 .hero h1 {
-    font-size: 1.8rem; /* Increased for readability */
-    margin: 15px 0;
+    font-size: 1.5rem;
+    margin: 10px 0;
 }
 
 .btn {
@@ -84,26 +84,21 @@ nav a:hover {
 
 /* Search Section */
 .search-section {
-    padding: 30px 0; /* Increased for better spacing */
+    padding: 20px 0;
     text-align: center;
 }
 
 .search-input {
     width: 100%;
-    padding: 12px; /* Increased for usability */
-    margin-top: 15px; /* Increased margin */
+    padding: 10px;
+    margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
 }
 
 #searchResults {
-    margin-top: 15px; /* Increased margin */
-}
-
-.result-item {
-    padding: 15px; /* Increased for readability */
-    border-bottom: 1px solid #ddd;
+    margin-top: 10px;
 }
 
 /* Promo Popup */
@@ -153,12 +148,12 @@ nav a:hover {
 
 /* Cards Section */
 .cards-section {
-    padding: 30px 0; /* Increased for better spacing */
+    padding: 20px 0;
 }
 
 .section-title {
-    font-size: 1.4rem; /* Increased for readability */
-    margin-bottom: 15px; /* Increased margin */
+    font-size: 1.2rem;
+    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -168,7 +163,7 @@ nav a:hover {
 
 .swiper-container {
     width: 100%;
-    padding: 15px 0; /* Increased padding */
+    padding: 10px 0;
 }
 
 .swiper-slide {
@@ -180,7 +175,7 @@ nav a:hover {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 15px; /* Increased for better spacing */
+    padding: 10px;
     text-align: center;
     width: 90%;
     margin: 0 auto;
@@ -189,23 +184,22 @@ nav a:hover {
 .promo-card img {
     width: 100%;
     height: auto;
-    max-height: 200px; /* Increased for better visibility */
     border-radius: 5px;
 }
 
 .promo-card h3 {
-    font-size: 1.2rem; /* Increased for readability */
+    font-size: 1.1rem;
     margin: 10px 0;
 }
 
 .promo-card p {
-    font-size: 1rem; /* Increased for readability */
+    font-size: 0.9rem;
     color: #666;
 }
 
 .swiper-pagination {
     text-align: center;
-    margin-top: 15px; /* Increased margin */
+    margin-top: 10px;
 }
 
 .swiper-pagination-bullet {
@@ -221,97 +215,97 @@ nav a:hover {
 
 /* Testimonials Section */
 .testimonials-section {
-    padding: 30px 0; /* Increased for better spacing */
+    padding: 20px 0;
     text-align: center;
 }
 
 .testimonials-container {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Increased gap */
+    gap: 15px;
 }
 
 .testimonial-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 15px; /* Increased for better spacing */
+    padding: 10px;
     text-align: center;
 }
 
 .testimonial-card img {
-    width: 60px; /* Increased for better visibility */
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     margin-bottom: 10px;
 }
 
 .testimonial-card p {
-    font-size: 1rem; /* Increased for readability */
+    font-size: 0.9rem;
     color: #666;
 }
 
 .testimonial-card h4 {
-    font-size: 0.9rem; /* Increased for readability */
+    font-size: 0.8rem;
     font-weight: 600;
 }
 
 /* Why Choose Section */
 .why-choose {
-    padding: 30px 0; /* Increased for better spacing */
+    padding: 20px 0;
     text-align: center;
     background-color: #e9ecef;
 }
 
 .why-choose h2 {
-    font-size: 1.4rem; /* Increased for readability */
-    margin-bottom: 15px; /* Increased margin */
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
 
 .why-choose p {
-    font-size: 1rem; /* Increased for readability */
-    margin: 8px 0; /* Increased margin */
+    font-size: 0.9rem;
+    margin: 5px 0;
 }
 
 /* FAQ Section */
 .faq-section {
-    padding: 30px 0; /* Increased for better spacing */
+    padding: 20px 0;
 }
 
 .faq-container {
-    margin-top: 15px; /* Increased margin */
+    margin-top: 10px;
 }
 
 .faq-item {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 15px; /* Increased for better spacing */
-    margin-bottom: 15px; /* Increased margin */
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 .faq-question {
-    font-size: 1.1rem; /* Increased for readability */
+    font-size: 1rem;
     cursor: pointer;
 }
 
 .faq-answer {
     display: none;
-    font-size: 1rem; /* Increased for readability */
+    font-size: 0.9rem;
     color: #666;
-    margin-top: 10px; /* Increased margin */
+    margin-top: 5px;
 }
 
 /* Social Links */
 .social-links {
     text-align: center;
-    padding: 15px 0; /* Increased padding */
+    padding: 10px 0;
 }
 
 .social-links a {
     color: #333;
     margin: 0 10px;
-    font-size: 1.4rem; /* Increased for visibility */
+    font-size: 1.2rem;
 }
 
 .social-links a:hover {
@@ -329,7 +323,7 @@ nav a:hover {
 .call-back-float a {
     background-color: #dc3545;
     color: #fff;
-    padding: 12px 20px; /* Increased padding */
+    padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: 600;
@@ -342,7 +336,7 @@ nav a:hover {
 .whatsapp-float a {
     background-color: #25D366;
     color: #fff;
-    padding: 12px; /* Increased padding */
+    padding: 10px;
     border-radius: 50%;
     text-decoration: none;
     display: flex;
