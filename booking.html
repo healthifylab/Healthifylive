@@ -507,30 +507,36 @@
         window.onload = () => {
             loadTests();
             loadProfiles();
-            // Drawer toggle (fallback if Drawer.js is missing or incomplete)
+            // Enhanced drawer toggle (fallback if drawer.js is missing)
             const menuToggle = document.querySelector('.menu-toggle');
             const drawer = document.getElementById('drawer');
             const closeDrawer = document.querySelector('.close-drawer');
             if (menuToggle && drawer && closeDrawer) {
+                console.log('Attaching drawer events...');
                 menuToggle.addEventListener('click', () => {
+                    console.log('Toggle clicked');
                     drawer.classList.add('active');
                     document.body.style.overflow = 'hidden'; // Prevent scrolling
                 });
                 closeDrawer.addEventListener('click', () => {
+                    console.log('Close clicked');
                     drawer.classList.remove('active');
                     document.body.style.overflow = ''; // Restore scrolling
                 });
                 // Close drawer when clicking outside
                 document.addEventListener('click', (e) => {
                     if (!drawer.contains(e.target) && !menuToggle.contains(e.target)) {
+                        console.log('Outside click');
                         drawer.classList.remove('active');
                         document.body.style.overflow = '';
                     }
                 });
+            } else {
+                console.error('Drawer elements not found:', { menuToggle, drawer, closeDrawer });
             }
         };
 
-        // Placeholder for showLoginForm (implement in Drawer.js or separate script)
+        // Placeholder for showLoginForm (implement in drawer.js or separate script)
         window.showLoginForm = () => {
             alert('Login functionality not implemented yet.');
         };
