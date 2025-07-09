@@ -33,9 +33,9 @@ body {
 }
 
 .logo-img {
-    height: 40px;
+    height: 70px;
     width: auto;
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
 nav a {
@@ -74,7 +74,7 @@ nav a:hover {
     background-color: #007bff;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 10px;
     font-weight: 600;
 }
 
@@ -445,7 +445,7 @@ nav a:hover {
 /* Responsive Design */
 @media (min-width: 768px) {
     .container {
-        max-width: 750px;
+        max-width: 750px; /* Existing limit */
     }
 
     .hero h1 {
@@ -457,7 +457,7 @@ nav a:hover {
     }
 
     .promo-card {
-        width: 80%;
+        width: 80%; /* Existing width */
     }
 
     .testimonials-container {
@@ -478,5 +478,91 @@ nav a:hover {
     .form-group textarea,
     .form-group select {
         flex: 1;
+    }
+}
+
+/* Updated Desktop Optimization (Above 1024px for Full-Screen) */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 100%; /* Remove fixed width to use full screen */
+        padding: 20px 0; /* Adjust padding to minimize white space */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-image {
+        max-height: 400px;
+    }
+
+    .search-section {
+        padding: 30px 0;
+    }
+
+    .search-input {
+        max-width: 800px;
+        font-size: 1.2rem;
+    }
+
+    #searchResults {
+        max-width: 800px;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .swiper-container {
+        padding: 20px 0;
+    }
+
+    .swiper-slide {
+        width: 350px !important; /* Show ~3-4 cards on desktop */
+    }
+
+    .promo-card {
+        width: 100%; /* Full width within slide */
+        padding: 15px;
+    }
+
+    .promo-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .promo-card p {
+        font-size: 1rem;
+    }
+
+    .testimonials-container {
+        justify-content: space-around;
+    }
+
+    .testimonial-card {
+        width: 300px;
+    }
+
+    .testimonial-card p {
+        font-size: 1rem;
+    }
+
+    .testimonial-card h4 {
+        font-size: 0.9rem;
+    }
+
+    .why-choose h2 {
+        font-size: 1.5rem;
+    }
+
+    .why-choose p {
+        font-size: 1.1rem;
+    }
+
+    .faq-question {
+        font-size: 1.2rem;
+    }
+
+    .faq-answer {
+        font-size: 1rem;
     }
 }
