@@ -504,3 +504,10 @@ nav a:hover {
     display: block; /* Show when active */
     transform: translateX(0); /* Slide to top left corner */
 }
+.result-item { padding: 10px; border-bottom: 1px solid #ddd; }
+.select-btn, .remove-btn, .proceed-btn { padding: 5px 10px; margin: 5px 0; border: none; border-radius: 5px; cursor: pointer; }
+.select-btn { background: #007bff; color: #fff; }
+.select-btn.selected { background: #28a745; }
+.remove-btn { background: #dc3545; color: #fff; }
+.proceed-btn { background: #28a745; color: #fff; width: 100%; }
+.selected-item { background: #e9ecef; }
