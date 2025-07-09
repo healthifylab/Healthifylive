@@ -1,5 +1,5 @@
 /* Reset and Base Styles */
-{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -186,11 +186,13 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Distribute content vertically */
+    overflow-y: auto; /* Add scroll if content exceeds height */
 }
 
 .promo-card img {
     width: 100%;
     height: auto;
+    max-height: 50%; /* Limit image height to 50% of card */
     border-radius: 5px;
     flex-shrink: 0; /* Prevent image from shrinking */
 }
@@ -205,11 +207,16 @@ nav a:hover {
     font-size: 0.9rem;
     color: #666;
     flex-shrink: 0; /* Prevent text from shrinking */
+    margin-bottom: 10px; /* Add some space before button */
 }
 
 .promo-card a {
     margin-top: auto; /* Push button to bottom */
+    padding: 8px 16px; /* Slightly reduce padding to fit */
+    font-size: 0.9rem; /* Reduce font size to fit */
     flex-shrink: 0; /* Prevent button from shrinking */
+    width: 100%; /* Ensure button takes full width */
+    box-sizing: border-box; /* Include padding in width */
 }
 
 .swiper-pagination {
@@ -495,88 +502,89 @@ nav a:hover {
         flex: 1;
     }
 
-/* Updated Desktop Optimization (Above 1024px for Full-Screen) */
-@media (min-width: 1024px) {
-    .container {
-        max-width: 100%; /* Remove fixed width to use full screen */
-        padding: 20px 0; /* Adjust padding to minimize white space */
-    }
+    /* Updated Desktop Optimization (Above 1024px for Full-Screen) */
+    @media (min-width: 1024px) {
+        .container {
+            max-width: 100%; /* Remove fixed width to use full screen */
+            padding: 20px 0; /* Adjust padding to minimize white space */
+        }
 
-    .hero h1 {
-        font-size: 2.5rem;
-    }
+        .hero h1 {
+            font-size: 2.5rem;
+        }
 
-    .hero-image {
-        max-height: 400px;
-    }
+        .hero-image {
+            max-height: 400px;
+        }
 
-    .search-section {
-        padding: 30px 0;
-    }
+        .search-section {
+            padding: 30px 0;
+        }
 
-    .search-input {
-        max-width: 800px;
-        font-size: 1.2rem;
-    }
+        .search-input {
+            max-width: 800px;
+            font-size: 1.2rem;
+        }
 
-    #searchResults {
-        max-width: 800px;
-    }
+        #searchResults {
+            max-width: 800px;
+        }
 
-    .section-title {
-        font-size: 2.2rem;
-    }
+        .section-title {
+            font-size: 2.2rem;
+        }
 
-    .swiper-container {
-        padding: 20px 0;
-    }
+        .swiper-container {
+            padding: 20px 0;
+        }
 
-    .swiper-slide {
-        width: 350px !important; /* Show ~3-4 cards on desktop */
-    }
+        .swiper-slide {
+            width: 350px !important; /* Show ~3-4 cards on desktop */
+        }
 
-    .promo-card {
-        width: 100%; /* Full width within slide */
-        padding: 15px;
-    }
+        .promo-card {
+            width: 100%; /* Full width within slide */
+            padding: 15px;
+        }
 
-    .promo-card h3 {
-        font-size: 1.5rem;
-    }
+        .promo-card h3 {
+            font-size: 1.5rem;
+        }
 
-    .promo-card p {
-        font-size: 1rem;
-    }
+        .promo-card p {
+            font-size: 1rem;
+        }
 
-    .testimonials-container {
-        justify-content: space-around;
-    }
+        .testimonials-container {
+            justify-content: space-around;
+        }
 
-    .testimonial-card {
-        width: 300px;
-    }
+        .testimonial-card {
+            width: 300px;
+        }
 
-    .testimonial-card p {
-        font-size: 1rem;
-    }
+        .testimonial-card p {
+            font-size: 1rem;
+        }
 
-    .testimonial-card h4 {
-        font-size: 0.9rem;
-    }
+        .testimonial-card h4 {
+            font-size: 0.9rem;
+        }
 
-    .why-choose h2 {
-        font-size: 1.5rem;
-    }
+        .why-choose h2 {
+            font-size: 1.5rem;
+        }
 
-    .why-choose p {
-        font-size: 1.1rem;
-    }
+        .why-choose p {
+            font-size: 1.1rem;
+        }
 
-    .faq-question {
-        font-size: 1.2rem;
-    }
+        .faq-question {
+            font-size: 1.2rem;
+        }
 
-    .faq-answer {
-        font-size: 1rem;
+        .faq-answer {
+            font-size: 1rem;
+        }
     }
 }
