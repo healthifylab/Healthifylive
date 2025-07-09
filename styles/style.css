@@ -149,9 +149,6 @@ nav a:hover {
 /* Cards Section */
 .cards-section {
     padding: 20px 0;
-    display: flex; /* Add Flexbox for side-by-side */
-    justify-content: space-between; /* Space between containers */
-    gap: 20px; /* Space between the two sections */
 }
 
 .section-title {
@@ -161,8 +158,6 @@ nav a:hover {
 }
 
 .cards-container {
-    flex: 1; /* Each container takes equal space */
-    min-width: 0; /* Prevent overflow */
     overflow: hidden;
 }
 
@@ -484,6 +479,26 @@ nav a:hover {
     .form-group select {
         flex: 1;
     }
+
+    /* New layout for side-by-side containers with blue border and radius */
+    .cards-section {
+        display: flex;
+        width: 100%; /* Full width of container */
+    }
+
+    .cards-container {
+        flex: 0 0 50%; /* Each container takes 50% */
+        border: 2px solid #007bff; /* Blue border */
+        border-radius: 10px; /* Rounded corners */
+    }
+
+    .cards-container:first-child {
+        margin-left: 50%; /* 50% left margin for first container */
+    }
+
+    .cards-container:last-child {
+        margin-right: 50%; /* 50% right margin for second container */
+    }
 }
 
 /* Updated Desktop Optimization (Above 1024px for Full-Screen) */
@@ -569,19 +584,5 @@ nav a:hover {
 
     .faq-answer {
         font-size: 1rem;
-    }
-}
-
-/* New styles for side-by-side layout (added to enable side-by-side containers) */
-@media (min-width: 768px) {
-    .cards-section {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px; /* Space between the two sections */
-    }
-
-    .cards-container {
-        flex: 1; /* Each container takes equal space */
-        min-width: 0; /* Prevent overflow */
     }
 }
