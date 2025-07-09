@@ -159,16 +159,19 @@ nav a:hover {
 
 .cards-container {
     overflow: hidden;
+    height: 400px; /* Fixed height for containers */
 }
 
 .swiper-container {
     width: 100%;
     padding: 10px 0;
+    height: 100%; /* Full height of container */
 }
 
 .swiper-slide {
     display: flex;
     justify-content: center;
+    height: 100%; /* Full height of slide */
 }
 
 .promo-card {
@@ -178,24 +181,35 @@ nav a:hover {
     padding: 10px;
     text-align: center;
     width: 90%;
-    height: 30%;
     margin: 0 auto;
+    height: 100%; /* Full height of slide */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute content vertically */
 }
 
 .promo-card img {
     width: 100%;
     height: auto;
     border-radius: 5px;
+    flex-shrink: 0; /* Prevent image from shrinking */
 }
 
 .promo-card h3 {
     font-size: 1.1rem;
     margin: 10px 0;
+    flex-shrink: 0; /* Prevent text from shrinking */
 }
 
 .promo-card p {
     font-size: 0.9rem;
     color: #666;
+    flex-shrink: 0; /* Prevent text from shrinking */
+}
+
+.promo-card a {
+    margin-top: auto; /* Push button to bottom */
+    flex-shrink: 0; /* Prevent button from shrinking */
 }
 
 .swiper-pagination {
@@ -479,6 +493,27 @@ nav a:hover {
     .form-group textarea,
     .form-group select {
         flex: 1;
+    }
+
+    /* New layout for side-by-side containers with reduced size and height */
+    .cards-section {
+        display: flex;
+        width: 100%; /* Full width of container */
+    }
+
+    .cards-container {
+        flex: 0 0 30%; /* Reduced to 30% width each */
+        border: 2px solid #007bff; /* Blue border */
+        border-radius: 10px; /* Rounded corners */
+        height: 400px; /* Fixed height for containers */
+    }
+
+    .cards-container:first-child {
+        margin-left: 50%; /* 50% left margin for first container */
+    }
+
+    .cards-container:last-child {
+        margin-right: 50%; /* 50% right margin for second container */
     }
 }
 
