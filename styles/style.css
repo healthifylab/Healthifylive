@@ -148,7 +148,7 @@ nav a:hover {
 
 /* Cards Section */
 .cards-section {
-    padding: 20px 0;
+    padding: 40px 0;
 }
 
 .section-title {
@@ -159,7 +159,7 @@ nav a:hover {
 
 .cards-container {
     overflow: hidden;
-    height: 440px; /* Fixed height for containers */
+    height: 500px; /* Fixed height for containers */
 }
 
 .swiper-container {
