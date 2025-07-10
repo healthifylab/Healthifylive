@@ -1,4 +1,4 @@
-// scripts/Search.js
+// scripts/Tests.js
 async function fetchTests() {
   try {
     console.log('Fetching tests from /public/tests.json...');
@@ -57,24 +57,69 @@ function bookSelected(selectedTests) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  console.log('DOM loaded, initializing search...');
-  const input = document.getElementById("searchInput");
-  const results = document.getElementById("searchResults");
+  console.log('DOM loaded, initializing tests...');
+  const testsContainer = document.getElementById("testsContainer");
   const bookButton = document.getElementById("bookSelectedButton");
   const summary = document.getElementById("selectedTestsSummary");
-  if (!input || !results || !bookButton || !summary) {
-    console.error('Missing DOM elements:', { input, results, bookButton, summary });
+  if (!testsContainer || !bookButton || !summary) {
+    console.error('Missing DOM elements:', { testsContainer, bookButton, summary });
     return;
   }
 
   const allTests = await fetchTests();
   if (allTests.length === 0) {
     console.error('No tests loaded from JSON');
-    results.innerHTML = '<p>Error loading tests. Please try again later.</p>';
+    testsContainer.innerHTML = '<p>Error loading tests. Please try again later.</p>';
     return;
   }
 
   const selectedTests = []; // Track selected tests
+
+  // Populate test cards
+  allTests.forEach(test => {
+    const slide = document.createElement("div");
+    slide.className = "swiper-slide";
+    slide.innerHTML = `
+      <div class="test-card">
+        <label>
+          <input type="checkbox" class="test-checkbox" data-test-name="${test.Test_Name}">
+          <strong>🧪 ${test.Test_Name}</strong>
+        </label><br/>
+        <span class="strike">₹${test.MRP}</span> <span class="offer-price">₹${test.Healthify_Offer_Price}</span><br/>
+        <em>${test.Description}</em>
+      </div>
+    `;
+    testsContainer.appendChild(slide);
+  });
+
+  // Initialize Swiper
+  new Swiper('.tests-swiper', {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.tests-swiper .swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 15,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+    },
+  });
 
   // Update summary when checkboxes change
   function handleCheckboxChange() {
@@ -87,47 +132,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateSummary(selectedTests);
   }
 
-  input.addEventListener("input", () => {
-    const query = input.value.toLowerCase();
-    console.log('Search query:', query);
-    results.innerHTML = "";
-
-    if (!query || query.length < 2) {
-      console.log('Query too short or empty, clearing results');
-      updateSummary(selectedTests);
-      return;
-    }
-
-    const filtered = allTests.filter(t =>
-      t.Test_Name.toLowerCase().includes(query) ||
-      t.Description.toLowerCase().includes(query)
-    ).slice(0, 10);
-    console.log('Filtered tests:', filtered);
-
-    filtered.forEach(test => {
-      const item = document.createElement("div");
-      item.className = "result-item";
-      item.innerHTML = `
-        <label>
-          <input type="checkbox" class="test-checkbox" data-test-name="${test.Test_Name}">
-          <strong>🧪 ${test.Test_Name}</strong>
-        </label><br/>
-        <span class="strike">₹${test.MRP}</span> <strong class="offer-price">₹${test.Healthify_Offer_Price}</strong><br/>
-        <em>${test.Description}</em>
-      `;
-      results.appendChild(item);
-    });
-
-    // Re-attach checkbox listeners and restore checked state
-    document.querySelectorAll('.test-checkbox').forEach(checkbox => {
-      const testName = checkbox.getAttribute('data-test-name');
-      checkbox.checked = selectedTests.some(t => t.Test_Name === testName);
-      checkbox.addEventListener('change', handleCheckboxChange);
-    });
-
-    updateSummary(selectedTests);
+  // Attach checkbox listeners
+  document.querySelectorAll('.test-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', handleCheckboxChange);
   });
 
   // Book button click handler
   bookButton.addEventListener('click', () => bookSelected(selectedTests));
+
+  // Initial summary update
+  updateSummary(selectedTests);
 });
