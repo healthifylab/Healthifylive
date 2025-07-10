@@ -102,6 +102,9 @@ nav a:hover {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    display: block !important; /* Ensure visibility */
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .result-item {
@@ -111,6 +114,9 @@ nav a:hover {
     padding: 10px;
     margin-bottom: 10px;
     text-align: left;
+    display: block !important; /* Ensure visibility */
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .strike {
