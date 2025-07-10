@@ -2,10 +2,15 @@
 async function fetchTests() {
   try {
     console.log('Fetching tests from /public/tests.json...');
-    const response = await fetch('/public/tests.json');
+    let response = await fetch('/public/tests.json');
     if (!response.ok) {
-      console.error('Fetch failed with status:', response.status);
-      throw new Error('Failed to fetch tests');
+      console.error('Fetch failed for /public/tests.json with status:', response.status);
+      console.log('Trying fallback path ./tests.json...');
+      response = await fetch('./tests.json');
+      if (!response.ok) {
+        console.error('Fallback fetch failed with status:', response.status);
+        throw new Error('Failed to fetch tests from both paths');
+      }
     }
     const data = await response.json();
     console.log('Fetched tests:', data);
@@ -14,23 +19,6 @@ async function fetchTests() {
     console.error('Error fetching tests:', error);
     return [];
   }
-}
-
-// Placeholder function for booking selected tests (replace with your actual booking logic)
-function bookTests(selectedTests) {
-  if (selectedTests.length === 0) {
-    alert('No tests selected for booking.');
-    return;
-  }
-  console.log('Booking tests:', selectedTests);
-  alert(`Booked ${selectedTests.length} test(s): ${selectedTests.map(t => t.Test_Name).join(', ')}`);
-  // Clear selections after booking
-  document.querySelectorAll('.test-checkbox').forEach(checkbox => {
-    checkbox.checked = false;
-  });
-  // Clear summary
-  selectedTests.length = 0;
-  updateSummary(selectedTests);
 }
 
 // Function to update the selected tests summary
@@ -58,11 +46,21 @@ function updateSummary(selectedTests) {
   `;
 }
 
+// Function to redirect to booking form with selected tests
+function bookSelected(selectedTests) {
+  if (selectedTests.length === 0) {
+    alert('No tests selected for booking.');
+    return;
+  }
+  const testNames = selectedTests.map(t => encodeURIComponent(t.Test_Name)).join(',');
+  window.location.href = `/booking.html?tests=${testNames}`;
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log('DOM loaded, initializing search...');
   const input = document.getElementById("searchInput");
   const results = document.getElementById("searchResults");
-  const bookButton = document.getElementById("bookButton");
+  const bookButton = document.getElementById("bookSelectedButton");
   const summary = document.getElementById("selectedTestsSummary");
   if (!input || !results || !bookButton || !summary) {
     console.error('Missing DOM elements:', { input, results, bookButton, summary });
@@ -72,6 +70,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const allTests = await fetchTests();
   if (allTests.length === 0) {
     console.error('No tests loaded from JSON');
+    results.innerHTML = '<p>Error loading tests. Please try again later.</p>';
+    return;
   }
 
   const selectedTests = []; // Track selected tests
@@ -110,12 +110,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       item.innerHTML = `
         <label>
           <input type="checkbox" class="test-checkbox" data-test-name="${test.Test_Name}">
-          <strong>${test.Category === "Health Checkup Profiles" ? '📁' : '🧪'} ${test.Test_Name}</strong>
+          <strong>🧪 ${test.Test_Name}</strong>
         </label><br/>
         <span class="strike">₹${test.MRP}</span> <strong class="offer-price">₹${test.Healthify_Offer_Price}</strong><br/>
-        <small>🧬 ${test.Tests_Included || "N/A"} | 🕒 ${test.TAT}</small>
-        <br/><em>${test.Description}</em>
-        <br/><button onclick='cartUI.addToCart("${test.Test_Name}")'>➕ Add to Cart</button>
+        <em>${test.Description}</em>
       `;
       results.appendChild(item);
     });
@@ -131,5 +129,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // Book button click handler
-  bookButton.addEventListener('click', () => bookTests(selectedTests));
+  bookButton.addEventListener('click', () => bookSelected(selectedTests));
 });
