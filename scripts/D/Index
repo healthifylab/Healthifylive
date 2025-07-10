@@ -1,4 +1,4 @@
-t<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -44,7 +44,7 @@ t<!DOCTYPE html>
         <!-- Swipeable Cards Section (Combined Promo and Featured) -->
         <section class="cards-section">
             <div class="cards-container">
-                <h2 class="section-title">Promo Health Packages <i class="fas fa-gift"></i></h2>
+                <h2 class="section-title"> <i class="fas fa-gift"></i></h2>
                 <div class="swiper-container promo-swiper">
                     <div class="swiper-wrapper">
                         <!-- First 13 profiles in promo swiper -->
@@ -156,7 +156,7 @@ t<!DOCTYPE html>
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
-            <h2 class="section-title">Featured Health Packages <i class="fas fa-star"></i></h2>
+            <h2 class="section-title"> <i class="fas fa-star"></i></h2>
             <div class="cards-container">
                 <div class="swiper-container featured-swiper">
                     <div class="swiper-wrapper">
@@ -285,7 +285,7 @@ t<!DOCTYPE html>
         </section>
         <div class="why-choose">
             <h2>Why Choose Healthify? <i class="fas fa-award"></i></h2>
-            <p>🔬 Healthifylive Lab <i class="fas fa-flask"></i></p>
+            <p>🔬 Healthify <i class="fas fa-flask"></i></p>
             <p>Your trusted partner in preventive healthcare.</p>
             <p>💉 Hassle-free sample collection at home <i class="fas fa-home"></i></p>
             <p>🧪 Advanced diagnostics & accurate reports <i class="fas fa-microscope"></i></p>
@@ -314,7 +314,7 @@ t<!DOCTYPE html>
         <div class="social-links">
             <a href="https://x.com/healthify_lab"><i class="fab fa-x-twitter"></i></a>
             <a href="https://instagram.com/healthifylab"><i class="fab fa-instagram"></i></a>
-            <a href="https://facebook.com/healthify"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.facebook.com/share/1Axkp5jB81/?mibextid=qi2Omg"><i class="fab fa-facebook-f"></i></a>
         </div>
     </div>
     <!-- Floating Call Me Back Button -->
