@@ -15,6 +15,87 @@
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFF; /* Default body background */
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background-color: #40E0D0 !important; /* Turquoise */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: left;
+        }
+        .header .logo-img {
+            height: 50px;
+        }
+        nav a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+        }
+        nav a:hover {
+            color: #FFF;
+        }
+        main {
+            background-color: #ffffff !important; /* PaleGreen */
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: right;
+        }
+        p {
+            text-align: center;
+            color: #555;
+        }
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            background-color: #40E0D0 !important; /* LightPink */
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        .btn {
+            background-color: #2962ff !important; /* LightSeaGreen */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #19A99D;
+        }
         #summaryCard {
             display: none;
             margin: 20px 0;
@@ -23,13 +104,29 @@
             color: white;
             font-family: Arial, sans-serif;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #20B2AA !important; /* LightSeaGreen */
         }
         .summary-item {
             margin: 10px 0;
             font-size: clamp(1.5rem, 5vw, 2.5rem);
         }
+        .summary-item .total-amount {
+            color: #FFD700 !important; /* Gold for Total Amount */
+            font-weight: bold;
+        }
+        .summary-item .discounted-amount {
+            color: #FF4500 !important; /* OrangeRed for Discounted Amount */
+            font-weight: bold;
+        }
+        .summary-item .saved-amount {
+            color: #32CD32 !important; /* LimeGreen for Saved Amount */
+            font-weight: bold;
+        }
         .selected-items {
             margin-top: 10px;
+            background-color: #90EE90 !important; /* LightGreen for Selected Tests */
+            padding: 10px;
+            border-radius: 5px;
         }
         .selected-tag {
             display: inline-block;
@@ -49,9 +146,42 @@
             font-size: 0.9em;
             color: #555;
         }
+        .item-details p {
+            color: #4682B4; /* SteelBlue for Description */
+            background-color: #E0FFFF !important; /* LightCyan for Description background */
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .profile-details .included-tests {
+            color: #6A5ACD; /* SlateBlue for Tests Included */
+            background-color: #DDA0DD !important; /* Plum for Tests Included background */
+            padding: 5px;
+            border-radius: 3px;
+        }
         .included-tests {
             list-style-type: disc;
             margin-top: 5px;
+        }
+        footer {
+            background-color: #87CEFA !important; /* LightSkyBlue */
+            padding: 10px 20px;
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #20B2AA;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .social-media a {
+            margin: 0 10px;
+            color: #333;
+        }
+        .social-media a:hover {
+            color: #20B2AA;
         }
         .whatsapp-float {
             position: fixed;
@@ -59,18 +189,17 @@
             right: 20px;
         }
         .whatsapp-float div {
-            display: inline-block !important;
-            padding: 8px !important;
-            background-color: #25D366 !important;
-            color: #fff !important;
-            border-radius: 50% !important;
-            font-size: 24px !important;
-            text-align: center !important;
-            width: 40px !important;
-            height: 40px !important;
+            display: inline-block;
+            padding: 8px;
+            background-color: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 24px;
+            text-align: center;
+            width: 40px;
+            height: 40px;
             margin-right: 20px;
-            line-height: 24px !important;
-            transition: none !important;
+            line-height: 24px;
         }
         .success {
             color: green;
@@ -78,21 +207,19 @@
         .error {
             color: red;
         }
-        <!-- Drawer -->
-    <div class="drawer" id="drawer">
-        <div class="drawer-content">
-            <div class="drawer-header">
-                <h2>Menu</h2>
-                <span class="close-drawer">×</span>
-            </div>
-            <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/booking.html">Book Test</a></li>
-                <li><a href="/contact.html">Contact</a></li>
-                <li><a href="#" onclick="showLoginForm()">Login</a></li>
-            </ul>
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav a {
+                margin: 5px 0;
+            }
+            .form-group {
+                padding: 10px;
+            }
+        }
     </style>
-    
 </head>
 <body>
     <div class="container">
@@ -100,29 +227,28 @@
             <img src="/public/logo.png" alt="Healthifylive Lab Logo" class="logo-img">
             <nav>
                 <a href="/index.html">Home</a>
-                <a href="/booking.html">Book Test</a>
                 <a href="/contact.html">Contact</a>
             </nav>
         </div>
         <main>
             <h1>📋 Book Your Test 😊</h1>
             <p>Select a test or profile to book your appointment. <i class="fas fa-syringe"></i></p>
-            <div class="booking-form">
+            <div class="booking-form" role="form" aria-label="Booking Form">
                 <form id="bookingForm">
                     <div class="form-group">
-                        <label for="name">Full Name <i class="fas fa-user"></i></label>
+                        <label for="name" aria-required="true">Full Name <i class="fas fa-user"></i></label>
                         <input type="text" id="name" placeholder="Enter your name" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number <i class="fas fa-phone"></i></label>
-                        <input type="tel" id="phone" placeholder="Enter your phone (XXXXXXXXXX)" value="+91" required>
+                        <label for="phone" aria-required="true">Phone Number <i class="fas fa-phone"></i></label>
+                        <input type="tel" id="phone" placeholder="Enter your phone (e.g., 9876543210)" pattern="^\+91[0-9]{10}$" value="+91" required>
                     </div>
                     <div class="form-group">
-                        <label for="age">Age <i class="fas fa-birthday-cake"></i></label>
+                        <label for="age" aria-required="true">Age <i class="fas fa-birthday-cake"></i></label>
                         <input type="number" id="age" placeholder="Enter your age" min="1" max="120" required>
                     </div>
                     <div class="form-group">
-                        <label for="sex">Sex <i class="fas fa-venus-mars"></i></label>
+                        <label for="sex" aria-required="true">Sex <i class="fas fa-venus-mars"></i></label>
                         <select id="sex" required>
                             <option value="" disabled selected>Select sex</option>
                             <option value="male">Male</option>
@@ -131,15 +257,15 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="address">Address with Landmark <i class="fas fa-map-marker-alt"></i></label>
+                        <label for="address" aria-required="true">Address with Landmark <i class="fas fa-map-marker-alt"></i></label>
                         <textarea id="address" placeholder="Enter your address with landmark" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="pincode">Pincode <i class="fas fa-mail-bulk"></i></label>
+                        <label for="pincode" aria-required="true">Pincode <i class="fas fa-mail-bulk"></i></label>
                         <input type="text" id="pincode" placeholder="Enter your pincode (e.g., 400001)" pattern="[0-9]{6}" required>
                     </div>
                     <div class="form-group">
-                        <label for="test">Select Test(s) <i class="fas fa-vial"></i></label>
+                        <label for="test" aria-required="true">Select Test(s) <i class="fas fa-vial"></i></label>
                         <input type="text" id="testSearch" placeholder="Search tests..." class="search-input">
                         <select id="test" multiple>
                             <option value="" disabled>Select test(s)</option>
@@ -147,7 +273,7 @@
                         <div id="selectedTests" class="selected-items"></div>
                     </div>
                     <div class="form-group">
-                        <label for="profile">Select Profile(s) <i class="fas fa-file-alt"></i></label>
+                        <label for="profile" aria-required="true">Select Profile(s) <i class="fas fa-file-alt"></i></label>
                         <input type="text" id="profileSearch" placeholder="Search profiles..." class="search-input">
                         <select id="profile" multiple>
                             <option value="" disabled>Select profile(s)</option>
@@ -155,15 +281,17 @@
                         <div id="selectedProfiles" class="selected-items"></div>
                     </div>
                     <div class="form-group">
-                        <label for="date">Appointment Date <i class="fas fa-calendar"></i></label>
-                        <input type="date" id="date" min="2025-07-06" required>
+                        <label for="date" aria-required="true">Appointment Date <i class="fas fa-calendar"></i></label>
+                        <input type="date" id="date" min="2025-07-10" required>
                     </div>
                     <div class="form-group">
-                        <label for="time">Appointment Time <i class="fas fa-clock"></i></label>
+                        <label for="time" aria-required="true">Appointment Time <i class="fas fa-clock"></i></label>
                         <input type="time" id="time" required>
                     </div>
                     <div id="summaryCard"></div>
-                    <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
+                    <div class="form-group">
+                        <button type="submit" class="btn">Book Now <i class="fas fa-check"></i></button>
+                    </div>
                 </form>
                 <p id="bookingMessage"></p>
             </div>
@@ -182,12 +310,11 @@
         </a>
     </div>
     <script type="module" src="/scripts/lead-submission.js"></script>
-    <script type="module" src="/scripts/Drawer.js"></script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
         import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
-        // Firebase Configuration
+        // Firebase Configuration (Move to environment variables in production)
         const firebaseConfig = {
             apiKey: "AIzaSyDS-MJYzAB2EDNY7Hhy2RtdEkxflj2jI-A",
             authDomain: "healthify-lab.firebaseapp.com",
@@ -209,7 +336,6 @@
         let selectedProfiles = new Set();
         let testDetails = {};
         let profileDetails = {};
-        let colorToggle = false;
 
         // Update summary card
         function updateSummaryCard() {
@@ -227,13 +353,10 @@
             const savingsPercentage = totalMRP > 0 ? ((savings / totalMRP) * 100).toFixed(2) : 0;
 
             summaryCard.style.display = 'block';
-            summaryCard.style.backgroundColor = colorToggle ? '#ff69b4' : '#90ee90';
-            colorToggle = !colorToggle;
-
             summaryCard.innerHTML = `
-                <div class="summary-item"><strong>Total Amount:</strong> ₹${totalMRP.toFixed(2)}</div>
-                <div class="summary-item"><strong>Discounted Amount:</strong> ₹${totalOffer.toFixed(2)}</div>
-                <div class="summary-item"><strong>Saved with Healthify:</strong> ₹${savings.toFixed(2)} (${savingsPercentage}%)</div>
+                <div class="summary-item"><strong>Total Amount:</strong> <span class="total-amount">₹${totalMRP.toFixed(2)}</span></div>
+                <div class="summary-item"><strong>Discounted Amount:</strong> <span class="discounted-amount">₹${totalOffer.toFixed(2)}</span></div>
+                <div class="summary-item"><strong>Saved with Healthify:</strong> <span class="saved-amount">₹${savings.toFixed(2)}</span> (<span class="discounted-amount">${savingsPercentage}% off</span>)</div>
             `;
         }
 
@@ -248,7 +371,7 @@
                 if (selectId === 'test') {
                     const test = testDetails[item];
                     selectedDiv.innerHTML += `
-                        <span class="selected-tag">${test.name} (MRP: <s>₹${test.mrp || test.offerPrice * 1.5}</s>, Offer: ₹${test.offerPrice})
+                        <span class="selected-tag">${test.name} (MRP: <s><span class="total-amount">₹${test.mrp || test.offerPrice * 1.5}</span></s>, Offer: <span class="discounted-amount">₹${test.offerPrice}</span>)
                             <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                         </span>
                         <div class="item-details">
@@ -258,7 +381,7 @@
                 } else if (selectId === 'profile') {
                     const profile = profileDetails[item];
                     selectedDiv.innerHTML += `
-                        <span class="selected-tag">${profile.name} (MRP: <s>₹${profile.mrp}</s>, Offer: ₹${profile.offerPrice})
+                        <span class="selected-tag">${profile.name} (MRP: <s><span class="total-amount">₹${profile.mrp}</span></s>, Offer: <span class="discounted-amount">₹${profile.offerPrice}</span>)
                             <button type="button" onclick="removeSelection('${selectId}', '${item}')">×</button>
                         </span>
                         <div class="profile-details">
@@ -279,21 +402,16 @@
         async function loadTests() {
             try {
                 console.log('Fetching tests.json...');
-                const fetchUrl = '/public/tests.json';
-                console.log('Fetch URL:', fetchUrl);
-                const response = await fetch(fetchUrl);
-                console.log('Fetch response:', response);
+                const response = await fetch('/public/tests.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const tests = await response.json();
-                console.log('Parsed tests data:', tests);
                 const select = document.getElementById('test');
                 select.innerHTML = '<option value="" disabled>Select test(s)</option>';
                 tests.forEach(test => {
-                    console.log('Processing test:', test);
                     const value = test.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
                     option.value = value;
-                    option.textContent = `${test.Test_Name} (₹${test.Healthify_Offer_Price})`;
+                    option.textContent = `${test.Test_Name} (<span class="discounted-amount">₹${test.Healthify_Offer_Price}</span>)`;
                     select.appendChild(option);
                     testDetails[value] = {
                         name: test.Test_Name,
@@ -302,11 +420,10 @@
                         description: test.Description || 'No description available'
                     };
                 });
-                console.log('Test dropdown populated with options:', select.options);
                 setupSearch('test', 'testSearch', selectedTests);
             } catch (error) {
                 console.error('Error loading tests:', error);
-                document.getElementById('test').innerHTML = '<option value="" disabled>Error loading tests. Check console (Status: ' + (error.message || 'Unknown') + ').</option>';
+                document.getElementById('test').innerHTML = '<option value="" disabled>Error loading tests. Check console.</option>';
             }
         }
 
@@ -314,21 +431,16 @@
         async function loadProfiles() {
             try {
                 console.log('Fetching profiles.json...');
-                const fetchUrl = '/public/profiles.json';
-                console.log('Fetch URL:', fetchUrl);
-                const response = await fetch(fetchUrl);
-                console.log('Fetch response:', response);
+                const response = await fetch('/public/profiles.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const profiles = await response.json();
-                console.log('Parsed profiles data:', profiles);
                 const select = document.getElementById('profile');
                 select.innerHTML = '<option value="" disabled>Select profile(s)</option>';
                 profiles.forEach(profile => {
-                    console.log('Processing profile:', profile);
                     const value = profile.Test_Name.toLowerCase().replace(/\s/g, '-');
                     const option = document.createElement('option');
                     option.value = value;
-                    option.textContent = `${profile.Test_Name} (₹${profile.Healthify_Offer_Price})`;
+                    option.textContent = `${profile.Test_Name} (<span class="discounted-amount">₹${profile.Healthify_Offer_Price}</span>)`;
                     select.appendChild(option);
                     profileDetails[value] = {
                         name: profile.Test_Name,
@@ -338,8 +450,6 @@
                         tests: profile.Tests_Included.split(', ')
                     };
                 });
-                console.log('Profile dropdown populated with options:', select.options);
-                // Preselect profile from URL query parameter
                 const urlParams = new URLSearchParams(window.location.search);
                 const profile = urlParams.get('profile');
                 if (profile && profileDetails[profile]) {
@@ -351,7 +461,7 @@
                 setupSearch('profile', 'profileSearch', selectedProfiles);
             } catch (error) {
                 console.error('Error loading profiles:', error);
-                document.getElementById('profile').innerHTML = '<option value="" disabled>Error loading profiles. Check console (Status: ' + (error.message || 'Unknown') + ').</option>';
+                document.getElementById('profile').innerHTML = '<option value="" disabled>Error loading profiles. Check console.</option>';
             }
         }
 
@@ -392,11 +502,11 @@
         // Handle booking form submission
         document.getElementById('bookingForm').addEventListener('submit', async (event) => {
             event.preventDefault();
-            const name = document.getElementById('name').value;
+            const name = document.getElementById('name').value.trim();
             const phone = document.getElementById('phone').value;
             const age = document.getElementById('age').value;
             const sex = document.getElementById('sex').value;
-            const address = document.getElementById('address').value;
+            const address = document.getElementById('address').value.trim();
             const pincode = document.getElementById('pincode').value;
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
@@ -404,7 +514,7 @@
 
             if (!name || !phone.match(/^\+91[0-9]{10}$/) || !age || !sex || !address || !pincode.match(/[0-9]{6}/) || (selectedTests.size === 0 && selectedProfiles.size === 0)) {
                 submissionStatus.className = "error";
-                submissionStatus.textContent = "❌ Please enter a valid name, mobile number (+91 followed by 10 digits), age, sex, address, pincode, and select at least one test or profile.";
+                submissionStatus.textContent = "❌ Please fill all fields correctly: name, +91 phone (10 digits), age, sex, address, pincode, and select at least one test/profile.";
                 return;
             }
 
@@ -413,7 +523,7 @@
                 await addDoc(collection(db, "bookings"), {
                     name: name,
                     phone: phone,
-                    age: age,
+                    age: parseInt(age),
                     sex: sex,
                     address: address,
                     pincode: pincode,
@@ -424,33 +534,26 @@
                     timestamp: new Date().toISOString(),
                     status: "New Booking"
                 });
-                // Send email via EmailJS
                 const message = `New booking: ${selectedTests.size > 0 ? Array.from(selectedTests).map(test => testDetails[test].name).join(', ') : ''}${selectedTests.size > 0 && selectedProfiles.size > 0 ? ' and ' : ''}${selectedProfiles.size > 0 ? Array.from(selectedProfiles).map(profile => profileDetails[profile].name).join(', ') : ''} on ${date} at ${time} by ${name} (Phone: ${phone}, Age: ${age}, Sex: ${sex}, Address: ${address}, Pincode: ${pincode})`;
-                emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
+                await emailjs.send('service_z3ac4pk', 'template_5v6t6ku', {
                     to_name: name,
                     to_email: 'report@healthifylab.com',
                     message: message
-                }).then(() => {
-                    console.log('Email sent successfully');
-                    submissionStatus.className = "success";
-                    submissionStatus.textContent = "✅ Request submitted! We’ll call you soon.";
-                    selectedTests.clear();
-                    selectedProfiles.clear();
-                    document.getElementById('selectedTests').innerHTML = '';
-                    document.getElementById('selectedProfiles').innerHTML = '';
-                    document.getElementById('test').innerHTML = '<option value="" disabled>Select test(s)</option>' + Array.from(document.getElementById('test').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
-                    document.getElementById('profile').innerHTML = '<option value="" disabled>Select profile(s)</option>' + Array.from(document.getElementById('profile').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
-                    document.getElementById('bookingForm').reset();
-                    updateSummaryCard(); // Reset summary card
-                }).catch((error) => {
-                    console.error('EmailJS error:', error);
-                    submissionStatus.className = "error";
-                    submissionStatus.textContent = "❌ Booking saved, but email failed to send.";
                 });
+                submissionStatus.className = "success";
+                submissionStatus.textContent = "✅ Request submitted! We’ll call you soon.";
+                selectedTests.clear();
+                selectedProfiles.clear();
+                document.getElementById('selectedTests').innerHTML = '';
+                document.getElementById('selectedProfiles').innerHTML = '';
+                document.getElementById('test').innerHTML = '<option value="" disabled>Select test(s)</option>' + Array.from(document.getElementById('test').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
+                document.getElementById('profile').innerHTML = '<option value="" disabled>Select profile(s)</option>' + Array.from(document.getElementById('profile').options).filter(o => o.style.display !== 'none').map(o => o.outerHTML).join('');
+                document.getElementById('bookingForm').reset();
+                updateSummaryCard();
             } catch (error) {
-                console.error('Error submitting booking:', error);
+                console.error('Error:', error);
                 submissionStatus.className = "error";
-                submissionStatus.textContent = `❌ Failed to submit: ${error.message}. Try again or contact support.`;
+                submissionStatus.textContent = `❌ Failed to submit: ${error.message}. Try again or contact support at +91 9503832889.`;
             }
         });
 
@@ -458,6 +561,11 @@
         window.onload = () => {
             loadTests();
             loadProfiles();
+        };
+
+        // Placeholder for showLoginForm (implement if needed)
+        window.showLoginForm = () => {
+            alert('Login functionality not implemented yet.');
         };
     </script>
     <script src="/scripts/pwa-register.js"></script>
