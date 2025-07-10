@@ -1,9 +1,15 @@
 // scripts/Search.js
 async function fetchTests() {
   try {
+    console.log('Fetching tests from /public/tests.json...');
     const response = await fetch('/public/tests.json');
-    if (!response.ok) throw new Error('Failed to fetch tests');
-    return await response.json();
+    if (!response.ok) {
+      console.error('Fetch failed with status:', response.status);
+      throw new Error('Failed to fetch tests');
+    }
+    const data = await response.json();
+    console.log('Fetched tests:', data);
+    return data;
   } catch (error) {
     console.error('Error fetching tests:', error);
     return [];
@@ -30,7 +36,10 @@ function bookTests(selectedTests) {
 // Function to update the selected tests summary
 function updateSummary(selectedTests) {
   const summary = document.getElementById('selectedTestsSummary');
-  if (!summary) return;
+  if (!summary) {
+    console.error('Summary element not found');
+    return;
+  }
 
   if (selectedTests.length === 0) {
     summary.innerHTML = '<p>No tests selected.</p>';
@@ -50,13 +59,21 @@ function updateSummary(selectedTests) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  console.log('DOM loaded, initializing search...');
   const input = document.getElementById("searchInput");
   const results = document.getElementById("searchResults");
   const bookButton = document.getElementById("bookButton");
   const summary = document.getElementById("selectedTestsSummary");
-  if (!input || !results || !bookButton || !summary) return;
+  if (!input || !results || !bookButton || !summary) {
+    console.error('Missing DOM elements:', { input, results, bookButton, summary });
+    return;
+  }
 
   const allTests = await fetchTests();
+  if (allTests.length === 0) {
+    console.error('No tests loaded from JSON');
+  }
+
   const selectedTests = []; // Track selected tests
 
   // Update summary when checkboxes change
@@ -72,10 +89,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   input.addEventListener("input", () => {
     const query = input.value.toLowerCase();
+    console.log('Search query:', query);
     results.innerHTML = "";
 
     if (!query || query.length < 2) {
-      updateSummary(selectedTests); // Update summary even if no results
+      console.log('Query too short or empty, clearing results');
+      updateSummary(selectedTests);
       return;
     }
 
@@ -83,6 +102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       t.Test_Name.toLowerCase().includes(query) ||
       t.Description.toLowerCase().includes(query)
     ).slice(0, 10);
+    console.log('Filtered tests:', filtered);
 
     filtered.forEach(test => {
       const item = document.createElement("div");
