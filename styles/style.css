@@ -51,16 +51,28 @@ nav a:hover {
 
 /* Hero Section */
 .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 20px 0;
+    padding: 40px 0;
     background-color: #e9ecef;
 }
 
-. hero-video {
+.hero-video {
     width: 100%;
     height: auto;
-    max-height: 200px;
-    object-fit: cover;
+    max-height: 50vh;
+    object-fit: contain;
+    display: block;
+}
+
+.hero-video + a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: underline;
 }
 
 .hero h1 {
@@ -445,7 +457,7 @@ nav a:hover {
 /* Responsive Design */
 @media (min-width: 768px) {
     .container {
-        max-width: 750px; /* Existing limit */
+        max-width: 750px;
     }
 
     .hero h1 {
@@ -457,7 +469,7 @@ nav a:hover {
     }
 
     .promo-card {
-        width: 80%; /* Existing width */
+        width: 80%;
     }
 
     .testimonials-container {
@@ -484,8 +496,13 @@ nav a:hover {
 /* Updated Desktop Optimization (Above 1024px for Full-Screen) */
 @media (min-width: 1024px) {
     .container {
-        max-width: 100%; /* Remove fixed width to use full screen */
-        padding: 20px 0; /* Adjust padding to minimize white space */
+        max-width: 100%;
+        padding: 20px 0;
+    }
+
+    .hero-video {
+        max-height: 60vh;
+        border-radius: 10px;
     }
 
     .hero h1 {
@@ -505,7 +522,7 @@ nav a:hover {
         font-size: 1.2rem;
     }
 
-    #searchResults {
+    .searchResults {
         max-width: 800px;
     }
 
@@ -518,11 +535,11 @@ nav a:hover {
     }
 
     .swiper-slide {
-        width: 350px !important; /* Show ~3-4 cards on desktop */
+        width: 350px !important;
     }
 
     .promo-card {
-        width: 100%; /* Full width within slide */
+        width: 100%;
         padding: 15px;
     }
 
